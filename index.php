@@ -32,20 +32,20 @@ $_G['class'] = ($request->get(0) != '') ? $request->get(0) : 'index';
 $_G['func'] = ($request->get(1) != '') ? $request->get(1) : 'index';
 
 //weixin 验证
-$options = [
-    'debug' => true,
-    'app_id' => 'wx2dc7b9baa7afd65b',
-    'secret' => '56d196f91373e6c3acadba655f2ba5cd',
-    'token' => 'print',
-    // 'aes_key' => null, // 可选
-    'log' => [
-        'level' => 'debug',
-        'file' => ROOT.'/public/easywechat.log', // XXX: 绝对路径！！！！
-    ]
-];
-$app=new \EasyWeChat\Foundation\Application($options);
-$app->server->serve()->send();
-exit;
+//$options = [
+//    'debug' => true,
+//    'app_id' => 'wx2dc7b9baa7afd65b',
+//    'secret' => '56d196f91373e6c3acadba655f2ba5cd',
+//    'token' => 'print',
+//    // 'aes_key' => null, // 可选
+//    'log' => [
+//        'level' => 'debug',
+//        'file' => ROOT.'/public/easywechat.log', // XXX: 绝对路径！！！！
+//    ]
+//];
+//$app=new \EasyWeChat\Foundation\Application($options);
+//$app->server->serve()->send();
+//exit;
 
 $_path='';
 if ($_G['class'] == 'api') {
