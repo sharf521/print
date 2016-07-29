@@ -27,5 +27,6 @@ class IndexController extends Controller
         $app=new \EasyWeChat\Foundation\Application($options);
         $response = $app->server->serve();
         $response->send();
+        exit;
     }
 }

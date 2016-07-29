@@ -33,6 +33,8 @@ $_G['func'] = ($request->get(1) != '') ? $request->get(1) : 'index';
 
 
 
+
+
 $_path='';
 if ($_G['class'] == 'api') {
     $_path='Api';
