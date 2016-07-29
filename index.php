@@ -1,4 +1,6 @@
 <?php
+
+ob_start();//开启输出缓冲
 $t1 = microtime(true);
 //error_reporting(E_ALL & ~E_NOTICE);
 error_reporting(7);
@@ -31,8 +33,21 @@ $_G['system'] = DB::table('system')->orderBy("`showorder`,id")->lists('value', '
 $_G['class'] = ($request->get(0) != '') ? $request->get(0) : 'index';
 $_G['func'] = ($request->get(1) != '') ? $request->get(1) : 'index';
 
-
-
+//weixin 验证
+//$options = [
+//    'debug' => true,
+//    'app_id' => 'wx2dc7b9baa7afd65b',
+//    'secret' => '56d196f91373e6c3acadba655f2ba5cd',
+//    'token' => 'print',
+//    // 'aes_key' => null, // 可选
+//    'log' => [
+//        'level' => 'debug',
+//        'file' => ROOT.'/public/data/easywechat.log', // XXX: 绝对路径！！！！
+//    ]
+//];
+//$app=new \EasyWeChat\Foundation\Application($options);
+//$response = $app->server->serve();
+//$response->send();
 
 
 $_path='';
@@ -68,3 +83,11 @@ if($_path==''){
 controller($_classpath,$method);
 $t2 = microtime(true);
 //echo '<hr>耗时'.round($t2-$t1,3).'秒';
+
+
+
+
+
+$phpinfo = ob_get_contents();
+file_put_contents("log.txt",$phpinfo);
+ob_clean();

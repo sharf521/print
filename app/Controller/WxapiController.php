@@ -1,0 +1,55 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2016/7/29
+ * Time: 23:16
+ */
+
+namespace App\Controller;
+
+class WxapiController extends Controller
+{
+    public function __construct()
+    {
+
+    }
+
+    public function index()
+    {
+        $options = [
+            'debug' => true,
+            'app_id' => 'wx2dc7b9baa7afd65b',
+            'secret' => '56d196f91373e6c3acadba655f2ba5cd',
+            'token' => 'print',
+            // 'aes_key' => null, // 可选
+            'log' => [
+                'level' => 'debug',
+                'file' => ROOT.'/public/data/easywechat.log', // XXX: 绝对路径！！！！
+            ]
+        ];
+        $app=new \EasyWeChat\Foundation\Application($options);
+        //$response = $app->server->serve();
+        //$response->send();
+
+        $server = $app->server;
+        $server->setMessageHandler(function ($message) {
+            //return "您好！欢迎关注我!";
+            return new \EasyWeChat\Message\Text(['content' => '您好！overtrue。']);
+        });
+
+
+        $server->serve()->send();
+
+
+
+
+
+        $phpinfo = ob_get_contents();
+        file_put_contents("log1.txt",$phpinfo);
+        ob_clean();
+        echo $phpinfo;
+
+        exit;
+    }
+}
