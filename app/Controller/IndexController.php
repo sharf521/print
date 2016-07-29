@@ -11,7 +11,7 @@ class IndexController extends Controller
         parent::__construct();
     }
 
-    public function index()
+    public function wxapi()
     {
         $options = [
             'debug' => true,
@@ -25,10 +25,10 @@ class IndexController extends Controller
             ]
         ];
 
-// 使用配置来初始化一个项目。
+        // 使用配置来初始化一个项目。
         $app=new \EasyWeChat\Foundation\Application($options);
         $response = $app->server->serve();
-// 将响应输出
+        // 将响应输出
         $response->send(); // Laravel 里请使用：return $response;
 
         exit;
