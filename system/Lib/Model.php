@@ -83,7 +83,7 @@ class Model
     }
 
     //获取联动值
-    public function getLinkPage($code, $codeKey)
+    public function getLinkPageName($code, $codeKey)
     {
         $result = app('\App\Model\LinkPage')->getLinkPage();
         return $result[$code][$codeKey];

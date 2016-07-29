@@ -167,7 +167,7 @@
                             ?>
                             <tr>
                                 <td><?=$row->created_at?></td>
-                                <td><?=$row->getLinkPage('account_type',$row->type);?></td>
+                                <td><?=$row->getLinkPageName('account_type',$row->type);?></td>
                                 <td class="fl"><?=$row->change?></td>
                                 <td class="fl"><?=$row->now?></td>
                                 <td class="fl"><?=nl2br($row->remark)?></td>

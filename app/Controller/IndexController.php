@@ -17,7 +17,7 @@ class IndexController extends Controller
             'debug' => true,
             'app_id' => app('\App\Model\System')->getCode('appId'),
             'secret' => app('\App\Model\System')->getCode('appsecret'),
-            'token' => 'easywechat',
+            'token' => 'print',
             // 'aes_key' => null, // 可选
             'log' => [
                 'level' => 'debug',
@@ -31,7 +31,5 @@ class IndexController extends Controller
         $response = $app->server->serve();
         // 将响应输出
         $response->send(); // Laravel 里请使用：return $response;
-
-        echo 111;
     }
 }
