@@ -24,13 +24,9 @@ class IndexController extends Controller
                 'file' => ROOT.'/public/data/easywechat.log', // XXX: 绝对路径！！！！
             ]
         ];
-
-        // 使用配置来初始化一个项目。
         $app=new \EasyWeChat\Foundation\Application($options);
         $response = $app->server->serve();
-        // 将响应输出
-        $response->send(); // Laravel 里请使用：return $response;
-
+        $response->send();
         exit;
     }
 }
