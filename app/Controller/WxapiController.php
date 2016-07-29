@@ -12,8 +12,8 @@ class WxapiController extends Controller
         parent::__construct();
         $options = [
             'debug' => true,
-            'app_id' => 'wx2dc7b9baa7afd65b',
-            'secret' => '56d196f91373e6c3acadba655f2ba5cd',
+            'app_id' => app('System')->getCode('appid'),
+            'secret' => app('System')->getCode('appsecret'),
             'token' => 'print',
             // 'aes_key' => null, // 可选
             'log' => [
