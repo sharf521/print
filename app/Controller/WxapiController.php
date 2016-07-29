@@ -28,9 +28,45 @@ class WxapiController extends Controller
     public function index()
     {
         $this->server->setMessageHandler(function ($message) {
-            //return "您好！欢迎关注我!";
-            return new Text(['content' => '您好！overtrue。']);
+            switch ($message->MsgType) {
+                case 'event':
+                    return $this->event($message);
+                    break;
+                case 'text':
+                    return $this->text($message);
+                    break;
+                case 'image':
+                    # 图片消息...
+                    break;
+                case 'voice':
+                    # 语音消息...
+                    break;
+                case 'video':
+                    # 视频消息...
+                    break;
+                case 'location':
+                    # 坐标消息...
+                    break;
+                case 'link':
+                    # 链接消息...
+                    break;
+                // ... 其它消息
+                default:
+                    # code...
+                    break;
+            }
         });
         $this->server->serve()->send();
+    }
+    private function event($message)
+    {
+        if($message->Event=='subscribe'){
+            return "您好！欢迎终于等到你了!";
+        }
+    }
+
+    private function text($message){
+        //return "您好！欢迎关注我!";
+        return new Text(['content' => '您好！overtrue。']);
     }
 }
