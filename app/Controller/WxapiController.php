@@ -32,7 +32,7 @@ class WxapiController extends Controller
         $this->server = $app->server;
     }
 
-    public function index1()
+    public function index()
     {
         $this->server->setMessageHandler(function ($message) {
             //return "您好！欢迎关注我!";
