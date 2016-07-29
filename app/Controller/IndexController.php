@@ -11,7 +11,7 @@ class IndexController extends Controller
         parent::__construct();
     }
 
-    public function index($a = 100, $b, $c = 300)
+    public function index()
     {
         $options = [
             'debug' => true,
@@ -25,6 +25,8 @@ class IndexController extends Controller
             ],
             //...
         ];
+
+        print_r($options);
 
         // 使用配置来初始化一个项目。
         $app=new Application($options);
