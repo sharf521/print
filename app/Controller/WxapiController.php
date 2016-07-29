@@ -34,6 +34,7 @@ class WxapiController extends Controller
 
     public function index()
     {
+        ob_start();//开启输出缓冲
         $this->server->setMessageHandler(function ($message) {
             //return "您好！欢迎关注我!";
             return new Text(['content' => '您好！overtrue。']);
