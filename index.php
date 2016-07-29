@@ -80,11 +80,3 @@ if($_path==''){
 controller($_classpath,$method);
 $t2 = microtime(true);
 //echo '<hr>耗时'.round($t2-$t1,3).'秒';
-
-
-
-
-
-$phpinfo = ob_get_contents();
-file_put_contents("log.txt",$phpinfo);
-ob_clean();

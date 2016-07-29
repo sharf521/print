@@ -39,6 +39,5 @@ class WxapiController extends Controller
             return new Text(['content' => '您好！overtrue。']);
         });
         $this->server->serve()->send();
-        exit;
     }
 }
