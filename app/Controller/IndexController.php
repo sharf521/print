@@ -15,7 +15,7 @@ class IndexController extends Controller
     {
         $options = [
             'debug' => true,
-            'app_id' => app('\App\Model\System')->getCode('appId'),
+            'app_id' => app('\App\Model\System')->getCode('appid'),
             'secret' => app('\App\Model\System')->getCode('appsecret'),
             'token' => 'print',
             // 'aes_key' => null, // 可选
