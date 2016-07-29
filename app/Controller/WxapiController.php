@@ -8,15 +8,15 @@
 
 namespace App\Controller;
 
+use EasyWeChat\Foundation\Application;
+use EasyWeChat\Message\Text;
+
 class WxapiController extends Controller
 {
+    protected $server;
     public function __construct()
     {
-
-    }
-
-    public function index()
-    {
+        parent::__construct();
         $options = [
             'debug' => true,
             'app_id' => 'wx2dc7b9baa7afd65b',
@@ -28,23 +28,17 @@ class WxapiController extends Controller
                 'file' => ROOT.'/public/data/easywechat.log', // XXX: 绝对路径！！！！
             ]
         ];
-        $app=new \EasyWeChat\Foundation\Application($options);
-        //$response = $app->server->serve();
-        //$response->send();
+        $app=new Application($options);
+        $this->server = $app->server;
+    }
 
-        $server = $app->server;
-        $server->setMessageHandler(function ($message) {
+    public function index()
+    {
+        $this->server->setMessageHandler(function ($message) {
             //return "您好！欢迎关注我!";
-            return new \EasyWeChat\Message\Text(['content' => '您好！overtrue。']);
+            return new Text(['content' => '您好！overtrue。']);
         });
-
-
-        $server->serve()->send();
-
-
-
-
-
+        $this->server->serve()->send();
         $phpinfo = ob_get_contents();
         file_put_contents("log1.txt",$phpinfo);
         ob_clean();

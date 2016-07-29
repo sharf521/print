@@ -48,7 +48,7 @@ $_G['func'] = ($request->get(1) != '') ? $request->get(1) : 'index';
 //$app=new \EasyWeChat\Foundation\Application($options);
 //$response = $app->server->serve();
 //$response->send();
-
+//exit;
 
 $_path='';
 if ($_G['class'] == 'api') {
