@@ -46,7 +46,6 @@ class WxapiController extends Controller
         ];
         $app=new \EasyWeChat\Foundation\Application($options);
         $app->server->serve()->send();
-        exit;
     }
 
     public function index1()
