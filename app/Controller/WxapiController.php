@@ -53,6 +53,7 @@ class WxapiController extends Controller
     }
     private function event($message)
     {
+        return "，您好！终于等到您了!";
         $userServer=$this->app->user;
         //$msg['Event']=='subscribe' || $msg['Event']=='SCAN'
 //        if(isset($message->EventKey)){
@@ -93,7 +94,7 @@ class WxapiController extends Controller
                 $user->type_id=1;
             }
             $user->save();
-            return ''.$userInfo->nickname."，您好！终于等到您了!";
+            return "，您好！终于等到您了!";
         }elseif($message->Event=='unsubscribe'){
             $arr=array(
                 'subscribe'=>0,

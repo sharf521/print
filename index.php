@@ -34,16 +34,16 @@ $_G['func'] = ($request->get(1) != '') ? $request->get(1) : 'index';
 //weixin 验证
 //$options = [
 //    'debug' => true,
-//    'app_id' => 'wx2dc7b9baa7afd65b',
-//    'secret' => '56d196f91373e6c3acadba655f2ba5cd',
+//    'app_id' => 'wxf2d48e37c9ee3c05',
+//    'secret' => '678477b3fbb4081b048df279cc38be5e',
 //    'token' => 'print',
 //    // 'aes_key' => null, // 可选
 //    'log' => [
 //        'level' => 'debug',
-//        'file' => ROOT.'/public/easywechat.log', // XXX: 绝对路径！！！！
+//        'file' => ROOT . '/public/easywechat.log', // XXX: 绝对路径！！！！
 //    ]
 //];
-//$app=new \EasyWeChat\Foundation\Application($options);
+//$app = new \EasyWeChat\Foundation\Application($options);
 //$app->server->serve()->send();
 //exit;
 
