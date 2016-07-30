@@ -18,14 +18,14 @@ class UserWx extends Model
                 'level' => 'debug',
                 'file' => ROOT.'/public/easywechat.log', // XXX: 绝对路径！！！！
             ],
-            'guzzle' => [
-                'timeout' => 3.0, // 超时时间（秒）
-                'verify' => false, // 关掉 SSL 认证（强烈不建议！！！）
-            ],
             'oauth' => [
                 'scopes'   => ['snsapi_userinfo'],
                 'callback' => 'http://'.$_SERVER['HTTP_HOST'].'/index.php/weixin/oauth_callback',
             ],
+            'guzzle' => [
+                'timeout' => 4.0, // 超时时间（秒）
+                'verify' => false, // 关掉 SSL 认证（强烈不建议！！！）
+            ]
         ];
         $this->app=new Application($options);
     }
