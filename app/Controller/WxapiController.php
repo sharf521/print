@@ -131,4 +131,9 @@ class WxapiController extends Controller
     private function text($message){
         return new Text(['content' => '您好！overtrue。']);
     }
+
+    public function test()
+    {
+        echo phpinfo();
+    }
 }
