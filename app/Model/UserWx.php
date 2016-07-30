@@ -24,7 +24,7 @@ class UserWx extends Model
             ],
             'oauth' => [
                 'scopes'   => ['snsapi_userinfo'],
-                'callback' => '/index.php/weixin/oauth_callback',
+                'callback' => 'http://'.$_SERVER['HTTP_HOST'].'/index.php/weixin/oauth_callback',
             ],
         ];
         $this->app=new Application($options);
