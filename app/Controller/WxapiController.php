@@ -53,7 +53,7 @@ class WxapiController extends Controller
     }
     private function event($message)
     {
-        return "，您好！终于等到您了!";
+        return new Text(['content' => '您好！overtrue。']);
         $userServer=$this->app->user;
         //$msg['Event']=='subscribe' || $msg['Event']=='SCAN'
 //        if(isset($message->EventKey)){
