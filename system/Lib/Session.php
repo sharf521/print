@@ -17,8 +17,10 @@ class Session
     public function get($key, $default = '')
     {
         $_key = base64_encode($key);
-        $_val = $_SESSION[$_key];
-        $value = unserialize($this->DeCode($_val, 'D'));
+        if(isset($_SESSION[$_key])){
+            $_val = $_SESSION[$_key];
+            $value = unserialize($this->DeCode($_val, 'D'));
+        }
         if (empty($value)) {
             return $default;
         }
