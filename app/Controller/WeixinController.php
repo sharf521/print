@@ -40,6 +40,7 @@ class WeixinController extends Controller
 
     public function member()
     {
+        print_r($_SESSION);
         echo 'member';
     }
 }
