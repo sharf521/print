@@ -53,7 +53,6 @@ class WxapiController extends Controller
     }
     private function event($message)
     {
-        return new Text(['content' =>$message->Event]);
         $userServer=$this->app->user;
         //$msg['Event']=='subscribe' || $msg['Event']=='SCAN'
 //        if(isset($message->EventKey)){
@@ -94,18 +93,19 @@ class WxapiController extends Controller
                 $user->type_id=1;
             }
             $user->save();
-            return "，您好！终于等到您了!";
+            return new Text(['content' =>"{$user->nickname}，您好！终于等到您了!"]);
         }elseif($message->Event=='unsubscribe'){
             $arr=array(
                 'subscribe'=>0,
             );
             DB::table('user_wx')->where("openid=?")->bindValues($message->FromUserName)->update($arr);
         }elseif($message->Event=='CLICK'){
-            return 'aaa';
             if($message->EventKey=='menu_order'){
-                return '下单页';
+                return new Text(['content' =>"下单页!"]);
             }elseif($message->EventKey=='menu_user'){
-                return '用户中心';
+                return new Text(['content' =>"用户中心!"]);
+            }else{
+                return new Text(['content' =>$message->EventKey]);
             }
         }
     }
