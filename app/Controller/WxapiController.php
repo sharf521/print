@@ -99,7 +99,7 @@ class WxapiController extends Controller
                 'subscribe'=>0,
             );
             DB::table('user_wx')->where("openid=?")->bindValues($message->FromUserName)->update($arr);
-        }elseif($message->Event=='CLICK'){
+        }elseif($message->Event=='click'){
             if($message->EventKey=='menu_order'){
                 return '下单页';
             }elseif($message->EventKey=='menu_user'){
