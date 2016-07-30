@@ -22,6 +22,10 @@ class UserWx extends Model
                 'timeout' => 3.0, // 超时时间（秒）
                 'verify' => false, // 关掉 SSL 认证（强烈不建议！！！）
             ],
+            'oauth' => [
+                'scopes'   => ['snsapi_userinfo'],
+                'callback' => '/index.php/weixin/oauth_callback',
+            ],
         ];
         $this->app=new Application($options);
     }

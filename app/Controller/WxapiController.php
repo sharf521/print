@@ -120,9 +120,9 @@ class WxapiController extends Controller
                 "key"  => "menu_order"
             ],
             [
-                "type" => "click",
+                "type" => "view",
                 "name" => "个人中心",
-                "key"  => "menu_user"
+                "url"  => "http://print.yuantuwang.com/index.php/weixin/oauth"
             ]
         ];
         $menu->add($buttons);
