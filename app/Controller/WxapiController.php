@@ -122,7 +122,7 @@ class WxapiController extends Controller
             [
                 "type" => "view",
                 "name" => "中心",
-                "url"  => "http://print.yuantuwang.com/index.php/weixin/oauth"
+                "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/oauth"
             ]
         ];
         $menu->add($buttons);
