@@ -4,6 +4,8 @@ namespace App\Controller;
 use App\Model\User;
 use App\Model\UserWx;
 use EasyWeChat\Message\Text;
+use System\Lib\DB;
+
 class WxapiController extends Controller
 {
     private $UserWx;
@@ -87,10 +89,17 @@ class WxapiController extends Controller
             $user->openid=$userInfo->openid;
             $user->headimgurl=$userInfo->subscribe_time;
             $user->nickname=$userInfo->nickname;
+            if(empty($user->type_id)){
+                $user->type_id=1;
+            }
             $user->save();
             return "您好！欢迎终于等到你了!".$userInfo->nickname;
         }elseif($message->Event=='unsubscribe'){
-            
+            $arr=array(
+                'subscribe'=>0,
+            );
+            DB::table('user')->where("openid=?")->bindValues($message->FromUserName)->update($arr);
+            return "您走了!";
         }
     }
 
