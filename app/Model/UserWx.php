@@ -17,7 +17,11 @@ class UserWx extends Model
             'log' => [
                 'level' => 'debug',
                 'file' => ROOT.'/public/easywechat.log', // XXX: 绝对路径！！！！
-            ]
+            ],
+            'guzzle' => [
+                'timeout' => 3.0, // 超时时间（秒）
+                'verify' => false, // 关掉 SSL 认证（强烈不建议！！！）
+            ],
         ];
         $this->app=new Application($options);
     }

@@ -93,51 +93,37 @@ class WxapiController extends Controller
                 $user->type_id=1;
             }
             $user->save();
-            return "您好！欢迎终于等到你了!".$userInfo->nickname;
+            return $userInfo->nickname."，您好！终于等到您了!";
         }elseif($message->Event=='unsubscribe'){
             $arr=array(
                 'subscribe'=>0,
             );
             DB::table('user_wx')->where("openid=?")->bindValues($message->FromUserName)->update($arr);
-            return "您走了!";
+        }elseif($message->Event=='CLICK'){
+            if($message->EventKey=='menu_order'){
+                return '下单页';
+            }elseif($message->EventKey=='menu_user'){
+                return '用户中心';
+            }
         }
     }
 
-    public function test()
+    public function createMenu()
     {
         $menu = $this->app->menu;
-        $menus = $menu->current();
-        print_r($menus);
-        exit;
         $buttons = [
             [
                 "type" => "click",
-                "name" => "今日歌曲",
-                "key"  => "V1001_TODAY_MUSIC"
+                "name" => "我要下单",
+                "key"  => "menu_order"
             ],
             [
-                "name"       => "菜单",
-                "sub_button" => [
-                    [
-                        "type" => "view",
-                        "name" => "搜索",
-                        "url"  => "http://www.soso.com/"
-                    ],
-                    [
-                        "type" => "view",
-                        "name" => "视频",
-                        "url"  => "http://v.qq.com/"
-                    ],
-                    [
-                        "type" => "click",
-                        "name" => "赞一下我们",
-                        "key" => "V1001_GOOD"
-                    ],
-                ],
-            ],
+                "type" => "click",
+                "name" => "个人中心",
+                "key"  => "menu_user"
+            ]
         ];
         $menu->add($buttons);
-        echo 111;
     }
 
     private function text($message){
