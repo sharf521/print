@@ -93,13 +93,14 @@ class WxapiController extends Controller
                 $user->type_id=1;
             }
             $user->save();
-            return $userInfo->nickname."，您好！终于等到您了!";
+            return ''.$userInfo->nickname."，您好！终于等到您了!";
         }elseif($message->Event=='unsubscribe'){
             $arr=array(
                 'subscribe'=>0,
             );
             DB::table('user_wx')->where("openid=?")->bindValues($message->FromUserName)->update($arr);
-        }elseif($message->Event=='click'){
+        }elseif($message->Event=='CLICK'){
+            return 'aaa';
             if($message->EventKey=='menu_order'){
                 return '下单页';
             }elseif($message->EventKey=='menu_user'){
