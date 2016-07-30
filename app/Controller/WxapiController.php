@@ -98,7 +98,7 @@ class WxapiController extends Controller
             $arr=array(
                 'subscribe'=>0,
             );
-            DB::table('user')->where("openid=?")->bindValues($message->FromUserName)->update($arr);
+            DB::table('user_wx')->where("openid=?")->bindValues($message->FromUserName)->update($arr);
             return "您走了!";
         }
     }
