@@ -105,22 +105,39 @@ class WxapiController extends Controller
 
     public function test()
     {
-        $user_wx=$this->UserWx->where("openid='asdfasdf'")->first();
-        $user_wx->subscribe = 4;
-        $user_wx->openid = 4;
-        $user_wx->nickname = 4;
-        $user_wx->sex = 4;
-        $user_wx->city =4;
-        $user_wx->country = 4;
-        $user_wx->province = 4;
-        $user_wx->language = 4;
-        $user_wx->headimgurl = 4;
-        $user_wx->subscribe_time = 4;
-        $user_wx->unionid = 4;
-        $user_wx->remark = 4;
-        $user_wx->groupid = 4;
-        $user_wx->tagid_list = 4;
-        $user_wx->save();
+        $menu = $this->app->menu;
+        $menus = $menu->current();
+        print_r($menus);
+        exit;
+        $buttons = [
+            [
+                "type" => "click",
+                "name" => "今日歌曲",
+                "key"  => "V1001_TODAY_MUSIC"
+            ],
+            [
+                "name"       => "菜单",
+                "sub_button" => [
+                    [
+                        "type" => "view",
+                        "name" => "搜索",
+                        "url"  => "http://www.soso.com/"
+                    ],
+                    [
+                        "type" => "view",
+                        "name" => "视频",
+                        "url"  => "http://v.qq.com/"
+                    ],
+                    [
+                        "type" => "click",
+                        "name" => "赞一下我们",
+                        "key" => "V1001_GOOD"
+                    ],
+                ],
+            ],
+        ];
+        $menu->add($buttons);
+        echo 111;
     }
 
     private function text($message){
