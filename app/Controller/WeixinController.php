@@ -24,6 +24,7 @@ class WeixinController extends Controller
         if (empty($_SESSION['wechat_user'])) {
             //$_SESSION['target_url'] = 'user/profile';
             $oauth->redirect()->send();
+            exit;
         }
         $user = $_SESSION['wechat_user'];
         redirect('weixin/member/?');

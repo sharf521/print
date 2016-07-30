@@ -121,7 +121,7 @@ class WxapiController extends Controller
             ],
             [
                 "type" => "view",
-                "name" => "个人中心",
+                "name" => "中心",
                 "url"  => "http://print.yuantuwang.com/index.php/weixin/oauth"
             ]
         ];
