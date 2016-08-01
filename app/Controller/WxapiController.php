@@ -120,9 +120,19 @@ class WxapiController extends Controller
                 "key"  => "menu_order"
             ],
             [
-                "type" => "view",
-                "name" => "中心",
-                "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/oauth"
+                "name" => "用户中心",
+                "sub_button" => [
+                    [
+                        "type" => "view",
+                        "name" => "订单列表",
+                        "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/oauth/?act=order"
+                    ],
+                    [
+                        "type" => "view",
+                        "name" => "联盟商家",
+                        "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/oauth=union"
+                    ]
+                ],
             ],
             [
                 "type" => "view",
