@@ -24,7 +24,7 @@ class UserWx extends Model
             ],
             'guzzle' => [
                 'timeout' => 4.0, // 超时时间（秒）
-                'verify' => false, // 关掉 SSL 认证（强烈不建议！！！）
+               // 'verify' => false, // 关掉 SSL 认证（强烈不建议！！！）
             ]
         ];
         $this->app=new Application($options);

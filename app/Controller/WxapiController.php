@@ -123,6 +123,11 @@ class WxapiController extends Controller
                 "type" => "view",
                 "name" => "中心",
                 "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/oauth"
+            ],
+            [
+                "type" => "view",
+                "name" => "产品、价格",
+                "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/artice/1"
             ]
         ];
         $menu->add($buttons);
