@@ -57,11 +57,6 @@ class WeixinController extends Controller
         }
     }
 
-    public function member()
-    {
-        echo 'member';
-    }
-
     public function orderAdd()
     {
         echo 'orderAdd';
