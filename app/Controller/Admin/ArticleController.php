@@ -24,7 +24,7 @@ class ArticleController extends AdminController
         }
         $result = $article->orderBy('id desc')->where($where)->pager($_GET['page']);
         $data['result'] = $result;
-        $data['cates'] = $category->echoOption(array('pid' => 2, 'path' => $_GET['categorypath']));
+        $data['cates'] = $category->echoOption(array('pid' => 1, 'path' => $_GET['categorypath']));
         $this->view('article', $data);
     }
 
@@ -88,7 +88,7 @@ class ArticleController extends AdminController
             }
         } else {
             //一级分类
-            $data['cates'] = $category->getlist(array('pid' => 2));
+            $data['cates'] = $category->getlist(array('pid' => 1));
             $this->view('article', $data);
         }
     }

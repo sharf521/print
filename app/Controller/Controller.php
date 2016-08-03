@@ -11,7 +11,7 @@ class Controller extends BaseController
         $host = strtolower($_SERVER['HTTP_HOST']);
         if (strpos($host, 'wap.') === false) {
             $this->is_wap = false;
-            $this->template = 'default';
+            $this->template = 'default_wap';
         } else {
             $this->is_wap = true;
             $this->template = 'default_wap';

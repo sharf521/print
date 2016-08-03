@@ -52,14 +52,50 @@ class AccountLog extends Model
                     'addip'=>ip()
                 );
                 $arr_col=array('funds_available','funds_freeze','integral_available','integral_freeze','security_deposit','turnover_available','turnover_credit');
+                $_turnover_available=0;//额外变动的周转金
                 foreach ($arr_col as $col){
                     if(isset($data[$col])){
+                        if($col=='funds_available'){//入帐
+                            if($data['funds_available']>0){
+                                //是否欠周转金
+                                $owe=(float)math($account['turnover_credit'],$account['turnover_available'],'-',2);
+                                if($owe>0){
+                                    /*
+                                     * 充值金额可以还清欠款
+                                     * 周转金:增加所欠的欠款
+                                     * 可用资金:增加 还清欠款后 剩余的金额
+                                     * */
+                                    if($data['funds_available']>=$owe){
+                                        $data['funds_available']=math($data['funds_available'],$owe,'-',2);
+                                        $_turnover_available=$owe;
+                                    }else{
+                                        $data['funds_available']=0;
+                                        $_turnover_available=$data['funds_available'];
+                                    }
+                                }
+                            }else{ //出帐
+                                if(in_array($data['type'],array(14,15))){
+                                    //买pos,买车 可以使用周转金
+                                    $owe=(float)math($account['funds_available'],$data['funds_available'],'+',2);
+                                    if($owe<0){
+                                        //出现欠款 把可用资金减为0
+                                        $data['funds_available']='-'.$account['funds_available'];
+                                        $_turnover_available=$owe;
+                                    }
+                                }
+                            }
+                        }
                         $log[$col]=$data[$col];
-                        $account[$col]=math($account[$col],$data[$col],'+',2);
+                        $account[$col]=math($account[$col],$data[$col],'+',5);
                         $log[$col.'_now']=$account[$col];
                     }else{
                         $log[$col]=0;
                     }
+                }
+                if($_turnover_available!=0){
+                    $log['turnover_available']=math($log['turnover_available'],$_turnover_available,'+',2);
+                    $account['turnover_available']=math($account['turnover_available'],$_turnover_available,'+',2);
+                    $log['turnover_available_now']=$account['turnover_available'];
                 }
                 $account['signature']=$this->sign($account);
                 if($insert){
@@ -86,6 +122,15 @@ class AccountLog extends Model
         }
         if(!empty($data['endtime'])){
             $where.=" and created_at<".strtotime($data['endtime']);
+        }
+        if(!empty($data['label'])){
+            $where.=" and label='{$data['label']}'";
+        }
+        if(!empty($data['label'])){
+            $where.=" and label='{$data['label']}'";
+        }
+        if(!empty($data['user_id'])){
+            $where.=" and user_id='{$data['user_id']}'";
         }
         $result=$this->where($where)->orderBy('id desc')->pager(intval($_GET['page']));
         foreach ($result['list'] as $index=>$value){
@@ -123,23 +168,23 @@ class AccountLog extends Model
                 }
                 $now.="当前冻结积分：{$value->integral_freeze_now}<br>";
             }
-            if($value->integral_freeze!=0){
-                if($value->turnover_available>0){
-                    $change.="保证金：+{$value->turnover_available}<br>";
-                }else{
-                    $change.="保证金：{$value->turnover_available}<br>";
-                }
-                $now.="当前保证金：{$value->turnover_available}<br>";
-            }
-            if($value->integral_freeze!=0){
+            if($value->security_deposit!=0){
                 if($value->security_deposit>0){
-                    $change.="可用周转金：+{$value->security_deposit}.<br>";
+                    $change.="保证金：+{$value->security_deposit}<br>";
                 }else{
-                    $change.="可用周转金：{$value->security_deposit}.<br>";
+                    $change.="保证金：{$value->security_deposit}<br>";
                 }
-                $now.="可用周转金：{$value->security_deposit_now}<br>";
+                $now.="当前保证金：{$value->security_deposit}<br>";
             }
-            if($value->integral_freeze!=0){
+            if($value->turnover_available!=0){
+                if($value->turnover_available>0){
+                    $change.="可用周转金：+{$value->turnover_available}.<br>";
+                }else{
+                    $change.="可用周转金：{$value->turnover_available}.<br>";
+                }
+                $now.="可用周转金：{$value->turnover_available_now}<br>";
+            }
+            if($value->turnover_credit!=0){
                 if($value->turnover_credit){
                     $change.="周转金额度：+{$value->turnover_credit}.<br>";
                 }else{
@@ -153,6 +198,10 @@ class AccountLog extends Model
         return $result;
     }
 
+    public function user()
+    {
+       return $this->hasOne('User','id','user_id');
+    }
 
     private function sign($signature)
     {
