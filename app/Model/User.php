@@ -24,9 +24,11 @@ class User extends Model
     function login($data)
     {
         if ($data['direct'] == '1') {
-            //后台WAP登录
-            $id = (int)$data['id'];
-            $user = DB::table('user')->where("id=?")->bindValues($id)->row();
+            if (isset($data['id'])) {
+                $user = DB::table('user')->where("id=?")->bindValues($data['id'])->row();
+            } elseif (isset($data['openid'])) {
+                $user = DB::table('user')->where("openid=?")->bindValues($data['openid'])->row();
+            }
         } else {
             $user = DB::table('user')->where("username=?")->bindValues($data['username'])->row();
             $id = (int)$user['id'];
@@ -36,20 +38,24 @@ class User extends Model
                 return '用户名或密码错误！';
             }
         }
-        if ($data['admin'] == true) {
-            $usertype = DB::table('usertype')->select('id,permission_id,is_admin')->where("id={$user['type_id']}")->row();
-            if ($usertype['is_admin'] != 1) {
-                return '会员禁止登陆！';
+        if ($user) {
+            if ($data['admin'] == true) {
+                $usertype = DB::table('usertype')->select('id,permission_id,is_admin')->where("id={$user['type_id']}")->row();
+                if ($usertype['is_admin'] != 1) {
+                    return '会员禁止登陆！';
+                }
+                session()->set('usertype', $usertype['id']);
+                session()->set('permission_id', $usertype['permission_id']);
+            } else {
+                session()->set('usertype', 0);
+                session()->set('permission_id', '');
             }
-            session()->set('usertype', $usertype['id']);
-            session()->set('permission_id', $usertype['permission_id']);
+            session()->set('user_id', $user['id']);
+            session()->set('username', $user["username"]);
+            return true;
         } else {
-            session()->set('usertype', 0);
-            session()->set('permission_id', '');
+            return '未知错误!';
         }
-        session()->set('user_id', $user['id']);
-        session()->set('username', $user["username"]);
-        return true;
     }
 
     function register($data)
