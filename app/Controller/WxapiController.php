@@ -115,9 +115,9 @@ class WxapiController extends Controller
         $menu = $this->app->menu;
         $buttons = [
             [
-                "type" => "click",
+                "type" => "view",
                 "name" => "我要下单",
-                "key"  => "menu_order"
+                "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/oauth/?redirect_uri=weixin/orderAdd"
             ],
             [
                 "name" => "用户中心",
@@ -125,12 +125,12 @@ class WxapiController extends Controller
                     [
                         "type" => "view",
                         "name" => "订单列表",
-                        "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/oauth/?act=order"
+                        "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/oauth/?redirect_uri=weixin/orderList"
                     ],
                     [
                         "type" => "view",
                         "name" => "联盟商家",
-                        "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/oauth/?act=union"
+                        "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/oauth/?redirect_uri=weixin/union"
                     ]
                 ],
             ],

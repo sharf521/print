@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Model\UserWx;
+use Symfony\Component\HttpFoundation\Request;
 
 class WeixinController extends Controller
 {
@@ -18,30 +19,47 @@ class WeixinController extends Controller
         $this->app=$this->UserWx->app;
     }
     
-    public function oauth()
+    public function oauth(Request $request)
     {
-        $oauth = $this->app->oauth;
-        if (empty($_SESSION['wechat_user'])) {
-            //$_SESSION['target_url'] = 'user/profile';
+        $redirect_uri=$request->get('redirect_uri');
+        //没有登陆时去授权
+        if (empty($this->user_id)) {
+            session()->set('target_url',$redirect_uri);
+            $oauth = $this->app->oauth;
             $oauth->redirect()->send();
             exit;
         }
-        $user = $_SESSION['wechat_user'];
-        redirect('weixin/member/?');
+        redirect($redirect_uri);
     }
     
     public function oauth_callback()
     {
         $oauth = $this->app->oauth;
         $user = $oauth->user();
-        $_SESSION['wechat_user'] = $user->toArray();
-        $targetUrl = empty($_SESSION['target_url']) ? '/index.php/weixin/member/' : $_SESSION['target_url'];
-        header('location:'. $targetUrl); // 跳转到 user/profile
+        var_dump($user->toArray());
+        exit;
+        $target_url=session('target_url');
+        redirect($target_url); // 跳转
     }
 
     public function member()
     {
         print_r($_SESSION);
         echo 'member';
+    }
+
+    public function orderAdd()
+    {
+        echo 'orderAdd';
+    }
+
+    public function orderList()
+    {
+        echo 'orderList';
+    }
+
+    public function union()
+    {
+        echo 'union';
     }
 }
