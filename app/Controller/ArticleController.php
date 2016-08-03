@@ -17,7 +17,7 @@ class ArticleController extends Controller
         $row=$article->findOrFail($id);
         $row->content=$row->ArticleData()->content;
         $data['article']=$row;
-        $data['$title_herder']=$row->title;
+        $data['title_herder']=$row->title;
         $this->view('article',$data);
     }
 }
