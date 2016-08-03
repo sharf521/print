@@ -53,22 +53,22 @@ class WeixinController extends Controller
             $target_url=session('target_url');
             redirect($target_url); // 跳转
         }else{
-            echo 'no user';
+            echo '请关注页面';
         }
     }
 
     public function orderAdd()
     {
-        echo 'orderAdd';
+        echo '下单页面';
     }
 
     public function orderList()
     {
-        echo 'orderList';
+        echo '订单列表页';
     }
 
     public function union()
     {
-        echo 'union';
+        echo '联盟页';
     }
 }
