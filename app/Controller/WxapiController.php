@@ -117,7 +117,7 @@ class WxapiController extends Controller
             [
                 "type" => "view",
                 "name" => "我要下单",
-                "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/oauth/?redirect_uri=weixin/orderAdd"
+                "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/oauth/?url=weixin/orderAdd"
             ],
             [
                 "name" => "用户中心",
@@ -125,12 +125,12 @@ class WxapiController extends Controller
                     [
                         "type" => "view",
                         "name" => "订单列表",
-                        "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/oauth/?redirect_uri=weixin/orderList"
+                        "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/oauth/?url=weixin/orderList"
                     ],
                     [
                         "type" => "view",
                         "name" => "联盟商家",
-                        "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/oauth/?redirect_uri=weixin/union"
+                        "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/oauth/?url=weixin/union"
                     ]
                 ],
             ],

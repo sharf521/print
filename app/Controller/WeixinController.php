@@ -19,7 +19,7 @@ class WeixinController extends Controller
         if(! in_array($this->func,array('oauth','oauth_callback'))){
             if(empty($this->user_id)){
                 $url=urlencode($_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
-                redirect("weixin/oauth/?redirect_uri={$url}");
+                redirect("weixin/oauth/?url={$url}");
                 exit;
             }
         }
@@ -29,15 +29,15 @@ class WeixinController extends Controller
     
     public function oauth(Request $request)
     {
-        $redirect_uri=$request->get('redirect_uri');
+        $url=$request->get('url');
         //没有登陆时去授权
         if (empty($this->user_id)) {
-            session()->set('target_url',$redirect_uri);
+            session()->set('target_url',$url);
             $oauth = $this->app->oauth;
             $oauth->redirect()->send();
             exit;
         }
-        redirect($redirect_uri);
+        redirect($url);
     }
     
     public function oauth_callback(User $user)
