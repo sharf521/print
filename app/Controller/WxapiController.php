@@ -5,6 +5,8 @@ use App\Model\User;
 use App\Model\UserWx;
 use EasyWeChat\Message\Text;
 use System\Lib\DB;
+use System\Lib\Request;
+use EasyWeChat\Foundation\Application;
 
 class WxapiController extends Controller
 {
@@ -13,8 +15,27 @@ class WxapiController extends Controller
     public function __construct()
     {
         parent::__construct();
+        $options = [
+            'debug' => true,
+            'app_id' => app('System')->getCode('appid'),
+            'secret' => app('System')->getCode('appsecret'),
+            'token' => 'print',
+            // 'aes_key' => null, // 可选
+            'log' => [
+                'level' => 'debug',
+                'file' => ROOT.'/public/easywechat.log', // XXX: 绝对路径！！！！
+            ],
+            'oauth' => [
+                'scopes'   => ['snsapi_userinfo'],
+                'callback' => 'http://'.$_SERVER['HTTP_HOST'].'/index.php/wxapi/oauth_callback',
+            ],
+            'guzzle' => [
+                'timeout' => 4.0, // 超时时间（秒）
+                // 'verify' => false, // 关掉 SSL 认证（强烈不建议！！！）
+            ]
+        ];
+        $this->app=new Application($options);
         $this->UserWx=new UserWx();
-        $this->app=$this->UserWx->app;
     }
 
     public function index()
@@ -117,7 +138,7 @@ class WxapiController extends Controller
             [
                 "type" => "view",
                 "name" => "我要下单",
-                "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/oauth/?url=weixin/orderAdd"
+                "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/orderAdd"
             ],
             [
                 "name" => "用户中心",
@@ -125,12 +146,12 @@ class WxapiController extends Controller
                     [
                         "type" => "view",
                         "name" => "订单列表",
-                        "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/oauth/?url=weixin/orderList"
+                        "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/orderList"
                     ],
                     [
                         "type" => "view",
                         "name" => "联盟商家",
-                        "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/oauth/?url=weixin/union"
+                        "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/union"
                     ]
                 ],
             ],
@@ -150,5 +171,35 @@ class WxapiController extends Controller
     public function test()
     {
         echo phpinfo();
+    }
+
+    public function oauth(Request $request)
+    {
+        $url=$request->get('url');
+        //没有登陆时去授权
+        if (empty($this->user_id)) {
+            session()->set('target_url',$url);
+            $oauth = $this->app->oauth;
+            $oauth->redirect()->send();
+            exit;
+        }
+        redirect($url);
+    }
+
+    public function oauth_callback(User $user)
+    {
+        $oauth = $this->app->oauth;
+        $oUser = $oauth->user()->toArray();
+        $arr=array(
+            'direct'=>1,
+            'openid'=>$oUser['id']
+        );
+        $result=$user->login($arr);
+        if($result===true){
+            $target_url=session('target_url');
+            redirect($target_url); // 跳转
+        }else{
+            echo '请关注页面';
+        }
     }
 }
