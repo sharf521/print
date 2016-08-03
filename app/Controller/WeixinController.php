@@ -48,10 +48,11 @@ class WeixinController extends Controller
             'direct'=>1,
             'openid'=>$oUser['id']
         );
+        var_dump($oUser);
         $result=$user->login($arr);
         if($result===true){
             $target_url=session('target_url');
-            redirect($target_url); // 跳转
+            //redirect($target_url); // 跳转
         }else{
             echo 'no user';
         }
