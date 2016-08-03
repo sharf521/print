@@ -3,7 +3,7 @@ namespace App\Controller;
 
 use App\Model\User;
 use App\Model\UserWx;
-use Symfony\Component\HttpFoundation\Request;
+use System\Lib\Request;
 
 class WeixinController extends Controller
 {
@@ -16,7 +16,6 @@ class WeixinController extends Controller
             echo '非微信浏览器不能访问';
             //die('Sorry！非微信浏览器不能访问');
         }
-echo $this->func;
         if(! in_array($this->func,array('oauth','oauth_callback'))){
             if(empty($this->user_id)){
                 $url=urlencode($_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
@@ -24,7 +23,6 @@ echo $this->func;
                 exit;
             }
         }
-
         $this->UserWx=new UserWx();
         $this->app=$this->UserWx->app;
     }
