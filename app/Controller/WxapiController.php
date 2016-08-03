@@ -6,7 +6,6 @@ use App\Model\UserWx;
 use EasyWeChat\Message\Text;
 use System\Lib\DB;
 use System\Lib\Request;
-use EasyWeChat\Foundation\Application;
 
 class WxapiController extends Controller
 {
@@ -15,27 +14,8 @@ class WxapiController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $options = [
-            'debug' => true,
-            'app_id' => app('System')->getCode('appid'),
-            'secret' => app('System')->getCode('appsecret'),
-            'token' => 'print',
-            // 'aes_key' => null, // 可选
-            'log' => [
-                'level' => 'debug',
-                'file' => ROOT.'/public/easywechat.log', // XXX: 绝对路径！！！！
-            ],
-            'oauth' => [
-                'scopes'   => ['snsapi_userinfo'],
-                'callback' => 'http://'.$_SERVER['HTTP_HOST'].'/index.php/wxapi/oauth_callback',
-            ],
-            'guzzle' => [
-                'timeout' => 4.0, // 超时时间（秒）
-                // 'verify' => false, // 关掉 SSL 认证（强烈不建议！！！）
-            ]
-        ];
-        $this->app=new Application($options);
         $this->UserWx=new UserWx();
+        $this->app=$this->UserWx->app;
     }
 
     public function index()
