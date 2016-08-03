@@ -10,6 +10,6 @@
     <meta http-equiv="Expires" content="-1">
     <meta http-equiv="pragram" content="no-cache">
     <meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">
-    <title>账户</title>
+    <title><?php if(!empty($title_herder)){echo $title_herder.'-';}?></title>
     <link href="/themes/default_wap/css.css" type="text/css" rel="stylesheet"/>
 </head>
