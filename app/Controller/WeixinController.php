@@ -35,8 +35,7 @@ class WeixinController extends Controller
     public function oauth_callback()
     {
         $oauth = $this->app->oauth;
-        $user = $oauth->user();
-        $user=$user->toArray();
+        $user = $oauth->user()->toArray();
         var_dump($user);
         exit;
         $target_url=session('target_url');
