@@ -11,7 +11,6 @@ class App
         }
         self::$instance['Container']->$key = $key;
         if (!isset(self::$instance[$key])) {
-           // echo $key.'<br>';
             self::$instance[$key] = self::$instance['Container']->$key;
         }
         return self::$instance[$key];
@@ -42,11 +41,13 @@ class Container
      */
     public function build($className)
     {
+
         // 如果是匿名函数（Anonymous functions），也叫闭包函数（closures）
         if ($className instanceof Closure) {
             // 执行闭包函数，并将结果
             return $className($this);
         }
+
         /** @var ReflectionClass $reflector */
         $reflector = new \ReflectionClass($className);
         // 检查类是否可实例化, 排除抽象类abstract和对象接口interface

@@ -156,14 +156,16 @@ class WxapiController extends Controller
     public function oauth(Request $request)
     {
         $url=$request->get('url');
+        
         //没有登陆时去授权
         if (empty($this->user_id)) {
             session()->set('target_url',$url);
             $oauth = $this->app->oauth;
             $oauth->redirect()->send();
             exit;
+        }else{
+            redirect($url);
         }
-        redirect($url);
     }
 
     public function oauth_callback(User $user)

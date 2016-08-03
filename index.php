@@ -27,7 +27,7 @@ require ROOT . '/system/helper.php';
 $pager = app('\System\Lib\Page');
 $request=app('\System\Lib\Request');
 $_G['system'] = DB::table('system')->orderBy("`showorder`,id")->lists('value', 'code');
-//$houtai=app('\App\Model\System')->getCode('houtai');
+    //$houtai=app('\App\Model\System')->getCode('houtai');
 $_G['class'] = ($request->get(0) != '') ? $request->get(0) : 'index';
 $_G['func'] = ($request->get(1) != '') ? $request->get(1) : 'index';
 

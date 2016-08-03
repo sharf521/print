@@ -58,6 +58,7 @@ if (!function_exists('controller')) {
         global $_G;
         $class=app($control);
         $_G['Controller'] = $class;
+
         if (!method_exists($class, $method)) {
             $method = 'error';
         }
