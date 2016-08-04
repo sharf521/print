@@ -18,6 +18,7 @@ class Controller
         $this->username = session('username');
         $this->user_typeid = session('usertype');
         $this->dbfix = DB::dbfix();
+        $_G['Controller'] = $this;
     }
 
     //显示模板

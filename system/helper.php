@@ -52,32 +52,6 @@ if (!function_exists('app')) {
         return \System\Lib\App::getInstance($className);
     }
 }
-if (!function_exists('controller')) {
-    function controller($control,$method='index')
-    {
-        global $_G;
-        $class=app($control);
-        $_G['Controller'] = $class;
-
-        if (!method_exists($class, $method)) {
-            $method = 'error';
-        }
-        $rMethod = new \ReflectionMethod($control, $method);
-        $params = $rMethod->getParameters();
-        $dependencies = array();
-        foreach ($params as $param) {
-            if ($param->getClass()) {
-                $_name = $param->getClass()->name;
-                array_push($dependencies, new $_name());
-            } elseif ($param->isDefaultValueAvailable()) {
-                array_push($dependencies, $param->getDefaultValue());
-            } else {
-                array_push($dependencies, null);
-            }
-        }
-        return call_user_func_array(array($class, $method), $dependencies);
-    }
-}
 
 if (!function_exists('ip')) {
     function ip()

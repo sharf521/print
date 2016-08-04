@@ -73,10 +73,9 @@ if($_path==''){
         $method = $_G['func'];
     } else {
         $_classpath = "\\App\\Controller\\" .$_path."\\IndexController";
-
         $method = $_G['class'];
     }
 }
-controller($_classpath,$method);
+\System\Lib\App::start($_classpath,$method);
 $t2 = microtime(true);
 //echo '<hr>耗时'.round($t2-$t1,3).'秒';

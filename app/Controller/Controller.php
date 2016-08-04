@@ -16,7 +16,5 @@ class Controller extends BaseController
             $this->is_wap = true;
             $this->template = 'default_wap';
         }
-        global $_G;
-        $_G['Controller'] = $this;
     }
 }

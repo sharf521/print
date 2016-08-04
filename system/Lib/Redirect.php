@@ -37,6 +37,7 @@ class Redirect
     {
         if($this->is_back){
             echo '<script>history.go(-1);</script>';
+            exit;
         }elseif (strtolower(substr($this->path, 0, 7))=='http://' || strtolower(substr($this->path, 0, 8))=='https://'){
             $url = $this->path;
         }else{
