@@ -1,31 +1,35 @@
 <?php
 require 'header.php';
 if($this->func=='index'){?>
-	<div class="main_title">
-    	<span>用户管理</span>列表  <?=$this->anchor('user/add/','添加');?>
+    <div class="main_title">
+        <span>用户管理</span>列表 <?= $this->anchor('user/add/', '添加'); ?>
     </div>
     <form method="get">
-    <div class="search">
-    	用户类型：<select name="type_id" id="type_id">
-                	<option value="">请选择</option>
-                	<?
-                    	foreach($usertype as $utype)
-						{
-							?>
-                            <option value="<?=$utype['id']?>" <? if($utype['id']==$_GET['type_id']){echo ' selected';}?>><?=$utype['name']?></option>  
-                            <?
-						}
-					?>   
-                </select>
-        用户名：<input type="text" name="username" value="<?=$_GET['username']?>"/>
-        <input type="submit" class="but2" value="查询" />
-    </div>
+        <div class="search">
+            用户类型：<select name="type_id" id="type_id">
+                <option value="">请选择</option>
+                <?
+                foreach ($usertype as $utype) {
+                    ?>
+                    <option value="<?= $utype['id'] ?>" <? if ($utype['id'] == $_GET['type_id']) {
+                        echo ' selected';
+                    } ?>><?= $utype['name'] ?></option>
+                    <?
+                }
+                ?>
+            </select>
+            用户名：<input type="text" name="username" value="<?= $_GET['username'] ?>"/>
+            <input type="submit" class="but2" value="查询"/>
+        </div>
     </form>
         <table class="table">
         	<tr class="bt">
-            	<th>USER_ID</th>
+            	<th>ID/用户名</th>
                 <th>用户类型</th>
-                <th>用户名</th>
+                <th>头像</th>
+                <th>昵称</th>
+                <th>性别</th>
+                <th>城市</th>
                 <th>EMAIL</th>
                 <th>真实姓名</th>
                 <th>电话</th>
@@ -35,36 +39,36 @@ if($this->func=='index'){?>
                 <th>操作</th>
             </tr>
             <?
+            $arr_sex=array('','男','女');
             foreach($list as $row)
 			{
 			?>
             <tr>
-            	<td><?=$row['id']?></td>
-                <td><?=$row['typename']?></td>
-                <td><?=$row['username']?></td>
-                <td><?=$row['email']?></td>
-                <td><?=$row['name']?></td>
-                <td><?=$row['tel']?></td>
-                <td><?=$row['qq']?></td>
-                <td><?=$row['address']?></td>
-                <td><?=date('Y-m-d H:i:s',$row['created_at'])?></td>
-                <td class="operate">
-				<? 
-				if($row['id']=="1")
-				{
-					echo "ADMIN用户禁止操作";
-				}
-				else
-				{
-					echo $this->anchor('user/edit/?id='.$row['id'],'编辑');
-					echo '&nbsp;|&nbsp;';
-					echo $this->anchor('user/edittype/?id='.$row['id'],'修改用户类型');
-                    echo '&nbsp;|&nbsp;';
-                    echo $this->anchor('user/updatepwd/?id='.$row['id'],'修改密码');
+            	<td><?=$row->id?>/<?=$row->username?></td>
+                <td><?=$row->UserType()->name?></td>
 
-
-				}
-				?>
+                <td><img src="<?=substr($row->UserWx()->headimgurl,0,-1)?>64" width="50"></td>
+                <td><?=$row->UserWx()->nickname?></td>
+                <td><?=$arr_sex[$row->UserWx()->sex]?></td>
+                <td><?=$row->UserWx()->province?>-<?=$row->UserWx()->city?></td>
+                <td><?=$row->email?></td>
+                <td><?=$row->name?></td>
+                <td><?=$row->tel?></td>
+                <td><?=$row->qq?></td>
+                <td><?=$row->address?></td>
+                <td><?=$row->created_at?></td>
+                <td>
+                    <?
+                    if ($row->id == "1") {
+                        echo "ADMIN用户禁止操作";
+                    } else {
+                        echo $this->anchor('user/edit/?id=' . $row->id, '编辑');
+                        echo '&nbsp;|&nbsp;';
+                        echo $this->anchor('user/edittype/?id=' . $row->id, '修改用户类型');
+                        echo '&nbsp;|&nbsp;';
+                        echo $this->anchor('user/updatepwd/?id=' . $row->id, '修改密码');
+                    }
+                    ?>
                     </td>
             </tr>
             <? }?>

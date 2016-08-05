@@ -16,17 +16,17 @@ class UserController extends AdminController
         $this->User = new User();
     }
 
-    function index()
+    function index(User $user,UserType $userType)
     {
-        $arr = array(
-            'type_id' => (int)$_GET['type_id'],
-            'username' => $_GET['username'],
-            'page' => (int)$_REQUEST['page'],
-            'epage' => 10
-        );
-        $data = $this->User->getlist($arr);
-        $UserType = new UserType();
-        $data['usertype'] = $UserType->getList();
+        $where = " 1=1";
+        if (!empty($_GET['type_id'])) {
+            $where .= " and type_id={$_GET['type_id']}";
+        }
+        if (!empty($_GET['username'])) {
+            $where .= " and username like '{$_GET['username']}%'";
+        }
+        $data =$user->where($where)->pager($_GET['page'],10);
+        $data['usertype'] = $userType->getList();
         $this->view('user', $data);
     }
 

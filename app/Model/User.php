@@ -97,23 +97,6 @@ class User extends Model
         }
     }
 
-    function getlist($data = array())
-    {
-        $_select = " u.*,ut.name as typename,uu.username invite_name";
-        $where = " 1=1";
-        if (!empty($data['type_id'])) {
-            $where .= " and u.type_id={$data['type_id']}";
-        }
-        if (!empty($data['username'])) {
-            $where .= " and u.username like '{$data['username']}%'";
-        }
-        return DB::table('user u')->select($_select)
-            ->leftJoin('user uu', 'u.invite_userid=uu.id')
-            ->leftJoin('usertype ut', 'u.type_id=ut.id')
-            ->where($where)
-            ->page($data['page'], $data['epage']);
-    }
-
     //修改密码
     public function updatePwd($data)
     {
@@ -200,5 +183,10 @@ left join {$this->dbfix}account_bank b on u.id=b.user_id {$where}";
     public function UserType()
     {
         return $this->hasOne('App\Model\UserType', 'id', 'type_id');
+    }
+    
+    public function UserWx()
+    {
+        return $this->hasOne('App\Model\UserWx', 'openid', 'openid');
     }
 }

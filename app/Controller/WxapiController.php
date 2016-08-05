@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Model\User;
 use App\Model\UserWx;
+use App\WeChat;
 use EasyWeChat\Message\Text;
 use System\Lib\DB;
 use System\Lib\Request;
@@ -15,7 +16,8 @@ class WxapiController extends Controller
     {
         parent::__construct();
         $this->UserWx=new UserWx();
-        $this->app=$this->UserWx->app;
+        $weChat=new WeChat();
+        $this->app=$weChat->app;
     }
 
     public function index()

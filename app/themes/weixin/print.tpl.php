@@ -1,4 +1,5 @@
 <?php require 'header.php';?>
+<? if($this->func=='orderAdd') : ?>
     <div class="header_tit">我要下单</div>
     <div class="container">
         <form method="post">
@@ -10,4 +11,12 @@
             <input type="submit" value="提 交" class="submit">
         </form>
     </div>
+    <? elseif ($this->func=='orderList') :?>
+    <div class="header_tit">我的订单</div>
+    <div class="container">
+        <table class="table">
+
+        </table>
+    </div>
+    <? endif;?>
 <?php require 'footer.php';?>

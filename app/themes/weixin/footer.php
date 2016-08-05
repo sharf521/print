@@ -7,7 +7,7 @@ if(session('msg'))
         layer.open({
             content: '<?=session('msg')?>',
             style: 'font-size:2.8rem;padding: 2rem 1.5rem;line-height: 2.2rem;',
-            time: 1
+            time: 2
         });
     </script>
     <?
