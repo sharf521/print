@@ -43,6 +43,16 @@ class LinkPage extends Model
                 }
                 $html.= "<label><input type='checkbox' name='{$name}[]' {$_chk} value='{$i}'>{$v}</label>&nbsp;";
             }
+        }elseif($data['type'] == 'radio'){
+            $index=0;
+            foreach ($linkpage[$code] as $i => $v) {
+                $_chk = '';
+                if ($index==0 || "$i" == "$val"){
+                    $_chk = 'checked';
+                }
+                $html.= "<label><input type='radio' name='{$name}' {$_chk} value='{$i}'>{$v}</label>&nbsp;";
+                $index++;
+            }
         } else {
             $html.= "<select name='{$name}' {$attr}><option value=''>{$title}</option>";
             foreach ($linkpage[$code] as $i => $v) {

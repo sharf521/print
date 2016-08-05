@@ -29,7 +29,7 @@ class WeixinController extends Controller
 
     public function orderAdd(LinkPage $linkPage)
     {
-        $data['print_type']=$linkPage->echoLink('print_type');
+        $data['print_type']=$linkPage->echoLink('print_type','',array('type'=>'radio'));
         $this->view('print',$data);
     }
 
