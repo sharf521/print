@@ -11,5 +11,5 @@
     <meta http-equiv="pragram" content="no-cache">
     <meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">
     <title><?php if(!empty($title_herder)){echo $title_herder.'-';}?><?=app('\App\Model\System')->getCode('webname');?></title>
-    <link href="/themes/weixin/css.css" type="text/css" rel="stylesheet"/>
+    <link href="/themes/weixin/css.css?<?=rand(100000,999999)?>" type="text/css" rel="stylesheet"/>
 </head>
