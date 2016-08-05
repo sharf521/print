@@ -41,7 +41,7 @@ class LinkPage extends Model
                 if (is_array($val) && in_array($i, $val)) {
                     $_chk = 'checked';
                 }
-                $html.= "<label><input type='checkbox' name='{$name}[]' {$_chk} value='{$i}'>{$v}</label>&nbsp;";
+                $html.= "<label><input type='checkbox' name='{$name}[]' {$_chk} value='{$i}'>{$v}</label>&nbsp;&nbsp;";
             }
         }elseif($data['type'] == 'radio'){
             $index=0;
@@ -50,7 +50,7 @@ class LinkPage extends Model
                 if ($index==0 || "$i" == "$val"){
                     $_chk = 'checked';
                 }
-                $html.= "<label><input type='radio' name='{$name}' {$_chk} value='{$i}'>{$v}</label>&nbsp;";
+                $html.= "<label><input type='radio' name='{$name}' {$_chk} value='{$i}'>{$v}</label>&nbsp;&nbsp;";
                 $index++;
             }
         } else {
