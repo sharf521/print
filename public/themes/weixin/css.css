@@ -25,7 +25,7 @@ input[type=button],input[type=submit]{ background:#2baab1; color:#fff;border: 1p
     line-height: 6rem;
     border-radius: .5rem;
 }
-.submit{font-size: 3rem; line-height: 7rem; height: 7rem;border-radius: .6rem;}
+input.submit{font-size: 3rem; line-height: 7rem; height: 7rem;border-radius: .6rem;}
 input[type=radio],input[type=checkbox]{ width:16px; height:16px;}
 
 
