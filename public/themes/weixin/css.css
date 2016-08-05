@@ -1,7 +1,4 @@
 html{font-size:62.5%;}
-
-
-
 html, body, div, span, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, address, big, cite, code, del, em, font, img, ins, small, strong, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend {margin: 0;padding: 0;-webkit-tap-highlight-color:transparent;}
 body {background:#f9f9f9;color: #666; font-family:"Microsoft YaHei"; width:100%;}
 ol, ul,li{list-style: none outside none;}
@@ -24,12 +21,11 @@ textarea {vertical-align: middle; line-height:30px; width: 100%; background:#fdf
 textarea:focus{ border:1px solid #2baab1;}
 input:focus{ border:1px solid #2baab1;}
 input[type=button],input[type=submit]{ background:#2baab1; color:#fff;border: 1px solid #26969c; cursor:pointer;padding:0.5rem 10rem; font-size: 2.4rem;
-
     height: 6rem;
-
     line-height: 6rem;
     border-radius: .5rem;
 }
+.submit{font-size: 3rem; line-height: 7rem; height: 7rem;border-radius: .6rem;}
 input[type=radio],input[type=checkbox]{ width:16px; height:16px;}
 
 

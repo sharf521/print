@@ -7,7 +7,7 @@
                 <tr><td>要求：</td><td><textarea name="remark" rows="5"></textarea></td></tr>
                 <tr><td>电话：</td><td><input type="text" name="tel"></td></tr>
             </table>
-            <input type="submit" value="提 交">
+            <input type="submit" value="提 交" class="submit">
         </form>
     </div>
 <?php require 'footer.php';?>
