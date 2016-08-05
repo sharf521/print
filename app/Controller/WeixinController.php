@@ -43,6 +43,7 @@ class WeixinController extends Controller
             if (empty($tel)) {
                 redirect()->back()->with('error', '请填写联系电话');
             }
+            $printTask->user_id=$this->user_id;
             $printTask->print_type=$print_type;
             $printTask->remark=$remark;
             $printTask->tel=$tel;
