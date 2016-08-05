@@ -23,6 +23,7 @@ class User extends Model
 
     function login($data)
     {
+        $user=array();
         if ($data['direct'] == '1') {
             if (isset($data['id'])) {
                 $user = DB::table('user')->where("id=?")->bindValues($data['id'])->row();
@@ -38,7 +39,7 @@ class User extends Model
                 return '用户名或密码错误！';
             }
         }
-        if ($user) {
+        if (!empty($user)) {
             if ($data['admin'] == true) {
                 $usertype = DB::table('usertype')->select('id,permission_id,is_admin')->where("id={$user['type_id']}")->row();
                 if ($usertype['is_admin'] != 1) {
