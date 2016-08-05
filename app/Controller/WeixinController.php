@@ -47,7 +47,7 @@ class WeixinController extends Controller
             $printTask->print_type=$print_type;
             $printTask->remark=$remark;
             $printTask->tel=$tel;
-            $print_type->status=0;
+            $printTask->status=0;
             $printTask->save();
             redirect('weixin/orderList')->with('msg', '下单成功，稍后工作人员会联系您，您也可以在微信里留言。');
         }else{
