@@ -72,7 +72,7 @@ ul, li{ list-style:none;}
 .table td{padding:6px 0; line-height:36px; font-size:14px; text-align:center; border-bottom: 1px solid #f1f1f1;}
 .table tr:hover{ background:#f9f9f9}
 
-.table_from{border-collapse: collapse; margin: 2rem }
+.table_from{border-collapse: collapse; margin: 2rem 0rem; width: 100%;}
 .table_from td{padding:0.6rem 0; text-align: left; line-height:3.6rem; font-size:2.4rem; border-bottom: 1px solid #f1f1f1;}
 .table_from>tbody>tr>td:first-child{text-align: right; padding-right: 1rem; width: 10rem}
 .table_from tr:hover{ background:#f9f9f9}
