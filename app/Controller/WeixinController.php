@@ -49,7 +49,7 @@ class WeixinController extends Controller
             $printTask->tel=$tel;
             $printTask->status=0;
             $printTask->save();
-            redirect('weixin/orderList')->with('msg', '下单成功，稍后工作人员会联系您，您也可以在微信里留言。');
+            redirect('weixin/orderList')->with('msg', '下单成功！<br>稍后工作人员会联系您。<br>您也可以在微信里留言。！<br>');
         }else{
             $data['print_type']=$linkPage->echoLink('print_type','',array('type'=>'radio'));
             $data['title_herder']='我要下单';
