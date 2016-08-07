@@ -62,8 +62,8 @@ class WeixinController extends Controller
             $where .= " and print_type='{$_GET['print_type']}'";
         }
         $data['title_herder']='我的订单';
-        $data = $printTask->where($where)->orderBy('id desc')->pager($_GET['page'], 10);
-        $data['print_type']=$linkPage->echoLink('print_type',$_GET['print_type']);
+        $task = $printTask->where($where)->orderBy('id desc')->pager($_GET['page'], 10);
+        $data['task']=$task;
         $this->view('print',$data);
     }
 
