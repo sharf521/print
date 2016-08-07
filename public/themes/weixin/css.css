@@ -71,12 +71,10 @@ ul, li{ list-style:none;}
 }
 
 .table{ width:100%; margin-top:10px; border-collapse: collapse; border:1px solid #dddddd;border-bottom:2px solid #dddddd;}
-.table .l{ text-align:left}
-.table .operate{ text-align:left; padding-left:20px;}
 .table .fl{ text-align: left; padding-left: 5px;}
 .table .fr{ text-align: right; padding-right: 5px;}
-.table th{line-height:36px;border-bottom:2px solid #dddddd; background:#f9f9f9;}
-.table td{padding:6px 0; line-height:36px; font-size:14px; text-align:center; border-bottom: 1px solid #f1f1f1;}
+.table th{line-height:4rem;font-size: 2.8rem;border-bottom:.2rem solid #dddddd; background:#f9f9f9;}
+.table td{padding: 1rem 0.5rem;line-height:4rem; font-size:2.8rem; text-align:center; border-bottom: 1px solid #f1f1f1;}
 .table tr:hover{ background:#f9f9f9}
 
 .table_from{border-collapse: collapse; margin: 3rem 0rem; width: 100%;}

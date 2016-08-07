@@ -13,7 +13,7 @@
     </div>
     <? elseif ($this->func=='orderList') : ?>
     <div class="header_tit">我的订单</div>
-    <div class="container">
+
         <table class="table">
             <tr class="bt">
                 <th>类型</th>
@@ -44,7 +44,7 @@
             <? }?>
         </table>
         <? if(empty($total)){echo "无记录！";}else{echo $page;}?>
-    </div>
+
     <? elseif ($this->func=='orderShow') : ?>
     <div class="header_tit">我的订单</div>
     <div class="container">
