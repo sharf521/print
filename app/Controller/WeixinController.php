@@ -100,7 +100,6 @@ class WeixinController extends Controller
             $order=new Order($attributes);
             $result = $payment->prepare($order);
             $prepayId = $result->prepay_id;
-            var_dump($result);
             var_dump($prepayId);
 
         }else{
