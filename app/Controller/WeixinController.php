@@ -108,10 +108,10 @@ class WeixinController extends Controller
             ];
             $order=new Order($attributes);
             $result = $payment->prepare($order);
-            var_dump($result);
             if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
                 $js = $app->js;
-                $data['config']=$js->config(array('chooseWXPay'), true);
+                $data['config']=$js->config(array('chooseWXPay'), true,false,false);
+                print_r($data['config']);
                 $data['pay']=$result;
             }
             $this->view('print',$data);
