@@ -3,6 +3,8 @@ namespace App\Controller;
 
 use App\Model\LinkPage;
 use App\Model\PrintTask;
+use App\WeChat;
+use EasyWeChat\Payment\Order;
 use System\Lib\Request;
 
 class WeixinController extends Controller
@@ -75,10 +77,30 @@ class WeixinController extends Controller
         if($task->user_id!=$this->user_id && $task->status != 3){
             redirect()->back()->with('error','权限异常！');
         }
-        $data['task']=$task;
-        $data['order']=$task->PrintOrder();
-        $data['title_herder']='我的订单';
-        $this->view('print',$data);
+        if($_POST){
+            $weChat=new WeChat();
+            $app=$weChat->app;
+            $payment = $app->payment;
+
+            $attributes = [
+                'trade_type'       => 'JSAPI', // JSAPI，NATIVE，APP...
+                'body'             => 'iPad mini 16G 白色',
+                'detail'           => 'iPad mini 16G 白色',
+                'out_trade_no'     => '1217752501201407033233368018',
+                'total_fee'        => 8,
+                'notify_url'       => 'http://print.yuantuwang.com/weixin/order-notify', // 支付结果通知网址，如果不设置则会
+            ];
+            $order=new Order($attributes);
+            $result=$payment->pay($order);
+            var_dump($result);
+
+        }else{
+
+            $data['task']=$task;
+            $data['order']=$task->PrintOrder();
+            $data['title_herder']='我的订单';
+            $this->view('print',$data);
+        }
     }
 
     public function union()
