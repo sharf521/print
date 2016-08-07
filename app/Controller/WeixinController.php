@@ -5,6 +5,7 @@ use App\Model\LinkPage;
 use App\Model\PrintTask;
 use App\WeChat;
 use EasyWeChat\Payment\Order;
+use System\Lib\DB;
 use System\Lib\Request;
 
 class WeixinController extends Controller
@@ -79,7 +80,7 @@ class WeixinController extends Controller
         }
 
         if($_POST){
-            echo 1111;
+            $openid=DB::table('user')->where('id=?')->bindValues($this->user_id)->value('openid');
             $weChat=new WeChat();
             $app=$weChat->app;
             $payment = $app->payment;
@@ -90,10 +91,11 @@ class WeixinController extends Controller
                 'detail'           => 'iPad mini 16G 白色',
                 'out_trade_no'     => '1217752501201407033233368018',
                 'total_fee'        => 8,
+                'attach'=>'attach',
+                'product_id'=>1,
+                'openid'=>$openid,
                 'notify_url'       => 'http://print.yuantuwang.com/weixin/order-notify', // 支付结果通知网址，如果不设置则会
             ];
-
-
 
             $order=new Order($attributes);
             $result = $payment->prepare($order);
@@ -102,7 +104,6 @@ class WeixinController extends Controller
             var_dump($prepayId);
 
         }else{
-
             $data['task']=$task;
             $data['order']=$task->PrintOrder();
             $data['title_herder']='我的订单';
