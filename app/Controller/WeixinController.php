@@ -104,7 +104,7 @@ class WeixinController extends Controller
                 'attach'=>'attach',
                 'product_id'=>1,
                 'openid'=>$openid,
-                'notify_url'       => 'http://print.yuantuwang.com/weixin/order-notify'
+                'notify_url'       => 'http://print.yuantuwang.com/weixin/'
             ];
             $order=new Order($attributes);
             $result = $payment->prepare($order);
