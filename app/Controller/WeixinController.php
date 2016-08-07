@@ -99,7 +99,7 @@ class WeixinController extends Controller
                 'trade_type'       => 'JSAPI', // JSAPI，NATIVE，APP...
                 'body'             => 'iPad mini 16G 白色',
                 'detail'           => 'iPad mini 16G 白色',
-                'out_trade_no'     => '1217752501201407033233368018',
+                'out_trade_no'     => time().rand(10000,99999),
                 'total_fee'        => 8,
                 'attach'=>'attach',
                 'product_id'=>1,
