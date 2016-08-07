@@ -97,7 +97,7 @@
             <table class="table_from">
                 <tr><td>总计：</td><td>￥<?=$money?></td></tr>
             </table>
-            <input type="text" name="money" value="<?=$money?>">
+            <input type="hidden" name="money" value="<?=$money?>">
             <input type="submit" value="确定支付" class="submit">
         </form>
     </div>

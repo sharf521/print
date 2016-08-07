@@ -92,9 +92,14 @@ class WeixinController extends Controller
                 'total_fee'        => 8,
                 'notify_url'       => 'http://print.yuantuwang.com/weixin/order-notify', // 支付结果通知网址，如果不设置则会
             ];
+
+
+
             $order=new Order($attributes);
-            $result=$payment->pay($order);
+            $result = $payment->prepare($order);
+            $prepayId = $result->prepay_id;
             var_dump($result);
+            var_dump($prepayId);
 
         }else{
 
