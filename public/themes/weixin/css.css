@@ -17,6 +17,13 @@ input,select {vertical-align: middle; background:#fdfdfd; border:1px solid #e4e4
     padding: 0 .6rem;
 
 }
+.but1{vertical-align: middle; background:#fdfdfd; border:1px solid #e4e4e4;border-radius:3px;
+
+    width: 100%;
+    box-sizing: border-box;
+    height: 6rem;
+    font-size: 2.4rem;
+    padding: 0 .6rem;}
 textarea {vertical-align: middle; line-height:30px; width: 100%; background:#fdfdfd; border:1px solid #e4e4e4;border-radius:3px; padding:0 0.6rem;box-sizing:border-box; }
 textarea:focus{ border:1px solid #2baab1;}
 input:focus{ border:1px solid #2baab1;}

@@ -11,8 +11,18 @@ class PrintTask extends Model
         parent::__construct();
     }
 
-    public function printOrder()
+    public function User()
     {
-        $this->hasMany('\App\Model\PrintOrder','id','task_id');
+        return $this->hasOne('\App\Model\User','id','user_id');
+    }
+
+    public function UserReply()
+    {
+        return $this->hasOne('\App\Model\User','id','reply_uid');
+    }
+
+    public function PrintOrder()
+    {
+        return $this->hasMany('\App\Model\PrintOrder','task_id','id');
     }
 }

@@ -3,8 +3,6 @@ namespace App\Controller;
 
 use App\Model\LinkPage;
 use App\Model\PrintTask;
-use App\Model\User;
-use App\Model\UserWx;
 use System\Lib\Request;
 
 class WeixinController extends Controller
@@ -47,7 +45,7 @@ class WeixinController extends Controller
             $printTask->print_type=$print_type;
             $printTask->remark=$remark;
             $printTask->tel=$tel;
-            $printTask->status=0;
+            $printTask->status=1;
             $printTask->save();
             redirect('weixin/orderList')->with('msg', '下单成功！<br>稍后工作人员会联系您。<br>您也可以在微信里留言。！<br>');
         }else{
@@ -57,8 +55,28 @@ class WeixinController extends Controller
         }
     }
 
-    public function orderList()
+    public function orderList(PrintTask $printTask,LinkPage $linkPage)
     {
+        $where = " user_id=$this->user_id";
+        if (!empty($_GET['print_type'])) {
+            $where .= " and print_type='{$_GET['print_type']}'";
+        }
+        $data['title_herder']='我的订单';
+        $data = $printTask->where($where)->orderBy('id desc')->pager($_GET['page'], 10);
+        $data['print_type']=$linkPage->echoLink('print_type',$_GET['print_type']);
+        $this->view('print',$data);
+    }
+
+    public function orderShow(Request $request,PrintTask $printTask)
+    {
+        $id=$request->get('task_id');
+        $page=$request->get('page');
+        $task=$printTask->findOrFail($id);
+        if($task->user_id!=$this->user_id && $task->status != 3){
+            redirect()->back()->with('error','权限异常！');
+        }
+        $data['task']=$task;
+        $data['order']=$task->PrintOrder();
         $data['title_herder']='我的订单';
         $this->view('print',$data);
     }
