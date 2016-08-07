@@ -77,7 +77,6 @@ class WeixinController extends Controller
         if($task->user_id!=$this->user_id && $task->status != 3){
             redirect()->back()->with('error','权限异常！');
         }
-        print_r($_POST);
 
         if($_POST){
             echo 1111;
