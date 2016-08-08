@@ -111,8 +111,9 @@ class WeixinController extends Controller
             var_dump($result);
             if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
                 $js = $app->js;
+                $time=time();
                 $data['config']=$js->config(array('chooseWXPay'), true);
-                $pay['timestamp']=''.time();
+                $pay['timestamp']="$time";
                 $pay['nonceStr']=$this->getNonceStr();
                 $pay['package']="prepay_id={$result->prepay_id}";
                 $pay['signType']='MD5';
