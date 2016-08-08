@@ -79,43 +79,35 @@ class WeixinController extends Controller
             redirect()->back()->with('error','权限异常！');
         }
 
-        if($_POST){
+        $data['task']=$task;
+        $data['order']=$task->PrintOrder();
+        $data['title_herder']='我的订单';
 
 
-
-
-
-        }else{
-            $data['task']=$task;
-            $data['order']=$task->PrintOrder();
-            $data['title_herder']='我的订单';
-
-
-            $openid=DB::table('user')->where('id=?')->bindValues($this->user_id)->value('openid');
-            $weChat=new WeChat();
-            $app=$weChat->app;
-            $payment = $app->payment;
-            $attributes = [
-                'trade_type'       => 'JSAPI', // JSAPI，NATIVE，APP...
-                'body'             => 'iPad mini 16G 白色',
-                'detail'           => 'iPad mini 16G 白色',
-                'out_trade_no'     => time().rand(10000,99999),
-                'total_fee'        => 8,
-                'attach'=>'attach',
-                'product_id'=>1,
-                'openid'=>$openid,
-                'notify_url'       => 'http://print.yuantuwang.com/weixin/'
-            ];
-            $order=new Order($attributes);
-            $result = $payment->prepare($order);
-            if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
-                $js = $app->js;                
-                $data['config']=$js->config(array('chooseWXPay'), true);
-                $pay=$weChat->getPayParams($result->prepay_id);
-                $data['pay']=$pay;
-            }
-            $this->view('print',$data);
+        $openid=DB::table('user')->where('id=?')->bindValues($this->user_id)->value('openid');
+        $weChat=new WeChat();
+        $app=$weChat->app;
+        $payment = $app->payment;
+        $attributes = [
+            'trade_type'       => 'JSAPI', // JSAPI，NATIVE，APP...
+            'body'             => '支付订单',
+            'out_trade_no'     => time().rand(10000,99999),
+            'total_fee'        => 1,
+            'attach'=>$task->id,
+            'openid'=>$openid,
+            'notify_url'       => 'http://print.yuantuwang.com/wxapi/payNotify/'
+        ];
+        $order=new Order($attributes);
+        $result = $payment->prepare($order);
+        if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
+            $js = $app->js;
+            $data['config']=$js->config(array('chooseWXPay'), true);
+            $pay=$weChat->getPayParams($result->prepay_id);
+            $data['pay']=$pay;
+            $task->out_trade_no=$attributes['out_trade_no'];
+            $task->save();
         }
+        $this->view('print',$data);
     }
 
     public function union()
