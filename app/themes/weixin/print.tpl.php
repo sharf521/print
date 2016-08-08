@@ -99,6 +99,7 @@
                 <tr><td>总计：</td><td>￥<?=$money?></td></tr>
             </table>
             <input type="hidden" name="money" value="<?=$money?>">
+            <input type="text" name="address" onclick="wxAddress()">
             <input type="button" value="确定支付" onclick="wxpay()" class="submit">
         </form>
     </div>
@@ -119,6 +120,23 @@
                         window.location='/index.php/weixin/orderList/?'+ res;
                     }
                 });
+            });
+        }
+        function wxAddress() {
+            wx.openAddress({
+                trigger: function (res) {
+                    alert('用户开始拉出地址');
+                },
+                success: function (res) {
+                    alert('用户成功拉出地址');
+                    alert(JSON.stringify(res));
+                },
+                cancel: function (res) {
+                    alert('用户取消拉出地址');
+                },
+                fail: function (res) {
+                    alert(JSON.stringify(res));
+                }
             });
         }
     </script>
