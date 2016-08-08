@@ -92,7 +92,7 @@ class WeixinController extends Controller
             'trade_type'       => 'JSAPI', // JSAPI，NATIVE，APP...
             'body'             => '支付订单',
             'out_trade_no'     => time().rand(10000,99999),
-            'total_fee'        => 1,
+            'total_fee'        => $task->money,
             'attach'=>$task->id,
             'openid'=>$openid,
             'notify_url'       => 'http://print.yuantuwang.com/wxapi/payNotify/'
