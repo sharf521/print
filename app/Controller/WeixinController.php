@@ -168,6 +168,7 @@ class WeixinController extends Controller
      */
     public function MakeSign($values)
     {
+        $values['appid']=app('System')->getCode('appid');
         //签名步骤一：按字典序排序参数
         ksort($values);
         $string = $this->ToUrlParams($values);
