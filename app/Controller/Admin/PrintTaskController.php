@@ -57,10 +57,12 @@ class PrintTaskController extends AdminController
                 $order->save();
 
                 $task->status=3;
+                $task->money=math($task->money,$order->money,'+',2);
                 $task->save();
                 redirect($url)->with('msg','添加成功！');
             }elseif($request->post('act')=='orderEdit'){
                 $id = $request->post('id');
+                $money=0;
                 foreach ($id as $key => $val) {
                     if(!empty($val)){
                         $arr=array(
@@ -69,9 +71,12 @@ class PrintTaskController extends AdminController
                             'company'=>$request->post('company')[$key],
                             'company_money'=>(float)$request->post('company_money')[$key]
                         );
+                        $money=math($money,$arr['money'],'+',2);
                         DB::table('print_order')->where('id=?')->bindValues($val)->update($arr);
                     }
                 }
+                $task->money=$money;
+                $task->save();
                 redirect($url)->with('msg','保存成功！');
             }
         }else{
@@ -96,6 +101,17 @@ class PrintTaskController extends AdminController
             redirect()->back()->with('error','权限异常！');
         }else{
             $order->delete($id);
+
+            $printTask=new PrintTask();
+            $task=$printTask->find($order->task_id);
+            $orders=$task->PrintOrder();
+            $money=0;
+            foreach ($orders as $o){
+                $money=math($money,$o->money,'+',2);
+            }
+            $task->money=$money;
+            $task->save();
+
             $url="printTask/show/?task_id={$request->get('task_id')}&page={$request->get('page')}";
             redirect($url)->with('msg','删除成功！');
         }
