@@ -12,9 +12,10 @@ use EasyWeChat\Foundation\Application;
 class WeChat
 {
     public $app;
+    private $options;
     public function __construct()
     {
-        $options = [
+        $this->options = [
             'debug' => true,
             'app_id' => app('System')->getCode('appid'),
             'secret' => app('System')->getCode('appsecret'),
@@ -45,6 +46,68 @@ class WeChat
                 // ...
             ],
         ];
-        $this->app=new Application($options);
+        $this->app=new Application($this->options);
+    }
+
+    public function getPayParams($prepay_id)
+    {
+        $pay=array();
+        $pay['appId']=$this->options['app_id'];
+        $time=time();
+        $pay['timeStamp']="$time";
+        $pay['nonceStr']=$this->getNonceStr();
+        $pay['package']="prepay_id={$prepay_id}";
+        $pay['signType']='MD5';
+        $pay['paySign']=$this->MakeSign($pay);
+        return $pay;
+    }
+
+    /**
+     *
+     * 产生随机字符串，不长于32位
+     * @param int $length
+     * @return 产生的随机字符串
+     */
+    private function getNonceStr($length = 32)
+    {
+        $chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+        $str ="";
+        for ( $i = 0; $i < $length; $i++ )  {
+            $str .= substr($chars, mt_rand(0, strlen($chars)-1), 1);
+        }
+        return $str;
+    }
+    /**
+     * 格式化参数格式化成url参数
+     */
+    private function ToUrlParams($values)
+    {
+        $buff = "";
+        foreach ($values as $k => $v)
+        {
+            if($k != "sign" && $v != "" && !is_array($v)){
+                $buff .= $k . "=" . $v . "&";
+            }
+        }
+
+        $buff = trim($buff, "&");
+        return $buff;
+    }
+
+    /**
+     * 生成签名
+     */
+    private function MakeSign($values)
+    {
+        //签名步骤一：按字典序排序参数
+        ksort($values);
+        $string = $this->ToUrlParams($values);
+        //签名步骤二：在string后加入KEY
+        $string = $string . "&key=".$this->options['payment']['key'];
+        //签名步骤三：MD5加密
+        $string = md5($string);
+        //签名步骤四：所有字符转为大写
+        $result = strtoupper($string);
+        return $result;
     }
 }
