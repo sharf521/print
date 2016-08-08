@@ -207,6 +207,7 @@ class WxapiController extends Controller
             // 用户是否支付成功
             if ($successful) {
                 $order->paytime = time();
+                $order->paymoney=(float)math($notify->total_fee,100,'/',2);
                 $order->status = 4;
             } else { // 用户支付失败
                 $order->status = 'paid_fail';
