@@ -112,7 +112,6 @@ class WeixinController extends Controller
                 $js = $app->js;                
                 $data['config']=$js->config(array('chooseWXPay'), true);
                 $pay=$weChat->getPayParams($result->prepay_id);
-                var_dump($pay);
                 $data['pay']=$pay;
             }
             $this->view('print',$data);

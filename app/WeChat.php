@@ -58,8 +58,15 @@ class WeChat
         $pay['nonceStr']=$this->getNonceStr();
         $pay['package']="prepay_id={$prepay_id}";
         $pay['signType']='MD5';
-        $pay['paySign']=$this->MakeSign($pay);
-        return $pay;
+        $sign=$this->MakeSign($pay);
+        $arr=array(
+            'timestamp'=>$pay['timeStamp'],
+            'nonceStr'=>$pay['nonceStr'],
+            'package'=>$pay['package'],
+            'signType'=>$pay['signType'],
+            'paySign'=>$sign
+        );
+        return $arr;
     }
 
     /**
