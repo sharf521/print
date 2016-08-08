@@ -124,6 +124,14 @@
         }
         function wxAddress() {
             wx.ready(function(){
+                wx.checkJsApi({
+                    jsApiList: [
+                        'openAddress',
+                    ],
+                    success: function (res) {
+                        alert(JSON.stringify(res));
+                    }
+                });
                 wx.openAddress({
                     trigger: function (res) {
                         alert('用户开始拉出地址');

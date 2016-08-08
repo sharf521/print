@@ -101,7 +101,7 @@ class WeixinController extends Controller
         $result = $payment->prepare($order);
         if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
             $js = $app->js;
-            $data['config']=$js->config(array('chooseWXPay','openAddress'), true);
+            $data['config']=$js->config(array('chooseWXPay','openAddress','checkJsApi'), true);
             $pay=$weChat->getPayParams($result->prepay_id);
             $data['pay']=$pay;
             $task->out_trade_no=$attributes['out_trade_no'];
