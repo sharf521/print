@@ -108,10 +108,11 @@ class WeixinController extends Controller
             ];
             $order=new Order($attributes);
             $result = $payment->prepare($order);
+            var_dump($result);
             if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
                 $js = $app->js;
                 $data['config']=$js->config(array('chooseWXPay'), true);
-                $pay['timestamp']=time();
+                $pay['timestamp']=''.time();
                 $pay['nonceStr']=$this->getNonceStr();
                 $pay['package']="prepay_id={$result->prepay_id}";
                 $pay['signType']='MD5';
@@ -171,6 +172,7 @@ class WeixinController extends Controller
         $values['appid']=app('System')->getCode('appid');
         //签名步骤一：按字典序排序参数
         ksort($values);
+        print_r($values);
         $string = $this->ToUrlParams($values);
         //签名步骤二：在string后加入KEY
         $string = $string . "&key=".'kfjakdfjakldsfjkasdq1234123411as';
