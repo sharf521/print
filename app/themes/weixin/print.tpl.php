@@ -62,6 +62,7 @@
                 <td><?=$row->created_at?></td>
                 <td><?=$row->getLinkPageName('print_status',$row->status)?></td>
                 <td>
+                    <a href="<?=url("weixin/orderShow/?task_id={$row->id}&page={$_GET['page']}")?>">详情</a>
                     <?
                     if($row->status==3){
                         ?>
