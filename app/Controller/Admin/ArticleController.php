@@ -147,7 +147,6 @@ class ArticleController extends AdminController
         } else {
             //一级分类
             $data['cates'] = $category->getlist(array('pid' => 1));
-            var_dump($data['cates']);
             $data['row'] = $article->findOrFail($id);
             $data['row']->content = $data['row']->ArticleData()->content;
             $categorypath = explode(',', $data['row']->category_path);
