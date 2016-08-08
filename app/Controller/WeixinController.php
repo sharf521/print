@@ -113,7 +113,7 @@ class WeixinController extends Controller
                 $js = $app->js;
                 $time=time();
                 $data['config']=$js->config(array('chooseWXPay'), true);
-                $pay['timestamp']="$time";
+                $pay['timeStamp']="$time";
                 $pay['nonceStr']=$this->getNonceStr();
                 $pay['package']="prepay_id={$result->prepay_id}";
                 $pay['signType']='MD5';
