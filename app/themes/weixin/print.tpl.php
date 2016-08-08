@@ -123,20 +123,22 @@
             });
         }
         function wxAddress() {
-            wx.openAddress({
-                trigger: function (res) {
-                    alert('用户开始拉出地址');
-                },
-                success: function (res) {
-                    alert('用户成功拉出地址');
-                    alert(JSON.stringify(res));
-                },
-                cancel: function (res) {
-                    alert('用户取消拉出地址');
-                },
-                fail: function (res) {
-                    alert(JSON.stringify(res));
-                }
+            wx.ready(function(){
+                wx.openAddress({
+                    trigger: function (res) {
+                        alert('用户开始拉出地址');
+                    },
+                    success: function (res) {
+                        alert('用户成功拉出地址');
+                        alert(JSON.stringify(res));
+                    },
+                    cancel: function (res) {
+                        alert('用户取消拉出地址');
+                    },
+                    fail: function (res) {
+                        alert(JSON.stringify(res));
+                    }
+                });
             });
         }
     </script>
