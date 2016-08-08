@@ -114,6 +114,7 @@
                     signType: 'MD5',
                     paySign: '<?=$pay['paySign']?>',
                     success: function (res) {
+                        alert(res.err_msg);
                         if(res.err_msg == "get_brand_wcpay_request：ok" ) {
                             alert('支付成功！');
                             window.location='/index.php/weixin/orderList';
