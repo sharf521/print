@@ -2,7 +2,7 @@
 require 'header.php';
 if($this->func=='index'){?>
     <div class="main_title">
-        <span>用户管理</span>列表
+        <span>用户管理</span>列表 <?= $this->anchor('user/add/', '添加'); ?>
     </div>
     <form method="get">
         <div class="search">
@@ -24,7 +24,7 @@ if($this->func=='index'){?>
     </form>
         <table class="table">
         	<tr class="bt">
-            	<th>ID</th>
+            	<th>ID/用户名</th>
                 <th>用户类型</th>
                 <th>头像</th>
                 <th>昵称</th>
@@ -44,7 +44,7 @@ if($this->func=='index'){?>
 			{
 			?>
             <tr>
-            	<td><?=$row->id?></td>
+            	<td><?=$row->id?>/<?=$row->username?></td>
                 <td><?=$row->UserType()->name?></td>
 
                 <td><img src="<?=substr($row->UserWx()->headimgurl,0,-1)?>64" width="50"></td>

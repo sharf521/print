@@ -43,7 +43,6 @@ class PrintTaskController extends AdminController
         if($this->user_typeid!=2 && $task->status!=1 && $task->reply_uid!=$this->user_id){
             redirect()->back()->with('error','权限异常！');
         }
-
         $url="printTask/show/?task_id={$request->get('task_id')}&page={$request->get('page')}";
         if($_POST){
             if($task->status >=4 ){
@@ -91,6 +90,7 @@ class PrintTaskController extends AdminController
                 $task->reply_time=time();
                 $task->save();
             }
+            $task->shipping_company=$linkPage->echoLink('shipping_company',$task->shipping_company);
             $data['task']=$task;
             $data['order']=$task->PrintOrder();
             $data['print_company']=$linkPage->echoLink('print_company','',array('name'=>'company'));

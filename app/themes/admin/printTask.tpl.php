@@ -91,7 +91,7 @@ elseif ($this->func=='show') : ?>
                         <input type="hidden" name="task_id" value="<?=$task->id?>">
                         <input type="hidden" name="page" value="<?=$_GET['page']?>">
                         <table class="table_from">
-                            <tr><td>快递公司：</td><td><input type="text" name="shipping_company" value="<?=$task->shipping_company?>"></td></tr>
+                            <tr><td>快递公司：</td><td><?=$task->shipping_company?></td></tr>
                             <tr><td>快递单号：</td><td><input type="text" name="shipping_no" value="<?=$task->shipping_no?>"></td></tr>
                             <tr><td>快递费用：</td><td><input type="text" name="shipping_fee" value="<?=$task->shipping_fee?>"></td></tr>
                             <tr><td>发货时间：</td><td><? if($task->shipping_time!=0){
