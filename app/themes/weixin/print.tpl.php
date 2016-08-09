@@ -127,10 +127,10 @@
             wx.ready(function(){
                 wx.openAddress({
                     success: function (res) {
-                        var add=JSON.stringify(res);
-                        alert(add.UserName);
-                        alert(add.telNumber);
-                        alert(add.provinceName+add.provinceName+add.cityName+add.countryName+add.detailInfo);
+                        //JSON.stringify(res);
+                        alert(res.UserName);
+                        alert(res.telNumber);
+                        alert(res.provinceName+res.provinceName+res.cityName+res.countryName+res.detailInfo);
                     },
                     cancel: function (res) {
                         alert('用户取消拉出地址');
