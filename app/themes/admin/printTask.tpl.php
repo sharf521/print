@@ -56,7 +56,7 @@
     <? if(empty($total)){echo "无记录！";}else{echo $page;}?>
 <?php elseif($this->func=='checkOrder') : ?>
         <div class="main_title">
-            <span>列单审核管理</span>列表
+            <span>订单审核</span>
         </div>
         <table class="table">
             <tr><th>ID</th><th>定做要求</th><th>价格</th><th>外联厂家</th><th>本成价</th><th>添加时间</th><th>状态</th><th></th></tr>
