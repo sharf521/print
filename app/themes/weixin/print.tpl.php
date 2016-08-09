@@ -128,7 +128,9 @@
                 <tr><td>联系电话：</td><td><?=$task->shipping_tel?></td></tr>
                 <tr><td>收货地址：</td><td><?=$task->shipping_address?></td></tr>
             </table>
-        <?php elseif ($task->status >=5) : ?>
+        <?php
+        endif;
+        if ($task->status >=5) : ?>
             <table class="table_from">
                 <tr><td>快递公司：</td><td><?=$task->shipping_company?></td></tr>
                 <tr><td>快递单号：</td><td><?=$task->shipping_no?></td></tr>
