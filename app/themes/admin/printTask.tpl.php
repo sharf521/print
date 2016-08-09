@@ -110,7 +110,11 @@ elseif ($this->func=='show') : ?>
                     <table class="table_from">
                         <tr><td>支付金额：</td><td><?=$task->paymoney?></td></tr>
                         <tr><td>流水号：</td><td><?=$task->out_trade_no?></td></tr>
-                        <tr><td>支付时间：</td><td><?=date('Y-m-d H:i:s',$task->paytime)?></td></tr>
+                        <tr><td>支付时间：</td><td>
+                                <? if ($task->paytime != 0) {
+                                    echo date('Y-m-d H:i:s', $task->paytime);
+                                } ?>
+                            </td></tr>
                         <tr><td>收货人：</td><td><?=$task->shipping_name?></td></tr>
                         <tr><td>联系电话：</td><td><?=$task->shipping_tel?></td></tr>
                         <tr><td>收货地址：</td><td><?=$task->shipping_address?></td></tr>
