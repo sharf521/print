@@ -125,21 +125,12 @@
         }
         function wxAddress() {
             wx.ready(function(){
-                wx.checkJsApi({
-                    jsApiList: [
-                        'openAddress',
-                    ],
-                    success: function (res) {
-                        alert(JSON.stringify(res));
-                    }
-                });
                 wx.openAddress({
-                    trigger: function (res) {
-                        alert('用户开始拉出地址');
-                    },
                     success: function (res) {
-                        alert('用户成功拉出地址');
-                        alert(JSON.stringify(res));
+                        var add=JSON.stringify(res);
+                        alert(add.UserName);
+                        alert(add.telNumber);
+                        alert(add.provinceName+add.provinceName+add.cityName+add.countryName+add.detailInfo);
                     },
                     cancel: function (res) {
                         alert('用户取消拉出地址');
