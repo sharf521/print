@@ -94,19 +94,49 @@
             }
             ?>
         </table>
+        <!-- 待支付 -->
+        <?php if($task->status==3) : ?>
         <div class="header_tit">添加收货地址：</div>
-            <table class="table_from">
-                <tr><td>收货人：</td><td><input type="text" id="name"><span></span></td></tr>
-                <tr><td>电话：</td><td><input type="text" id="tel"><span></span></td></tr>
-                <tr><td>地址：</td><td><input type="text" id="address"><span></span></td></tr>
-            </table>
-        <div align="center"> <input type="button"  value="选择地址" id="btnAddress" class="but1" style="width: 80%"></div>
-       <br>
-
-
-        <table width="100%">
-            <tr><td style="font-size: 3rem">总计：<span style=" color: #ff8000">￥<?=$money?></span></td><td align="right"><input type="button" value="确定支付" id="butPay" class="submit"></td></tr>
+        <table class="table_from">
+            <tr>
+                <td>收货人：</td>
+                <td><input type="text" id="name"><span></span></td>
+            </tr>
+            <tr>
+                <td>电话：</td>
+                <td><input type="text" id="tel"><span></span></td>
+            </tr>
+            <tr>
+                <td>地址：</td>
+                <td><input type="text" id="address"><span></span></td>
+            </tr>
         </table>
+        <div align="center"><input type="button" value="选择地址" id="btnAddress" class="but1" style="width: 80%"></div>
+        <br>
+        <table width="100%">
+            <tr>
+                <td style="font-size: 3rem">总计：<span style=" color: #ff8000">￥<?= $money ?></span></td>
+                <td align="right"><input type="button" value="确定支付" id="butPay" class="submit"></td>
+            </tr>
+        </table>
+        <?php elseif ($task->paymoney > 0) : ?>
+            <table class="table_from">
+                <tr><td>支付金额：</td><td><?=$task->paymoney?></td></tr>
+                <tr><td>流水号：</td><td><?=$task->out_trade_no?></td></tr>
+                <tr><td>支付时间：</td><td><?=date('Y-m-d H:i:s',$task->paytime)?></td></tr>
+                <tr><td>收货人：</td><td><?=$task->shipping_name?></td></tr>
+                <tr><td>联系电话：</td><td><?=$task->shipping_tel?></td></tr>
+                <tr><td>收货地址：</td><td><?=$task->shipping_address?></td></tr>
+            </table>
+        <?php elseif ($task->status >=5) : ?>
+            <table class="table_from">
+                <tr><td>快递公司：</td><td><?=$task->shipping_company?></td></tr>
+                <tr><td>快递单号：</td><td><?=$task->shipping_no?></td></tr>
+                <tr><td>发货时间：</td><td><? if($task->shipping_time!=0){
+                            echo date('Y-m-d H:i:s',$task->shipping_time);
+                        }?></td></tr>
+            </table>
+        <? endif ?>
     </div>
 
 

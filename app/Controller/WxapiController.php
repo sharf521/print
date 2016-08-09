@@ -57,7 +57,7 @@ class WxapiController extends Controller
     }
     private function event($message)
     {
-        $userServer=$this->app->user;
+
         //$msg['Event']=='subscribe' || $msg['Event']=='SCAN'
 //        if(isset($message->EventKey)){
 //            $EventKey=$message->EventKey;
@@ -71,33 +71,8 @@ class WxapiController extends Controller
 //            $txt=(int)substr($_str,0,-2);//内容				
 //        }        
         if($message->Event=='subscribe'){
-            $userInfo=$userServer->get($message->FromUserName);
-            $user_wx=$this->UserWx->where("openid=?")->bindValues($userInfo->openid)->first();
-            $user_wx->subscribe = $userInfo->subscribe;
-            $user_wx->openid = $userInfo->openid;
-            $user_wx->nickname = $userInfo->nickname;
-            $user_wx->sex = $userInfo->sex;
-            $user_wx->city = $userInfo->city;
-            $user_wx->country = $userInfo->country;
-            $user_wx->province = $userInfo->province;
-            $user_wx->language = $userInfo->language;
-            $user_wx->headimgurl = $userInfo->headimgurl;
-            $user_wx->subscribe_time = $userInfo->subscribe_time;
-            $user_wx->unionid = $userInfo->unionid;
-            $user_wx->remark = $userInfo->remark;
-            $user_wx->groupid = $userInfo->groupid;
-            $user_wx->tagid_list =json_encode($userInfo->tagid_list);
-            $user_wx->save();
-            $user=new User();
-            $user=$user->where("openid=?")->bindValues($userInfo->openid)->first();
-            $user->openid=$userInfo->openid;
-            $user->headimgurl=$userInfo->subscribe_time;
-            $user->nickname=$userInfo->nickname;
-            if(empty($user->type_id)){
-                $user->type_id=1;
-            }
-            $user->save();
-            return new Text(['content' =>"{$user->nickname}，您好！终于等到您了!"]);
+            $this->addUser($message->FromUserName);
+            return new Text(['content' =>"您好！终于等到您了!"]);
         }elseif($message->Event=='unsubscribe'){
             $arr=array(
                 'subscribe'=>0,
@@ -156,6 +131,37 @@ class WxapiController extends Controller
         echo phpinfo();
     }
 
+    private function addUser($openid)
+    {
+        $userServer=$this->app->user;
+        $userInfo=$userServer->get($openid);
+        $user_wx=$this->UserWx->where("openid=?")->bindValues($userInfo->openid)->first();
+        $user_wx->subscribe = $userInfo->subscribe;
+        $user_wx->openid = $userInfo->openid;
+        $user_wx->nickname = $userInfo->nickname;
+        $user_wx->sex = $userInfo->sex;
+        $user_wx->city = $userInfo->city;
+        $user_wx->country = $userInfo->country;
+        $user_wx->province = $userInfo->province;
+        $user_wx->language = $userInfo->language;
+        $user_wx->headimgurl = $userInfo->headimgurl;
+        $user_wx->subscribe_time = $userInfo->subscribe_time;
+        $user_wx->unionid = $userInfo->unionid;
+        $user_wx->remark = $userInfo->remark;
+        $user_wx->groupid = $userInfo->groupid;
+        $user_wx->tagid_list =json_encode($userInfo->tagid_list);
+        $user_wx->save();
+        $user=new User();
+        $user=$user->where("openid=?")->bindValues($userInfo->openid)->first();
+        $user->openid=$userInfo->openid;
+        $user->headimgurl=$userInfo->subscribe_time;
+        $user->nickname=$userInfo->nickname;
+        if(empty($user->type_id)){
+            $user->type_id=1;
+        }
+        $user->save();
+    }
+
     public function oauth(Request $request)
     {
         $url=$request->get('url');
@@ -175,6 +181,7 @@ class WxapiController extends Controller
     {
         $oauth = $this->app->oauth;
         $oUser = $oauth->user()->toArray();
+        $this->addUser($oUser['id']);
         $arr=array(
             'direct'=>1,
             'openid'=>$oUser['id']

@@ -46,6 +46,11 @@ class PrintTaskController extends AdminController
 
         $url="printTask/show/?task_id={$request->get('task_id')}&page={$request->get('page')}";
         if($_POST){
+            if($task->status >=4 ){
+                //支付之前可以操作
+                redirect()->back()->with('error','禁止该操作，状态异常！');
+            }
+
             if($request->post('act')=='orderAdd'){
                 $order=new PrintOrder();
                 $order->task_id=$task->id;
@@ -97,13 +102,20 @@ class PrintTaskController extends AdminController
     {
         $id=$request->get('id');
         $order=$printOrder->findOrFail($id);
-        if($this->user_typeid!=2 && $order->reply_id!=$this->user_id){
-            redirect()->back()->with('error','权限异常！');
+        $printTask=new PrintTask();
+        $task=$printTask->find($order->task_id);
+        if($this->user_typeid!=2){
+            if($order->reply_id!=$this->user_id){
+                redirect()->back()->with('error','权限异常！');
+            }
+            if($task->status >=4){
+                //支付之前可以操作
+                redirect()->back()->with('error','禁止该操作，状态异常！');
+            }
         }else{
             $order->delete($id);
 
-            $printTask=new PrintTask();
-            $task=$printTask->find($order->task_id);
+
             $orders=$task->PrintOrder();
             $money=0;
             foreach ($orders as $o){
@@ -115,5 +127,25 @@ class PrintTaskController extends AdminController
             $url="printTask/show/?task_id={$request->get('task_id')}&page={$request->get('page')}";
             redirect($url)->with('msg','删除成功！');
         }
+    }
+    
+    
+    public function editShipping(Request $request,PrintTask $printTask)
+    {
+        $id=$request->post('task_id');
+        $page=$request->post('page');
+        $task=$printTask->findOrFail($id);
+        if($task->status!=4 && $task->status!=5){
+            //待发或己发货
+            redirect()->back()->with('error','禁止该操作，状态异常！');
+        }
+        $task->shipping_company=$request->post('shipping_company');
+        $task->shipping_no=$request->post('shipping_no');
+        $task->shipping_fee=$request->post('shipping_fee');
+        $task->shipping_time=time();
+        $task->status=5;
+        $task->save();
+        $url="printTask/show/?task_id={$id}&page={$page}";
+        redirect($url)->with('msg','保存成功！');
     }
 }
