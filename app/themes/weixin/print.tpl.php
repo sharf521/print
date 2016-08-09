@@ -94,17 +94,17 @@
             }
             ?>
         </table>
-
+        <div class="header_tit">添加收货地址：</div>
             <table class="table_from">
-                <tr><td>收货人：</td><td><input type="text" id="name"></td></tr>
+                <tr><td>姓名：</td><td><input type="text" id="name"></td></tr>
                 <tr><td>电话：</td><td><input type="text" id="tel"></td></tr>
                 <tr><td>地址：</td><td><input type="text" id="address"></td></tr>
             </table>
             <input type="button"  value="选择地址" id="btnAddress">
 
 
-        <table class="table_from">
-            <tr><td>总计：￥<?=$money?></td><td><input type="button" value="确定支付" id="butPay" class="submit"></td></tr>
+        <table>
+            <tr><td>总计：￥<?=$money?></td><td align="right"><input type="button" value="确定支付" id="butPay" class="but1"></td></tr>
         </table>
     </div>
 
