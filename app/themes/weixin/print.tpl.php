@@ -94,22 +94,26 @@
             }
             ?>
         </table>
-        <form method="post">
+
             <table class="table_from">
-                <tr><td>总计：</td><td>￥<?=$money?></td></tr>
+                <tr><td>收货人：</td><td><input type="text" id="name"></td></tr>
+                <tr><td>电话：</td><td><input type="text" id="tel"></td></tr>
+                <tr><td>地址：</td><td><input type="text" id="address"></td></tr>
             </table>
-            <input type="hidden" name="money" value="<?=$money?>">
-            <input type="text" name="address" onclick="wxAddress()">
-            <input type="button" value="确定支付" onclick="wxpay()" class="submit">
-        </form>
+            <input type="button"  value="选择地址" id="btnAddress">
+
+
+        <table class="table_from">
+            <tr><td>总计：￥<?=$money?></td><td><input type="button" value="确定支付" id="butPay" class="submit"></td></tr>
+        </table>
     </div>
 
 
     <script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
         wx.config(<?=$config?>);
-        function wxpay() {
-            wx.ready(function(){
+        wx.ready(function () {
+            $("#butPay").click(function () {
                 wx.chooseWXPay({
                     timestamp: '<?=$pay['timestamp']?>',
                     nonceStr: '<?=$pay['nonceStr']?>',
@@ -118,19 +122,17 @@
                     paySign: '<?=$pay['paySign']?>',
                     success: function (res) {
                         alert('支付成功！');
-                        window.location='/index.php/weixin/orderList/?'+ res;
+                        window.location = '/index.php/weixin/orderList/';
                     }
                 });
             });
-        }
-        function wxAddress() {
-            wx.ready(function(){
+            $('#btnAddress').click(function () {
                 wx.openAddress({
                     success: function (res) {
                         //JSON.stringify(res);
-                        alert(res.UserName);
-                        alert(res.telNumber);
-                        alert(res.provinceName+res.provinceName+res.cityName+res.countryName+res.detailInfo);
+                        $('#name').val(res.userName);
+                        $('#tel').val(res.telNumber);
+                        $('#address').val(res.provinceName + res.cityName + res.countryName + res.detailInfo);
                     },
                     cancel: function (res) {
                         alert('用户取消拉出地址');
@@ -140,7 +142,7 @@
                     }
                 });
             });
-        }
+        })
     </script>
 
     <? endif;?>
