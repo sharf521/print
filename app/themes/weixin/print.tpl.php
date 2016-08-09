@@ -96,9 +96,9 @@
         </table>
         <div class="header_tit">添加收货地址：</div>
             <table class="table_from">
-                <tr><td>收货人：</td><td><input type="text" id="name"></td></tr>
-                <tr><td>电话：</td><td><input type="text" id="tel"></td></tr>
-                <tr><td>地址：</td><td><input type="text" id="address"></td></tr>
+                <tr><td>收货人：</td><td><input type="text" id="name" onblur="validate_address(this)"><span></span></td></tr>
+                <tr><td>电话：</td><td><input type="text" id="tel" onblur="validate_address(this)"><span></span></td></tr>
+                <tr><td>地址：</td><td><input type="text" id="address" onblur="validate_address(this)"><span></span></td></tr>
             </table>
         <div align="center"> <input type="button"  value="选择地址" id="btnAddress" class="but1" style="width: 80%"></div>
        <br>
@@ -115,6 +115,15 @@
         wx.config(<?=$config?>);
         wx.ready(function () {
             $("#butPay").click(function () {
+                var name=validate_address(document.getElementById('name'));
+                var tel=validate_address(document.getElementById('tel'));
+                var add=validate_address(document.getElementById('address'));
+                if(name && tel && add){
+                    $.post("/index.php/weixin/saveAddress/?task_id="+<?=$task->id?>,{'name':$('#name').val(),'tel':$('#tel').val(),'address':$('#address').val()},function(str){
+                    });
+                }else {
+                    return;
+                }
                 wx.chooseWXPay({
                     timestamp: '<?=$pay['timestamp']?>',
                     nonceStr: '<?=$pay['nonceStr']?>',
@@ -130,7 +139,6 @@
             $('#btnAddress').click(function () {
                 wx.openAddress({
                     success: function (res) {
-                        //JSON.stringify(res);
                         $('#name').val(res.userName);
                         $('#tel').val(res.telNumber);
                         $('#address').val(res.provinceName + res.cityName + res.countryName + res.detailInfo);
@@ -143,7 +151,46 @@
                     }
                 });
             });
-        })
+        });
+
+        function validate_address(o)
+        {
+            var flag = true;
+            var name = $(o).attr('id');
+            var span = $(o).next('span');
+            if (name == 'name') {
+                if (o.value == '') {
+                    span.html('<font style="color:#f00">姓名不能为空!</font>');
+                    flag = false;
+                }else{
+                    span.html('');
+                }
+            }
+            if (name == 'tel') {
+                if (o.value == '') {
+                    span.html('<font style="color:#f00">电话不能为空!</font>');
+                    flag = false;
+                }else{
+                    span.html('');
+                }
+            }
+            if (name == 'address') {
+                if (o.value == '') {
+                    span.html('<font style="color:#f00">地址不能为空!</font>');
+                    flag = false;
+                }else{
+                    span.html('');
+                }
+                /*
+                 var ajax = $.ajax({url: "/index.php/ajax/check_valicode/" + o.value, async: false});
+                 if (ajax.responseText != 'ok') {
+                 span.html('<font style="color:#f00">验证码不正确!</font>');
+                 flag = false;
+                 }
+                */
+            }
+            return flag;
+        }
     </script>
 
     <? endif;?>

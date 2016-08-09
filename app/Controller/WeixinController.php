@@ -114,6 +114,19 @@ class WeixinController extends Controller
     {
         echo '联盟页';
     }
+    
+    
+    public function saveAddress(Request $request,PrintTask $printTask)
+    {
+        $task_id=(int)$request->get('task_id');
+        $task=$printTask->findOrFail($task_id);
+        if($task->user_id == $this->user_id){
+            $task->shipping_name=$request->post('name');
+            $task->shipping_tel=$request->post('tel');
+            $task->shipping_address=$request->post('address');
+            $task->save();
+        }
+    }
 
 
 
