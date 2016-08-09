@@ -141,7 +141,7 @@ class PrintTaskController extends AdminController
         }
         $task->shipping_company=$request->post('shipping_company');
         $task->shipping_no=$request->post('shipping_no');
-        $task->shipping_fee=$request->post('shipping_fee');
+        $task->shipping_fee=(float)$request->post('shipping_fee');
         $task->shipping_time=time();
         $task->status=5;
         $task->save();
