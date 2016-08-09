@@ -148,4 +148,13 @@ class PrintTaskController extends AdminController
         $url="printTask/show/?task_id={$id}&page={$page}";
         redirect($url)->with('msg','保存成功！');
     }
+
+    public function checkOrder()
+    {
+        $data['orderList']=DB::table('print_order o')->select("o.*")
+            ->leftJoin('print_task t','o.task_id=t.id')
+            ->where("t.status>=4")
+            ->page($_GET['page'],10);
+        $this->view('printTask', $data);
+    }
 }
