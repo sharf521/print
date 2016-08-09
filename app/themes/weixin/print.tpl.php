@@ -141,7 +141,7 @@
         <? endif ?>
     </div>
 
-
+<? if($task->status==3) :?>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
         wx.config(<?=$config?>);
@@ -207,6 +207,6 @@
             return flag;
         }
     </script>
-
+<? endif;?>
     <? endif;?>
 <?php require 'footer.php';?>
