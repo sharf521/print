@@ -65,7 +65,6 @@ class ArticleController extends AdminController
             //添加文章信息
             $arr = array();
             $arr['user_id'] = $this->user_id;
-            $arr['subsite_id'] = $_POST['subsite_id'];
             $arr['title'] = $_POST['title'];
             $arr['typeid'] = (int)$_POST['typeid'];
             $arr['category_id'] = $categoryid;
@@ -125,7 +124,6 @@ class ArticleController extends AdminController
             //修改文章信息
             $arr = array();
             $arr['user_id'] = $this->user_id;
-            $arr['subsite_id'] = $_POST['subsite_id'];
             $arr['title'] = $_POST['title'];
             $arr['typeid'] = $_POST['typeid'];
             $arr['category_id'] = $categoryid;
