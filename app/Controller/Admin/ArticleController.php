@@ -70,7 +70,7 @@ class ArticleController extends AdminController
             $arr['category_id'] = $categoryid;
             $arr['category_path'] = $categorypath;
             $arr['lable'] = $_POST['lable'];
-            $arr['status'] = $_POST['status'];
+            $arr['status'] = (int)$_POST['status'];
             $arr['picture'] = $_POST['picture'];
             $arr['addtime'] = date('Y-m-d H:i:s');
             $artice_id =DB::table('article')->insertGetId($arr);
@@ -125,11 +125,11 @@ class ArticleController extends AdminController
             $arr = array();
             $arr['user_id'] = $this->user_id;
             $arr['title'] = $_POST['title'];
-            $arr['typeid'] = $_POST['typeid'];
+            $arr['typeid'] = (int)$_POST['typeid'];
             $arr['category_id'] = $categoryid;
             $arr['category_path'] = $categorypath;
             $arr['lable'] = $_POST['lable'];
-            $arr['status'] = $_POST['status'];
+            $arr['status'] = (int)$_POST['status'];
             $arr['picture'] = $_POST['picture'];
             $arr['edittime'] = date('Y-m-d H:i:s');
             $result=Db::table('article')->where("id={$id}")->limit(1)->update($arr);
