@@ -8,27 +8,22 @@ a:hover{color:#666;text-decoration:none;}
 fieldset, img {border: 0;vertical-align: middle;}
 select, input, button, textarea {font: 100% "Microsoft YaHei";padding: 0;}
 :focus {outline: 0 none;}
-input,select {vertical-align: middle; background:#fdfdfd; border:1px solid #e4e4e4;border-radius:3px;
-
+input[type=text],select {vertical-align: middle; background:#fdfdfd; border:1px solid #e4e4e4;border-radius:3px;
     width: 100%;
     box-sizing: border-box;
     height: 6rem;
     font-size: 2.4rem;
     padding: 0 .6rem;
-
 }
-.but1{vertical-align: middle;border-radius:.3rem;
-    box-sizing: border-box;   height: 6rem;    font-size: 2.4rem;    padding: 0 1.2rem; background-color: #f60; color: #fff;}
-.but1:hover{color: #fff;}
+.but1,.submit{ box-sizing: border-box;    border: none; background: #00adfe;    color: #fff;    padding: 0 1.2rem;    text-align: center;}
+.but1 { height: 6rem;font-size: 2.4rem; line-height: 6rem; border-radius: .3rem;   }
+.submit{height: 7rem;font-size: 3rem;   line-height: 7rem; border-radius: .6rem; width: 100%;}
+
 textarea {vertical-align: middle; line-height:30px; width: 100%; background:#fdfdfd; border:1px solid #e4e4e4;border-radius:3px; padding:0 0.6rem;box-sizing:border-box; }
 textarea:focus{ border:1px solid #2baab1;}
 input:focus{ border:1px solid #2baab1;}
-input[type=button],input[type=submit]{ background:#2baab1; color:#fff;border: 1px solid #26969c; cursor:pointer;padding:0 10rem; font-size: 2.4rem;
-    height: 6rem;
-    line-height: 6rem;
-    border-radius: .5rem;
-}
-input.submit{font-size: 3rem; line-height: 7rem; height: 7rem;border-radius: .6rem;}
+
+
 input[type=radio],input[type=checkbox]{ width:2.4rem; height:2.4rem;}
 
 
@@ -75,7 +70,7 @@ ul, li{ list-style:none;}
 
 .table_from{border-collapse: collapse; margin: 3rem 0rem; width: 100%;}
 .table_from td{ padding: 1rem 0.5rem; text-align: left; line-height:6rem; font-size:2.8rem; border-bottom: 1px solid #f1f1f1;}
-.table_from>tbody>tr>td:first-child{text-align: right;width: 10rem}
+.table_from>tbody>tr>td:first-child{text-align: right;}
 .table_from tr:hover{ background:#f9f9f9}
 
 .orderList{font-size: 2.4rem}
