@@ -59,7 +59,7 @@
             <span>列单审核管理</span>列表
         </div>
         <table class="table">
-            <tr><th>ID</th><th>定做要求</th><th>价格</th><th>外联厂家</th><th>本成价</th><th>添加时间</th><th></th></tr>
+            <tr><th>ID</th><th>定做要求</th><th>价格</th><th>外联厂家</th><th>本成价</th><th>添加时间</th><th>状态</th><th></th></tr>
             <?
             $printOrder=new \App\Model\PrintOrder();
             foreach($orderList['list'] as $order)
@@ -67,15 +67,19 @@
                 $item=$printOrder->find($order['id']);
                 ?>
                 <tr>
-                    <td><input type="hidden" name="id[]" value="<?= $item->id ?>"><?= $item->id ?></td>
-                    <td><textarea name="remark[]"><?= $item->remark ?></textarea></td>
-                    <td><input type="text" name="money[]" value="<?= $item->money ?>"></td>
+                    <td><?= $item->id ?></td>
+                    <td class="fl"><?= nl2br($item->remark) ?></td>
+                    <td><?= $item->money ?></td>
                     <td><?= $item->company?></td>
-                    <td><input type="text" name="company_money[]" value="<?= $item->company_money ?>"></td>
+                    <td><?= $item->company_money ?></td>
                     <td><?= $item->created_at ?></td>
+                    <td><?=$item->getLinkPageName('check_status',$item->status)?></td>
                     <td>
-                        <a href="<?= url("printTask/orderDel/?id={$item->id}&page={$_GET['page']}&task_id={$task->id}") ?>"
-                           onclick="return confirm('确定要删除吗？')"></a></td>
+                        <? if($item->status==1) : ?>
+                        <a href="<?= url("printTask/checkOrder/?id={$item->id}&status=2&page={$_GET['page']}") ?>" onclick="return confirm('确定要操作吗？')">审核通过</a>&nbsp;&nbsp;
+                        <a href="<?= url("printTask/checkOrder/?id={$item->id}&status=3&page={$_GET['page']}") ?>" onclick="return confirm('确定要操作吗？')">审核不通过</a>
+                        <? endif ?>
+                    </td>
                 </tr>
             <? }?>
         </table>

@@ -58,6 +58,7 @@ class PrintTaskController extends AdminController
                 $order->money=(float)$request->post('money');
                 $order->company=$request->post('company');
                 $order->company_money=(float)$request->post('company_money');
+                $order->status=1;
                 $order->save();
 
                 $task->status=3;
@@ -149,12 +150,26 @@ class PrintTaskController extends AdminController
         redirect($url)->with('msg','保存成功！');
     }
 
-    public function checkOrder()
+    public function checkOrder(Request $request,PrintOrder $printOrder)
     {
-        $data['orderList']=DB::table('print_order o')->select("o.*")
-            ->leftJoin('print_task t','o.task_id=t.id')
-            ->where("t.status>=4")
-            ->page($_GET['page'],10);
-        $this->view('printTask', $data);
+        if(isset($_GET['id'])){
+            $id=$request->get('id');
+            $status=$request->get('status');
+            $order=$printOrder->findOrFail($id);
+            if($order->status==1 && in_array($status,array(2,3))){
+                $order->status=$status;
+                $order->save();
+                redirect()->back()->with('msg','操成成功！');
+            }else{
+                redirect()->back()->with('error','异常');
+            }
+        }else{
+            $data['orderList']=DB::table('print_order o')->select("o.*")
+                ->leftJoin('print_task t','o.task_id=t.id')
+                ->where("t.status>=4")
+                ->orderBy('o.id desc')
+                ->page($_GET['page'],10);
+            $this->view('printTask', $data);
+        }
     }
 }
