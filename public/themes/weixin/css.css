@@ -71,7 +71,7 @@ ul, li{ list-style:none;}
 
 .div_box{background-color: #ffffff; padding: .6rem; margin-bottom: 2rem; border-bottom: 1px solid #d5d5d5; border-top: 1px solid #d5d5d5}
 .table_box{font-size: 2.4rem;}
-.table_box>tbody>tr>td:first-child{text-align: right; color: #999999;width: 15rem; float: right}
+.table_box>tbody>tr>td:first-child{text-align: right; color: #999999;width: 13rem; float: right}
 
 .orderList{font-size: 2.4rem}
 .orderList li{margin-bottom: 10px; border-bottom: .5rem solid #efefef;}
