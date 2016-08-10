@@ -44,11 +44,10 @@ ul, li{ list-style:none;}
     body{ width:640px; margin:0 auto;}
 }
 .header_tit {
-    line-height: 6rem;
-    height: 6rem;
+    line-height: 10rem;
+    height: 10rem;
+    padding: 0 2rem;
     font-size: 3rem; color: #fff;
-    margin: 0 auto;
-    padding-left: 2rem;
     background-color:#006600;
 }
 .container{
@@ -71,8 +70,8 @@ ul, li{ list-style:none;}
 .table_from tr:hover{ background:#f9f9f9}
 
 .div_box{background-color: #ffffff; padding: .6rem; margin-bottom: 2rem; border-bottom: 1px solid #d5d5d5; border-top: 1px solid #d5d5d5}
-.table_box{font-size: 2rem; margin-bottom: 2rem; }
-.table_box>tbody>tr>td:first-child{text-align: right; color: #999999; }
+.table_box{font-size: 2.2rem;}
+.table_box>tbody>tr>td:first-child{text-align: right; color: #999999; padding-left: 2rem}
 
 .orderList{font-size: 2.4rem}
 .orderList li{margin-bottom: 10px; border-bottom: .5rem solid #efefef;}
