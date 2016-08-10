@@ -1,5 +1,5 @@
 <?php require 'header.php'; ?>
-    <div class="header_tit">请填写收件人信息：</div>
+    <div class="header_tit">支付中：</div>
     <table class="table_from">
         <tr>
             <td style="width: 12rem">收货人：</td>
