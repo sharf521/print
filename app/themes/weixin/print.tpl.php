@@ -31,7 +31,7 @@
                     endif;
                     if ($row->status == 3) {
                         ?>
-                        <a class="but_pay" href="<?= url("weixin/orderPay/?task_id={$row->id}&page={$_GET['page']}") ?>">支付</a>
+                        <a class="but_pay" href="<?= url("weixin/orderPay/?task_id={$row->id}&page={$_GET['page']}") ?>">付款</a>
                         <?
                     }else{
                         echo '<span class="status">'.$row->getLinkPageName('print_status',$row->status).'</span>';
