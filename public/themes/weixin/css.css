@@ -26,7 +26,7 @@ input:focus{ border:1px solid #2baab1;}
 
 input[type=radio],input[type=checkbox]{ width:2.4rem; height:2.4rem;}
 
-
+.gray{ color: #999999;}
 
 ul, li{ list-style:none;}
 .hide{ display:none}
@@ -46,13 +46,10 @@ ul, li{ list-style:none;}
 .header_tit {
     line-height: 6rem;
     height: 6rem;
-    font-size: 3rem;
-    width: 90%;
+    font-size: 3rem; color: #fff;
     margin: 0 auto;
-    color: #f60;
-    padding: 2rem 0 1rem;
-    border-bottom: 1px solid #d5d5d5;
-    position: relative;
+    padding-left: 2rem;
+    background-color:#006600;
 }
 .container{
     width: 90%;
@@ -72,6 +69,10 @@ ul, li{ list-style:none;}
 .table_from td{ padding: 1rem 0.5rem; text-align: left; line-height:6rem; font-size:2.8rem; border-bottom: 1px solid #f1f1f1;}
 .table_from>tbody>tr>td:first-child{text-align: right;}
 .table_from tr:hover{ background:#f9f9f9}
+
+.div_box{background-color: #ffffff; padding: .6rem; margin-bottom: 2rem; border-bottom: 1px solid #d5d5d5; border-top: 1px solid #d5d5d5}
+.table_box{font-size: 2rem; margin-bottom: 2rem; }
+.table_box>tbody>tr>td:first-child{text-align: right; color: #999999; }
 
 .orderList{font-size: 2.4rem}
 .orderList li{margin-bottom: 10px; border-bottom: .5rem solid #efefef;}

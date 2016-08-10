@@ -54,37 +54,8 @@
         <? }?>
     </table>
     <? if(empty($total)){echo "无记录！";}else{echo $page;}?>
-<?php elseif($this->func=='checkOrder') : ?>
-        <div class="main_title">
-            <span>订单审核</span>
-        </div>
-        <table class="table">
-            <tr><th>ID</th><th>定做要求</th><th>价格</th><th>外联厂家</th><th>本成价</th><th>添加时间</th><th>状态</th><th></th></tr>
-            <?
-            $printOrder=new \App\Model\PrintOrder();
-            foreach($orderList['list'] as $order)
-            {
-                $item=$printOrder->find($order['id']);
-                ?>
-                <tr>
-                    <td><?= $item->id ?></td>
-                    <td class="fl"><?= nl2br($item->remark) ?></td>
-                    <td><?= $item->money ?></td>
-                    <td><?= $item->company?></td>
-                    <td><?= $item->company_money ?></td>
-                    <td><?= $item->created_at ?></td>
-                    <td><?=$item->getLinkPageName('check_status',$item->status)?></td>
-                    <td>
-                        <? if($item->status==1) : ?>
-                        <a href="<?= url("printTask/checkOrder/?id={$item->id}&status=2&page={$_GET['page']}") ?>" onclick="return confirm('确定要操作吗？')">审核通过</a>&nbsp;&nbsp;
-                        <a href="<?= url("printTask/checkOrder/?id={$item->id}&status=3&page={$_GET['page']}") ?>" onclick="return confirm('确定要操作吗？')">审核不通过</a>
-                        <? endif ?>
-                    </td>
-                </tr>
-            <? }?>
-        </table>
-        <? if(empty($orderList['total'])){echo "无记录！";}else{echo $orderList['page'];}?>
-        <?php
+
+<?php
 elseif ($this->func=='show') : ?>
     <div class="main_title">
         <span>列单管理</span>列表
@@ -95,16 +66,22 @@ elseif ($this->func=='show') : ?>
             <tr><th>基本信息</th><th>支付</th><th>物流</th></tr>
             <tr>
                 <td>
-                    <table class="table_from">
-                        <tr><td>用户：</td><td>
-                                <?=$task->user_id?>/<?=$task->User()->UserWx()->nickname?>
-                                <img src="<?=substr($task->User()->UserWx()->headimgurl,0,-1)?>64" width="50"></td></tr>
-                        <tr><td>类型：</td><td><?=$task->print_type?></td></tr>
-                        <tr><td>要求：</td><td><?=nl2br($task->remark)?></td></tr>
-                        <tr><td>电话：</td><td><?=$task->tel?></td></tr>
-                        <tr><td>添加时间：</td><td><?=$task->created_at?></td></tr>
-                        <tr><td>状态：</td><td><?=$task->getLinkPageName('print_status',$task->status)?></td></tr>
-                    </table>
+                    <form method="post" action="<?=url('printTask/editTask')?>">
+                        <input type="hidden" name="task_id" value="<?=$task->id?>">
+                        <input type="hidden" name="page" value="<?=$_GET['page']?>">
+                        <table class="table_from">
+                            <tr><td>用户：</td><td>
+                                    <?=$task->user_id?>/<?=$task->User()->UserWx()->nickname?>
+                                    <img src="<?=substr($task->User()->UserWx()->headimgurl,0,-1)?>64" width="50"></td></tr>
+                            <tr><td>类型：</td><td><?=$task->print_type?></td></tr>
+                            <tr><td>要求：</td><td><textarea name="remark" cols="40" rows="3"><?=$task->remark?></textarea></td></tr>
+                            <tr><td>电话：</td><td><?=$task->tel?></td></tr>
+                            <tr><td>添加时间：</td><td><?=$task->created_at?></td></tr>
+                            <tr><td>价格：</td><td><?=$task->money?></td></tr>
+                            <tr><td>状态：</td><td><?=$task->getLinkPageName('print_status',$task->status)?></td></tr>
+                            <tr><td></td><td><input type="submit" value="保存"></td></tr>
+                        </table>
+                    </form>
                 </td>
                 <td>
                     <table class="table_from">
@@ -141,7 +118,9 @@ elseif ($this->func=='show') : ?>
     </div>
     <? if(!empty($order)) :?>
         <div class="main_content">
-        <form method="post">
+        <form method="post" action="<?=url('printTask/orderEdit')?>">
+            <input type="hidden" name="task_id" value="<?=$task->id?>">
+            <input type="hidden" name="page" value="<?=$_GET['page']?>">
             <table class="table">
                 <tr><th>ID</th><th>定做要求</th><th>价格</th><th>外联厂家</th><th>本成价</th><th>添加时间</th><th></th></tr>
                 <?
@@ -163,7 +142,6 @@ elseif ($this->func=='show') : ?>
                 }
                 ?>
                 <tr><td colspan="7">
-                    <input type="hidden" value="orderEdit" name="act">
                     <input type="submit" value=" 保 存 "></td></tr>
             </table>
         </form>
@@ -172,8 +150,9 @@ elseif ($this->func=='show') : ?>
 
     <div class="main_content">
         <h3>添加订单</h3>
-        <form method="post">
-            <input type="hidden" name="act" value="orderAdd">
+        <form method="post"action="<?=url('printTask/orderAdd')?>">
+            <input type="hidden" name="task_id" value="<?=$task->id?>">
+            <input type="hidden" name="page" value="<?=$_GET['page']?>">
             <table class="table_from">
                 <tr><td>定做要求：</td><td><textarea name="remark" cols="40" rows="4"></textarea></td></tr>
                 <tr><td>价格：</td><td><input type="text" name="money"></td></tr>
