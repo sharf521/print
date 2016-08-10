@@ -17,13 +17,17 @@
         <? foreach ($task['list'] as $row) : ?>
 
             <div class="div_box clearFix taskList">
+                <? if($row->paymoney>0) : ?>
                 <a href="<?=url("weixin/orderShow/?task_id={$row->id}")?>">
+                <? endif?>
                     <div class="remark_title clearFix">
                         <span class="type"><?= $row->print_type ?></span>
                         <span class="time"><?= $row->created_at ?></span>
                     </div>
                     <div class="remark clearFix"><?= nl2br($row->remark) ?></div>
+                <? if($row->paymoney>0) : ?>
                 </a>
+                <? endif?>
                 <div class="taskBot clearFix">
                     <? if($row->money>0) : ?>
                     <span class="money1">￥<?= $row->money ?></span>
