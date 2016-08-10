@@ -44,8 +44,8 @@ ul, li{ list-style:none;}
     body{ width:640px; margin:0 auto;}
 }
 .header_tit {
-    line-height: 10rem;
-    height: 10rem;
+    line-height: 15rem;
+    height: 15rem;
     padding: 0 2rem;
     font-size: 3rem; color: #fff;
     background-color:#006600;
@@ -77,8 +77,8 @@ ul, li{ list-style:none;}
 .taskList{padding: 0 2rem}
 .taskList  .time{ float: right; font-size: 1.8rem; color: #ccc;}
 .taskList .remark_title{ border-bottom: 1px dashed #949FB1; line-height: 5rem; height: 5rem}
-.taskList .remark{ line-height: 3.8rem;}
+.taskList .remark{ line-height: 3rem; margin-top: 2rem}
 .taskList .taskBot{ text-align: right;}
-.taskList .taskBot .but_pay{box-sizing: border-box;    border: none; background: #00adfe;    color: #fff;    text-align: center; padding: 0 1rem;border-radius:.5rem;}
+.taskList .taskBot .but_pay{box-sizing: border-box;    border: none; background: #00adfe;    color: #fff;    text-align: center; padding: 0 1rem;border-radius:.5rem; line-height: 5rem; height: 5rem}
 .taskList .taskBot .money1{color: #f00;}
 .taskList .taskBot .status{color: #999999; font-size: 2rem}
