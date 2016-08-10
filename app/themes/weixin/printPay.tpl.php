@@ -2,7 +2,7 @@
     <div class="header_tit">请填写收件人信息：</div>
     <table class="table_from">
         <tr>
-            <td width="12rem">收货人：</td>
+            <td width="11rem">收货人：</td>
             <td><input type="text" id="name"><span></span></td>
         </tr>
         <tr>
