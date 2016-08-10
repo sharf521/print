@@ -76,7 +76,7 @@ ul, li{ list-style:none;}
 
 
 .taskList  .time{ float: right; font-size: 1.8rem; color: #ccc;}
-.taskList .remark_title{ border-bottom: 1px dashed #949FB1; line-height: 4rem; height: 4rem}
+.taskList .remark_title{ border-bottom: 1px dashed #949FB1; line-height: 5rem; height: 5rem}
 .taskList .remark{ line-height: 3.8rem;}
 .taskList .taskBot{ text-align: right;}
 .taskList .taskBot .but_pay{box-sizing: border-box;    border: none; background: #00adfe;    color: #fff;    text-align: center; padding: 0 1rem;border-radius:.5rem;}

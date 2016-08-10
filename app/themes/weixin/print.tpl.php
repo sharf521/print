@@ -15,15 +15,20 @@
     <div class="header_tit">我的订单</div>
         <br>
         <? foreach ($task['list'] as $row) : ?>
-        <a href="<?=url("weixin/orderShow/?task_id={$row->id}")?>">
+
             <div class="div_box clearFix taskList">
-                <div class="remark_title clearFix">
-                    <span class="type"><?= $row->print_type ?></span>
-                    <span class="time"><?= $row->created_at ?></span>
-                </div>
-                <div class="remark clearFix"><?= nl2br($row->remark) ?></div>
-                <div class="taskBot clearFix"><span class="money1">￥<?= $row->money ?></span>
+                <a href="<?=url("weixin/orderShow/?task_id={$row->id}")?>">
+                    <div class="remark_title clearFix">
+                        <span class="type"><?= $row->print_type ?></span>
+                        <span class="time"><?= $row->created_at ?></span>
+                    </div>
+                    <div class="remark clearFix"><?= nl2br($row->remark) ?></div>
+                </a>
+                <div class="taskBot clearFix">
+                    <? if($row->money>0) : ?>
+                    <span class="money1">￥<?= $row->money ?></span>
                     <?
+                    endif;
                     if ($row->status == 3) {
                         ?>
                         <a class="but_pay" href="<?= url("weixin/orderShow/?task_id={$row->id}&page={$_GET['page']}") ?>">支付</a>
@@ -32,7 +37,7 @@
                         echo '<span class="status">'.$row->getLinkPageName('print_status',$row->status).'</span>';
                     }
                     ?></div>
-            </div></a>
+            </div>
         <? endforeach; ?>
     <? if(empty($task['total'])){echo "无记录！";}else{echo $task['page'];}?>
     <? elseif ($this->func=='orderShow') : ?>
