@@ -79,6 +79,6 @@ ul, li{ list-style:none;}
 .taskList .remark_title{ border-bottom: 1px dashed #949FB1; line-height: 5rem; height: 5rem}
 .taskList .remark{ line-height: 3rem; margin-top: 2rem}
 .taskList .taskBot{ text-align: right;}
-.taskList .taskBot .but_pay{box-sizing: border-box;    border: none; background: #00adfe;    color: #fff;    text-align: center; padding: 0 1rem;border-radius:.5rem; line-height: 5rem; height: 5rem}
+.taskList .taskBot .but_pay{box-sizing: border-box;    border: none; background: #00adfe;    color: #fff;    text-align: center; padding: 0 1rem;border-radius:.5rem; line-height: 6rem; height: 6rem}
 .taskList .taskBot .money1{color: #f00;}
 .taskList .taskBot .status{color: #999999; font-size: 2rem}
