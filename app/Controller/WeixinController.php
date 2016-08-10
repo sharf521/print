@@ -117,7 +117,7 @@ class WeixinController extends Controller
         $task=$printTask->findOrFail($id);
 
         $data['task']=$task;
-        $data['title_herder']='我的订单';
+        $data['title_herder']='订单详情';
 
         $this->view('print',$data);
     }
