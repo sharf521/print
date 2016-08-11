@@ -115,7 +115,7 @@ class WxapiController extends Controller
             ],
             [
                 "type" => "view",
-                "name" => "产品、价格",
+                "name" => "产品/价格",
                 "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/article/detail/1"
             ]
         ];
@@ -156,7 +156,7 @@ class WxapiController extends Controller
         $user->openid=$userInfo->openid;
         $user->headimgurl=$userInfo->subscribe_time;
         $user->nickname=$userInfo->nickname;
-        if(empty($user->type_id)){
+        if(intval($user->type_id)==0){
             $user->type_id=1;
         }
         $user->save();
