@@ -30,7 +30,7 @@ class WxapiController extends Controller
                     return $this->event($message);
                     break;
                 case 'text':
-                    return $this->text($message);
+                    //return $this->text($message);
                     break;
                 case 'image':
                     # 图片消息...
