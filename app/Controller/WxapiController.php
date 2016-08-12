@@ -6,6 +6,7 @@ use App\Model\User;
 use App\Model\UserWx;
 use App\WeChat;
 use EasyWeChat\Message\Text;
+use EasyWeChat\Message\Raw;
 use System\Lib\DB;
 use System\Lib\Request;
 
@@ -30,7 +31,7 @@ class WxapiController extends Controller
                     return $this->event($message);
                     break;
                 case 'text':
-                    //return $this->text($message);
+                    return $this->text($message);
                     break;
                 case 'image':
                     # 图片消息...
@@ -122,8 +123,16 @@ class WxapiController extends Controller
         $menu->add($buttons);
     }
 
-    private function text($message){
-        return new Text(['content' => '您好！overtrue。']);
+    private function text($message)
+    {
+        $message = new Raw('<xml>
+        <ToUserName><![CDATA['.$message->FromUserName.']]></ToUserName>
+        <FromUserName><![CDATA['.$message->ToUserName.']]></FromUserName>
+        <CreateTime>'.time().'</CreateTime>
+        <MsgType><![CDATA[transfer_customer_service]]></MsgType>
+        </xml>');
+        return $message;
+        //return new Text(['content' => '您好！overtrue。']);
     }
 
     public function test()
