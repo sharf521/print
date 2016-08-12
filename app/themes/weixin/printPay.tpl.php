@@ -56,7 +56,8 @@
                         $('#name').val(res.userName);
                         $('#tel').val(res.telNumber);
                         $('#address').val(res.provinceName + res.cityName + res.countryName + res.detailInfo);
-                        //validate_address();
+                        validate_address();
+                        return true;
                     },
                     cancel: function (res) {
                         //alert('用户取消拉出地址');
