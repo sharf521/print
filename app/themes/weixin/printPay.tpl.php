@@ -56,10 +56,10 @@
                         $('#name').val(res.userName);
                         $('#tel').val(res.telNumber);
                         $('#address').val(res.provinceName + res.cityName + res.countryName + res.detailInfo);
-                        validate_address();
+                        //validate_address();
                     },
                     cancel: function (res) {
-                        alert('用户取消拉出地址');
+                        //alert('用户取消拉出地址');
                     },
                     fail: function (res) {
                         alert(JSON.stringify(res));
