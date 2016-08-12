@@ -16,7 +16,7 @@ class LinkPage extends Model
     {
         if($this->result==null){
             $arr = array();
-            $_result = DB::table('linkpage_type a')->select('a.code,b.value,b.name')->join('linkpage b', 'a.id=b.typeid')->orderBy('b.showorder asc')->all();
+            $_result = DB::table('linkpage_type a')->select('a.code,b.value,b.name')->join('linkpage b', 'a.id=b.typeid')->orderBy('b.showorder asc,b.id')->all();
             foreach ($_result as $_row) {
                 $arr[$_row['code']][$_row['value']] = $_row['name'];
             }
