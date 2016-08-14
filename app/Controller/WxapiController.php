@@ -114,8 +114,10 @@ class WxapiController extends Controller
 
     private function text($message)
     {
-        if($message->Content=='1234'){
-            return new Text(['content' => '您好！overtrue。']);
+        if($message->Content=='邀请'){
+            $weChat=new WeChat();
+            $url=$weChat->shorten("http://{$_SERVER['HTTP_HOST']}/index.php/weixin/invite");
+            return new Text(['content' => $url]);
         }else{
             $message = new Raw('<xml>
             <ToUserName><![CDATA['.$message->FromUserName.']]></ToUserName>
