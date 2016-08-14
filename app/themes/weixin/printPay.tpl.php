@@ -14,14 +14,11 @@
             <td><input type="text" id="address"><span></span></td>
         </tr>
     </table>
-    <div align="center"><input type="button" value="选择地址" id="btnAddress" class="but1" style="width: 80%"></div>
-    <br>
-    <table width="100%">
-        <tr>
-            <td style="font-size: 3rem">总计：<span style=" color: #ff8000">￥<?= $task->money ?></span></td>
-            <td align="right"><input type="button" value="确定支付" id="butPay" class="submit"></td>
-        </tr>
-    </table>
+    <div align="center" style="margin-bottom: 10rem"><input type="button" value="选择地址" id="btnAddress" class="but1" style="width: 80%"></div>
+    <div class="pay_footer">
+        总计：￥<?= $task->money ?>
+        <span id="butPay" class="pay_span">立即支付</span>
+    </div>
 
     <script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
