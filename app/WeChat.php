@@ -129,4 +129,11 @@ class WeChat
         $url = $qrcode->url($ticket);
         return $url;
     }
+
+    /* 短地址*/
+    public function shorten($uri)
+    {
+        $url = $this->app->url;
+        return $url->shorten($uri);
+    }
 }

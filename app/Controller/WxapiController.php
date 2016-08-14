@@ -114,14 +114,17 @@ class WxapiController extends Controller
 
     private function text($message)
     {
-        $message = new Raw('<xml>
-        <ToUserName><![CDATA['.$message->FromUserName.']]></ToUserName>
-        <FromUserName><![CDATA['.$message->ToUserName.']]></FromUserName>
-        <CreateTime>'.time().'</CreateTime>
-        <MsgType><![CDATA[transfer_customer_service]]></MsgType>
-        </xml>');
-        return $message;
-        //return new Text(['content' => '您好！overtrue。']);
+        if($message->Content=='1234'){
+            return new Text(['content' => '您好！overtrue。']);
+        }else{
+            $message = new Raw('<xml>
+            <ToUserName><![CDATA['.$message->FromUserName.']]></ToUserName>
+            <FromUserName><![CDATA['.$message->ToUserName.']]></FromUserName>
+            <CreateTime>'.time().'</CreateTime>
+            <MsgType><![CDATA[transfer_customer_service]]></MsgType>
+            </xml>');
+            return $message;
+        }
     }
 
     public function test()
