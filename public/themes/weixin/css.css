@@ -83,5 +83,9 @@ ul, li{ list-style:none;}
 .taskList .taskBot .money1{color: #f00;}
 .taskList .taskBot .status{color: #999999; font-size: 2rem}
 
-.pay_footer{ line-height: 8rem; height: 8rem; color: #f00; position: fixed; bottom: 0; left: 0; background: #fff; width: 100%; font-size: 3rem; padding-left: 1rem}
+/* 支付 */
+.pay_footer{ border-top: 1px solid #d5d5d5;line-height: 8rem; height: 8rem; color: #f00; position: fixed; bottom: 0; left: 0; background: #fff; width: 100%; font-size: 3rem; padding-left: 1rem}
 .pay_footer .pay_span{float: right; background-color: #FF6600; color: #fff; font-size: 3rem; display: block; width: 20rem; text-align: center; cursor: pointer}
+
+/* 二维码 */
+.qrcode_div{text-align: center; padding: 2rem}

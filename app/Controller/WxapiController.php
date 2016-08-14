@@ -58,21 +58,14 @@ class WxapiController extends Controller
     }
     private function event($message)
     {
+        if(isset($message->EventKey)){  //$msg['Event']=='subscribe' || $msg['Event']=='SCAN'
+            $eventKey=$message->EventKey;
+            $typeid=substr($eventKey,-2);//类型id
+            $txt=substr($eventKey,0,-2);//内容
+        }
 
-        //$msg['Event']=='subscribe' || $msg['Event']=='SCAN'
-//        if(isset($message->EventKey)){
-//            $EventKey=$message->EventKey;
-//            if($message->Event=='subscribe')
-//            {
-//                //$EventKey=substr($EventKey,8);
-//            }
-//            $typeid=substr($EventKey,-2);//类型id			
-//            $_str=substr($EventKey,0,-2);
-//            $subsiteid=substr($_str,-2);//分站id
-//            $txt=(int)substr($_str,0,-2);//内容				
-//        }        
         if($message->Event=='subscribe'){
-            $this->addUser($message->FromUserName);
+            $this->addUser($message->FromUserName,intval($txt));
             return new Text(['content' =>"您好！终于等到您了!"]);
         }elseif($message->Event=='unsubscribe'){
             $arr=array(
@@ -82,10 +75,6 @@ class WxapiController extends Controller
         }elseif($message->Event=='CLICK'){
             if($message->EventKey=='menu_order'){
                 return new Text(['content' =>"下单页!"]);
-            }elseif($message->EventKey=='menu_user'){
-                return new Text(['content' =>"用户中心!"]);
-            }else{
-                return new Text(['content' =>$message->EventKey]);
             }
         }
     }
@@ -140,7 +129,7 @@ class WxapiController extends Controller
         echo phpinfo();
     }
 
-    private function addUser($openid)
+    private function addUser($openid,$invite_userid=0)
     {
         $userServer=$this->app->user;
         $userInfo=$userServer->get($openid);
@@ -160,11 +149,21 @@ class WxapiController extends Controller
         $user_wx->groupid = $userInfo->groupid;
         $user_wx->tagid_list =json_encode($userInfo->tagid_list);
         $user_wx->save();
+
         $user=new User();
         $user=$user->where("openid=?")->bindValues($userInfo->openid)->first();
         $user->openid=$userInfo->openid;
         $user->headimgurl=$userInfo->subscribe_time;
         $user->nickname=$userInfo->nickname;
+
+        if($invite_userid!=0){
+            $invite=new User();
+            $invite=$invite->find($invite_userid);
+            if(!empty($invite)){
+                $user->invite_userid=$invite->id;
+                $user->invite_path=$invite->invite_path.$invite_userid.',';
+            }
+        }
         if(intval($user->type_id)==0){
             $user->type_id=1;
         }

@@ -139,6 +139,18 @@ class WeixinController extends Controller
             $task->save();
         }
     }
+    
+    
+    public function invite(WeChat $weChat)
+    {
+        $data['qrcodeSrc']=$weChat->qrcode($this->user_id.'01');
+
+
+
+        $data['title_herder']='邀请商家';
+
+        $this->view('invite',$data);
+    }
 
 
 
