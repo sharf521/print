@@ -145,8 +145,6 @@ class WeixinController extends Controller
     {
         $data['qrcodeSrc']=$weChat->qrcode($this->user_id.'01');
 
-
-
         $data['title_herder']='邀请商家';
 
         $this->view('invite',$data);

@@ -134,6 +134,7 @@ class WeChat
     public function shorten($uri)
     {
         $url = $this->app->url;
-        return $url->shorten($uri);
+        $shortUrl=$url->shorten($uri);
+        return $shortUrl->short_url;
     }
 }
