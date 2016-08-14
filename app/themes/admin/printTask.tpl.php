@@ -37,18 +37,23 @@
                 <td><?=$row->print_type?></td>
                 <td><?=nl2br($row->remark)?></td>
                 <td><?=$row->tel?></td>
-                <td><?=$row->created_at?></td>
+                <td><?=substr($row->created_at,2,-3)?></td>
                 <td><?=$row->UserReply()->UserWx()->nickname?></td>
                 <td><? if($row->reply_time!=0){
-                        echo date('Y-m-d H:i:s',$row->reply_time);
+                        echo substr(date('Y-m-d H:i:s',$row->reply_time),2,-3);
                     }?></td>
                 <td><?=(float)$row->paymoney?></td>
                 <td><? if($row->paytime!=0){
-                        echo date('Y-m-d H:i:s',$row->paytime);
+                        echo substr(date('Y-m-d H:i:s',$row->paytime),2,-3);
                     }?></td>
                 <td><?=$row->out_trade_no?></td>
                 <td><?=$row->getLinkPageName('print_status',$row->status)?></td>
-                <td><a href="<?=url("printTask/show/?task_id={$row->id}&page={$_GET['page']}")?>">详情</a>
+                <td>
+                    <a href="<?=url("printTask/show/?task_id={$row->id}&page={$_GET['page']}")?>">详情</a>
+                    <? if($row->status <4 ) : ?>
+                    <a href="<?=url("printTask/taskDel/?task_id={$row->id}&page={$_GET['page']}")?>"
+                       onclick="return confirm('确定要删除吗？')">删除</a>
+                    <? endif ?>
                 </td>
             </tr>
         <? }?>

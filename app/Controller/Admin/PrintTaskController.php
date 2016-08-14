@@ -127,6 +127,21 @@ class PrintTaskController extends AdminController
         }
     }
 
+    public function taskDel(Request $request,PrintTask $printTask)
+    {
+        $id=$request->get('task_id');
+        $task=$printTask->findOrFail($id);
+        if($this->user_typeid!=2 && $task->reply_uid!=$this->user_id){
+            redirect()->back()->with('error','权限异常！');
+        }
+        $tag=$printTask->del($id);
+        if($tag !==true){
+            redirect()->back()->with('error',$tag);
+        }
+        $url="printTask/?page={$request->get('page')}";
+        redirect($url)->with('msg','删除成功！');
+    }
+
     public function orderDel(Request $request,PrintOrder $printOrder)
     {
         $id=$request->get('id');
