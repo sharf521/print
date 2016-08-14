@@ -14,12 +14,13 @@ class WxapiController extends Controller
 {
     private $UserWx;
     private $app;
+    private $weChat;
     public function __construct()
     {
         parent::__construct();
         $this->UserWx=new UserWx();
-        $weChat=new WeChat();
-        $this->app=$weChat->app;
+        $this->weChat=new WeChat();
+        $this->app=$this->weChat->app;
     }
 
     public function index()
@@ -115,9 +116,8 @@ class WxapiController extends Controller
     private function text($message)
     {
         if($message->Content=='邀请'){
-            $weChat=new WeChat();
             $url="http://{$_SERVER['HTTP_HOST']}/index.php/weixin/invite";
-            //$url=$weChat->shorten();
+            $url=$this->weChat->shorten($url);
             return new Text(['content' => $url]);
         }else{
             $message = new Raw('<xml>
