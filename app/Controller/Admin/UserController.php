@@ -25,6 +25,10 @@ class UserController extends AdminController
         if (!empty($_GET['username'])) {
             $where .= " and username like '{$_GET['username']}%'";
         }
+        if (!empty($_GET['invite_userid'])) {
+            $where .= " and invite_userid='{$_GET['invite_userid']}'";
+        }
+
         $data =$user->where($where)->orderBy('id desc')->pager($_GET['page'],10);
         $data['usertype'] = $userType->getList();
         $this->view('user', $data);

@@ -19,6 +19,7 @@ if($this->func=='index'){?>
                 ?>
             </select>
             用户名：<input type="text" name="username" value="<?= $_GET['username'] ?>"/>
+            邀请人ID:<input type="text" size="4" name="invite_userid" value="<?= $_GET['invite_userid'] ?>"/>
             <input type="submit" class="but2" value="查询"/>
         </div>
     </form>
@@ -30,6 +31,7 @@ if($this->func=='index'){?>
                 <th>昵称</th>
                 <th>性别</th>
                 <th>城市</th>
+                <th>邀请人</th>
                 <th>EMAIL</th>
                 <th>真实姓名</th>
                 <th>电话</th>
@@ -48,9 +50,10 @@ if($this->func=='index'){?>
                 <td><?=$row->UserType()->name?></td>
 
                 <td><img src="<?=substr($row->UserWx()->headimgurl,0,-1)?>64" width="50"></td>
-                <td><?=$row->UserWx()->nickname?></td>
+                <td><?=$row->nickname?></td>
                 <td><?=$arr_sex[$row->UserWx()->sex]?></td>
                 <td><?=$row->UserWx()->province?>-<?=$row->UserWx()->city?></td>
+                <td><?=$row->Invite()->nickname?></td>
                 <td><?=$row->email?></td>
                 <td><?=$row->name?></td>
                 <td><?=$row->tel?></td>

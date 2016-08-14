@@ -189,4 +189,9 @@ left join {$this->dbfix}account_bank b on u.id=b.user_id {$where}";
     {
         return $this->hasOne('App\Model\UserWx', 'openid', 'openid');
     }
+
+    public  function Invite()
+    {
+        return $this->hasOne('App\Model\User', 'id','invite_userid');
+    }
 }
