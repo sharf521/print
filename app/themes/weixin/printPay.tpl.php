@@ -14,7 +14,16 @@
             <td><input type="text" id="address"><span></span></td>
         </tr>
     </table>
-    <div align="center" style="margin-bottom: 10rem"><input type="button" value="选择地址" id="btnAddress" class="but1" style="width: 80%"></div>
+    <div align="center"><input type="button" value="选择地址" id="btnAddress" class="but1" style="width: 80%"></div>
+    <div class="div_box clearFix taskList" style="margin-bottom: 10rem; margin-top: 3.2rem">
+        <div class="remark_title clearFix">
+            <span class="type"><?= $task->print_type ?></span>
+            <span class="time"><?= $task->created_at ?></span>
+        </div>
+        <div class="remark clearFix"><?= nl2br($task->remark) ?></div>
+    </div>
+
+
     <div class="pay_footer">
         总计：￥<?= $task->money ?>
         <span id="butPay" class="pay_span">立即支付</span>
