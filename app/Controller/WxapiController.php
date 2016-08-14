@@ -116,7 +116,8 @@ class WxapiController extends Controller
     {
         if($message->Content=='邀请'){
             $weChat=new WeChat();
-            $url=$weChat->shorten("http://{$_SERVER['HTTP_HOST']}/index.php/weixin/invite");
+            $url="http://{$_SERVER['HTTP_HOST']}/index.php/weixin/invite";
+            //$url=$weChat->shorten();
             return new Text(['content' => $url]);
         }else{
             $message = new Raw('<xml>
