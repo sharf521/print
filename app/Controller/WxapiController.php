@@ -61,7 +61,7 @@ class WxapiController extends Controller
         if(isset($message->EventKey)){  //$msg['Event']=='subscribe' || $msg['Event']=='SCAN'
             $eventKey=$message->EventKey;
             $typeid=substr($eventKey,-2);//类型id
-            $txt=substr($eventKey,0,-2);//内容
+            $txt=substr($eventKey,8,-2);//内容EventKey":"qrscene_201
         }
 
         if($message->Event=='subscribe'){
