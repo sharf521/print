@@ -22,7 +22,11 @@ class Model
         if (isset($this->attributes[$key])) {
             $val= $this->attributes[$key];
         } else {
-            $val= $this->cols->$key;
+            if(isset($this->cols->$key)){
+                $val= $this->cols->$key;
+            }else{
+                $val=null;
+            }
         }
         if($key=='created_at'){
             return date('Y-m-d H:i:s',$val);

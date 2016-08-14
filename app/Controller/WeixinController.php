@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Model\LinkPage;
 use App\Model\PrintTask;
+use App\Model\User;
 use App\WeChat;
 use EasyWeChat\Payment\Order;
 use System\Lib\DB;
@@ -141,10 +142,11 @@ class WeixinController extends Controller
     }
     
     
-    public function invite(WeChat $weChat)
+    public function invite(WeChat $weChat,User $user)
     {
         $data['qrcodeSrc']=$weChat->qrcode($this->user_id.'01');
-
+        $data['invites']=$user->where("invite_userid=?")->bindValues($this->user_id)->get();
+        
         $data['title_herder']='邀请商家';
 
         $this->view('invite',$data);

@@ -159,7 +159,7 @@ class WxapiController extends Controller
         $user=new User();
         $user=$user->where("openid=?")->bindValues($userInfo->openid)->first();
         $user->openid=$userInfo->openid;
-        $user->headimgurl=$userInfo->subscribe_time;
+        $user->headimgurl=$userInfo->headimgurl;
         $user->nickname=$userInfo->nickname;
 
         if($invite_userid!=0){
