@@ -91,7 +91,7 @@ ul, li{ list-style:none;}
 .qrcode_div{text-align: center; padding: 2rem}
 
 .invite_box{background-color: #fff;}
-.invite_box h3{line-height: 6rem;line-height: 6rem; padding-left: 2rem;}
+.invite_box h3{line-height: 6rem;line-height: 6rem; font-size: 3rem; padding-left: 2rem;}
 .invite_box li{border-bottom: 1px dashed #ccc;}
 .invite_box img{float: left; margin: 2rem;border-radius: 1rem; }
 .invite_box .invite_info{float: left; margin-top: 2rem;font-size: 2.8rem;}
