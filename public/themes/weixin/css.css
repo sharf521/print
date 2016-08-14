@@ -93,6 +93,6 @@ ul, li{ list-style:none;}
 .invite_box{font-size: 2.4rem; background-color: #fff;}
 .invite_box h3{line-height: 5rem;line-height: 5rem; padding-left: 2rem;}
 .invite_box li{border-bottom: 1px dashed #ccc;}
-.invite_box img{float: left; margin: 2rem}
+.invite_box img{float: left; margin: 2rem;}
 .invite_box .invite_info{float: left; margin-top: 1.5rem}
 .invite_box .invite_info .time{font-size: 1.8rem; color: #ccc;}

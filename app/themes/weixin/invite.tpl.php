@@ -8,7 +8,7 @@
         <ul>
             <? foreach ($invites as $user) : ?>
             <li class="clearFix">
-                <img src="<?=substr($user->UserWX()->headimgurl,0,-1)?>64" width="50">
+                <img src="<?=substr($user->UserWX()->headimgurl,0,-1)?>96" width="50">
                 <div class="invite_info">
                     <?=$user->nickname?><br>
                     <span class="time"><?=$user->created_at?></span></div>
