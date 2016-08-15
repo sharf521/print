@@ -14,7 +14,7 @@ class PrintTaskController extends AdminController
         parent::__construct();
     }
 
-    function index(PrintTask $printTask, PrintOrder $printOrder,LinkPage $linkPage)
+    function index(PrintTask $printTask,LinkPage $linkPage,Request $request)
     {
         $where = " 1=1";
         if (!empty($_GET['print_type'])) {
@@ -29,6 +29,14 @@ class PrintTaskController extends AdminController
                 ->leftJoin('user u','u.openid=w.openid')
                 ->where('w.nickname=?')->bindValues($_GET['nickname'])->value('u.id','int');
             $where .= " and user_id='{$user_id}'";
+        }
+        $starttime=$request->get('starttime');
+        $endtime=$request->get('endtime');
+        if(!empty($starttime)){
+            $where.=" and created_at>=".strtotime($starttime);
+        }
+        if(!empty($endtime)){
+            $where.=" and created_at<".strtotime($endtime);
         }
         $data = $printTask->where($where)->orderBy('id desc')->pager($_GET['page'], 10);
         $data['print_type']=$linkPage->echoLink('print_type',$_GET['print_type']);
@@ -53,6 +61,36 @@ class PrintTaskController extends AdminController
         $data['order']=$task->PrintOrder();
         $data['print_company']=$linkPage->echoLink('print_company','',array('name'=>'company'));
         $this->view('printTask', $data);
+    }
+
+    public function taskAdd(Request $request,PrintTask $printTask,LinkPage $linkPage)
+    {
+        $user_id=$request->id;
+        if($_POST){
+            $print_type=$request->post('print_type');
+            $remark=$request->post('remark');
+            $tel=$request->post('tel');
+            if (empty($print_type)) {
+                redirect()->back()->with('error', '请选择类型');
+            }
+            if (empty($remark)) {
+                redirect()->back()->with('error', '请填写具体要求');
+            }
+            if (empty($tel)) {
+                redirect()->back()->with('error', '请填写联系电话');
+            }
+            $printTask->user_id=$user_id;
+            $printTask->print_type=$print_type;
+            $printTask->remark=$remark;
+            $printTask->tel=$tel;
+            $printTask->status=1;
+            $printTask->save();
+            redirect('printTask/')->with('msg', '下单成功！');
+        }else{
+            $data['print_type']=$linkPage->echoLink('print_type','',array('type'=>'radio'));
+            $data['title_herder']='我要下单';
+            $this->view('printTask',$data);
+        }
     }
 
     public function editTask(Request $request,PrintTask $printTask)
@@ -208,9 +246,18 @@ class PrintTaskController extends AdminController
                 redirect()->back()->with('error','异常');
             }
         }else{
+            $where=" t.status>=4";
+            $starttime=$request->get('starttime');
+            $endtime=$request->get('endtime');
+            if(!empty($starttime)){
+                $where.=" and t.created_at>=".strtotime($starttime);
+            }
+            if(!empty($endtime)){
+                $where.=" and t.created_at<".strtotime($endtime);
+            }
             $data['orderList']=DB::table('print_order o')->select("o.*")
                 ->leftJoin('print_task t','o.task_id=t.id')
-                ->where("t.status>=4")
+                ->where($where)
                 ->orderBy('o.id desc')
                 ->page($_GET['page'],10);
             $this->view('printOrder', $data);

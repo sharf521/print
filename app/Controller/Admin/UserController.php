@@ -16,7 +16,7 @@ class UserController extends AdminController
         $this->User = new User();
     }
 
-    function index(User $user,UserType $userType)
+    function index(User $user,UserType $userType,Request $request)
     {
         $where = " 1=1";
         if (!empty($_GET['type_id'])) {
@@ -27,6 +27,15 @@ class UserController extends AdminController
         }
         if (!empty($_GET['invite_userid'])) {
             $where .= " and invite_userid='{$_GET['invite_userid']}'";
+        }
+
+        $starttime=$request->get('starttime');
+        $endtime=$request->get('endtime');
+        if(!empty($starttime)){
+            $where.=" and created_at>=".strtotime($starttime);
+        }
+        if(!empty($endtime)){
+            $where.=" and created_at<".strtotime($endtime);
         }
 
         $data =$user->where($where)->orderBy('id desc')->pager($_GET['page'],10);

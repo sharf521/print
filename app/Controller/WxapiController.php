@@ -87,7 +87,7 @@ class WxapiController extends Controller
             [
                 "type" => "view",
                 "name" => "我要下单",
-                "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/orderAdd"
+                "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/taskAdd"
             ],
             [
                 "name" => "用户中心",
@@ -161,8 +161,7 @@ class WxapiController extends Controller
         $user->openid=$userInfo->openid;
         $user->headimgurl=$userInfo->headimgurl;
         $user->nickname=$userInfo->nickname;
-
-        if($invite_userid!=0){
+        if($invite_userid!=0 && intval($user->id)==0){
             $invite=new User();
             $invite=$invite->find($invite_userid);
             if(!empty($invite)){

@@ -8,6 +8,9 @@
             类型：<?=$print_type?>
             用户名：<input type="text" name="username" size="5" value="<?= $_GET['username'] ?>"/>
             昵称：<input type="text" name="nickname" size="5" value="<?= $_GET['nickname'] ?>"/>
+            时间：<input  name="starttime" type="text" value="<?=$_GET['starttime']?>" onClick="javascript:WdatePicker();" class="Wdate">
+            到
+            <input  name="endtime" type="text" value="<?=$_GET['endtime']?>" onClick="javascript:WdatePicker();" class="Wdate">
             <input type="submit" class="but2" value="查询"/>
         </div>
     </form>
@@ -61,6 +64,25 @@
     <? if(empty($total)){echo "无记录！";}else{echo $page;}?>
 
 <?php
+elseif ($this->func=='taskAdd') :
+?>
+    <div class="main_title">
+        <span>列单管理</span>
+    </div>
+    <div class="main_content">
+        <h3><?=$_GET['nickname']?> 添加订单</h3>
+        <form method="post">
+            <table class="table_from">
+                <tr><td>类型：</td><td><?=$print_type?></td></tr>
+                <tr><td>要求：</td><td><textarea name="remark" rows="5" cols="50"></textarea></td></tr>
+                <tr><td>电话：</td><td><input type="text" name="tel"></td></tr>
+                <tr><td></td><td>
+                        <input type="submit" value="添加">
+                        <input type="button" value="返回" onclick="window.history.go(-1)"></td></tr>
+            </table>
+        </form>
+    </div>
+<?
 elseif ($this->func=='show') : ?>
     <div class="main_title">
         <span>列单管理</span>列表
@@ -169,8 +191,5 @@ elseif ($this->func=='show') : ?>
             </table>
         </form>
     </div>
-
-
-
 <?php endif;
 require 'footer.php';

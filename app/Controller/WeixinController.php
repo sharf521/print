@@ -30,7 +30,7 @@ class WeixinController extends Controller
     
     
 
-    public function orderAdd(Request $request,LinkPage $linkPage,PrintTask $printTask)
+    public function taskAdd(Request $request,LinkPage $linkPage,PrintTask $printTask)
     {
         if($_POST){
             $print_type=$request->post('print_type');
@@ -59,7 +59,7 @@ class WeixinController extends Controller
         }
     }
 
-    public function orderList(PrintTask $printTask,LinkPage $linkPage)
+    public function orderList(PrintTask $printTask)
     {
         $where = " user_id=$this->user_id";
         if (!empty($_GET['print_type'])) {
@@ -95,7 +95,7 @@ class WeixinController extends Controller
             'total_fee'        => math($task->money,100,'*',2),
             'attach'=>$task->id,
             'openid'=>$openid,
-            'notify_url'       => 'http://print.yuantuwang.com/wxapi/payNotify/'
+            'notify_url'       => "http://{$_SERVER['HTTP_HOST']}/index.php/wxapi/payNotify/"
         ];
         $order=new Order($attributes);
         $result = $payment->prepare($order);
@@ -107,7 +107,6 @@ class WeixinController extends Controller
             $task->out_trade_no=$attributes['out_trade_no'];
             $task->save();
         }
-
         $this->view('printPay',$data);
     }
 
@@ -119,7 +118,6 @@ class WeixinController extends Controller
 
         $data['task']=$task;
         $data['title_herder']='订单详情';
-
         $this->view('print',$data);
     }
 
@@ -141,7 +139,6 @@ class WeixinController extends Controller
         }
     }
     
-    
     public function invite(WeChat $weChat,User $user)
     {
         $data['qrcodeSrc']=$weChat->qrcode($this->user_id.'01');
@@ -151,9 +148,4 @@ class WeixinController extends Controller
 
         $this->view('invite',$data);
     }
-
-
-
-
-
 }

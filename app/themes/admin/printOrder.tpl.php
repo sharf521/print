@@ -3,6 +3,14 @@
     <div class="main_title">
         <span>订单审核</span>
     </div>
+    <form method="get">
+        <div class="search">
+            时间：<input  name="starttime" type="text" value="<?=$_GET['starttime']?>" onClick="javascript:WdatePicker();" class="Wdate">
+            到
+            <input  name="endtime" type="text" value="<?=$_GET['endtime']?>" onClick="javascript:WdatePicker();" class="Wdate">
+            <input type="submit" class="but2" value="查询"/>
+        </div>
+    </form>
     <table class="table">
         <tr>
             <th>ID</th>

@@ -20,6 +20,10 @@ if($this->func=='index'){?>
             </select>
             用户名：<input type="text" name="username" value="<?= $_GET['username'] ?>"/>
             邀请人ID:<input type="text" size="4" name="invite_userid" value="<?= $_GET['invite_userid'] ?>"/>
+
+            时间：<input  name="starttime" type="text" value="<?=$_GET['starttime']?>" onClick="javascript:WdatePicker();" class="Wdate">
+            到
+            <input  name="endtime" type="text" value="<?=$_GET['endtime']?>" onClick="javascript:WdatePicker();" class="Wdate">
             <input type="submit" class="but2" value="查询"/>
         </div>
     </form>
@@ -72,6 +76,7 @@ if($this->func=='index'){?>
                         echo $this->anchor('user/updatepwd/?id=' . $row->id, '修改密码');
                     }
                     ?>
+                    <a href="<?=url("printTask/taskAdd/?id={$row->id}&page={$_GET['page']}&nickname={$row->nickname}")?>">添加订单</a>
                     </td>
             </tr>
             <? }?>
