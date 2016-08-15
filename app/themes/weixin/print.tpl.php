@@ -1,5 +1,5 @@
 <?php require 'header.php';?>
-<? if($this->func=='orderAdd') : ?>
+<? if($this->func=='taskAdd') : ?>
     <div class="header_tit">我要下单</div>
     <div class="container">
         <form method="post">
