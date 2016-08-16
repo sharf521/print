@@ -68,8 +68,8 @@ class WxapiController extends Controller
         if($message->Event=='subscribe'){
             $this->addUser($message->FromUserName,intval($txt));
 
-            $content=" 亲，请发要求给我们，稍后会有客服和您微信直接联系。\r\n 也可以点击：【<a href='".url('weixin/addTask')."'>我要下单</a>】 。
-\r\n 产品介绍及报价：【<a href='".url('article/detail/1')."'>点击点击</a>】 \r\n感谢您的支持！";
+            $content=" 亲，请发要求给我们，稍后会有客服和您微信直接联系。\r\n 也可以点击：【<a href='".url('weixin/addTask')."'>我要下单</a>】。
+\r\n 产品介绍及报价：【<a href='".url('article/detail/1')."'>点击</a>】 \r\n感谢您的支持！";
             return new Text(['content' =>$content]);
         }elseif($message->Event=='unsubscribe'){
             $arr=array(
