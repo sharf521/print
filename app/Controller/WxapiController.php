@@ -67,7 +67,10 @@ class WxapiController extends Controller
 
         if($message->Event=='subscribe'){
             $this->addUser($message->FromUserName,intval($txt));
-            return new Text(['content' =>"您好！终于等到您了!"]);
+
+            $content=" 亲，请发要求给我们，稍后会有客服和您微信直接联系。也可以点击：【<a href='".url('weixin/addTask')."'>我要下单</a>】 跳转到下单页面。
+产品介绍及报价：【<a href='".url('article/detail/1')."'>点击点击</a>】   （跳转到产品/价格内容页面）感谢您的支持！";
+            return new Text(['content' =>$content]);
         }elseif($message->Event=='unsubscribe'){
             $arr=array(
                 'subscribe'=>0,
@@ -86,7 +89,7 @@ class WxapiController extends Controller
         $buttons = [
             [
                 "type" => "view",
-                "name" => "我要下单",
+                "name" => "我要印",
                 "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/taskAdd"
             ],
             [
