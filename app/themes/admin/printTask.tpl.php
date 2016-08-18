@@ -47,7 +47,6 @@
                 <td><?=$row->tel?></td>
                 <td title="<?=$time?>"><?=substr($row->created_at,2,-3)?></td>
                 <td><?=$row->UserReply()->UserWx()->nickname?></td>
-                <td></td>
                 <td><?=(float)$row->paymoney?></td>
                 <td><?=$row->out_trade_no?></td>
                 <td><?=$row->getLinkPageName('print_status',$row->status)?></td>
