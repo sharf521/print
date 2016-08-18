@@ -5,6 +5,8 @@
     </div>
     <form method="get">
         <div class="search">
+            关键字：<input name="q" value="<?=$_GET['q']?>">
+            外联厂家：<?=$print_company?>
             时间：<input  name="starttime" type="text" value="<?=$_GET['starttime']?>" onClick="javascript:WdatePicker();" class="Wdate">
             到
             <input  name="endtime" type="text" value="<?=$_GET['endtime']?>" onClick="javascript:WdatePicker();" class="Wdate">

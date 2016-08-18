@@ -83,7 +83,9 @@ class PrintTaskController extends AdminController
             $printTask->print_type=$print_type;
             $printTask->remark=$remark;
             $printTask->tel=$tel;
-            $printTask->status=1;
+            $printTask->status=2;
+            $printTask->reply_uid=$this->user_id;
+            $printTask->reply_time=time();
             $printTask->save();
             redirect('printTask/')->with('msg', '下单成功！');
         }else{
@@ -232,7 +234,7 @@ class PrintTaskController extends AdminController
     }
 
 
-    public function checkOrder(Request $request,PrintOrder $printOrder)
+    public function checkOrder(Request $request,PrintOrder $printOrder,LinkPage $linkPage)
     {
         if(isset($_GET['id'])){
             $id=$request->get('id');
@@ -247,6 +249,8 @@ class PrintTaskController extends AdminController
             }
         }else{
             $where=" t.status>=4";
+            $q=$request->get('q');
+            $company=$request->get('company');
             $starttime=$request->get('starttime');
             $endtime=$request->get('endtime');
             if(!empty($starttime)){
@@ -255,11 +259,18 @@ class PrintTaskController extends AdminController
             if(!empty($endtime)){
                 $where.=" and t.created_at<".strtotime($endtime);
             }
+            if(!empty($q)){
+                $where.=" and o.remark like '%{$q}%'";
+            }
+            if(!empty($company)){
+                $where.=" and company='{$company}'";
+            }
             $data['orderList']=DB::table('print_order o')->select("o.*")
                 ->leftJoin('print_task t','o.task_id=t.id')
                 ->where($where)
                 ->orderBy('o.id desc')
                 ->page($_GET['page'],10);
+            $data['print_company']=$linkPage->echoLink('print_company',$company,array('name'=>'company'));
             $this->view('printOrder', $data);
         }
     }

@@ -21,11 +21,9 @@
             <th>类型</th>
             <th>要求</th>
             <th>电话</th>
-            <th>添加时间</th>
+            <th>时间</th>
             <th>接单人</th>
-            <th>接单时间</th>
             <th>支付金额</th>
-            <th>支付时间</th>
             <th>支付流水号</th>
             <th>状态</th>
             <th>操作</th>
@@ -33,6 +31,13 @@
         <?
         foreach($list as $row)
         {
+            $time='';
+            if($row->reply_time!=0){
+                $time.= '接单时间：'.date('Y-m-d H:i:s',$row->reply_time)."\r\n";
+            }
+            if($row->paytime!=0){
+                $time.= '支付时间：'.date('Y-m-d H:i:s',$row->paytime);
+            }
             ?>
             <tr>
                 <td><?=$row->id?></td>
@@ -40,15 +45,10 @@
                 <td><?=$row->print_type?></td>
                 <td><?=nl2br($row->remark)?></td>
                 <td><?=$row->tel?></td>
-                <td><?=substr($row->created_at,2,-3)?></td>
+                <td title="<?=$time?>"><?=substr($row->created_at,2,-3)?></td>
                 <td><?=$row->UserReply()->UserWx()->nickname?></td>
-                <td><? if($row->reply_time!=0){
-                        echo substr(date('Y-m-d H:i:s',$row->reply_time),2,-3);
-                    }?></td>
+                <td></td>
                 <td><?=(float)$row->paymoney?></td>
-                <td><? if($row->paytime!=0){
-                        echo substr(date('Y-m-d H:i:s',$row->paytime),2,-3);
-                    }?></td>
                 <td><?=$row->out_trade_no?></td>
                 <td><?=$row->getLinkPageName('print_status',$row->status)?></td>
                 <td>
