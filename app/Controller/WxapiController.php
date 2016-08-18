@@ -67,17 +67,16 @@ class WxapiController extends Controller
 
         if($message->Event=='subscribe'){
             $this->addUser($message->FromUserName,intval($txt));
-
-            $content=' 亲，请发要求给我们，稍后会有客服和您微信直接联系。'."\r\n".'也可以点击：【<a href="http://'.$_SERVER['HTTP_HOST'].'/index.php/weixin/taskAdd/">我要下单</a>】'."\r\n".'产品介绍及报价：【<a href="http://'.$_SERVER['HTTP_HOST'].'/article/detail/1">点 击</a>】'."\r\n".'感谢您的支持！';
-            return new Text(['content' =>$content]);
+            return new Text(['content' =>'您好，终于等到你了！']);
         }elseif($message->Event=='unsubscribe'){
             $arr=array(
                 'subscribe'=>0,
             );
             DB::table('user_wx')->where("openid=?")->bindValues($message->FromUserName)->update($arr);
         }elseif($message->Event=='CLICK'){
-            if($message->EventKey=='menu_order'){
-                return new Text(['content' =>"下单页!"]);
+            if($message->EventKey=='menu_print'){
+                $content=' 亲，请发要求给我们，稍后会有客服和您微信直接联系。'."\r\n".'也可以点击：【<a href="http://'.$_SERVER['HTTP_HOST'].'/index.php/weixin/taskAdd/">我要下单</a>】'."\r\n".'产品介绍及报价：【<a href="http://'.$_SERVER['HTTP_HOST'].'/article/detail/1">点 击</a>】'."\r\n".'感谢您的支持！';
+                return new Text(['content' =>$content]);
             }
         }
     }
@@ -87,9 +86,9 @@ class WxapiController extends Controller
         $menu = $this->app->menu;
         $buttons = [
             [
-                "type" => "view",
+                "type" => "click",
                 "name" => "我要印",
-                "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/taskAdd"
+                "key"  => "menu_print"
             ],
             [
                 "name" => "用户中心",
