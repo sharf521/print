@@ -97,8 +97,9 @@ elseif ($this->func=='show') : ?>
                         <input type="hidden" name="page" value="<?=$_GET['page']?>">
                         <table class="table_from">
                             <tr><td>用户：</td><td>
+                                    <img src="<?=substr($task->User()->UserWx()->headimgurl,0,-1)?>64" width="50">
                                     <?=$task->user_id?>/<?=$task->User()->UserWx()->nickname?>
-                                    <img src="<?=substr($task->User()->UserWx()->headimgurl,0,-1)?>64" width="50"></td></tr>
+                                    </td></tr>
                             <tr><td>类型：</td><td><?=$task->print_type?></td></tr>
                             <tr><td>要求：</td><td><textarea name="remark" cols="40" rows="5"><?=$task->remark?></textarea></td></tr>
                             <tr><td>电话：</td><td><?=$task->tel?></td></tr>
@@ -175,7 +176,7 @@ elseif ($this->func=='show') : ?>
     <? endif?>
 
     <div class="main_content">
-        <h3>添加订单</h3>
+        <h3>添加工单</h3>
         <form method="post"action="<?=url('printTask/orderAdd')?>">
             <input type="hidden" name="task_id" value="<?=$task->id?>">
             <input type="hidden" name="page" value="<?=$_GET['page']?>">
