@@ -148,14 +148,14 @@ elseif ($this->func=='show') : ?>
             <input type="hidden" name="task_id" value="<?=$task->id?>">
             <input type="hidden" name="page" value="<?=$_GET['page']?>">
             <table class="table">
-                <tr><th>ID</th><th>定做要求</th><th>价格</th><th>外联厂家</th><th>本成价</th><th>添加时间</th><th></th></tr>
+                <tr><th>ID</th><th>定做要求</th><th>价格</th><th>外联厂家</th><th>成本价</th><th>添加时间</th><th></th></tr>
                 <?
                 $linkPage=new \App\Model\LinkPage();
                 foreach ($order as $item){
                     ?>
                     <tr>
                         <td><input type="hidden" name="id[]" value="<?= $item->id ?>"><?= $item->id ?></td>
-                        <td><textarea name="remark[]" rows="4" cols="45"><?= $item->remark ?></textarea></td>
+                        <td><textarea name="remark[]" rows="4" cols="50"><?= $item->remark ?></textarea></td>
                         <td><input type="text" name="money[]" value="<?= $item->money ?>"></td>
                         <td><?= $linkPage->echoLink('print_company', $item->company, array('name' => 'company[]')) ?></td>
                         <td><input type="text" name="company_money[]" value="<?= $item->company_money ?>"></td>
@@ -183,7 +183,7 @@ elseif ($this->func=='show') : ?>
                 <tr><td>定做要求：</td><td><textarea name="remark" cols="45" rows="5"></textarea></td></tr>
                 <tr><td>价格：</td><td><input type="text" name="money"></td></tr>
                 <tr><td>外联厂家：</td><td><?=$print_company?></td></tr>
-                <tr><td>厂家本成价：</td><td><input type="text" name="company_money"></td></tr>
+                <tr><td>厂家成本价：</td><td><input type="text" name="company_money"></td></tr>
                 <tr><td></td><td>
                         <input type="submit" value="添加">
                         <input type="button" value="返回" onclick="window.location='<?=url("printTask/index/?page={$_GET['page']}")?>'"></td></tr>

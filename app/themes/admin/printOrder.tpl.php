@@ -1,7 +1,7 @@
 <?php require 'header.php'; ?>
 <?php if ($this->func == 'checkOrder') : ?>
     <div class="main_title">
-        <span>订单审核</span>
+        <span>工单管理</span>
     </div>
     <form method="get">
         <div class="search">
@@ -30,7 +30,7 @@
             $item = $printOrder->find($order['id']);
             ?>
             <tr>
-                <td><?= $item->id ?></td>
+                <td><a href="<?=url('printTask/show/?task_id='.$item->task_id)?>"><?= $item->id ?></a></td>
                 <td class="fl"><?= nl2br($item->remark) ?></td>
                 <td><?= $item->money ?></td>
                 <td><?= $item->company ?></td>
@@ -57,7 +57,7 @@
     } ?>
     <? elseif ($this->func=='checkOrderDo') : ?>
     <div class="main_content">
-        <h3>审核订单</h3>
+        <h3>审核工单</h3>
         <form method="post">
             <input type="hidden" name="id" value="<?=$order->id?>">
             <input type="hidden" name="page" value="<?=$_GET['page']?>">
