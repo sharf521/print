@@ -47,7 +47,7 @@
     <? elseif ($this->func=='orderShow') : ?>
         <!-- 待支付 -->
         <div class="header_tit">订单详情：</div><br>
-    <div class="div_box clearFix taskList" style="margin-bottom: 10rem; margin-top: 3.2rem">
+    <div class="div_box clearFix taskList">
         <div class="remark_title clearFix">
             <span class="type"><?= $task->print_type ?></span>
             <span class="time"><?= $task->created_at ?></span>
