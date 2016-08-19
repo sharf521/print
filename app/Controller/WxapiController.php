@@ -120,12 +120,12 @@ class WxapiController extends Controller
             $url="http://{$_SERVER['HTTP_HOST']}/index.php/weixin/invite";
             $url=$this->weChat->shorten($url);
             return new Text(['content' => $url]);
-        }elseif($message->Content=='123'){
+        }else{
+
             $session = $this->app->staff_session; // 客服会话管理
 
             $t=$session->create('kf2001@gh_eaa8b99402a9', 'oHzjfwvtq80ycSaDwSTm-ZCeLQQs');
-            return new Text(['content' => '123']);
-        }else{
+
             $message = new Raw('<xml>
             <ToUserName><![CDATA['.$message->FromUserName.']]></ToUserName>
             <FromUserName><![CDATA['.$message->ToUserName.']]></FromUserName>
