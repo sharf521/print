@@ -120,6 +120,11 @@ class WxapiController extends Controller
             $url="http://{$_SERVER['HTTP_HOST']}/index.php/weixin/invite";
             $url=$this->weChat->shorten($url);
             return new Text(['content' => $url]);
+        }elseif($message->Content=='123'){
+            $session = $this->app->staff_session; // 客服会话管理
+
+            $t=$session->create('kf2001@gh_eaa8b99402a9', 'oHzjfwvtq80ycSaDwSTm-ZCeLQQs');
+            return new Text(['content' => '123']);
         }else{
             $message = new Raw('<xml>
             <ToUserName><![CDATA['.$message->FromUserName.']]></ToUserName>
@@ -134,8 +139,25 @@ class WxapiController extends Controller
     public function test()
     {
         $staff = $this->app->staff; // 客服管理
-         $result=$staff->lists();
-            var_dump($result);
+        $result=$staff->lists();
+        $result=json_decode($result,true);
+        $kf_list=$result['kf_list'];
+
+        print_r($kf_list);
+
+
+        $result=$staff->onlines();
+
+        $result=json_decode($result,true);
+        $kf_online_list=$result['kf_online_list'];
+        print_r($kf_online_list);
+
+        $session = $this->app->staff_session; // 客服会话管理
+
+        $t=$session->create('kf2001@gh_eaa8b99402a9', 'oHzjfwvtq80ycSaDwSTm-ZCeLQQs');
+        //$staff->message(new Text(['content' =>'aa']))->by('kf2001@gh_eaa8b99402a9')->to('oHzjfwvtq80ycSaDwSTm-ZCeLQQs')->send();
+
+
     }
 
     private function addUser($openid,$invite_userid=0)
