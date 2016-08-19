@@ -121,7 +121,6 @@ class WxapiController extends Controller
             $url=$this->weChat->shorten($url);
             return new Text(['content' => $url]);
         }else{
-
             $openid=$message->FromUserName;
             $user=new User();
             $user=$user->where('openid=?')->bindValues($openid)->first();
@@ -141,17 +140,13 @@ class WxapiController extends Controller
                 $kf_list=$result['kf_list'];
                 foreach ($kf_list as $kf){
                     if($kf['kf_nick']==$invite_name  && in_array($kf['kf_id'],$online_array)){
-                        $session = $this->app->staff_session; // 客服会话管理
+                        //创建会话
+                        $session = $this->app->staff_session;
                         $session->create($kf['kf_account'],$message->FromUserName);
                         break;
                     }
                 }
             }
-
-
-
-
-
             $message = new Raw('<xml>
             <ToUserName><![CDATA['.$message->FromUserName.']]></ToUserName>
             <FromUserName><![CDATA['.$message->ToUserName.']]></FromUserName>
@@ -174,8 +169,25 @@ class WxapiController extends Controller
         print_r($result['kf_online_list']);
 
         $session = $this->app->staff_session; // 客服会话管理
-        $session->create('kf2001@gh_eaa8b99402a9',$message->FromUserName);
+        $session->create('kf2001@gh_eaa8b99402a9','oHzjfwvtq80ycSaDwSTm-ZCeLQQs');
 
+
+        /*
+         *
+ [kf_account] => kf2001@gh_eaa8b99402a9
+            [kf_headimgurl] => http://mmbiz.qpic.cn/mmbiz_jpg/RflZvibIfCaQOkT6mOt3oR7qOArHTy8lD0gyt62EbTML8BG3Gu5rfAfJTNpickL3L5hBSL2SRR6anEhgAohsic7iaw/300?wx_fmt=jpeg
+            [kf_id] => 2001
+            [kf_nick] => 综合接待
+            [kf_wx] => gdl521
+
+
+        [kf_account] => kf2001@gh_eaa8b99402a9
+            [status] => 1
+            [kf_id] => 2001
+            [accepted_case] => 0
+
+
+         * */
 
     }
 
