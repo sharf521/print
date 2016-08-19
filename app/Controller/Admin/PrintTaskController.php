@@ -16,7 +16,7 @@ class PrintTaskController extends AdminController
 
     function index(PrintTask $printTask,LinkPage $linkPage,Request $request)
     {
-        if($this->user_typeid!=2){
+        if($this->user_typeid==2){
             $where = " 1=1 ";
         }else{
             $where = " (status=1 || reply_uid={$this->user_id} )";

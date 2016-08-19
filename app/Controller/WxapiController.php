@@ -133,7 +133,9 @@ class WxapiController extends Controller
 
     public function test()
     {
-        echo phpinfo();
+        $staff = $this->app->staff; // 客服管理
+         $result=$staff->lists();
+            var_dump($result);
     }
 
     private function addUser($openid,$invite_userid=0)
