@@ -122,9 +122,8 @@ class WxapiController extends Controller
             return new Text(['content' => $url]);
         }else{
 
-            $session = $this->app->staff_session; // 客服会话管理
-
-            $t=$session->create('kf2001@gh_eaa8b99402a9', 'oHzjfwvtq80ycSaDwSTm-ZCeLQQs');
+            //$session = $this->app->staff_session; // 客服会话管理
+            //$session->create('kf2001@gh_eaa8b99402a9',$message->FromUserName);
 
             $message = new Raw('<xml>
             <ToUserName><![CDATA['.$message->FromUserName.']]></ToUserName>
