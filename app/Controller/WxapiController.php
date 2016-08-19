@@ -122,8 +122,35 @@ class WxapiController extends Controller
             return new Text(['content' => $url]);
         }else{
 
-            //$session = $this->app->staff_session; // 客服会话管理
-            //$session->create('kf2001@gh_eaa8b99402a9',$message->FromUserName);
+            $openid=$message->FromUserName;
+            $user=new User();
+            $user=$user->where('openid=?')->bindValues($openid)->first();
+            $invite_name=$user->Invite()->name;
+            if(!empty($invite_name)){
+                $staff = $this->app->staff; // 客服管理
+                $result=$staff->onlines();
+                $result=json_decode($result,true);
+                $kf_online_list=$result['kf_online_list'];
+                $online_array=array();
+                foreach ($kf_online_list as $online){
+                    array_push($online_array,$online['kf_id']);
+                    //$online_array[$online['kf_id']]=$online['kf_account'];
+                }
+                $result=$staff->lists();
+                $result=json_decode($result,true);
+                $kf_list=$result['kf_list'];
+                foreach ($kf_list as $kf){
+                    if($kf['kf_nick']==$invite_name  && in_array($kf['kf_id'],$online_array)){
+                        $session = $this->app->staff_session; // 客服会话管理
+                        $session->create($kf['kf_account'],$message->FromUserName);
+                        break;
+                    }
+                }
+            }
+
+
+
+
 
             $message = new Raw('<xml>
             <ToUserName><![CDATA['.$message->FromUserName.']]></ToUserName>
@@ -141,20 +168,13 @@ class WxapiController extends Controller
         $result=$staff->lists();
         $result=json_decode($result,true);
         $kf_list=$result['kf_list'];
-
         print_r($kf_list);
-
-
         $result=$staff->onlines();
-
         $result=json_decode($result,true);
-        $kf_online_list=$result['kf_online_list'];
-        print_r($kf_online_list);
+        print_r($result['kf_online_list']);
 
         $session = $this->app->staff_session; // 客服会话管理
-
-        $t=$session->create('kf2001@gh_eaa8b99402a9', 'oHzjfwvtq80ycSaDwSTm-ZCeLQQs');
-        //$staff->message(new Text(['content' =>'aa']))->by('kf2001@gh_eaa8b99402a9')->to('oHzjfwvtq80ycSaDwSTm-ZCeLQQs')->send();
+        $session->create('kf2001@gh_eaa8b99402a9',$message->FromUserName);
 
 
     }
