@@ -100,7 +100,7 @@ elseif ($this->func=='show') : ?>
                                     <?=$task->user_id?>/<?=$task->User()->UserWx()->nickname?>
                                     <img src="<?=substr($task->User()->UserWx()->headimgurl,0,-1)?>64" width="50"></td></tr>
                             <tr><td>类型：</td><td><?=$task->print_type?></td></tr>
-                            <tr><td>要求：</td><td><textarea name="remark" cols="40" rows="3"><?=$task->remark?></textarea></td></tr>
+                            <tr><td>要求：</td><td><textarea name="remark" cols="40" rows="5"><?=$task->remark?></textarea></td></tr>
                             <tr><td>电话：</td><td><?=$task->tel?></td></tr>
                             <tr><td>添加时间：</td><td><?=$task->created_at?></td></tr>
                             <tr><td>价格：</td><td><?=$task->money?></td></tr>
@@ -109,21 +109,21 @@ elseif ($this->func=='show') : ?>
                         </table>
                     </form>
                 </td>
-                <td>
+                <td valign="top">
                     <table class="table_from">
-                        <tr><td>支付金额：</td><td><?=$task->paymoney?></td></tr>
-                        <tr><td>流水号：</td><td><?=$task->out_trade_no?></td></tr>
-                        <tr><td>支付时间：</td><td>
+                        <tr><td style="width: 150px;">支付金额：</td><td><?=$task->paymoney?></td></tr>
+                        <tr><td style="width: 150px;">流水号：</td><td><?=$task->out_trade_no?></td></tr>
+                        <tr><td style="width: 150px;">支付时间：</td><td>
                                 <? if ($task->paytime != 0) {
                                     echo date('Y-m-d H:i:s', $task->paytime);
                                 } ?>
                             </td></tr>
-                        <tr><td>收货人：</td><td><?=$task->shipping_name?></td></tr>
-                        <tr><td>联系电话：</td><td><?=$task->shipping_tel?></td></tr>
-                        <tr><td>收货地址：</td><td><?=$task->shipping_address?></td></tr>
+                        <tr><td style="width: 150px;">收货人：</td><td><?=$task->shipping_name?></td></tr>
+                        <tr><td style="width: 150px;">联系电话：</td><td><?=$task->shipping_tel?></td></tr>
+                        <tr><td style="width: 150px;">收货地址：</td><td><?=$task->shipping_address?></td></tr>
                     </table>
                 </td>
-                <td>
+                <td valign="top">
                     <form method="post" action="<?=url('printTask/editShipping')?>">
                         <input type="hidden" name="task_id" value="<?=$task->id?>">
                         <input type="hidden" name="page" value="<?=$_GET['page']?>">
@@ -155,7 +155,7 @@ elseif ($this->func=='show') : ?>
                     ?>
                     <tr>
                         <td><input type="hidden" name="id[]" value="<?= $item->id ?>"><?= $item->id ?></td>
-                        <td><textarea name="remark[]"><?= $item->remark ?></textarea></td>
+                        <td><textarea name="remark[]" rows="4" cols="45"><?= $item->remark ?></textarea></td>
                         <td><input type="text" name="money[]" value="<?= $item->money ?>"></td>
                         <td><?= $linkPage->echoLink('print_company', $item->company, array('name' => 'company[]')) ?></td>
                         <td><input type="text" name="company_money[]" value="<?= $item->company_money ?>"></td>
@@ -180,7 +180,7 @@ elseif ($this->func=='show') : ?>
             <input type="hidden" name="task_id" value="<?=$task->id?>">
             <input type="hidden" name="page" value="<?=$_GET['page']?>">
             <table class="table_from">
-                <tr><td>定做要求：</td><td><textarea name="remark" cols="40" rows="4"></textarea></td></tr>
+                <tr><td>定做要求：</td><td><textarea name="remark" cols="45" rows="5"></textarea></td></tr>
                 <tr><td>价格：</td><td><input type="text" name="money"></td></tr>
                 <tr><td>外联厂家：</td><td><?=$print_company?></td></tr>
                 <tr><td>厂家本成价：</td><td><input type="text" name="company_money"></td></tr>
