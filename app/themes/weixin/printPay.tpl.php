@@ -59,6 +59,7 @@
             $('#btnAddress').click(function () {
                 wx.openAddress({
                     success: function (res) {
+                        alert(JSON.stringify(res));
                         $('#name').val(res.userName);
                         $('#tel').val(res.telNumber);
                         $('#address').val(res.provinceName + res.cityName + res.countryName + res.detailInfo);
