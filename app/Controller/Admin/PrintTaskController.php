@@ -141,7 +141,7 @@ class PrintTaskController extends AdminController
             redirect($url)->with('msg','添加成功！');
         }
     }
-    public function orderEdit(Request $request,PrintTask $printTask)
+    public function orderEditMoney(Request $request,PrintTask $printTask)
     {
         if($_POST){
             $task_id=$request->post('task_id');
@@ -156,10 +156,7 @@ class PrintTaskController extends AdminController
             foreach ($id as $key => $val) {
                 if(!empty($val)){
                     $arr=array(
-                        'remark'=>$request->post('remark')[$key],
-                        'money'=>(float)$request->post('money')[$key],
-                        'company'=>$request->post('company')[$key],
-                        'company_money'=>(float)$request->post('company_money')[$key]
+                        'money'=>(float)$request->post('money')[$key]
                     );
                     $money=math($money,$arr['money'],'+',2);
                     DB::table('print_order')->where('id=?')->bindValues($val)->update($arr);
@@ -179,6 +176,10 @@ class PrintTaskController extends AdminController
         if($this->user_typeid!=2 && $task->reply_uid!=$this->user_id){
             redirect()->back()->with('error','权限异常！');
         }
+        if($task->status >=4){
+            //支付之前可以操作
+            redirect()->back()->with('error','禁止该操作，状态异常！');
+        }
         $tag=$printTask->del($id);
         if($tag !==true){
             redirect()->back()->with('error',$tag);
@@ -191,15 +192,18 @@ class PrintTaskController extends AdminController
     {
         $id=$request->get('id');
         $order=$printOrder->findOrFail($id);
+        if($order->status ==2){
+            redirect()->back()->with('error','己审核，禁止操作！');
+        }
         $printTask=new PrintTask();
         $task=$printTask->find($order->task_id);
+        if($task->status >=4){
+            //支付之前可以操作
+            redirect()->back()->with('error','禁止该操作，状态异常！');
+        }
         if($this->user_typeid!=2){
             if($order->reply_id!=$this->user_id){
                 redirect()->back()->with('error','权限异常！');
-            }
-            if($task->status >=4){
-                //支付之前可以操作
-                redirect()->back()->with('error','禁止该操作，状态异常！');
             }
         }else{
             $order->delete($id);

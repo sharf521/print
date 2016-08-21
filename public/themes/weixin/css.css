@@ -2,6 +2,7 @@ html{font-size:62.5%;}
 html, body, div, span, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, address, big, cite, code, del, em, font, img, ins, small, strong, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend {margin: 0;padding: 0;-webkit-tap-highlight-color:transparent;}
 body {background:#f9f9f9;color: #666; font-family:"Microsoft YaHei"; width:100%;}
 ol, ul,li{list-style: none outside none;}
+h3{line-height: 6rem;height: 6rem; font-size: 3rem;}
 :focus {outline: 0 none;}
 a{color:#666666;text-decoration:none;}
 a:hover{color:#666;text-decoration:none;}
@@ -17,6 +18,7 @@ input[type=text],select {vertical-align: middle; background:#fdfdfd; border:1px 
 }
 .but1,.submit{ box-sizing: border-box;    border: none; background: #00adfe;    color: #fff;    padding: 0 1.2rem;    text-align: center;}
 .but1 { height: 6rem;font-size: 2.4rem; line-height: 6rem; border-radius: .3rem;   }
+.but1:hover{color: #fff;}
 .submit{height: 7rem;font-size: 3rem;   line-height: 7rem; border-radius: .6rem; width: 100%;}
 
 textarea {vertical-align: middle; line-height:30px; width: 100%; background:#fdfdfd; border:1px solid #e4e4e4;border-radius:3px; padding:0 0.6rem;box-sizing:border-box; }
@@ -64,7 +66,7 @@ ul, li{ list-style:none;}
 .table td{padding: 1rem 0.5rem;line-height:4rem; font-size:2rem; text-align:center; border-bottom: 1px solid #f1f1f1;}
 .table tr:hover{ background:#f9f9f9}
 
-.table_from{border-collapse: collapse; margin: 3rem 0rem; width: 100%;}
+.table_from{border-collapse: collapse; width: 100%;}
 .table_from td{ padding: 1rem 0.5rem; text-align: left; line-height:6rem; font-size:2.8rem; border-bottom: 1px solid #f1f1f1;}
 .table_from>tbody>tr>td:first-child{text-align: right;}
 .table_from tr:hover{ background:#f9f9f9}
@@ -91,8 +93,27 @@ ul, li{ list-style:none;}
 .qrcode_div{text-align: center; padding: 2rem}
 
 .invite_box{background-color: #fff;}
-.invite_box h3{line-height: 6rem;line-height: 6rem; font-size: 3rem; padding-left: 2rem;}
+.invite_box h3{ padding-left: 2rem;}
 .invite_box li{border-bottom: 1px dashed #ccc;}
 .invite_box img{float: left; margin: 2rem;border-radius: 1rem; }
 .invite_box .invite_info{float: left; margin-top: 2rem;font-size: 2.8rem;}
 .invite_box .invite_info .time{font-size: 2rem; color: #ccc; margin-top: 2rem; display: block}
+.invite_box .invite_btn{ float: right; margin: 2rem}
+
+
+/* shop list */
+.shop_list{margin-top: 3rem}
+.shop_list h3{line-height: 6rem;height: 6rem; font-size: 3rem; padding-left: 2rem;}
+.shop_list li{background-color: #ffffff; padding: .6rem; margin-bottom: 2rem; border-bottom: 1px solid #d5d5d5; border-top: 1px solid #d5d5d5;font-size: 2.4rem;}
+.shop_list li .img{ margin: 2rem;border-radius: 1rem; width: 10rem ; float: left}
+.shop_list li .shop_info{ margin-left: 14rem}
+.shop_list li .shop_title{border-bottom: 1px dashed #949FB1; line-height: 6rem; height: 6rem; font-size: 2.8rem;}
+.shop_list li .shop_title .edit{font-size: 2rem; color: #ccc;  float: right}
+.shop_list li .shop_remark{ line-height: 3rem;font-size: 2.4rem;}
+
+/*上传按钮*/
+.upload-upimg{height:6rem;width:20rem;position:relative; overflow:hidden; margin:0 1px;display:inline-block;border-radius: 0.3rem;}
+.upload-upimg ._upload_f{height:6rem;width:20rem; background-color:#d9534f; display:block;
+    color: #FFF; font-size:2.4rem; line-height:6rem; text-align:center}
+.upload-upimg:hover{background-color:#F00;}
+.upload-upimg input{width: 100%; height: 100%;cursor: pointer;filter:alpha(opacity=0); -moz-opacity:0;	position:absolute;opacity:0;left:0px;top: 0px;}

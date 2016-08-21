@@ -13,4 +13,5 @@
     <title><?php if(!empty($title_herder)){echo $title_herder.'-';}?><?=app('\App\Model\System')->getCode('webname');?></title>
     <link href="/themes/weixin/css.css?<?=rand(100000,999999)?>" type="text/css" rel="stylesheet"/>
     <script language="javascript" src="/plugin/js/jquery.js"></script>
+    <script src="/themes/weixin/js.js"></script>
 </head>

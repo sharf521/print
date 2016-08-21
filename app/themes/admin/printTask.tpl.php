@@ -145,7 +145,7 @@ elseif ($this->func=='show') : ?>
     </div>
     <? if(!empty($order)) :?>
         <div class="main_content">
-        <form method="post" action="<?=url('printTask/orderEdit')?>">
+        <form method="post" action="<?=url('printTask/orderEditMoney')?>">
             <input type="hidden" name="task_id" value="<?=$task->id?>">
             <input type="hidden" name="page" value="<?=$_GET['page']?>">
             <table class="table">
@@ -156,20 +156,23 @@ elseif ($this->func=='show') : ?>
                     ?>
                     <tr>
                         <td><input type="hidden" name="id[]" value="<?= $item->id ?>"><?= $item->id ?></td>
-                        <td><textarea name="remark[]" rows="4" cols="50"><?= $item->remark ?></textarea></td>
+                        <td width="40%"><?= nl2br($item->remark) ?></td>
                         <td><input type="text" name="money[]" value="<?= $item->money ?>"></td>
-                        <td><?= $linkPage->echoLink('print_company', $item->company, array('name' => 'company[]')) ?></td>
-                        <td><input type="text" name="company_money[]" value="<?= $item->company_money ?>"></td>
+                        <td><?=$item->company ?></td>
+                        <td>￥<?= $item->company_money ?></td>
                         <td><?= $item->created_at ?></td>
                         <td>
+
+                            <a href="<?= url("printOrder/edit/?id={$item->id}&type=show&page={$_GET['page']}") ?>">编辑</a>
+
                             <a href="<?= url("printTask/orderDel/?id={$item->id}&page={$_GET['page']}&task_id={$task->id}") ?>"
                                onclick="return confirm('确定要删除吗？')">删除</a></td>
                     </tr>
                     <?
                 }
                 ?>
-                <tr><td colspan="7">
-                    <input type="submit" value=" 保 存 "></td></tr>
+                <tr><td colspan="2"></td><td colspan="5" class="l">
+                    <input type="submit" value="修改价格"></td></tr>
             </table>
         </form>
     </div>

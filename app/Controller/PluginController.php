@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
 
+use System\Lib\Request;
+
 class PluginController extends Controller
 {
     public function __construct()
@@ -66,38 +68,62 @@ class PluginController extends Controller
 
     public function ajaxFileUpload()
     {
-        $type = $_GET['type'];
-        $path = 'upload/' . date('Ym');
-        $name = '';
+        $type=$_GET['type'];
+        $name=time().rand(1000,9000);
+        $user_id=$this->user_id;
+        if(empty($user_id)){
+            $data = array(
+                'status' => 'fail',
+                'data' => '超时，请重新登陆'
+            );
+            echo json_encode($data);
+            exit;
+        }
+        $path = '/data/upload/' . date('Ym').'/';
         if ($type == 'article') {
             $path = 'upload/article/' . date('Ym');
+        }elseif ($type=='headimgurl'){
+            $name='face';
+            $path='/data/upload/'.ceil($user_id/2000).'/'.$user_id.'/';
+        }elseif ($type=='shop'){
+            $path='/data/upload/'.ceil($user_id/2000).'/'.$user_id.'/'.date('Ym').'/';
         }
-        if (!empty($_FILES['files']['name'])) {
-            require __DIR__ . '/../../system/upload.class.php';
-            $data = array('field' => 'files',
-                'path' => $path,
-                'name' => $name,
-                'exts' => array()
-            );
-            $up = new \upload($data);
-            $arr = $up->save();
-            if ($arr['status'] == 1) {
-                $arr['data'] = $arr['file'];
-//                    if($type=='car')
-//                    {
-//                        $_arr=array(
-//                            'user_id'	=>(int)$this->user_id,
-//                            'car_id'	=>0,
-//                            'image_url'	=>$arr['file'],
-//                            'addtime'	=>date('Y-m-d H:i:s')
-//                        );
-//                        $this->mysql->insert('car_image',$_arr);
-//                        $arr['id']=$this->mysql->insert_id();
-//                    }
-            } else {
-                $arr['data'] = $arr['error'];
+        //创建文件夹
+        $_path=ROOT.'/public'.$path;
+        if (!file_exists($_path)) {
+            if (!mkdir($_path, 0777, true)) {
+                $data = array(
+                    'status' => 'fail',
+                    'data' => '失败：Can not create directory'
+                );
+                echo json_encode($data);
+                exit;
             }
-            echo json_encode($arr);
+        }
+        if($_FILES['files']['name']!=''){
+            $storage = new \Upload\Storage\FileSystem($_path,true);
+            $file = new \Upload\File('files', $storage);
+            $file->setName($name);
+            $file->addValidations(array(
+                new \Upload\Validation\Mimetype(array('image/png', 'image/gif','image/jpeg')),
+                // Ensure file is no larger than 5M (use "B", "K", M", or "G")
+                new \Upload\Validation\Size('5M'),
+            ));
+            try {
+                if($file->upload()){
+                    $data['data']=$path.$file->getNameWithExtension();
+                    $data['status'] = 'success';
+                    echo json_encode($data);
+                }
+            } catch (\Exception $e) {
+                $errors = $file->getErrors();
+                $data = array(
+                    'status' => 'fail',
+                    'data' => '失败：'.json_encode($errors)
+                );
+                echo json_encode($data);
+                exit;
+            }
         }
     }
 }

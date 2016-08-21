@@ -1,5 +1,5 @@
 <?php require 'header.php'; ?>
-    <div class="header_tit">支付中：</div>
+    <div class="header_tit">支付中…</div><br>
     <table class="table_from">
         <tr>
             <td style="width: 12rem">收货人：</td>

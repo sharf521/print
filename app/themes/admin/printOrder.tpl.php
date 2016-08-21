@@ -44,7 +44,7 @@
                         <a href="<?= url("printOrder/check/?id={$item->id}&status=3&page={$_GET['page']}") ?>"
                            onclick="return confirm('确定要操作吗？')">审核不通过</a>&nbsp;&nbsp;
 
-                        <a href="<?= url("printOrder/edit/?id={$item->id}&page={$_GET['page']}") ?>">编辑</a>
+                        <a href="<?= url("printOrder/edit/?id={$item->id}&type=printOrder&page={$_GET['page']}") ?>">编辑</a>
                     <? endif ?>
                 </td>
             </tr>
@@ -57,18 +57,18 @@
     } ?>
     <? elseif ($this->func=='edit') : ?>
     <div class="main_content">
-        <h3>审核工单</h3>
+        <h3>编辑工单</h3>
         <form method="post">
             <input type="hidden" name="id" value="<?=$order->id?>">
             <input type="hidden" name="page" value="<?=$_GET['page']?>">
             <table class="table_from">
                 <tr><td>定做要求：</td><td><textarea name="remark" cols="50" rows="5"><?=$order->remark?></textarea></td></tr>
-                <tr><td>价格：</td><td><input type="text" name="money" value="<?=$order->money?>"></td></tr>
+                <tr><td>价格：</td><td>￥<?=$order->money?></td></tr>
                 <tr><td>外联厂家：</td><td><?=$print_company?></td></tr>
                 <tr><td>厂家本成价：</td><td><input type="text" name="company_money" value="<?=$order->company_money?>"></td></tr>
                 <tr><td></td><td>
                         <input type="submit" value="保存">
-                        <input type="button" value="返回" onclick="window.location='<?=url("printOrder/?page={$_GET['page']}")?>'"></td></tr>
+                        <input type="button" value="返回" onclick="window.history.go(-1)"></td></tr>
             </table>
         </form>
     </div>

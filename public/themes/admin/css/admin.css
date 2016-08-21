@@ -140,21 +140,6 @@ li.menuSelectd a{ color: #fff; border-left: 5px #FFAA1C solid; padding-left: 25p
 .delete_btn{  background:url(../images/icon.png) no-repeat; background-position:0 0; width:17px; height:17px; display:block; cursor: pointer; float:left;  margin:3px 5px;}
 
 
-/*修改订单商品规格*/
-.gou-wu-xiangqing{ width:538px; overflow:hidden;}
-.gou-wu-xiangqing .colour{ width:538px; overflow:hidden; margin-bottom:10px;}
-.gou-wu-xiangqing .colour li{ height:42px; line-height:42px; float:left;}
-.gou-wu-xiangqing .colour li span{ font-size:14px; color:#383838;}
-.gou-wu-xiangqing .colour li  a{ font-size:16px ;padding:6px 10px; margin-right:10px; background-image:url(../images/san-jiao_09.png); color:#ff756b;}
-.gou-wu-xiangqing .colour li  a:hover{ background-image:url(../images/san-jiao_07.png); }
-.gou-wu-xiangqing .colour li .spec_1{ background-image:url(../images/san-jiao_07.png); }
-.gou-wu-xiangqing .size{ width:538px; overflow:hidden; margin-bottom:10px;}
-.gou-wu-xiangqing .size li{ height:42px; line-height:42px; float:left;}
-.gou-wu-xiangqing .size li span{ font-size:14px; color:#383838;}
-.gou-wu-xiangqing .size li  a{ font-size:16px ;padding:8px 7px; margin-right:10px; background-image:url(../images/san-jiao_15.png); color:#ff756b;}
-.gou-wu-xiangqing .size li  a:hover{ background-image:url(../images/san-jiao_13.png); }
-.gou-wu-xiangqing .size li .spec_2{ background-image:url(../images/san-jiao_13.png); }
-
 
 /*订单回复*/
 .div_eval{ width:600px; margin-top:20px;}
@@ -166,7 +151,7 @@ li.menuSelectd a{ color: #fff; border-left: 5px #FFAA1C solid; padding-left: 25p
 
 
 /*上传按钮*/
-.upload-upimg{height:25px; line-height:25px;width:80px;position:relative; overflow:hidden; }
+.upload-upimg{height:25px; line-height:25px;width:80px;position:relative; overflow:hidden; display: inline-block; }
 .upload-upimg ._upload_f{height:25px;background-color:#fd493d; display:block;
 	color: #FFF; font-size:12px; line-height:25px; text-align:center}
 .upload-upimg:hover{}

@@ -68,14 +68,22 @@ class PrintOrderController extends AdminController
     {
         $id=$request->id;
         $page=$request->page;
+        $type=$request->get('type');
         $order=$printOrder->findOrFail($id);
+        if($order->status ==2){
+            redirect()->back()->with('error','己审核，禁止操作！');
+        }
         if($_POST){
             $order->remark=$_POST['remark'];
-            $order->money=(float)$request->post('money');
             $order->company=$request->post('company');
             $order->company_money=(float)$request->post('company_money');
             $order->save();
-            $url="printOrder/?page={$page}";
+
+            if($type=='printOrder'){
+                $url="printOrder/?page={$page}";
+            }elseif ($type=='show'){
+                $url="printTask/show/?task_id={$order->task_id}?page={$page}";
+            }
             redirect($url)->with('msg','保存成功！');
         }else{
             $data['print_company']=$linkPage->echoLink('print_company',$order->company,array('name'=>'company'));
