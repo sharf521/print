@@ -152,7 +152,7 @@ elseif ($this->func=='show') : ?>
                 <tr><th>ID</th><th>定做要求</th><th>价格</th><th>外联厂家</th><th>成本价</th><th>添加时间</th><th></th></tr>
                 <?
                 $linkPage=new \App\Model\LinkPage();
-                foreach ($order as $item){
+                foreach ($order as $item) {
                     ?>
                     <tr>
                         <td><input type="hidden" name="id[]" value="<?= $item->id ?>"><?= $item->id ?></td>
