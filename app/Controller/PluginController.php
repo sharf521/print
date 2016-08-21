@@ -1,8 +1,6 @@
 <?php
 namespace App\Controller;
 
-use System\Lib\Request;
-
 class PluginController extends Controller
 {
     public function __construct()
