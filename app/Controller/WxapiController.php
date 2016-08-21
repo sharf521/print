@@ -120,6 +120,11 @@ class WxapiController extends Controller
             $url="http://{$_SERVER['HTTP_HOST']}/index.php/weixin/invite";
             $url=$this->weChat->shorten($url);
             return new Text(['content' => $url]);
+        }
+        elseif($message->Content=='商铺'){
+            $url="http://{$_SERVER['HTTP_HOST']}/index.php/shop";
+            $url=$this->weChat->shorten($url);
+            return new Text(['content' => $url]);
         }else{
             $openid=$message->FromUserName;
             $user=new User();
