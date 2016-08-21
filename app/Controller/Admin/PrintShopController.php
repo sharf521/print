@@ -9,7 +9,9 @@
 namespace app\Controller\Admin;
 
 
+use app\Model\PrintGroup;
 use app\Model\PrintShop;
+use app\Model\PrintShopGroup;
 use System\Lib\Request;
 
 class PrintShopController extends AdminController
@@ -19,24 +21,45 @@ class PrintShopController extends AdminController
         parent::__construct();
     }
 
-
-    public function index(Request $request,PrintShop $printShop)
+    public function index(Request $request,PrintShop $printShop,PrintGroup $printGroup)
     {
-        $where=" 1=1";
-        $q=$request->get('q');
-        $starttime=$request->get('starttime');
-        $endtime=$request->get('endtime');
-        if(!empty($starttime)){
-            $where.=" and created_at>=".strtotime($starttime);
+        if($_POST){
+            $shop_id_arr=$request->post('id');
+            if(empty($shop_id_arr)){
+                redirect()->back()->with('error','请选择商铺！');
+            }
+            $group_id=(int)$request->post('group_id');
+            $shop_group=new PrintShopGroup();
+            foreach ($shop_id_arr as $id){
+                $id=(int)$id;
+                if($id!=0){
+                    $shop_group=$shop_group->where("group_id={$group_id} && shop_id={$id}")->first();
+                    if(!$shop_group->is_exist){
+                        $shop_group->group_id=$group_id;
+                        $shop_group->shop_id=$id;
+                        $shop_group->save();
+                    }
+                }
+            }
+            redirect()->back()->with('msg','操作完成 ！');
+        }else{
+            $where=" 1=1";
+            $q=$request->get('q');
+            $starttime=$request->get('starttime');
+            $endtime=$request->get('endtime');
+            if(!empty($starttime)){
+                $where.=" and created_at>=".strtotime($starttime);
+            }
+            if(!empty($endtime)){
+                $where.=" and created_at<".strtotime($endtime);
+            }
+            if(!empty($q)){
+                $where.=" and name like '%{$q}%'";
+            }
+            $data['printShop'] = $printShop->where($where)->orderBy('id desc')->pager($_GET['page'], 10);
+            $data['printGroup']=$printGroup->orderBy('id desc')->get();
+            $this->view('printShop', $data);
         }
-        if(!empty($endtime)){
-            $where.=" and created_at<".strtotime($endtime);
-        }
-        if(!empty($q)){
-            $where.=" and name like '%{$q}%'";
-        }
-        $data['printShop'] = $printShop->where($where)->orderBy('id desc')->pager($_GET['page'], 10);
-        $this->view('printShop', $data);
     }
     public function edit(Request $request,PrintShop $printShop)
     {

@@ -12,36 +12,46 @@
             <input type="submit" class="but2" value="查询"/>
         </div>
     </form>
-    <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>user_id</th>
-            <th>昵称</th>
-            <th></th>
-            <th>名称</th>
-            <th>图片</th>
-            <th>介绍</th>
-            <th>添加时间</th>
-            <th>状态</th>
-            <th></th>
-        </tr>
-        <?
-        foreach ($printShop['list'] as $item) {
-            $user=$item->User();
-            ?>
+    <form method="post">
+        <table class="table">
             <tr>
-                <td><?= $item->id ?></td>
-                <td><?=$user->id?></td>
-                <td><?=$user->nickname?></td>
-                <td><img src="<?=substr($user->headimgurl,0,-1)?>64" width="50"></td>
-                <td><?= $item->name ?></td>
-                <td><img src="<?= $item->picture ?>" width="50"></td>
-                <td class="fl"><?= nl2br($item->remark) ?></td>
-                <td><?= $item->created_at ?></td>
-                <td><a href="<?= url("printShop/edit/?id={$item->id}&page={$_GET['page']}") ?>">编辑</a></td>
+                <th></th>
+                <th>ID</th>
+                <th>user_id</th>
+                <th>昵称</th>
+                <th></th>
+                <th>名称</th>
+                <th>图片</th>
+                <th>介绍</th>
+                <th>添加时间</th>
+                <th>操作</th>
             </tr>
-        <? } ?>
-    </table>
+            <?
+            foreach ($printShop['list'] as $item) {
+                $user=$item->User();
+                ?>
+                <tr>
+                    <td><input type="checkbox" name="id[]" value="<?=$item->id?>"></td>
+                    <td><?= $item->id ?></td>
+                    <td><?=$user->id?></td>
+                    <td><?=$user->nickname?></td>
+                    <td><img src="<?=substr($user->headimgurl,0,-1)?>64" width="50"></td>
+                    <td><?= $item->name ?></td>
+                    <td><img src="<?= $item->picture ?>" width="50"></td>
+                    <td class="fl"><?= nl2br($item->remark) ?></td>
+                    <td><?= $item->created_at ?></td>
+                    <td><a href="<?= url("printShop/edit/?id={$item->id}&page={$_GET['page']}") ?>">编辑</a></td>
+                </tr>
+            <? } ?>
+            <tr><td colspan="10" class="l"> 添加到：
+                <select name="group_id">
+                    <? foreach ($printGroup as $group) : ?>
+                        <option value="<?=$group->id?>"><?=$group->name?></option>
+                    <? endforeach;?>
+                </select> <input type="submit" value="保存">
+                </td></tr>
+        </table>
+    </form>
     <? if (empty($printShop['total'])) {
         echo "无记录！";
     } else {

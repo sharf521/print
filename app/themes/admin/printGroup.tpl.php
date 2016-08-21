@@ -23,6 +23,7 @@
                         <td><?= nl2br($row->remark) ?></td>
                         <td><?= $row->created_at ?></td>
                         <td>
+                            <a href="<?= url("printGroup/shopList/?id={$row->id}&page={$_GET['page']}") ?>">店铺列表</a>
                             <a href="<?= url("printGroup/edit/?id={$row->id}&page={$_GET['page']}") ?>">修改</a>
                             <a href="<?= url("printGroup/delete/?id={$row->id}&page={$_GET['page']}") ?>"
                                onclick="return confirm('确定要删除吗？')">删除</a>
@@ -37,7 +38,7 @@
     } else {
         echo $printGroup['page'];
     } ?>
-<? elseif ($this->func == 'add' || $this->func == 'edit') : ?>
+<? elseif ($this->func == 'add' || $this->func == 'edit') :  ?>
     <script src="/plugin/js/ajaxfileupload.js?111"></script>
     <div class="main_title">
         <span>管理</span><? if ($this->func == 'add') { ?>新增<? } else { ?>编辑<? } ?>
@@ -69,5 +70,37 @@
             </table>
         </form>
     </div>
+<?php elseif($this->func=='shopList') : ?>
+    <div class="main_title">
+        <span>管理</span>列表 <a href="<?= url('printGroup') ?>" class="but1">返回列表</a>
+    </div>
+    <div class="main_content">
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <th>名称</th>
+                <th>图片</th>
+                <th>介绍</th>
+                <th>添加时间</th>
+                <th>分组时间</th>
+            </tr>
+            <?
+            foreach ($list as $item) {
+                $shop=$item->PrintShop();
+                ?>
+                <tr>
+                    <td><?= $shop->id ?></td>
+                    <td><?= $shop->name ?></td>
+                    <td><img src="<?= $shop->picture ?>" width="50"></td>
+                    <td class="fl"><?= nl2br($shop->remark) ?></td>
+                    <td><?= $shop->created_at ?></td>
+                    <td><?= $item->created_at ?></td>
+                </tr>
+            <? } ?>
+        </table>
+        <? if (empty($list)) {
+            echo "无记录！";
+        }?>
+    </div>    
 <? endif; ?>
 <?php require 'footer.php'; ?>

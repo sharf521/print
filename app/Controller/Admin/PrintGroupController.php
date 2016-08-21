@@ -10,6 +10,7 @@ namespace app\Controller\Admin;
 
 
 use app\Model\PrintGroup;
+use app\Model\PrintShopGroup;
 use System\Lib\Request;
 
 class PrintGroupController extends AdminController
@@ -22,6 +23,14 @@ class PrintGroupController extends AdminController
     public function index(PrintGroup $printGroup)
     {
         $data['printGroup']=$printGroup->orderBy('id desc')->pager($_GET['page'],10);
+        $this->view('printGroup',$data);
+    }
+
+    public function shopList(Request $request,PrintShopGroup $shopGroup)
+    {
+        $id=$request->get('id');
+        $list=$shopGroup->where("group_id=?")->bindValues($id)->get();
+        $data['list']=$list;
         $this->view('printGroup',$data);
     }
 

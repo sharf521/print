@@ -10,7 +10,7 @@ class Model
     protected $cols;
     protected $dbfix;
     protected $primaryKey = 'id';
-    protected $is_exist = false;
+    public $is_exist = false;
 
     public function __construct()
     {
