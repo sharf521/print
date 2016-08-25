@@ -30,17 +30,14 @@
                 wx.getLocation({
                     type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
                     success: function (res) {
-                        var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
-                        var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                        var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90 34.761806
+                        var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。113.76333
                         var speed = res.speed; // 速度，以米/每秒计
                         var accuracy = res.accuracy; // 位置精度
-                        alert(JSON.stringify(res));
-
-//                        $.post("/index.php/plugin/getAddress/?task_id=" +<?//=$task->id?>//, {
-//                            'name': $('#name').val(),
-//                            'tel': $('#tel').val(),
-//                            'address': $('#address').val()
-//                        }, function (str) {  });
+                        $.post("/index.php/plugin/getAddress/", {
+                            'lat': latitude,
+                            'lon': longitude
+                        }, function (str) { alert(str) });
                     }
                 });
             });

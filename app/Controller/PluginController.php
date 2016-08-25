@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
 
+use System\Lib\Request;
+
 class PluginController extends Controller
 {
     public function __construct()
@@ -123,5 +125,17 @@ class PluginController extends Controller
                 exit;
             }
         }
+    }
+
+    public function getAddress(Request $request)
+    {
+        //$lat=34.761806;
+        //$lon=113.76333;
+        $lat=$request->post('lat');
+        $lon=$request->post('lon');
+        $url="http://api.map.baidu.com/cloudrgc/v1?location={$lat},{$lon}&geotable_id=2147124672&coord_type=wgs84ll&ak=FD277acba8a70dc3bd90b1790787d332";
+        $result=curl_url($url);
+        $result=json_decode($result,true);
+        echo $result['formatted_address'].$result['recommended_location_description'];
     }
 }
