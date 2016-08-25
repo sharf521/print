@@ -8,6 +8,7 @@ namespace app\Controller;
 
 use app\Model\PrintShop;
 use System\Lib\Request;
+use App\WeChat;
 
 class ShopController extends WeixinController
 {
@@ -49,6 +50,10 @@ class ShopController extends WeixinController
             $data['title_herder'] = '商户联盟';
             $list=$shop->where("user_id=?")->bindValues($this->user_id)->get();
             $data['list']=$list;
+
+            $weChat=new WeChat();
+            $js = $weChat->app->js;
+            $data['config']=$js->config(array('chooseWXPay','openAddress','checkJsApi','getLocation'), true);
             $this->view('shop', $data);
         }
     }
