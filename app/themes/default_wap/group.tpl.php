@@ -14,6 +14,7 @@
         <ul>
             <? foreach ($shopList as $item) :
                 $shop=$item->Shop();
+                if(! $shop->is_exist){continue;}
                 ?>
                 <li class="clearFix">
                     <img class="img" src="<?=$shop->picture?>">
