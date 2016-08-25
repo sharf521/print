@@ -14,13 +14,13 @@
                         <div class="shop_title">
                             <?= $shop->name ?>
                             <span class="edit">
-                                <a href="<?= url("shop/edit/?id={$shop->id}") ?>">编辑</a>
-                                <a href="<?= url("shop/delete/?id={$shop->id}") ?>" onclick="return confirm('确定要删除吗？')">删除</a>
+                                <a href="<?= url("shop/edit/?id={$shop->id}") ?>">修改</a>
+                                <a href="<?= url("shop/delete/?id={$shop->id}") ?>" onclick="return confirm('确定要删除吗？')"></a>
                                 <?
                                 $shopGroup=$shop->ShopGroup();
                                 foreach ($shopGroup as $_item){
                                     ?>
-                                    <a href="<?= url("/group/detail/?id={$_item->group_id}&user_id={$shop->user_id}") ?>">联盟</a>
+                                    <a href="<?=url("/group/detail/?id={$_item->group_id}&user_id={$shop->user_id}") ?>">联盟</a>
                                     <?
                                 }
                                 ?>
@@ -37,8 +37,8 @@
     <div class="container">
         <form method="post">
             <table class="table_from">
-                <tr><td>名称：</td><td><input type="text" name="name"></td></tr>
-                <tr><td>图片：</td><td>
+                <tr><td>店名：</td><td><input type="text" name="name"></td></tr>
+                <tr><td>门头：</td><td>
                         <input type="hidden" name="picture" id="picture"
                                value=""/>
 						<span id="upload_span_picture">
@@ -49,8 +49,8 @@
                                    onchange="upload_image('picture','shop')"/>
                         </div>
                     </td></tr>
-                <tr><td>介绍：</td><td><textarea name="remark" rows="5"></textarea></td></tr>
-                <tr><td>位置：</td><td><input type="text" name="address" id="address"></td></tr>
+                <tr><td>主营：</td><td><textarea name="remark" rows="5"></textarea></td></tr>
+                <tr><td>地址：</td><td><input type="text" name="address" id="address"></td></tr>
             </table>
             <input type="submit" value="提 交" class="submit">
         </form>
@@ -77,12 +77,12 @@
         </script>
     </div>
 <? elseif ($this->func=='edit') :  ?>
-    <div class="header_tit">编辑店铺</div>
+    <div class="header_tit">修改店铺</div>
     <div class="container">
         <form method="post">
             <table class="table_from">
-                <tr><td>名称：</td><td><input type="text" name="name"  value="<?=$shop->name?>"></td></tr>
-                <tr><td>图片：</td><td>
+                <tr><td>店名：</td><td><input type="text" name="name"  value="<?=$shop->name?>"></td></tr>
+                <tr><td>门头：</td><td>
                         <input type="hidden" name="picture" id="picture"
                                value="<?=$shop->picture?>"/>
 						<span id="upload_span_picture">
@@ -97,8 +97,8 @@
                                    onchange="upload_image('picture','shop')"/>
                         </div>
                     </td></tr>
-                <tr><td>介绍：</td><td><textarea name="remark" rows="5"><?=$shop->remark?></textarea></td></tr>
-                <tr><td>位置：</td><td><input type="text" name="address" value="<?=$shop->address?>"></td></tr>
+                <tr><td>主营：</td><td><textarea name="remark" rows="5"><?=$shop->remark?></textarea></td></tr>
+                <tr><td>地址：</td><td><input type="text" name="address" value="<?=$shop->address?>"></td></tr>
             </table>
             <input type="submit" value="提 交" class="submit">
         </form>
