@@ -5,6 +5,9 @@
     </div>
     <div class="invite_box">
         <h3>己邀请列表</h3>
+        <? if(empty($invites)) : ?>
+            <div class='alert-warning'>没有找到匹配的记录！</div>
+        <? endif;?>
         <ul>
             <? foreach ($invites as $user) : ?>
             <li class="clearFix">
