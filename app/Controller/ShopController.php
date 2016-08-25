@@ -37,6 +37,9 @@ class ShopController extends WeixinController
             if (empty($remark)) {
                 redirect()->back()->with('error', '请填写介绍');
             }
+            if (empty($address)) {
+                redirect()->back()->with('error', '请填写所在地址');
+            }
             $shop->user_id = $user_id;
             $shop->picture = $picture;
             $shop->remark = $remark;
@@ -80,6 +83,9 @@ class ShopController extends WeixinController
             }
             if (empty($remark)) {
                 redirect()->back()->with('error', '请填写介绍');
+            }
+            if (empty($address)) {
+                redirect()->back()->with('error', '请填写所在地址');
             }
             $shop->picture = $picture;
             $shop->remark = $remark;

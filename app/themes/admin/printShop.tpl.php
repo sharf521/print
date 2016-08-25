@@ -23,6 +23,7 @@
                 <th>名称</th>
                 <th>图片</th>
                 <th>介绍</th>
+                <th>地址</th>
                 <th>添加时间</th>
                 <th>操作</th>
             </tr>
@@ -39,6 +40,7 @@
                     <td><?= $item->name ?></td>
                     <td><img src="<?= $item->picture ?>" width="50"></td>
                     <td class="fl"><?= nl2br($item->remark) ?></td>
+                    <td class="fl"><?=$item->address ?></td>
                     <td><?= $item->created_at ?></td>
                     <td><a href="<?= url("printShop/edit/?id={$item->id}&page={$_GET['page']}") ?>">编辑</a></td>
                 </tr>
@@ -82,6 +84,7 @@
                         </div>
                     </td></tr>
                 <tr><td>介绍：</td><td><textarea name="remark" cols="50" rows="5"><?=$shop->remark?></textarea></td></tr>
+                <tr><td>位置：</td><td><input type="text" name="address"  value="<?=$shop->address?>"></td></tr>
                 <tr><td></td><td>
                         <input type="submit" value="保存">
                         <input type="button" value="返回" onclick="window.location='<?=url("printShop/?page={$_GET['page']}")?>'"></td></tr>
