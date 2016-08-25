@@ -48,16 +48,18 @@ if($this->func=='index'){?>
             $arr_sex=array('','男','女');
             foreach($list as $row)
 			{
+                $UserWx=$row->UserWx();
+                $Invite=$row->Invite();
 			?>
             <tr>
             	<td><?=$row->id?>/<?=$row->username?></td>
                 <td><?=$row->UserType()->name?></td>
 
-                <td><img src="<?=substr($row->UserWx()->headimgurl,0,-1)?>64" width="50"></td>
+                <td><img src="<?=substr($UserWx->headimgurl,0,-1)?>64" width="50"></td>
                 <td><?=$row->nickname?></td>
-                <td><?=$arr_sex[$row->UserWx()->sex]?></td>
-                <td><?=$row->UserWx()->province?>-<?=$row->UserWx()->city?></td>
-                <td><?=$row->Invite()->nickname?></td>
+                <td><?=$arr_sex[$UserWx->sex]?></td>
+                <td><?=$UserWx->province?>-<?=$UserWx->city?></td>
+                <td><?=$Invite->id?>/<?=$Invite->nickname?></td>
                 <td><?=$row->email?></td>
                 <td><?=$row->name?></td>
                 <td><?=$row->tel?></td>

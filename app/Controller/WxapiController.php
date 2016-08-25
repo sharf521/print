@@ -228,6 +228,9 @@ class WxapiController extends Controller
             if(!empty($invite)){
                 $user->invite_userid=$invite->id;
                 $user->invite_path=$invite->invite_path.$invite_userid.',';
+                //更新邀请人的邀请数量
+                $invite->invite_count=$invite->invite_count+1;
+                $invite->save();
             }
         }
         if(intval($user->type_id)==0){
@@ -239,7 +242,6 @@ class WxapiController extends Controller
     public function oauth(Request $request)
     {
         $url=$request->get('url');
-        
         //没有登陆时去授权
         if (empty($this->user_id)) {
             session()->set('target_url',$url);
