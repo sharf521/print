@@ -20,7 +20,6 @@ class GroupController extends Controller
         parent::__construct();
     }
 
-
     public function detail(Request $request,PrintShopGroup $shopGroup,WeChat $weChat)
     {
         $id=$request->get('id');

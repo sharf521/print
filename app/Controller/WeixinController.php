@@ -122,7 +122,6 @@ class WeixinController extends Controller
         echo '联盟页';
     }
     
-    
     public function saveAddress(Request $request,PrintTask $printTask)
     {
         $task_id=(int)$request->get('task_id');
