@@ -52,10 +52,9 @@ class ShopController extends WeixinController
             $data['title_herder'] = '商户联盟';
             $list=$shop->where("user_id=?")->bindValues($this->user_id)->get();
             $data['list']=$list;
-
             $weChat=new WeChat();
             $js = $weChat->app->js;
-            $data['config']=$js->config(array('chooseWXPay','openAddress','checkJsApi','getLocation'), false);
+            $data['config']=$js->config(array('chooseWXPay','openAddress','checkJsApi','getLocation'), true);
             $this->view('shop', $data);
         }
     }
@@ -90,6 +89,9 @@ class ShopController extends WeixinController
             redirect('shop')->with('msg','保存成功！');
         }else{
             $data['shop']=$shop;
+            $weChat=new WeChat();
+            $js = $weChat->app->js;
+            $data['config']=$js->config(array('chooseWXPay','openAddress','checkJsApi','getLocation'), true);
             $this->view('shop', $data);
         }
     }
