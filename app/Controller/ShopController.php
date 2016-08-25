@@ -53,7 +53,7 @@ class ShopController extends WeixinController
 
             $weChat=new WeChat();
             $js = $weChat->app->js;
-            $data['config']=$js->config(array('chooseWXPay','openAddress','checkJsApi','getLocation'), true);
+            $data['config']=$js->config(array('chooseWXPay','openAddress','checkJsApi','getLocation'), false);
             $this->view('shop', $data);
         }
     }
