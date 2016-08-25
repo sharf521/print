@@ -87,7 +87,7 @@
             </tr>
             <?
             foreach ($list as $item) {
-                $shop=$item->PrintShop();
+                $shop=$item->Shop();
                 if(! $shop->is_exist){continue;}
                 ?>
                 <tr>

@@ -21,4 +21,10 @@ class PrintShop extends Model
     {
         return $this->hasOne('\App\Model\User','id','user_id');
     }
+
+    public function ShopGroup()
+    {
+        return $this->hasMany('\App\Model\PrintShopGroup','shop_id','id');
+    }
+
 }

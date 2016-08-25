@@ -7,18 +7,26 @@
             <div class='alert-warning'>没有找到匹配的记录！</div>
         <? endif;?>
         <ul>
-            <? foreach ($list as $row) : ?>
+            <? foreach ($list as $shop) : ?>
                 <li class="clearFix">
-                    <img class="img" src="<?=$row->picture?>">
+                    <img class="img" src="<?=$shop->picture?>">
                     <div class="shop_info clearFix">
                         <div class="shop_title">
-                            <?= $row->name ?>
+                            <?= $shop->name ?>
                             <span class="edit">
-                                <a href="<?= url("shop/edit/?id={$row->id}") ?>">编辑</a>
-                                <a href="<?= url("shop/delete/?id={$row->id}") ?>" onclick="return confirm('确定要删除吗？')">删除</a>
+                                <a href="<?= url("shop/edit/?id={$shop->id}") ?>">编辑</a>
+                                <a href="<?= url("shop/delete/?id={$shop->id}") ?>" onclick="return confirm('确定要删除吗？')">删除</a>
+                                <?
+                                $shopGroup=$shop->ShopGroup();
+                                foreach ($shopGroup as $_item){
+                                    ?>
+                                    <a href="<?= url("/group/detail/?id={$_item->group_id}&user_id={$shop->user_id}") ?>">联盟</a>
+                                    <?
+                                }
+                                ?>
                             </span>
                         </div>
-                        <div class="shop_remark"><?= nl2br($row->remark) ?></div>
+                        <div class="shop_remark"><?= nl2br($shop->remark) ?></div>
                     </div>
                 </li>
             <? endforeach; ?>

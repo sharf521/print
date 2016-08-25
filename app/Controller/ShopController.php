@@ -7,6 +7,7 @@
 namespace app\Controller;
 
 use app\Model\PrintShop;
+use app\Model\PrintShopGroup;
 use System\Lib\Request;
 use App\WeChat;
 
@@ -113,4 +114,5 @@ class ShopController extends WeixinController
             $this->view('shop', $data);
         }
     }
+
 }

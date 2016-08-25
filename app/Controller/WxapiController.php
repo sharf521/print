@@ -101,7 +101,7 @@ class WxapiController extends Controller
                     [
                         "type" => "view",
                         "name" => "联盟商家",
-                        "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/union"
+                        "url"  => "http://{$_SERVER['HTTP_HOST']}/index.php/shop"
                     ]
                 ],
             ],

@@ -17,8 +17,16 @@ class PrintShopGroup extends  Model
         parent::__construct();
     }
 
-    public function PrintShop()
+    public function Shop()
     {
         return $this->hasOne('\App\Model\PrintShop','id','shop_id');
+    }
+
+    /**
+     * @return \App\Model\PrintGroup
+     */
+    public function Group()
+    {
+        return $this->hasOne('\App\Model\PrintGroup','id','group_id');
     }
 }
