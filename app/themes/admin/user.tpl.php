@@ -33,14 +33,10 @@ if($this->func=='index'){?>
                 <th>用户类型</th>
                 <th>头像</th>
                 <th>昵称</th>
+                <th>邀请人数</th>
                 <th>性别</th>
                 <th>城市</th>
                 <th>邀请人</th>
-                <th>EMAIL</th>
-                <th>真实姓名</th>
-                <th>电话</th>
-                <th>QQ</th>
-                <th>地址</th>
                 <th>注册时间</th>
                 <th>操作</th>
             </tr>
@@ -54,17 +50,12 @@ if($this->func=='index'){?>
             <tr>
             	<td><?=$row->id?>/<?=$row->username?></td>
                 <td><?=$row->UserType()->name?></td>
-
                 <td><img src="<?=substr($UserWx->headimgurl,0,-1)?>64" width="50"></td>
                 <td><?=$row->nickname?></td>
+                <td><?=$row->invite_count?></td>
                 <td><?=$arr_sex[$UserWx->sex]?></td>
                 <td><?=$UserWx->province?>-<?=$UserWx->city?></td>
                 <td><?=$Invite->id?>/<?=$Invite->nickname?></td>
-                <td><?=$row->email?></td>
-                <td><?=$row->name?></td>
-                <td><?=$row->tel?></td>
-                <td><?=$row->qq?></td>
-                <td><?=$row->address?></td>
                 <td><?=$row->created_at?></td>
                 <td>
                     <?
