@@ -22,8 +22,8 @@
                 <th></th>
                 <th>名称</th>
                 <th>图片</th>
-                <th>介绍</th>
                 <th>地址</th>
+                <th>介绍</th>
                 <th>添加时间</th>
                 <th>操作</th>
             </tr>
@@ -39,13 +39,15 @@
                     <td><img src="<?=substr($user->headimgurl,0,-1)?>64" width="50"></td>
                     <td><?= $item->name ?></td>
                     <td><img src="<?= $item->picture ?>" width="50"></td>
-                    <td class="fl"><?= nl2br($item->remark) ?></td>
                     <td class="fl"><?=$item->address ?></td>
+                    <td class="fl"><?= nl2br($item->remark) ?></td>
                     <td><?= $item->created_at ?></td>
-                    <td><a href="<?= url("printShop/edit/?id={$item->id}&page={$_GET['page']}") ?>">编辑</a></td>
+                    <td><a href="<?= url("printShop/edit/?id={$item->id}&page={$_GET['page']}") ?>">编辑</a>
+                        <a href="<?= url("printShop/delete/?id={$item->id}&page={$_GET['page']}") ?>" onclick="return confirm('确定要删除吗？')">删除</a>
+                    </td>
                 </tr>
             <? } ?>
-            <tr><td colspan="10" class="l"> 添加到：
+            <tr><td colspan="11" class="l"> 添加到：
                 <select name="group_id">
                     <? foreach ($printGroup as $group) : ?>
                         <option value="<?=$group->id?>"><?=$group->name?></option>
@@ -67,10 +69,9 @@
         </div>
         <form method="post">
             <table class="table_from">
-                <tr><td>名称：</td><td><input type="text" name="name"  value="<?=$shop->name?>"></td></tr>
+                <tr><td>名称：</td><td><input type="text" name="name" size="50"  value="<?=$shop->name?>"></td></tr>
                 <tr><td>图片：</td><td>
-                        <input type="hidden" name="picture" id="picture"
-                               value="<?=$shop->picture?>"/>
+                        <input type="hidden" name="picture" id="picture" value="<?=$shop->picture?>"/>
 						<span id="upload_span_picture">
                             <? if ($shop->picture != '') { ?>
                                 <a href="<?= $shop->picture ?>" target="_blank"><img
@@ -84,7 +85,7 @@
                         </div>
                     </td></tr>
                 <tr><td>介绍：</td><td><textarea name="remark" cols="50" rows="5"><?=$shop->remark?></textarea></td></tr>
-                <tr><td>位置：</td><td><input type="text" name="address"  value="<?=$shop->address?>"></td></tr>
+                <tr><td>位置：</td><td><input type="text" name="address" size="50"  value="<?=$shop->address?>"></td></tr>
                 <tr><td></td><td>
                         <input type="submit" value="保存">
                         <input type="button" value="返回" onclick="window.location='<?=url("printShop/?page={$_GET['page']}")?>'"></td></tr>

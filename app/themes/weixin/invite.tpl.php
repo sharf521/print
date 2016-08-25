@@ -12,7 +12,11 @@
                 <div class="invite_info">
                     <?=$user->nickname?><br>
                     <span class="time"><?=$user->created_at?></span></div>
-                <a class="invite_btn but1" href="<?= url("shop/?user_id={$user->id}") ?>">添加商户</a>
+                <?
+                $shops = $user->PrintShop();
+                if (empty($shops)) : ?>
+                    <a class="invite_btn but1" href="<?= url("shop/add/?user_id={$user->id}") ?>">添加商户</a>
+                <? endif; ?>
             </li>
             <? endforeach;?>
         </ul>

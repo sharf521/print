@@ -45,13 +45,9 @@ ul, li{ list-style:none;}
 @media only screen and (min-width:640px){
     body{ width:640px; margin:0 auto;}
 }
-.header_tit {
-    line-height: 15rem;
-    height: 15rem;
-    padding: 0 2rem;
-    font-size: 3rem; color: #fff;
-    background-color:#006600;
-}
+.header_tit {    line-height: 15rem;    height: 15rem;    padding: 0 2rem;    font-size: 3rem; color: #fff;    background-color:#006600;}
+.header_tit .header_right{color: #fff; float: right; margin-right: 2rem;}
+.header_tit .header_right:hover{color: #fff;}
 .container{
     width: 90%;
     margin: 0rem auto 0;

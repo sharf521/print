@@ -61,6 +61,14 @@ class PrintShopController extends AdminController
             $this->view('printShop', $data);
         }
     }
+
+    public function delete(PrintShop $printShop,Request $request)
+    {
+        $shop=$printShop->findOrFail($request->get('id'));
+        $shop->delete();
+        redirect()->back()->with('msg','删除完成!');
+    }
+
     public function edit(Request $request,PrintShop $printShop)
     {
         $id=$request->id;

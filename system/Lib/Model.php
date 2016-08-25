@@ -65,14 +65,22 @@ class Model
         }
         return $post;
     }
-
-    //删除
-    public function delete($id='int|array')
+    
+    /**
+     * @param null int array $id
+     * @return mixed
+     */
+    public function delete($id=null)
     {
-        if(is_array($id)){
-            return DB::table($this->table)->where($id)->delete();
+        if($id==null){
+            $primaryKey=$this->primaryKey;
+            return DB::table($this->table)->where($this->primaryKey . "=?")->bindValues($this->$primaryKey)->delete();
         }else{
-            return DB::table($this->table)->where($this->primaryKey . "=?")->bindValues($id)->delete();
+            if(is_array($id)){
+                return DB::table($this->table)->where($id)->delete();
+            }else{
+                return DB::table($this->table)->where($this->primaryKey . "=?")->bindValues($id)->delete();
+            }
         }
     }
 

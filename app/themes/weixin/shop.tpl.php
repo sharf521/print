@@ -1,9 +1,29 @@
 <?php require 'header.php';?>
+<script src="/plugin/js/ajaxfileupload.js?111"></script>
 <? if($this->func=='index') : ?>
-    <script src="/plugin/js/ajaxfileupload.js?111"></script>
-    <div class="header_tit">商铺联盟</div>
+    <div class="header_tit">店铺列表<a class="header_right" href="<?=url('shop/add')?>">添加</a></div>
+    <div class="shop_list">
+        <ul>
+            <? foreach ($list as $row) : ?>
+                <li class="clearFix">
+                    <img class="img" src="<?=$row->picture?>">
+                    <div class="shop_info clearFix">
+                        <div class="shop_title">
+                            <?= $row->name ?>
+                            <span class="edit">
+                                <a href="<?= url("shop/edit/?id={$row->id}") ?>">编辑</a>
+                                <a href="<?= url("shop/delete/?id={$row->id}") ?>" onclick="return confirm('确定要删除吗？')">删除</a>
+                            </span>
+                        </div>
+                        <div class="shop_remark"><?= nl2br($row->remark) ?></div>
+                    </div>
+                </li>
+            <? endforeach; ?>
+        </ul>
+    </div>
+<? elseif ($this->func=='add') : ?>
+    <div class="header_tit">添加商铺</div>
     <div class="container">
-        <h3>添加商铺</h3>
         <form method="post">
             <table class="table_from">
                 <tr><td>名称：</td><td><input type="text" name="name"></td></tr>
@@ -45,22 +65,7 @@
             });
         </script>
     </div>
-    <div class="shop_list">
-        <h3>己邀请列表</h3>
-        <ul>
-            <? foreach ($list as $row) : ?>
-                <li class="clearFix">
-                    <img class="img" src="<?=$row->picture?>">
-                    <div class="shop_info clearFix">
-                        <div class="shop_title"><?= $row->name ?> <a href="<?= url("shop/edit/?id={$row->id}") ?>" class="edit">编辑</a></div>
-                        <div class="shop_remark"><?= nl2br($row->remark) ?></div>
-                    </div>
-                </li>
-            <? endforeach; ?>
-        </ul>
-    </div>
 <? elseif ($this->func=='edit') :  ?>
-    <script src="/plugin/js/ajaxfileupload.js?111"></script>
     <div class="header_tit">编辑店铺</div>
     <div class="container">
         <form method="post">

@@ -194,4 +194,9 @@ left join {$this->dbfix}account_bank b on u.id=b.user_id {$where}";
     {
         return $this->hasOne('App\Model\User', 'id','invite_userid');
     }
+
+    public function PrintShop()
+    {
+        return $this->hasMany('App\Model\PrintShop', 'user_id','id');
+    }
 }

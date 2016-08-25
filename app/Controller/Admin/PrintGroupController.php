@@ -34,6 +34,14 @@ class PrintGroupController extends AdminController
         $this->view('printGroup',$data);
     }
 
+
+    public function shopListDel(PrintShopGroup $shopGroup,Request $request)
+    {
+        $shopGroup=$shopGroup->findOrFail($request->get('id'));
+        $shopGroup->delete();
+        redirect()->back()->with('msg','删除完成!');
+    }
+
     public function add(Request $request)
     {
         if($_POST){

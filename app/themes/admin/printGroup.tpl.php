@@ -78,23 +78,26 @@
         <table class="table">
             <tr>
                 <th>ID</th>
-                <th>名称</th>
+                <th>店铺ID/名称</th>
                 <th>图片</th>
                 <th>介绍</th>
                 <th>添加时间</th>
                 <th>分组时间</th>
+                <th></th>
             </tr>
             <?
             foreach ($list as $item) {
                 $shop=$item->PrintShop();
+                if(! $shop->is_exist){continue;}
                 ?>
                 <tr>
-                    <td><?= $shop->id ?></td>
-                    <td><?= $shop->name ?></td>
+                    <td><?= $item->id ?></td>
+                    <td><?= $shop->id ?>/<?= $shop->name ?></td>
                     <td><img src="<?= $shop->picture ?>" width="50"></td>
                     <td class="fl"><?= nl2br($shop->remark) ?></td>
                     <td><?= $shop->created_at ?></td>
                     <td><?= $item->created_at ?></td>
+                    <td><a href="<?= url("printGroup/shopListDel/?id={$item->id}") ?>" onclick="return confirm('确定要移除吗？')">移除</a></td>
                 </tr>
             <? } ?>
         </table>

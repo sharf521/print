@@ -17,7 +17,18 @@ class ShopController extends WeixinController
         parent::__construct();
     }
 
-    public function index(Request $request, PrintShop $shop)
+    public function index(PrintShop $shop)
+    {
+        $list=$shop->where("user_id=?")->bindValues($this->user_id)->get();
+        if(empty($list)){
+            redirect('shop/add');
+        }
+        $data['list']=$list;
+        $data['title_herder'] = '商户列表';
+        $this->view('shop', $data);
+    }
+
+    public function add(Request $request, PrintShop $shop)
     {
         $user_id=(int)$request->get('user_id');
         if($user_id==0){
@@ -52,14 +63,21 @@ class ShopController extends WeixinController
                 redirect('shop')->with('msg', '添加成功！');
             }
         } else {
-            $data['title_herder'] = '商户联盟';
-            $list=$shop->where("user_id=?")->bindValues($this->user_id)->get();
-            $data['list']=$list;
+            $data['title_herder'] = '添加商户';
             $weChat=new WeChat();
             $js = $weChat->app->js;
             $data['config']=$js->config(array('chooseWXPay','openAddress','checkJsApi','getLocation'), false);
             $this->view('shop', $data);
         }
+    }
+    
+    public function delete(PrintShop $printShop,Request $request)
+    {
+        $shop=$printShop->findOrFail($request->get('id'));
+        if($shop->user_id==$this->user_id){
+            $shop->delete();
+        }
+        redirect()->back()->with('msg','删除完成!');
     }
     
     public function edit(Request $request,PrintShop $printShop)
