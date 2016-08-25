@@ -27,6 +27,7 @@ class ShopController extends WeixinController
             $name = $request->post('name');
             $picture = $request->post('picture');
             $remark = $request->post('remark');
+            $address = $request->post('address');
             if (empty($name)) {
                 redirect()->back()->with('error', '请填写名称');
             }
@@ -40,6 +41,7 @@ class ShopController extends WeixinController
             $shop->picture = $picture;
             $shop->remark = $remark;
             $shop->name = $name;
+            $shop->address=$address;
             $shop->save();
             if(isset($_GET['user_id'])){
                 redirect('weixin/invite')->with('msg', '添加成功！');
@@ -70,6 +72,7 @@ class ShopController extends WeixinController
             $name = $request->post('name');
             $picture = $request->post('picture');
             $remark = $request->post('remark');
+            $address = $request->post('address');
             if (empty($name)) {
                 redirect()->back()->with('error', '请填写名称');
             }
@@ -82,6 +85,7 @@ class ShopController extends WeixinController
             $shop->picture = $picture;
             $shop->remark = $remark;
             $shop->name = $name;
+            $shop->address=$address;
             $shop->save();
             redirect('shop')->with('msg','保存成功！');
         }else{
