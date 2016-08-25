@@ -20,9 +20,6 @@ class ShopController extends WeixinController
     public function index(PrintShop $shop)
     {
         $list=$shop->where("user_id=?")->bindValues($this->user_id)->get();
-        if(empty($list)){
-            redirect('shop/add');
-        }
         $data['list']=$list;
         $data['title_herder'] = '商户列表';
         $this->view('shop', $data);

@@ -172,11 +172,8 @@ class WxapiController extends Controller
         $result=$staff->onlines();
         $result=json_decode($result,true);
         print_r($result['kf_online_list']);
-
         $session = $this->app->staff_session; // 客服会话管理
         $session->create('kf2001@gh_eaa8b99402a9','oHzjfwvtq80ycSaDwSTm-ZCeLQQs');
-
-
         /*
          *
  [kf_account] => kf2001@gh_eaa8b99402a9
@@ -184,16 +181,11 @@ class WxapiController extends Controller
             [kf_id] => 2001
             [kf_nick] => 综合接待
             [kf_wx] => gdl521
-
-
         [kf_account] => kf2001@gh_eaa8b99402a9
             [status] => 1
             [kf_id] => 2001
             [accepted_case] => 0
-
-
          * */
-
     }
 
     private function addUser($openid,$invite_userid=0)

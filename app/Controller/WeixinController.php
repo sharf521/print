@@ -27,8 +27,6 @@ class WeixinController extends Controller
         }
         $this->template = 'weixin';
     }
-    
-    
 
     public function taskAdd(Request $request,LinkPage $linkPage,PrintTask $printTask)
     {
@@ -82,7 +80,6 @@ class WeixinController extends Controller
         }
 
         $data['task']=$task;
-        $data['title_herder']='支付订单';
 
         $openid=DB::table('user')->where('id=?')->bindValues($this->user_id)->value('openid');
         $weChat=new WeChat();
@@ -107,15 +104,14 @@ class WeixinController extends Controller
             $task->out_trade_no=$attributes['out_trade_no'];
             $task->save();
         }
+        $data['title_herder']='支付中。。';
         $this->view('printPay',$data);
     }
 
     public function orderShow(Request $request,PrintTask $printTask)
     {
         $id=$request->get('task_id');
-        $page=$request->get('page');
         $task=$printTask->findOrFail($id);
-
         $data['task']=$task;
         $data['title_herder']='订单详情';
         $this->view('print',$data);
@@ -143,9 +139,7 @@ class WeixinController extends Controller
     {
         $data['qrcodeSrc']=$weChat->qrcode($this->user_id.'01');
         $data['invites']=$user->where("invite_userid=?")->bindValues($this->user_id)->get();
-        
         $data['title_herder']='邀请商家';
-
         $this->view('invite',$data);
     }
 }

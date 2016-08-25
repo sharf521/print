@@ -12,10 +12,9 @@
         </form>
     </div>
     <? elseif ($this->func=='orderList') :  ?>
-    <div class="header_tit">我的订单</div>
+    <div class="header_tit">我的订单 <a class="header_right" href="<?=url('weixin/taskAdd')?>">我要下单</a></div>
         <br>
         <? foreach ($task['list'] as $row) : ?>
-
             <div class="div_box clearFix taskList">
                 <? if($row->paymoney>0) : ?>
                 <a href="<?=url("weixin/orderShow/?task_id={$row->id}")?>">
@@ -43,7 +42,7 @@
                     ?></div>
             </div>
         <? endforeach; ?>
-    <? if(empty($task['total'])){echo "无记录！";}else{echo $task['page'];}?>
+    <? if(empty($task['total'])){echo "<div class='alert-warning'>没有找到匹配的记录！</div>";}else{echo $task['page'];}?>
     <? elseif ($this->func=='orderShow') : ?>
         <!-- 待支付 -->
         <div class="header_tit">订单详情：</div><br>

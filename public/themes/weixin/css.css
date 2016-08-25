@@ -28,6 +28,8 @@ input:focus{ border:1px solid #2baab1;}
 
 input[type=radio],input[type=checkbox]{ width:2.4rem; height:2.4rem;}
 
+.alert-warning{color: #8a6d3b;background-color: #fcf8e3;border-color: #faebcc;padding: 2rem;margin:4rem; font-size: 3rem; border-radius: .6rem;}
+
 .gray{ color: #999999;}
 
 ul, li{ list-style:none;}

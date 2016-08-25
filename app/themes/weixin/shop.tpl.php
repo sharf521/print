@@ -3,6 +3,9 @@
 <? if($this->func=='index') : ?>
     <div class="header_tit">店铺列表<a class="header_right" href="<?=url('shop/add')?>">添加</a></div>
     <div class="shop_list">
+        <? if(empty($list)) : ?>
+            <div class='alert-warning'>没有找到匹配的记录！</div>
+        <? endif;?>
         <ul>
             <? foreach ($list as $row) : ?>
                 <li class="clearFix">
