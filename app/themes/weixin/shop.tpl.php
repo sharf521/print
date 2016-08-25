@@ -37,7 +37,9 @@
                         $.post("/index.php/plugin/getAddress/", {
                             'lat': latitude,
                             'lon': longitude
-                        }, function (str) { alert(str) });
+                        }, function (str) {
+                            alert(str);
+                        });
                     }
                 });
             });
