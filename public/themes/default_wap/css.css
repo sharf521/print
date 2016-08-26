@@ -52,7 +52,7 @@ footer li p{ line-height: 4rem; font-size: 3rem;}
     border-bottom: 1px solid #e7e7eb;
     line-height: 1.4;
     font-weight: 500;
-    font-size: 34px; color: #000;
+    font-size: 36px; color: #000;
 }
 .rich_media_meta_list {    margin-bottom: 18px;    line-height: 1.4;    font-size: 24px;}
 .rich_media_meta_list .date{  display: inline-block;  font-family: Arial;   vertical-align: middle;    margin-right: 8px;    margin-bottom: 10px;    }
@@ -66,8 +66,8 @@ footer li p{ line-height: 4rem; font-size: 3rem;}
 .shop_list li{background-color: #ffffff; padding-bottom:15px; border-top: 1px solid #d5d5d5;}
 .shop_list li .img{ margin-top: 10px;border-radius: 3px; width: 80px ; float: left}
 .shop_list li .shop_info{ margin-left:90px; }
-.shop_list li .shop_title{border-bottom: 1px dashed #949FB1; color: #000; line-height: 60px; height: 60px; font-size:30px;}
-.shop_list li .shop_remark{ line-height:1.4; padding-top: 5px;font-size: 20px;}
+.shop_list li .shop_title{border-bottom: 1px dashed #949FB1; color: #000; line-height: 60px; height: 60px; font-size:34px;}
+.shop_list li .shop_remark{ line-height:1.4; padding-top: 5px;font-size: 22px;}
 
 .alert-warning{color: #8a6d3b;background-color: #fcf8e3;border-color: #faebcc;padding: 2rem;margin:4rem; font-size: 3rem; border-radius: .6rem;}
 .qrcode_div{text-align: center; padding: 2rem}
