@@ -1,7 +1,7 @@
 <?php require 'header.php';?>
 <script src="/plugin/js/ajaxfileupload.js?111"></script>
 <? if($this->func=='index') : ?>
-    <div class="header_tit"><img src="<?=substr($user->headimgurl,0,-1)?>64" width="50"> 我的店铺<a class="header_right" href="<?=url('shop/add')?>">添加</a></div>
+    <div class="header_tit"><img src="<?=substr($user->headimgurl,0,-1)?>64" width="64"> 我的店铺<a class="header_right" href="<?=url('shop/add')?>">添加</a></div>
     <div class="shop_list">
         <? if(empty($list)) : ?>
             <div class='alert-warning'>没有找到匹配的记录！</div>
