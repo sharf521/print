@@ -26,6 +26,7 @@ class GroupController extends Controller
         $user_id=(int)$request->get('user_id');
         $shopGroup=$shopGroup->findOrFail($id);
         $group=$shopGroup->Group();
+        $group->picture='http://'.$_SERVER['HTTP_HOST'].$group->picture;
         $shopList=$shopGroup->where("group_id=?")->bindValues($id)->get();
         $data['user_id']=$user_id;
         $data['group']=$group;
@@ -35,7 +36,7 @@ class GroupController extends Controller
 
         $weChat=new WeChat();
         $js = $weChat->app->js;
-        $data['config']=$js->config(array('checkJsApi','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone'), true);
+        $data['config']=$js->config(array('checkJsApi','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone'), false);
         $this->view('group', $data);
     }
 }
