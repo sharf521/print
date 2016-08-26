@@ -102,13 +102,13 @@ ul, li{ list-style:none;}
 /* shop list */
 .shop_list{margin-top: 3rem}
 .shop_list h3{line-height: 6rem;height: 6rem; font-size: 3rem; padding-left: 2rem;}
-.shop_list li{background-color: #ffffff; padding-bottom: .6rem; margin-bottom: 2rem; border-bottom: 1px solid #d5d5d5; border-top: 1px solid #d5d5d5;}
+.shop_list li{background-color: #ffffff; padding-bottom: .6rem; margin-bottom: 2rem; border-bottom: 1px solid #d5d5d5; border-top: 1px solid #d5d5d5;font-size: 2.4rem;}
 .shop_list li .shop_list_left{float: left; width: 15rem; text-align: center;}
-.shop_list li .shop_list_left img{ margin-top: 1rem;border-radius: 1rem; width: 10rem ; margin-bottom: 1rem}
+.shop_list li .shop_list_left img{ margin-top: 1rem;border-radius: 1rem; width: 10rem ; margin-bottom: 2rem}
 .shop_list li .shop_info{ margin-left: 14rem}
 .shop_list li .shop_title{border-bottom: 1px dashed #949FB1; color: #000; line-height: 6rem; height: 6rem; font-size:3rem;}
 .shop_list li .shop_title .edit{font-size: 2rem; color: #ccc; margin-right: 1rem;  float: right}
-.shop_list li .shop_remark{ line-height: 1.4; color:#999;font-size: 2.6rem; padding-top: 1rem;font-size: 2.4rem;}
+.shop_list li .shop_remark{ line-height: 1.4; color:#999;font-size: 2.6rem; padding-top: 1rem;font-size: 2.6rem;}
 
 /*上传按钮*/
 .upload-upimg{height:6rem;width:20rem;position:relative; overflow:hidden; margin:0 1px;display:inline-block;border-radius: 0.3rem;}
