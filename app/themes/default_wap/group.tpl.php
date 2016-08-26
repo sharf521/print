@@ -21,11 +21,12 @@
                 if(! $shop->is_exist){continue;}
                 ?>
                 <li class="clearFix">
+                    <div class="shop_title">
+                        <?= $shop->name ?>
+                    </div>
                     <img class="img" src="<?=$shop->picture?>">
                     <div class="shop_info clearFix">
-                        <div class="shop_title">
-                            <?= $shop->name ?>
-                        </div>
+
                         <div class="shop_remark">
                             <?= nl2br($shop->remark) ?><br>
                             电话：<?=$shop->tel?><br>
