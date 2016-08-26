@@ -249,13 +249,13 @@ class WxapiController extends Controller
     {
         $oauth = $this->app->oauth;
         $oUser = $oauth->user()->toArray();
-        $this->addUser($oUser['id']);
         $arr=array(
             'direct'=>1,
             'openid'=>$oUser['id']
         );
         $result=$user->login($arr);
         if($result===true){
+            $this->addUser($oUser['id']);
             $target_url=session('target_url');
             redirect($target_url); // 跳转
         }else{
