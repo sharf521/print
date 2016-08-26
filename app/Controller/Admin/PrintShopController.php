@@ -81,19 +81,19 @@ class PrintShopController extends AdminController
             $address = $request->post('address');
             $tel = $request->post('tel');
             if (empty($name)) {
-                redirect()->back()->with('error', '请填写名称');
+                redirect()->back()->with('error', '店名不能为空！');
             }
             if (empty($picture)) {
-                redirect()->back()->with('error', '请上传图片');
+                redirect()->back()->with('error', '门头照片不能为空！');
             }
             if (empty($remark)) {
-                redirect()->back()->with('error', '请填写介绍');
+                redirect()->back()->with('error', '主营不能为空！');
             }
             if (empty($tel)) {
                 redirect()->back()->with('error', '电话不能为空！');
             }
             if (empty($address)) {
-                redirect()->back()->with('error', '请填写所在地址');
+                redirect()->back()->with('error', '地址不能为空！');
             }
             $shop->picture = $picture;
             $shop->remark = $remark;
