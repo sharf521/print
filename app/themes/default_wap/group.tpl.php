@@ -5,8 +5,8 @@
         <span class="date"><?=date('Y-m-d')?></span>
         <span class="nickname"><?=app('\App\Model\System')->getCode('webname');?></span>
     </div>
-    <div class="ca_d_table">
-        <?=$group->remark?>
+    <div class="content_txt">
+        <?=nl2br($group->remark)?>
     </div>
     <div class="qrcode_div">
         <img src="<?=$qrcodeSrc?>" width="50%">

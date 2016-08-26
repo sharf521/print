@@ -1,6 +1,6 @@
 html{/*font-size:62.5%;*/}
 html, body, div, span, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, address, big, cite, code, del, em, font, img, ins, small, strong, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend {margin: 0;padding: 0;-webkit-tap-highlight-color:transparent;}
-body {background:#f9f9f9;color: #666; font-family:"Microsoft YaHei"; width:100%;}
+body {background:#f9f9f9;color: #666; width:100%;font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;}
 ol, ul,li{list-style: none outside none;}
 :focus {outline: 0 none;}
 a{color:#666666;text-decoration:none;}
@@ -57,6 +57,8 @@ footer li p{ line-height: 4rem; font-size: 3rem;}
 .rich_media_meta_list {    margin-bottom: 18px;    line-height: 20px;    font-size: 16px;}
 .rich_media_meta_list .date{  display: inline-block;    vertical-align: middle;    margin-right: 8px;    margin-bottom: 10px;    }
 .rich_media_meta_list .nickname{ display: inline-block;  vertical-align: middle;    margin-right: 8px;    margin-bottom: 10px; color: #607fa6;    text-decoration: none;}
+
+.content_txt{font-size: 18px; line-height: 30px;}
 
 
 /* shop list */
