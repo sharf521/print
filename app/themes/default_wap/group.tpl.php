@@ -37,5 +37,35 @@
         </ul>
     </div>
 </div>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+        wx.config(<?=$config?>);
+        wx.ready(function () {
+            wx.onMenuShareTimeline({
+                title: '<?=$group->name?>', // 分享标题
+                link: window.location.href, // 分享链接
+                imgUrl: '<?=$group->picture?>', // 分享图标
+                success: function () {
+                },
+                cancel: function () {
+                }
+            });
+            wx.onMenuShareAppMessage({
+                title: '<?=$group->name?>', // 分享标题
+                desc: '<?=$group->remark?>', // 分享描述
+                link: window.location.href, // 分享链接
+                imgUrl: '<?=$group->picture?>', // 分享图标
+                type: '', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+        });
+    </script>
+
 
 <?php require 'footer.php';?>

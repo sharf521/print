@@ -23,7 +23,7 @@ class GroupController extends Controller
     public function detail(Request $request,PrintShopGroup $shopGroup,WeChat $weChat)
     {
         $id=$request->get('id');
-        $user_id=$request->get('user_id');
+        $user_id=(int)$request->get('user_id');
         $shopGroup=$shopGroup->findOrFail($id);
         $group=$shopGroup->Group();
         $shopList=$shopGroup->where("group_id=?")->bindValues($id)->get();
@@ -33,6 +33,9 @@ class GroupController extends Controller
 
         $data['qrcodeSrc']=$weChat->qrcode($user_id.'01');
 
+        $weChat=new WeChat();
+        $js = $weChat->app->js;
+        $data['config']=$js->config(array('checkJsApi','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone'), true);
         $this->view('group', $data);
     }
 }
