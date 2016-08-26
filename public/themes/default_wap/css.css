@@ -52,9 +52,9 @@ footer li p{ line-height: 4rem; font-size: 3rem;}
     border-bottom: 1px solid #e7e7eb;
     line-height: 1.4;
     font-weight: 500;
-    font-size: 28px; color: #000;
+    font-size: 30px; color: #000;
 }
-.rich_media_meta_list {    margin-bottom: 18px;    line-height: 20px;    font-size: 16px;}
+.rich_media_meta_list {    margin-bottom: 18px;    line-height: 20px;    font-size: 20px;}
 .rich_media_meta_list .date{  display: inline-block;    vertical-align: middle;    margin-right: 8px;    margin-bottom: 10px;    }
 .rich_media_meta_list .nickname{ display: inline-block;  vertical-align: middle;    margin-right: 8px;    margin-bottom: 10px; color: #607fa6;    text-decoration: none;}
 
