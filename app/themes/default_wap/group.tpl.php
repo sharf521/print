@@ -1,11 +1,15 @@
 <?php require 'header.php';?>
-    <div class="m_regtilinde"><?=$group->name?></div>
-    <br>
+<div class="page-content">
+    <div class="rich_media_title"><?=$group->name?></div>
+    <div class="rich_media_meta_list">
+        <span class="date"><?=date('Y-m-d')?></span>
+        <span class="nickname"><?=app('\App\Model\System')->getCode('webname');?></span>
+    </div>
     <div class="ca_d_table">
         <?=$group->remark?>
     </div>
     <div class="qrcode_div">
-        <img src="<?=$qrcodeSrc?>">
+        <img src="<?=$qrcodeSrc?>" width="50%">
     </div>
     <div class="shop_list">
         <? if(empty($shopList)) : ?>
@@ -22,10 +26,16 @@
                         <div class="shop_title">
                             <?= $shop->name ?>
                         </div>
-                        <div class="shop_remark"><?= nl2br($shop->remark) ?></div>
+                        <div class="shop_remark">
+                            <?= nl2br($shop->remark) ?><br>
+                            电话：<?=$shop->tel?><br>
+                            地址：<?=$shop->address?><br>
+                        </div>
                     </div>
                 </li>
             <? endforeach; ?>
         </ul>
     </div>
+</div>
+
 <?php require 'footer.php';?>

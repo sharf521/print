@@ -8,6 +8,7 @@ namespace app\Controller;
 
 use app\Model\PrintShop;
 use app\Model\PrintShopGroup;
+use App\Model\User;
 use System\Lib\Request;
 use App\WeChat;
 
@@ -18,9 +19,10 @@ class ShopController extends WeixinController
         parent::__construct();
     }
 
-    public function index(PrintShop $shop)
+    public function index(PrintShop $shop,User $user)
     {
         $list=$shop->where("user_id=?")->bindValues($this->user_id)->get();
+        $data['user']=$user->find($this->user_id);
         $data['list']=$list;
         $data['title_herder'] = '商户列表';
         $this->view('shop', $data);
@@ -37,6 +39,7 @@ class ShopController extends WeixinController
             $picture = $request->post('picture');
             $remark = $request->post('remark');
             $address = $request->post('address');
+            $tel = $request->post('tel');
             if (empty($name)) {
                 redirect()->back()->with('error', '请填写名称');
             }
@@ -46,6 +49,9 @@ class ShopController extends WeixinController
             if (empty($remark)) {
                 redirect()->back()->with('error', '请填写介绍');
             }
+            if (empty($tel)) {
+                redirect()->back()->with('error', '电话不能为空！');
+            }
             if (empty($address)) {
                 redirect()->back()->with('error', '请填写所在地址');
             }
@@ -53,6 +59,7 @@ class ShopController extends WeixinController
             $shop->picture = $picture;
             $shop->remark = $remark;
             $shop->name = $name;
+            $shop->tel=$tel;
             $shop->address=$address;
             $shop->save();
             if(isset($_GET['user_id'])){
@@ -69,15 +76,6 @@ class ShopController extends WeixinController
         }
     }
     
-    public function delete(PrintShop $printShop,Request $request)
-    {
-        $shop=$printShop->findOrFail($request->get('id'));
-        if($shop->user_id==$this->user_id){
-            $shop->delete();
-        }
-        redirect()->back()->with('msg','删除完成!');
-    }
-    
     public function edit(Request $request,PrintShop $printShop)
     {
         $id=$request->id;
@@ -91,14 +89,18 @@ class ShopController extends WeixinController
             $picture = $request->post('picture');
             $remark = $request->post('remark');
             $address = $request->post('address');
+            $tel = $request->post('tel');
             if (empty($name)) {
-                redirect()->back()->with('error', '请填写名称');
+                redirect()->back()->with('error', '请填写店名');
             }
             if (empty($picture)) {
-                redirect()->back()->with('error', '请上传图片');
+                redirect()->back()->with('error', '请上传门头照片');
             }
             if (empty($remark)) {
-                redirect()->back()->with('error', '请填写介绍');
+                redirect()->back()->with('error', '主营不能为空！');
+            }
+            if (empty($tel)) {
+                redirect()->back()->with('error', '电话不能为空！');
             }
             if (empty($address)) {
                 redirect()->back()->with('error', '请填写所在地址');
@@ -106,6 +108,7 @@ class ShopController extends WeixinController
             $shop->picture = $picture;
             $shop->remark = $remark;
             $shop->name = $name;
+            $shop->tel=$tel;
             $shop->address=$address;
             $shop->save();
             redirect('shop')->with('msg','保存成功！');
@@ -113,6 +116,15 @@ class ShopController extends WeixinController
             $data['shop']=$shop;
             $this->view('shop', $data);
         }
+    }
+
+    public function delete(PrintShop $printShop,Request $request)
+    {
+        $shop=$printShop->findOrFail($request->get('id'));
+        if($shop->user_id==$this->user_id){
+            $shop->delete();
+        }
+        redirect()->back()->with('msg','删除完成!');
     }
 
 }

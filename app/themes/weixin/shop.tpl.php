@@ -1,7 +1,7 @@
 <?php require 'header.php';?>
 <script src="/plugin/js/ajaxfileupload.js?111"></script>
 <? if($this->func=='index') : ?>
-    <div class="header_tit">我的店铺<a class="header_right" href="<?=url('shop/add')?>">添加</a></div>
+    <div class="header_tit"><img src="<?=substr($user->headimgurl,0,-1)?>64" width="50"> 我的店铺<a class="header_right" href="<?=url('shop/add')?>">添加</a></div>
     <div class="shop_list">
         <? if(empty($list)) : ?>
             <div class='alert-warning'>没有找到匹配的记录！</div>
@@ -9,24 +9,30 @@
         <ul>
             <? foreach ($list as $shop) : ?>
                 <li class="clearFix">
-                    <img class="img" src="<?=$shop->picture?>">
+                    <div class="shop_list_left">
+                        <img src="<?=$shop->picture?>"><br>
+                        <?
+                        $shopGroup=$shop->ShopGroup();
+                        foreach ($shopGroup as $_item){
+                            ?>
+                            <a href="<?=url("/group/detail/?id={$_item->group_id}&user_id={$shop->user_id}") ?>">联盟</a>
+                            <?
+                        }
+                        ?>
+                    </div>
                     <div class="shop_info clearFix">
                         <div class="shop_title">
                             <?= $shop->name ?>
                             <span class="edit">
                                 <a href="<?= url("shop/edit/?id={$shop->id}") ?>">修改</a>
                                 <a href="<?= url("shop/delete/?id={$shop->id}") ?>" onclick="return confirm('确定要删除吗？')"></a>
-                                <?
-                                $shopGroup=$shop->ShopGroup();
-                                foreach ($shopGroup as $_item){
-                                    ?>
-                                    <a href="<?=url("/group/detail/?id={$_item->group_id}&user_id={$shop->user_id}") ?>">联盟</a>
-                                    <?
-                                }
-                                ?>
                             </span>
                         </div>
-                        <div class="shop_remark"><?= nl2br($shop->remark) ?></div>
+                        <div class="shop_remark">
+                            <?= nl2br(substr_cn($shop->remark,100)) ?><br>
+                            电话：<?=$shop->tel?><br>
+                            地址：<?=$shop->address?><br>
+                        </div>
                     </div>
                 </li>
             <? endforeach; ?>
@@ -50,6 +56,7 @@
                         </div>
                     </td></tr>
                 <tr><td>主营：</td><td><textarea name="remark" rows="5"></textarea></td></tr>
+                <tr><td>电话：</td><td><input type="text" name="tel"></td></tr>
                 <tr><td>地址：</td><td><input type="text" name="address" id="address"></td></tr>
             </table>
             <input type="submit" value="提 交" class="submit">
@@ -98,6 +105,7 @@
                         </div>
                     </td></tr>
                 <tr><td>主营：</td><td><textarea name="remark" rows="5"><?=$shop->remark?></textarea></td></tr>
+                <tr><td>电话：</td><td><input type="text" name="tel" value="<?=$shop->tel?>"></td></tr>
                 <tr><td>地址：</td><td><input type="text" name="address" value="<?=$shop->address?>"></td></tr>
             </table>
             <input type="submit" value="提 交" class="submit">

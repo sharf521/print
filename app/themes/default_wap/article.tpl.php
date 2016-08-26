@@ -1,7 +1,12 @@
-<?php require 'header.php';?>
-    <div class="m_regtilinde"><?=$article->title?></div>
-<br>
-    <div class="ca_d_table">
-        <?=$article->content?>
+<?php require 'header.php'; ?>
+<div class="page-content">
+    <div class="rich_media_title"><?= $article->title ?></div>
+    <div class="rich_media_meta_list">
+        <span class="date"><?= date('Y-m-d') ?></span>
+        <span class="nickname"><?= app('\App\Model\System')->getCode('webname'); ?></span>
     </div>
-<?php require 'footer.php';?>
+    <div class="content_txt">
+        <?= $article->content ?>
+    </div>
+</div>
+<?php require 'footer.php'; ?>

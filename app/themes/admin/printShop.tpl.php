@@ -19,11 +19,12 @@
                 <th>ID</th>
                 <th>user_id</th>
                 <th>昵称</th>
-                <th></th>
-                <th>名称</th>
-                <th>图片</th>
+                <th>头像</th>
+                <th>店名</th>
+                <th>门头</th>
+                <th>电话</th>
                 <th>地址</th>
-                <th>介绍</th>
+                <th>主营</th>
                 <th>添加时间</th>
                 <th>操作</th>
             </tr>
@@ -39,6 +40,7 @@
                     <td><img src="<?=substr($user->headimgurl,0,-1)?>64" width="50"></td>
                     <td><?= $item->name ?></td>
                     <td><img src="<?= $item->picture ?>" width="50"></td>
+                    <td class="fl"><?=$item->tel ?></td>
                     <td class="fl"><?=$item->address ?></td>
                     <td class="fl"><?= nl2br($item->remark) ?></td>
                     <td><?= $item->created_at ?></td>
@@ -69,8 +71,8 @@
         </div>
         <form method="post">
             <table class="table_from">
-                <tr><td>名称：</td><td><input type="text" name="name" size="50"  value="<?=$shop->name?>"></td></tr>
-                <tr><td>图片：</td><td>
+                <tr><td>店名：</td><td><input type="text" name="name" size="50"  value="<?=$shop->name?>"></td></tr>
+                <tr><td>门头：</td><td>
                         <input type="hidden" name="picture" id="picture" value="<?=$shop->picture?>"/>
 						<span id="upload_span_picture">
                             <? if ($shop->picture != '') { ?>
@@ -84,8 +86,9 @@
                                    onchange="upload_image('picture','shop')"/>
                         </div>
                     </td></tr>
-                <tr><td>介绍：</td><td><textarea name="remark" cols="50" rows="5"><?=$shop->remark?></textarea></td></tr>
-                <tr><td>位置：</td><td><input type="text" name="address" size="50"  value="<?=$shop->address?>"></td></tr>
+                <tr><td>主营：</td><td><textarea name="remark" cols="50" rows="5"><?=$shop->remark?></textarea></td></tr>
+                <tr><td>电话：</td><td><input type="text" name="tel" size="50"  value="<?=$shop->tel?>"></td></tr>
+                <tr><td>地址：</td><td><input type="text" name="address" size="50"  value="<?=$shop->address?>"></td></tr>
                 <tr><td></td><td>
                         <input type="submit" value="保存">
                         <input type="button" value="返回" onclick="window.location='<?=url("printShop/?page={$_GET['page']}")?>'"></td></tr>
