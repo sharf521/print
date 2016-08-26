@@ -108,7 +108,7 @@ ul, li{ list-style:none;}
 .shop_list li .shop_info{ margin-left: 14rem}
 .shop_list li .shop_title{border-bottom: 1px dashed #949FB1; color: #000; line-height: 6rem; height: 6rem; font-size:3rem;}
 .shop_list li .shop_title .edit{font-size: 2rem; color: #ccc;  float: right}
-.shop_list li .shop_remark{ line-height: 2.8rem; color:#999;font-size: 2.4rem; padding-top: .5rem}
+.shop_list li .shop_remark{ line-height: 3rem; color:#999;font-size: 2.6rem; padding-top: 1rem}
 
 /*上传按钮*/
 .upload-upimg{height:6rem;width:20rem;position:relative; overflow:hidden; margin:0 1px;display:inline-block;border-radius: 0.3rem;}
