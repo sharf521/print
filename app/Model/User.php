@@ -10,7 +10,7 @@ class User extends Model
     public function __construct()
     {
         parent::__construct();
-        $this->fields = array('name', 'username', 'password', 'addtime', 'status', 'lastip', 'portrait', 'times', 'zf_password', 'email', 'tel', 'qq', 'address');
+        //$this->fields = array('name', 'username', 'password', 'addtime', 'status', 'lastip', 'portrait', 'times', 'zf_password', 'email', 'tel', 'qq', 'address');
     }
 
     function logout()

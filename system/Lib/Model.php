@@ -118,19 +118,12 @@ class Model
         return $obj;
     }
 
-    public function firstOrFail()
-    {
-        $obj = $this->first();
-        if (empty($obj->cols)) {
-            die('find Fail !!!');
-        }
-        return $obj;
-    }
-
     private function setObj($o)
     {
         if(empty($o)){
-            $this->is_exist=false;
+            $this->attributes=array();
+            $this->cols = array();
+            $this->is_exist = false;
             return $this;
         }else{
             $obj = clone $this;
