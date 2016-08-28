@@ -75,7 +75,7 @@ class WxapiController extends Controller
                 $message=new Text(['content' => "您好，终于等到你了！"]);
                 $staff->message($message)->to($arr['openid'])->send();
 
-                $message=new Text(['content' => "您的邀请人：{$arr['invite_nickname']}"]);
+                $message=new Text(['content' => "您成功的为 {$arr['invite_nickname']} 投了一票，感谢您的支持！"]);
                 $staff->message($message)->to($arr['openid'])->send();
             }
 
@@ -249,7 +249,7 @@ class WxapiController extends Controller
 
                 //发送给邀请人
                 $staff = $this->app->staff; // 客服管理
-                $message=new Text(['content' => "您成功邀请：{$user->nickname}"]);
+                $message=new Text(['content' => "您成功邀请了：{$user->nickname}，一共邀请：{$user->invite_count}人。"]);
                 $staff->message($message)->to($invite->openid)->send();
 
                 $return_arr['openid']=$user->openid;
