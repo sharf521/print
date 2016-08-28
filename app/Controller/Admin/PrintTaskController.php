@@ -144,11 +144,18 @@ class PrintTaskController extends AdminController
             $task->money=math($task->money,$order->money,'+',2);
             $task->save();
             $url="printTask/show/?task_id={$task_id}&page={$page}";
-            if($first_add){
+            if(!$first_add){
                 $wechat=new WeChat();
                 //发送给邀请人
                 $staff = $wechat->app->staff; // 客服管理
-                $message=new Text(['content' => "您的订单【{$task->print_type}】己生成，待支付！".'<a href="http://'.$_SERVER["HTTP_HOST"].'/index.php/weixin/orderList">点击查看</a>']);
+
+                $txt="【订单生成通知】
+".date('Y-m-d H:i:s')."
+名称：{$task->print_type}
+金额：{$task->money}元
+状态：未付款
+".'<a href="http://'.$_SERVER["HTTP_HOST"].'/index.php/weixin/orderList">'."请核对订单信息，并及时付款，点击查看订单详情！</a>";
+                $message=new Text(['content' =>$txt]);
                 $openid=$task->User()->openid;
                 $staff->message($message)->to($openid)->send();
             }
