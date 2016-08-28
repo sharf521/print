@@ -66,8 +66,19 @@ class WxapiController extends Controller
         }
 
         if($message->Event=='subscribe'){
-            $this->addUser($message->FromUserName,intval($txt));
-            return new Text(['content' =>'您好，终于等到你了！']);
+            $arr=$this->addUser($message->FromUserName,intval($txt));
+            if(empty($arr['openid'])){
+                return new Text(['content' =>'您好，终于等到你了！']);
+            }else{
+                //发送消息
+                $staff = $this->app->staff; // 客服管理
+                $message=new Text(['content' => "您好，终于等到你了！"]);
+                $staff->message($message)->to($arr['openid'])->send();
+
+                $message=new Text(['content' => "您的邀请人：{$arr['invite_nickname']}"]);
+                $staff->message($message)->to($arr['openid'])->send();
+            }
+
         }elseif($message->Event=='unsubscribe'){
             $arr=array(
                 'subscribe'=>0,
@@ -164,7 +175,14 @@ class WxapiController extends Controller
 
     public function test()
     {
+        exit;
         $staff = $this->app->staff; // 客服管理
+
+        $message=new Text(['content' => 'asdfadsf']);
+        $staff->message($message)->to('oHzjfwvtq80ycSaDwSTm-ZCeLQQs')->send();
+
+        exit;
+
         $result=$staff->lists();
         $result=json_decode($result,true);
         $kf_list=$result['kf_list'];
@@ -172,8 +190,12 @@ class WxapiController extends Controller
         $result=$staff->onlines();
         $result=json_decode($result,true);
         print_r($result['kf_online_list']);
+        exit;
         $session = $this->app->staff_session; // 客服会话管理
         $session->create('kf2001@gh_eaa8b99402a9','oHzjfwvtq80ycSaDwSTm-ZCeLQQs');
+
+
+
         /*
          *
  [kf_account] => kf2001@gh_eaa8b99402a9
@@ -190,6 +212,7 @@ class WxapiController extends Controller
 
     private function addUser($openid,$invite_userid=0)
     {
+        $return_arr=array();
         $userServer=$this->app->user;
         $userInfo=$userServer->get($openid);
         $user_wx=$this->UserWx->where("openid=?")->bindValues($userInfo->openid)->first();
@@ -223,12 +246,21 @@ class WxapiController extends Controller
                 //更新邀请人的邀请数量
                 $invite->invite_count=$invite->invite_count+1;
                 $invite->save();
+
+                //发送给邀请人
+                $staff = $this->app->staff; // 客服管理
+                $message=new Text(['content' => "您成功邀请：{$user->nickname}"]);
+                $staff->message($message)->to($invite->openid)->send();
+
+                $return_arr['openid']=$user->openid;
+                $return_arr['invite_nickname']=$invite->nickname;
             }
         }
         if(intval($user->type_id)==0){
             $user->type_id=1;
         }
         $user->save();
+        return $return_arr;
     }
 
     public function oauth(Request $request)

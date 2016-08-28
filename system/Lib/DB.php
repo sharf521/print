@@ -131,9 +131,6 @@ class DbConnection
         if ($params == null) {
             $params = $this->bindValues;
         }
-//        if (!is_array($params)) {
-//            $params = array($params);
-//        }
 //        echo $query . '<br>';
 //        print_r($params);
 //        echo '<br>';
