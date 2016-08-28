@@ -21,13 +21,13 @@
             <th>付款时间</th>
             <th>接待人</th>
             <th>邀请人</th>
+            <th>快递公司</th>
+            <th>快递单号</th>
+            <th>快递金额</th>
             <th>订做要求</th>
             <th>价格</th>
             <th>外联厂商</th>
             <th>外协金额</th>
-            <th>快递公司</th>
-            <th>快递单号</th>
-            <th>快递金额</th>
             <th>状态</th>
         </tr>
         <?
@@ -47,23 +47,18 @@
                     <td><?= $item->paytime ?></td>
                     <td><?= $reply->nickname ?></td>
                     <td><?=$invite->nickname?></td>
-                <? else : ?>
-                    <td></td><td></td><td></td><td></td><td></td><td></td>
-                <? endif?>
-
-                <td class="fl"><?= nl2br($item->order_remark) ?></td>
-                <td><?= $item->order_money ?></td>
-                <td><?= $item->company ?></td>
-                <td><?= $item->company_money ?></td>
-
-                <? if($task_id!=$item->id) : ?>
                     <td><?= $item->shipping_company ?></td>
                     <td><?= $item->shipping_no ?></td>
                     <td><?= $item->shipping_fee ?></td>
-                    <td><?= $user->getLinkPageName('check_status', $item->status) ?></td>
                 <? else : ?>
-                    <td></td><td></td><td></td><td></td>
+                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                 <? endif?>
+
+                <td class="fl" style="width: 300px;"><?= nl2br($item->order_remark) ?></td>
+                <td><?= $item->order_money ?></td>
+                <td><?= $item->company ?></td>
+                <td><?= $item->company_money ?></td>
+                <td><?= $user->getLinkPageName('check_status', $item->order_status) ?></td>
             </tr>
         <?
             $task_id=$item->id;

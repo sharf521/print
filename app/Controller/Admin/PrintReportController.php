@@ -39,7 +39,7 @@ class PrintReportController extends AdminController
         if(!empty($company)){
             $where.=" and company='{$company}'";
         }
-        $data['orderList']=DB::table('print_task t')->select("t.*,o.remark as order_remark,o.money as order_money,o.company,o.company_money")
+        $data['orderList']=DB::table('print_task t')->select("t.*,o.remark as order_remark,o.money as order_money,o.company,o.company_money,o.status as order_status")
             ->join('print_order o','o.task_id=t.id')
             ->where($where)
             ->orderBy('t.id desc')
