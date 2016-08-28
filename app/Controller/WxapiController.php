@@ -249,24 +249,39 @@ class WxapiController extends Controller
             $id=(int)$notify->attach;
             $out_trade_no=$notify->out_trade_no;
             $task=new PrintTask();
-            $order =$task->find($id);
-            if (!$order) { // 如果订单不存在
+            $task =$task->find($id);
+            if (!$task) { // 如果订单不存在
                 return 'Order not exist.'; // 告诉微信，我已经处理完了，订单没找到，别再通知我了
             }
             // 如果订单存在
             // 检查订单是否已经更新过支付状态
-            if ($order->status!=3 || $order->out_trade_no !=$out_trade_no) {
+            if ($task->status!=3 || $task->out_trade_no !=$out_trade_no) {
                 return true; // 已经支付成功了就不再更新了
             }
             // 用户是否支付成功
             if ($successful) {
-                $order->paytime = time();
-                $order->paymoney=(float)math($notify->total_fee,100,'/',2);
-                $order->status = 4;
-            } else { // 用户支付失败
-                $order->status = 'paid_fail';
+                $task->paytime = time();
+                $task->paymoney=(float)math($notify->total_fee,100,'/',2);
+                $task->status = 4;
+                $task->save(); // 保存
+                //消息start
+                $notice = $this->app->notice;
+                $templateId = 'tmGk3uxIeNke-tG7zBbHVzrxuHI_zB_cdKm69ZWfmm4';
+                $url = "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/orderShow/?task_id={$task->id}";
+                $data = array(
+                    "first"  => "您好，您的订单【{$task->print_type}】已付款成功！",
+                    "keyword1"   => $out_trade_no,
+                    "keyword2"  => date('Y-m-d H:i'),
+                    "keyword3"  => $task->paymoney,
+                    "keyword4"  => '微信支付',
+                    "remark" => "感谢您的惠顾。",
+                );
+                $openid=$task->User()->openid;
+                $notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($openid)->send();
+                //消息end
+            } else {
+                // 用户支付失败
             }
-            $order->save(); // 保存订单
             return true; // 返回处理完成
         });
         $response->send();
@@ -279,12 +294,6 @@ class WxapiController extends Controller
 
 
         $notice = $this->app->notice;
-
-        //$message=new Text(['content' => '您的订单己生成，<a href="http://'.$_SERVER['HTTP_HOST'].'/index.php/weixin/orderList/">点击支付！</a>']);
-        //$staff->message($message)->to('oHzjfwvtq80ycSaDwSTm-ZCeLQQs')->send();
-
-
-
         $templateId = 'HS0gHwMEKEqskA4btwP47QYNF35KvbK0N7YoMnWs6G8';
         $url = "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/orderShow/?task_id=";
         $openid='oHzjfwvtq80ycSaDwSTm-ZCeLQQs';
