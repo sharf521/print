@@ -3,6 +3,7 @@ namespace App\Controller\Admin;
 
 use App\Model\User;
 use App\Model\UserType;
+use App\WeChat;
 use System\Lib\DB;
 use System\Lib\Request;
 
@@ -65,6 +66,7 @@ class UserController extends AdminController
             show_msg(array('超级管理员禁止操作', '', $this->base_url('user')));
             exit;
         }
+        $user = DB::table('user')->where('id=?')->bindValues($_GET['id'])->row();
         if ($_POST) {
             $arr = array();
             $arr['name'] = $_POST['name'];
@@ -73,10 +75,15 @@ class UserController extends AdminController
             $arr['address'] = $_POST['address'];
             $arr['id'] = (int)$_POST['id'];
             $this->User->edit($arr);
+
+            $weChat=new WeChat();
+            $userService=$weChat->app->user;
+            $userService->remark($user['openid'], $arr['name']);
+
             show_msg(array('修改成功', '', $this->base_url('user')));
             //$this->redirect('usertype');
         } else {
-            $data['row'] = DB::table('user')->where('id=?')->bindValues($_GET['id'])->row();
+            $data['row'] =$user;
             $this->view('user', $data);
         }
     }
