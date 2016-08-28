@@ -71,7 +71,7 @@ class ShopController extends WeixinController
             $data['title_herder'] = '添加商户';
             $weChat=new WeChat();
             $js = $weChat->app->js;
-            $data['config']=$js->config(array('chooseWXPay','openAddress','checkJsApi','getLocation','chooseImage'), true);
+            $data['config']=$js->config(array('chooseWXPay','openAddress','checkJsApi','getLocation','chooseImage'), false);
             $this->view('shop', $data);
         }
     }
@@ -114,6 +114,12 @@ class ShopController extends WeixinController
             redirect('shop')->with('msg','保存成功！');
         }else{
             $data['shop']=$shop;
+
+            $weChat=new WeChat();
+            $js = $weChat->app->js;
+            $data['config']=$js->config(array('chooseWXPay','openAddress','checkJsApi','getLocation','chooseImage'), true);
+
+
             $this->view('shop', $data);
         }
     }
