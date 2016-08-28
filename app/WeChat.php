@@ -16,7 +16,7 @@ class WeChat
     public function __construct()
     {
         $this->options = [
-            'debug' => true,
+            'debug' => false,
             'app_id' => app('System')->getCode('appid'),
             'secret' => app('System')->getCode('appsecret'),
             'token' => 'print',

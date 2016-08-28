@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 use App\Model\LinkPage;
 use App\Model\PrintOrder;
 use App\Model\PrintTask;
+use App\WeChat;
+use EasyWeChat\Message\Text;
 use System\Lib\DB;
 use System\Lib\Request;
 
@@ -125,6 +127,10 @@ class PrintTaskController extends AdminController
                 //支付之前可以操作
                 redirect()->back()->with('error','禁止该操作，状态异常！');
             }
+            $first_add=false;
+            if((float)$task->money==0){
+                $first_add=true;
+            }
             $order=new PrintOrder();
             $order->task_id=$task->id;
             $order->reply_id=$this->user_id;
@@ -138,6 +144,14 @@ class PrintTaskController extends AdminController
             $task->money=math($task->money,$order->money,'+',2);
             $task->save();
             $url="printTask/show/?task_id={$task_id}&page={$page}";
+            if($first_add){
+                $wechat=new WeChat();
+                //发送给邀请人
+                $staff = $wechat->app->staff; // 客服管理
+                $message=new Text(['content' => "您的订单【{$task->print_type}】己生成，待支付！".'<a href="http://'.$_SERVER["HTTP_HOST"].'/index.php/weixin/orderList">点击查看</a>']);
+                $openid=$task->User()->openid;
+                $staff->message($message)->to($openid)->send();
+            }
             redirect($url)->with('msg','添加成功！');
         }
     }
@@ -208,7 +222,6 @@ class PrintTaskController extends AdminController
         }else{
             $order->delete($id);
 
-
             $orders=$task->PrintOrder();
             $money=0;
             foreach ($orders as $o){
@@ -228,16 +241,38 @@ class PrintTaskController extends AdminController
         $id=$request->post('task_id');
         $page=$request->post('page');
         $task=$printTask->findOrFail($id);
-        if($task->status!=4 && $task->status!=5){
-            //待发或己发货
-            redirect()->back()->with('error','禁止该操作，状态异常！');
+
+        $first_add=false;
+        if($task->shipping_time==0){
+            $first_add=true;
         }
         $task->shipping_company=$request->post('shipping_company');
         $task->shipping_no=$request->post('shipping_no');
         $task->shipping_fee=(float)$request->post('shipping_fee');
         $task->shipping_time=time();
         $task->status=5;
+        if($task->shipping_company=='' || $task->shipping_no==''){
+            redirect()->back()->with('error','请填写完整！');
+        }
         $task->save();
+
+        //发消息
+        if($first_add){
+            $wechat=new WeChat();
+            $notice=$wechat->app->notice;
+            $templateId = 'HS0gHwMEKEqskA4btwP47QYNF35KvbK0N7YoMnWs6G8';
+            $url = "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/orderShow/?task_id={$task->id}";
+            $data = array(
+                "first"  => "",
+                "keyword1"   => $task->print_type,
+                "keyword2"  => $task->shipping_company,
+                "keyword3"  => $task->shipping_no,
+                "keyword4"  => date('Y-m-d H:i'),
+                "remark" => "请注意查收！",
+            );
+            $openid=$task->User()->openid;
+            $notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($openid)->send();
+        }
         $url="printTask/show/?task_id={$id}&page={$page}";
         redirect($url)->with('msg','保存成功！');
     }

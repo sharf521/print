@@ -34,22 +34,6 @@ class WxapiController extends Controller
                 case 'text':
                     return $this->text($message);
                     break;
-                case 'image':
-                    # 图片消息...
-                    break;
-                case 'voice':
-                    # 语音消息...
-                    break;
-                case 'video':
-                    # 视频消息...
-                    break;
-                case 'location':
-                    # 坐标消息...
-                    break;
-                case 'link':
-                    # 链接消息...
-                    break;
-                // ... 其它消息
                 default:
                     # code...
                     break;
@@ -173,43 +157,6 @@ class WxapiController extends Controller
         }
     }
 
-    public function test()
-    {
-        exit;
-        $staff = $this->app->staff; // 客服管理
-
-        $message=new Text(['content' => 'asdfadsf']);
-        $staff->message($message)->to('oHzjfwvtq80ycSaDwSTm-ZCeLQQs')->send();
-
-        exit;
-
-        $result=$staff->lists();
-        $result=json_decode($result,true);
-        $kf_list=$result['kf_list'];
-        print_r($kf_list);
-        $result=$staff->onlines();
-        $result=json_decode($result,true);
-        print_r($result['kf_online_list']);
-        exit;
-        $session = $this->app->staff_session; // 客服会话管理
-        $session->create('kf2001@gh_eaa8b99402a9','oHzjfwvtq80ycSaDwSTm-ZCeLQQs');
-
-
-
-        /*
-         *
- [kf_account] => kf2001@gh_eaa8b99402a9
-            [kf_headimgurl] => http://mmbiz.qpic.cn/mmbiz_jpg/RflZvibIfCaQOkT6mOt3oR7qOArHTy8lD0gyt62EbTML8BG3Gu5rfAfJTNpickL3L5hBSL2SRR6anEhgAohsic7iaw/300?wx_fmt=jpeg
-            [kf_id] => 2001
-            [kf_nick] => 综合接待
-            [kf_wx] => gdl521
-        [kf_account] => kf2001@gh_eaa8b99402a9
-            [status] => 1
-            [kf_id] => 2001
-            [accepted_case] => 0
-         * */
-    }
-
     private function addUser($openid,$invite_userid=0)
     {
         $return_arr=array();
@@ -323,5 +270,61 @@ class WxapiController extends Controller
             return true; // 返回处理完成
         });
         $response->send();
+    }
+
+
+    public function test()
+    {
+
+
+
+        $notice = $this->app->notice;
+
+        //$message=new Text(['content' => '您的订单己生成，<a href="http://'.$_SERVER['HTTP_HOST'].'/index.php/weixin/orderList/">点击支付！</a>']);
+        //$staff->message($message)->to('oHzjfwvtq80ycSaDwSTm-ZCeLQQs')->send();
+
+
+
+        $templateId = 'HS0gHwMEKEqskA4btwP47QYNF35KvbK0N7YoMnWs6G8';
+        $url = "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/orderShow/?task_id=";
+        $openid='oHzjfwvtq80ycSaDwSTm-ZCeLQQs';
+        $data = array(
+            "first"  => "恭喜你购买成功！",
+            "keyword1"   => "不干胶",
+            "keyword2"  => "快递公司",
+            "keyword3"  => "快递单号",
+            "keyword4"  => date('Y-m-d H:i'),
+            "remark" => "请注意查收！",
+        );
+        $notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($openid)->send();
+
+
+        exit;
+
+        $result=$staff->lists();
+        $result=json_decode($result,true);
+        $kf_list=$result['kf_list'];
+        print_r($kf_list);
+        $result=$staff->onlines();
+        $result=json_decode($result,true);
+        print_r($result['kf_online_list']);
+        exit;
+        $session = $this->app->staff_session; // 客服会话管理
+        $session->create('kf2001@gh_eaa8b99402a9','oHzjfwvtq80ycSaDwSTm-ZCeLQQs');
+
+
+
+        /*
+         *
+ [kf_account] => kf2001@gh_eaa8b99402a9
+            [kf_headimgurl] => http://mmbiz.qpic.cn/mmbiz_jpg/RflZvibIfCaQOkT6mOt3oR7qOArHTy8lD0gyt62EbTML8BG3Gu5rfAfJTNpickL3L5hBSL2SRR6anEhgAohsic7iaw/300?wx_fmt=jpeg
+            [kf_id] => 2001
+            [kf_nick] => 综合接待
+            [kf_wx] => gdl521
+        [kf_account] => kf2001@gh_eaa8b99402a9
+            [status] => 1
+            [kf_id] => 2001
+            [accepted_case] => 0
+         * */
     }
 }
