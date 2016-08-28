@@ -10,7 +10,7 @@
     </div>
     <div class="qrcode_div">
         <img src="<?=$qrcodeSrc?>" width="50%">
-        <div>↑↑由 <?=$user->nickname?> 分享，长按图片关注！</div>
+        <div>↑↑由 <?=$user->nickname?> 分享，长按图片识别二维码关注！</div>
     </div>
     <div class="shop_list">
         <? if(empty($shopList)) : ?>
