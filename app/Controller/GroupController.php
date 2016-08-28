@@ -33,10 +33,9 @@ class GroupController extends Controller
         $shopList=DB::table('print_shop_group sg')->select("s.*")
             ->leftJoin('print_shop s','sg.shop_id=s.id')
             ->leftJoin('user u','s.user_id=u.id')
-            ->where("group_id=?")->bindValues($id)
-            ->groupBy("u.invite_count desc")
+            ->where("sg.group_id=?")->bindValues($id)
+            ->orderBy("u.invite_count desc")
             ->all(\PDO::FETCH_OBJ);
-
         $data['user']=$user->find($user_id);
         $data['group']=$group;
         $data['shopList']=$shopList;
