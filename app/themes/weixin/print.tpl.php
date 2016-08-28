@@ -45,7 +45,7 @@
     <? if(empty($task['total'])){echo "<div class='alert-warning'>没有找到匹配的记录！</div>";}else{echo $task['page'];}?>
     <? elseif ($this->func=='orderShow') : ?>
         <!-- 待支付 -->
-        <div class="header_tit">订单详情：</div><br>
+        <div class="header_tit">订单详情：<?=$task->getLinkPageName('print_status',$task->status)?></div><br>
     <div class="div_box clearFix taskList">
         <div class="remark_title clearFix">
             <span class="type"><?= $task->print_type ?></span>

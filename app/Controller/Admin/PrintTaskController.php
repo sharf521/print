@@ -148,7 +148,6 @@ class PrintTaskController extends AdminController
                 $wechat=new WeChat();
                 //发送给邀请人
                 $staff = $wechat->app->staff; // 客服管理
-
                 $txt="订单生成通知：
                 
 时间：".date('Y-m-d H:i')."
