@@ -10,15 +10,19 @@
     </div>
     <div class="qrcode_div">
         <img src="<?=$qrcodeSrc?>" width="50%">
+        <div>↑↑由 <?=$user->nickname?> 分享，长按图片关注！</div>
     </div>
     <div class="shop_list">
         <? if(empty($shopList)) : ?>
             <div class='alert-warning'>没有找到匹配的记录！</div>
         <? endif;?>
         <ul>
-            <? foreach ($shopList as $item) :
-                $shop=$item->Shop();
-                if(! $shop->is_exist){continue;}
+            <?
+            //$shop=new \app\Model\PrintShop();
+            foreach ($shopList as $shop) :
+                //$shop=$shop->find($item['shop_id']);
+                //if(! $shop->is_exist){continue;}
+                if($shop->name==''){continue;}
                 ?>
                 <li class="clearFix">
                     <img class="img" src="<?=$shop->picture?>">
