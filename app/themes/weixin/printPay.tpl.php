@@ -35,7 +35,7 @@
         wx.ready(function () {
             $("#butPay").click(function () {
                 if (validate_address()) {
-                    $.post("/index.php/weixin/saveAddress/?task_id=" +<?=$task->id?>, {
+                    $.post("/index.php/weixin/saveAddress/?task_id=<?=$task->id?>", {
                         'name': $('#name').val(),
                         'tel': $('#tel').val(),
                         'address': $('#address').val()
@@ -51,8 +51,8 @@
                     signType: 'MD5',
                     paySign: '<?=$pay['paySign']?>',
                     success: function (res) {
-                        alert('支付成功！');
-                        window.location = '/index.php/weixin/orderList/';
+                        //alert('支付成功！');
+                        window.location = "/index.php/weixin/orderShow/?task_id=<?=$task->id?>";
                     }
                 });
             });
