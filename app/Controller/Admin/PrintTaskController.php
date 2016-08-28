@@ -144,7 +144,7 @@ class PrintTaskController extends AdminController
             $task->money=math($task->money,$order->money,'+',2);
             $task->save();
             $url="printTask/show/?task_id={$task_id}&page={$page}";
-            if(!$first_add){
+            if($first_add){
                 $wechat=new WeChat();
                 //发送给邀请人
                 $staff = $wechat->app->staff; // 客服管理
