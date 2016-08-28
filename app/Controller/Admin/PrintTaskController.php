@@ -149,11 +149,13 @@ class PrintTaskController extends AdminController
                 //发送给邀请人
                 $staff = $wechat->app->staff; // 客服管理
 
-                $txt="订单生成通知：\r\n
+                $txt="订单生成通知：
+                
 时间：".date('Y-m-d H:i')."
 名称：{$task->print_type}
 金额：{$task->money}元
-状态：未付款\r\n
+状态：未付款
+
 ".'<a href="http://'.$_SERVER["HTTP_HOST"].'/index.php/weixin/orderList">'."请核对订单信息，并及时付款，点击查看订单详情！</a>";
                 $message=new Text(['content' =>$txt]);
                 $openid=$task->User()->openid;
