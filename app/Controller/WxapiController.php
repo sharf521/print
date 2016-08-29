@@ -70,7 +70,10 @@ class WxapiController extends Controller
             DB::table('user_wx')->where("openid=?")->bindValues($message->FromUserName)->update($arr);
         }elseif($message->Event=='CLICK'){
             if($message->EventKey=='menu_print'){
-                $content=' 亲，请发要求给我们，稍后会有客服和您微信直接联系。'."\r\n".'也可以点击：【<a href="http://'.$_SERVER['HTTP_HOST'].'/index.php/weixin/taskAdd/">我要下单</a>】'."\r\n".'产品介绍及报价：【<a href="http://'.$_SERVER['HTTP_HOST'].'/article/detail/1">点 击</a>】'."\r\n".'感谢您的支持！';
+                $content=' 亲，请发要求给我们，稍后会有客服和您微信直接联系。
+也可以点击：【<a href="http://'.$_SERVER['HTTP_HOST'].'/index.php/weixin/taskAdd/">我要下单</a>】
+产品介绍及报价：【<a href="http://'.$_SERVER['HTTP_HOST'].'/article/detail/1">点 击</a>】
+感谢您的支持！';
                 return new Text(['content' =>$content]);
             }
         }
@@ -196,7 +199,7 @@ class WxapiController extends Controller
 
                 //发送给邀请人
                 $staff = $this->app->staff; // 客服管理
-                $message=new Text(['content' => "您成功邀请了：{$user->nickname}，一共邀请：{$user->invite_count}人。"]);
+                $message=new Text(['content' => "您成功邀请了：{$user->nickname}，一共邀请：{$invite->invite_count}人。"]);
                 $staff->message($message)->to($invite->openid)->send();
 
                 $return_arr['openid']=$user->openid;
