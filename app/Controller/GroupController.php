@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use app\Model\PrintGroup;
 use app\Model\PrintShopGroup;
 use App\Model\User;
 use App\WeChat;
@@ -22,12 +23,11 @@ class GroupController extends Controller
         parent::__construct();
     }
 
-    public function detail(Request $request,PrintShopGroup $shopGroup,WeChat $weChat,User $user)
+    public function detail(Request $request,PrintGroup $printGroup,PrintShopGroup $shopGroup,WeChat $weChat,User $user)
     {
         $id=$request->get('id');
         $user_id=(int)$request->get('user_id');
-        $shopGroup=$shopGroup->findOrFail($id);
-        $group=$shopGroup->Group();
+        $group=$printGroup->findOrFail($id);
         $group->picture='http://'.$_SERVER['HTTP_HOST'].$group->picture;
 
         $shopList=DB::table('print_shop_group sg')->select("s.*")

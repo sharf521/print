@@ -14,7 +14,7 @@
     </div>
     <div class="shop_list">
         <? if(empty($shopList)) : ?>
-            <div class='alert-warning'>没有找到匹配的记录！</div>
+            <div class='alert-warning'>周边商家正在加入中……</div>
         <? endif;?>
         <ul>
             <?
