@@ -137,7 +137,7 @@ class WeixinController extends Controller
     public function invite(WeChat $weChat,User $user)
     {
         $data['qrcodeSrc']=$weChat->qrcode($this->user_id.'01');
-        $data['invites']=$user->where("invite_userid=?")->bindValues($this->user_id)->get();
+        $data['invites']=$user->where("invite_userid=?")->bindValues($this->user_id)->orderBy('id desc')->get();
         $data['title_herder']='邀请商家';
         $this->view('invite',$data);
     }
