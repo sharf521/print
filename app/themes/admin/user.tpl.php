@@ -50,7 +50,11 @@ if($this->func=='index'){?>
             <tr>
             	<td><?=$row->id?>/<?=$row->username?></td>
                 <td><?=$row->UserType()->name?></td>
-                <td><img src="<?=substr($UserWx->headimgurl,0,-1)?>64" width="50"></td>
+                <td>
+                    <? if($UserWx->headimgurl!=''):?>
+                    <img src="<?=substr($UserWx->headimgurl,0,-1)?>64" width="50">
+                    <? endif;?>
+                </td>
                 <td><?=$row->nickname?></td>
                 <td><?=$row->invite_count?></td>
                 <td><?=$arr_sex[$UserWx->sex]?></td>
@@ -86,6 +90,7 @@ if($this->func=='index'){?>
             <ul>
               <li><label>用户名：</label><input type="text" name="username" class="input1" onblur="validate_register(this)"/><span class="validate_tip">*用户名5-15位字符</span></li>
               <li><label>邮箱：</label><input type="text" name="email" class="input4" onblur="validate_register(this)"/><span class="validate_tip">*邮箱</span></li>
+                <li><label>昵称：</label><input type="text" name="nickname" ></li>
               <li><label>密码：</label><input type="password" name="password" class="input2" onblur="validate_register(this)"/><span class="validate_tip">*密码长度6-15位</span></li>
               <li><label>确认密码：</label><input type="password" name="sure_password" class="input2" onblur="validate_register(this)"/><span class="validate_tip">*确认密码</span></li>              
           </ul>
@@ -101,14 +106,14 @@ elseif($this->func=='edit'){?>
 		<?=$this->anchor('user','列表','class="but1"');?>
     </div>
     <form method="post">
-    	<input type="hidden" name="id" value="<?=$row['id']?>"/>
     	<div class="form1">
             <ul>
-                <li><label>用户名：</label><?=$row['username']?></li>
-                <li><label>真实姓名：</label><input type="text" name="name" value="<?=$row['name']?>"/></li>
-                <li><label>电话：</label><input type="text" name="tel" value="<?=$row['tel']?>"/></li>
-                <li><label>QQ：</label><input type="text" name="qq" value="<?=$row['qq']?>"/></li>
-                <li><label>地址：</label><input type="text" name="address" value="<?=$row['address']?>"/></li>
+                <li><label>用户名：</label><?=$user->username?></li>
+                <li><label>真实姓名：</label><input type="text" name="name" value="<?=$user->name?>"/></li>
+                <li><label>昵称：</label><input type="text" name="nickname" value="<?=$user->nickname?>"/></li>
+                <li><label>电话：</label><input type="text" name="tel" value="<?=$user->tel?>"/></li>
+                <li><label>QQ：</label><input type="text" name="qq" value="<?=$user->qq?>"/></li>
+                <li><label>地址：</label><input type="text" name="address" value="<?=$user->address?>"/></li>
             </ul>
             <input type="submit" class="but3" value="保存" />
             <input type="button" class="but3" value="返回" onclick="window.history.go(-1)"/>

@@ -79,6 +79,7 @@ class User extends Model
         $data = array(
             'type_id' => 1,
             'username' => $data['username'],
+            'nickname' => $data['nickname'],
             'password' => md5(md5($data['password']) . $salt),
             'zf_password' => md5(md5($data['password']) . $salt),
             'created_at' => time(),

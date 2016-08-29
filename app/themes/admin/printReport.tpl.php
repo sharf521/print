@@ -44,7 +44,7 @@
                     <td><a href="<?=url('printTask/show/?task_id='.$item->id)?>"><?= $item->id ?></a></td>
                     <td><?= $item->print_type ?></td>
                     <td><?= $user->nickname ?></td>
-                    <td><?= $item->paytime ?></td>
+                    <td><?= date('y-m-d H:i',$item->paytime) ?></td>
                     <td><?= $reply->nickname ?></td>
                     <td><?=$invite->nickname?></td>
                     <td><?= $item->shipping_company ?></td>

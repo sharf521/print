@@ -60,30 +60,31 @@ class UserController extends AdminController
     }
 
     //编辑用户资料
-    function edit()
+    function edit(User $user)
     {
         if ($_REQUEST['id'] == "1") {
             show_msg(array('超级管理员禁止操作', '', $this->base_url('user')));
             exit;
         }
-        $user = DB::table('user')->where('id=?')->bindValues($_GET['id'])->row();
+        $user=$user->findOrFail($_GET['id']);
         if ($_POST) {
-            $arr = array();
-            $arr['name'] = $_POST['name'];
-            $arr['tel'] = $_POST['tel'];
-            $arr['qq'] = $_POST['qq'];
-            $arr['address'] = $_POST['address'];
-            $arr['id'] = (int)$_POST['id'];
-            $this->User->edit($arr);
+            $user->name=$_POST['name'];
+            $user->nickname=$_POST['nickname'];
+            $user->tel=$_POST['tel'];
+            $user->qq=$_POST['qq'];
+            $user->address=$_POST['address'];
+            $user->save();
 
-            $weChat=new WeChat();
-            $userService=$weChat->app->user;
-            $userService->remark($user['openid'], $arr['name']);
+            if($user->openid!=''){
+                $weChat=new WeChat();
+                $userService=$weChat->app->user;
+                $userService->remark($user->openid, $user->name);
+            }
 
             show_msg(array('修改成功', '', $this->base_url('user')));
             //$this->redirect('usertype');
         } else {
-            $data['row'] =$user;
+            $data['user'] =$user;
             $this->view('user', $data);
         }
     }
