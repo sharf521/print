@@ -11,6 +11,7 @@
             到
             <input  name="endtime" type="text" value="<?=$_GET['endtime']?>" onClick="javascript:WdatePicker();" class="Wdate">
             <input type="submit" class="but2" value="查询"/>
+            <a href="<?=url("printReport/excel/?q={$_GET['q']}&company={$_GET['company']}&starttime={$_GET['starttime']}&endtime={$_GET['endtime']}")?>">导出EXCEL</a>
         </div>
     </form>
     <table class="table">
@@ -31,22 +32,21 @@
             <th>状态</th>
         </tr>
         <?
-        $user = new \App\Model\User();
-        $invite = new \App\Model\User();
+        $User = new \App\Model\User();
         $task_id=0;
         foreach ($orderList['list'] as $item) {
-            $user=$user->find($item->user_id);
-            $reply=$user->find($item->reply_uid);
-            $invite=$invite->find($user->invite_userid);
+            $user=$User->find($item->user_id);
+            $reply=$User->find($item->reply_uid);
+            $invite=$User->find($user->invite_userid);
             ?>
             <tr>
                 <? if($task_id!=$item->id) : ?>
                     <td><a href="<?=url('printTask/show/?task_id='.$item->id)?>"><?= $item->id ?></a></td>
                     <td><?= $item->print_type ?></td>
-                    <td><?= $user->nickname ?></td>
+                    <td><?= $user->id?>/<?= $user->nickname ?></td>
                     <td><?= date('y-m-d H:i',$item->paytime) ?></td>
-                    <td><?= $reply->nickname ?></td>
-                    <td><?=$invite->nickname?></td>
+                    <td><?= $reply->id?>/<?= $reply->nickname ?></td>
+                    <td><?=$invite->id?>/<?=$invite->nickname?></td>
                     <td><?= $item->shipping_company ?></td>
                     <td><?= $item->shipping_no ?></td>
                     <td><?= $item->shipping_fee ?></td>

@@ -121,10 +121,14 @@ class WeChat
     /**
      * 生成二维码
      */
-    public function qrcode($txt)
+    public function qrcode($txt,$forever=false)
     {
         $qrcode = $this->app->qrcode;
-        $result = $qrcode->temporary($txt, 6 * 24 * 3600);
+        if($forever){
+            $result=$qrcode->forever($txt);//永久二维码
+        }else{
+            $result = $qrcode->temporary($txt, 6 * 24 * 3600);
+        }
         $ticket = $result->ticket;// 或者 $result['ticket']
         $url = $qrcode->url($ticket);
         return $url;

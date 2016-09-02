@@ -43,7 +43,7 @@
                 <td><?=$row->id?></td>
                 <td><?=$row->User()->id?>/<?=$row->User()->UserWx()->nickname?></td>
                 <td><?=$row->print_type?></td>
-                <td><?=nl2br($row->remark)?></td>
+                <td class="l"><?=nl2br($row->remark)?></td>
                 <td><?=$row->tel?></td>
                 <td title="<?=$time?>"><?=substr($row->created_at,2,-3)?></td>
                 <td><?=$row->UserReply()->UserWx()->nickname?></td>

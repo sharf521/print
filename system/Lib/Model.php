@@ -5,6 +5,7 @@ class Model
 {
     //属性必须在这里声明
     protected $table;
+    protected $dates=array('created_at');
     protected $fields = array();
     protected $attributes = array();
     protected $cols;
@@ -28,7 +29,7 @@ class Model
                 $val=null;
             }
         }
-        if($key=='created_at'){
+        if(in_array($key,$this->dates)){
             return date('Y-m-d H:i:s',$val);
         }else{
             return $val;
@@ -122,13 +123,13 @@ class Model
     {
         if(empty($o)){
             $this->attributes=array();
-            $this->cols = array();
+            $this->cols =null;
             $this->is_exist = false;
             return $this;
         }else{
             $obj = clone $this;
             $id = $obj->primaryKey;
-            $obj->attributes[$obj->primaryKey] = $obj->$id;
+            $obj->attributes[$obj->primaryKey] = $o->$id;
             $obj->is_exist = true;
             $obj->cols = $o;
             return $obj;
@@ -171,16 +172,20 @@ class Model
         );
     }
 
-    public function save()
+    public function save($returnId=false)
     {
         if ($this->is_exist) {
             $primaryKey = $this->primaryKey;
             $id = $this->$primaryKey;
-            unset($this->$primaryKey);
+            unset($this->attributes[$this->$primaryKey]);
             return DB::table($this->table)->where("{$primaryKey}=?")->bindValues($id)->limit('1')->update($this->attributes);
         } else {
             $this->attributes['created_at']=time();
-            return DB::table($this->table)->insert($this->attributes);
+            if($returnId){
+                return DB::table($this->table)->insertGetId($this->attributes);
+            }else{
+                return DB::table($this->table)->insert($this->attributes);
+            }
         }
     }
 ///////以下DB类方法/////////////////////////////////////////////////////////////////////////////////
