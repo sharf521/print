@@ -33,6 +33,7 @@ if($this->func=='index'){?>
                 <th>用户类型</th>
                 <th>头像</th>
                 <th>昵称</th>
+                <th>openid</th>
                 <th>邀请人数</th>
                 <th>性别</th>
                 <th>城市</th>
@@ -56,6 +57,7 @@ if($this->func=='index'){?>
                     <? endif;?>
                 </td>
                 <td><?=$row->nickname?></td>
+                <td><?=$row->openid?></td>
                 <td><?=$row->invite_count?></td>
                 <td><?=$arr_sex[$UserWx->sex]?></td>
                 <td><?=$UserWx->province?>-<?=$UserWx->city?></td>
