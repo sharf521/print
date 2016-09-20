@@ -6,7 +6,7 @@
  * Time: 13:08
  */
 
-namespace app\Controller\Admin;
+namespace App\Controller\Admin;
 
 use App\Model\LinkPage;
 use App\Model\PrintOrder;

@@ -6,12 +6,12 @@
  * Time: 16:46
  */
 
-namespace app\Controller\Admin;
+namespace App\Controller\Admin;
 
 
-use app\Model\PrintGroup;
-use app\Model\PrintShop;
-use app\Model\PrintShopGroup;
+use App\Model\PrintGroup;
+use App\Model\PrintShop;
+use App\Model\PrintShopGroup;
 use System\Lib\Request;
 
 class PrintShopController extends AdminController

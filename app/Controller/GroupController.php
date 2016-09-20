@@ -8,8 +8,8 @@
 
 namespace App\Controller;
 
-use app\Model\PrintGroup;
-use app\Model\PrintShopGroup;
+use App\Model\PrintGroup;
+use App\Model\PrintShopGroup;
 use App\Model\User;
 use App\WeChat;
 use System\Lib\DB;

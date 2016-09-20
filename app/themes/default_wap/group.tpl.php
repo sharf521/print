@@ -18,7 +18,7 @@
         <? endif;?>
         <ul>
             <?
-            //$shop=new \app\Model\PrintShop();
+            //$shop=new \App\Model\PrintShop();
             foreach ($shopList as $shop) :
                 //$shop=$shop->find($item['shop_id']);
                 //if(! $shop->is_exist){continue;}

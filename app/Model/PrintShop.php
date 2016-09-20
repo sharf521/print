@@ -6,7 +6,7 @@
  * Time: 14:04
  */
 
-namespace app\Model;
+namespace App\Model;
 
 
 class PrintShop extends Model

@@ -6,11 +6,6 @@
     <title>layim - layui</title>
 
     <link rel="stylesheet" href="/plugin/layui/css/layui.css">
-    <style>
-        html {
-            background-color: #D9D9D9;
-        }
-    </style>
     <script src="./js/swfobject.js"></script>
     <script src="./js/web_socket.js"></script>
     <script src="./js/jquery.min.js"></script>
@@ -27,10 +22,10 @@
     inited = false;
 
 
-    userinfo['id'] = 'id';
-    userinfo['avatar'] = '';
+    userinfo['id'] = '1';
+    userinfo['avatar'] = 'http://q.qlogo.cn/qqapp/101265487/DFEA103D9583BBD4A97D625765B74F7C/40';
     userinfo['sign'] = 'sign';
-    userinfo['username'] = 'nickname';
+    userinfo['username'] = 'feng';
     connect_workerman();
     setInterval('send_heartbeat()', 20000);
 
@@ -38,10 +33,17 @@
     function connect_workerman() {
         socket = new WebSocket('ws://121.41.30.46:7272');
         socket.onopen = function () {
-            socket.send(JSON.stringify({type: 'init'}));
+            var initStr = userinfo;
+            initStr['type'] = 'init';
+            socket.send(JSON.stringify(initStr));
+            console.log("onopen:" + JSON.stringify(initStr));
         };
 
         socket.onmessage = function (e) {
+
+
+            console.log("onmessage:" + e.data);
+
             var msg = JSON.parse(e.data);
             switch (msg.message_type) {
                 case 'init':
@@ -118,17 +120,14 @@
                 init: {
                     url: './json/getList.json'
                 }
-
                 //查看群员接口
                 , members: {
                     url: './json/getMembers.json'
                 }
-
                 // 上传图片
                 , uploadImage: {
                     url: './upload_img.php'
                 }
-
                 // 上传文件
                 , uploadFile: {
                     url: './upload_file.php'
@@ -139,24 +138,22 @@
                 , copyright: true //是否授权
                 , title: 'LayChat'
             });
-
             //监听发送消息
             layim.on('sendMessage', function (data) {
                 $.post("./post_message.php", {data: data});
-            });
 
+                console.log("sendMessage:" + JSON.stringify(data));
+            });
             //监听在线状态的切换事件
             layim.on('online', function (data) {
                 socket.send(JSON.stringify({type: data}));
             });
-
             //layim建立就绪
             layim.on('ready', function (res) {
                 // 离线消息
                 for (var key in history_message) {
                     layim.getMessage(JSON.parse(history_message[key]));
                 }
-
 //                layui.layim.getMessage({
 //                    username: "Hi"
 //                    ,avatar: "http://tva1.sinaimg.cn/crop.7.0.736.736.50/bd986d61jw8f5x8bqtp00j20ku0kgabx.jpg"
@@ -174,7 +171,6 @@
             });
         });
     }
-
 </script>
 </body>
 </html>

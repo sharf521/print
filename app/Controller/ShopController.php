@@ -4,10 +4,10 @@
  * User: Administrator
  */
 
-namespace app\Controller;
+namespace App\Controller;
 
-use app\Model\PrintShop;
-use app\Model\PrintShopGroup;
+use App\Model\PrintShop;
+use App\Model\PrintShopGroup;
 use App\Model\User;
 use System\Lib\Request;
 use App\WeChat;

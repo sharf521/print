@@ -6,7 +6,7 @@
  * Time: 14:07
  */
 
-namespace app\Model;
+namespace App\Model;
 
 
 class PrintGroup extends Model
