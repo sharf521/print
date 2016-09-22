@@ -8,11 +8,8 @@ class AdminController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        global $_G;
-        $this->base_url='/index.php/'.$_G['system']['houtai'].'/';
         $this->template='admin';
-        $this->control	=$_G['class'];
-        $this->func		=$_G['func'];
+        $this->control	=application('control');
         $this->user_typeid	=session('usertype');
         $this->permission_id=session('permission_id');
 
