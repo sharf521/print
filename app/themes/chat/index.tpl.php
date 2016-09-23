@@ -6,26 +6,27 @@
     <title>layim - layui</title>
 
     <link rel="stylesheet" href="/plugin/layui/css/layui.css">
-    <script src="./js/swfobject.js"></script>
-    <script src="./js/web_socket.js"></script>
-    <script src="./js/jquery.min.js"></script>
+
+    <script src="/themes/chat/js/swfobject.js"></script>
+    <script src="/themes/chat/js/web_socket.js"></script>
+    <script src="/themes/chat/js/jquery.min.js"></script>
+
+    <script src="/plugin/layui/layui.js"></script>
 </head>
 <body>
-
-<script src="/plugin/layui/layui.js"></script>
 <script type="text/javascript">
     // 浏览器不支持websocket则自动用flash模拟
-    WEB_SOCKET_SWF_LOCATION = "./swf/WebSocketMain.swf";
+    WEB_SOCKET_SWF_LOCATION = "/themes/chat/swf/WebSocketMain.swf";
     WEB_SOCKET_DEBUG = true;
     // QQ互联
     userinfo = {};
     inited = false;
 
 
-    userinfo['id'] = '1';
-    userinfo['avatar'] = 'http://q.qlogo.cn/qqapp/101265487/DFEA103D9583BBD4A97D625765B74F7C/40';
+    userinfo['id'] = '<?=$user->id?>';
+    userinfo['avatar'] = '<?=$user->headimgurl?>';
     userinfo['sign'] = 'sign';
-    userinfo['username'] = 'feng';
+    userinfo['username'] = '<?=$user->username?>';
     connect_workerman();
     setInterval('send_heartbeat()', 20000);
 
@@ -40,10 +41,7 @@
         };
 
         socket.onmessage = function (e) {
-
-
             console.log("onmessage:" + e.data);
-
             var msg = JSON.parse(e.data);
             switch (msg.message_type) {
                 case 'init':

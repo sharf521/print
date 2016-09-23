@@ -40,6 +40,7 @@ $pager = app('\System\Lib\Page');
 
 
 $routes=array(
+    'chat'=>'Chat',
     'member'=>'Member',
 );
 \System\Lib\Application::start($routes);
