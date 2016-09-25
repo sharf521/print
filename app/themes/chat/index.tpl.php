@@ -4,33 +4,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>layim - layui</title>
-
-    <link rel="stylesheet" href="/plugin/layui/css/layui.css">
-
-    <script src="/themes/chat/js/swfobject.js"></script>
-    <script src="/themes/chat/js/web_socket.js"></script>
-    <script src="/themes/chat/js/jquery.min.js"></script>
-
-    <script src="/plugin/layui/layui.js"></script>
 </head>
 <body>
+<link rel="stylesheet" href="/plugin/layui/css/layui.css">
+<link rel="stylesheet" href="/themes/chat/chat.css">
+<script src="/themes/chat/js/swfobject.js"></script>
+<script src="/themes/chat/js/web_socket.js"></script>
+<script src="/themes/chat/js/jquery.min.js"></script>
+<script src="/plugin/layui/layui.js"></script>
 <script type="text/javascript">
     // 浏览器不支持websocket则自动用flash模拟
     WEB_SOCKET_SWF_LOCATION = "/themes/chat/swf/WebSocketMain.swf";
     WEB_SOCKET_DEBUG = true;
-    // QQ互联
-    userinfo = {};
+
     inited = false;
-
-
+    userinfo = {};
     userinfo['id'] = '<?=$user->id?>';
     userinfo['avatar'] = '<?=$user->headimgurl?>';
     userinfo['sign'] = 'sign';
-    userinfo['username'] = '<?=$user->username?>';
+    userinfo['username'] = '<?=$user->nickname?>';
     connect_workerman();
     setInterval('send_heartbeat()', 20000);
-
-
     function connect_workerman() {
         socket = new WebSocket('ws://121.41.30.46:7272');
         socket.onopen = function () {
@@ -116,11 +110,11 @@
             layim.config({
                 //初始化接口
                 init: {
-                    url: '/chat/getList/'
+                    url: '/chat/getList/?uid='+userinfo['id']
                 }
                 //查看群员接口
                 , members: {
-                    url: '/chat/getMembers'
+                    url: '/chat/getMembers/?uid='+userinfo['id']
                 }
                 // 上传图片
                 , uploadImage: {
@@ -131,16 +125,16 @@
                     url: './upload_file.php'
                 }
                 //聊天记录地址
-                , chatLog: './chat_history.php'
+                , chatLog: '/chat/history/'+userinfo['id']+'/'
                 , find: ''
                 , copyright: true //是否授权
                 , title: 'LayChat'
             });
             //监听发送消息
             layim.on('sendMessage', function (data) {
-                $.post("./post_message.php", {data: data});
-
-                console.log("sendMessage:" + JSON.stringify(data));
+                $.post("/chat/post_message/", {data: data});
+                socket.send(JSON.stringify({type: 'chatMessage',data:data}));
+                console.log("sendMessage:" + JSON.stringify({type: 'chatMessage',data:data}));
             });
             //监听在线状态的切换事件
             layim.on('online', function (data) {
@@ -148,6 +142,7 @@
             });
             //layim建立就绪
             layim.on('ready', function (res) {
+                console.log('ready：'+res);
                 // 离线消息
                 for (var key in history_message) {
                     layim.getMessage(JSON.parse(history_message[key]));
