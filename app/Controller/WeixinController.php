@@ -137,8 +137,7 @@ class WeixinController extends Controller
     public function invite(WeChat $weChat,User $user)
     {
         $user=$user->find($this->user_id);
-        if($user->type_id==5 || $this->user_id==42){
-            echo '永久二维码';
+        if($user->type_id==5){
             //客服生成永久二维码
             $data['qrcodeSrc']=$weChat->qrcode($this->user_id.'01',true);
         }else{
