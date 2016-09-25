@@ -21,7 +21,7 @@
         var html = '';
         for(var key in data){
             if(uid==data[key].id){
-                html += '<li class="layim-chat-mine"><div class="layim-chat-user"><img src="'+data[key].avatar+'"><cite>'+data[key].created_at+'<i>'+data[key].username+'</i></cite></div><div class="layim-chat-text">'+ layim.content(data[key].content)+'</div></li>';
+                html += '<li class="layim-chat-mine"><div class="layim-chat-user"><img src="'+data[key].avatar+'"><cite><i>'+data[key].created_at+'</i>'+data[key].username+'</cite></div><div class="layim-chat-text">'+ layim.content(data[key].content)+'</div></li>';
             }else{
                 html += '<li><div class="layim-chat-user"><img src="'+data[key].avatar+'"><cite>'+data[key].username+'<i>'+data[key].created_at+'</i></cite></div><div class="layim-chat-text">'+ layim.content(data[key].content)+'</div></li>';
             }
