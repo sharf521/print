@@ -22,9 +22,8 @@ class IndexController extends ChatController
 
     public function index(User $user,Request $request)
     {
-        $id=$request->id;
-        $data['user']=$user->findOrFail($id);
-        $this->view('index',$data);
+
+        $this->view('index');
     }
 
     private function socketSend($data=array())

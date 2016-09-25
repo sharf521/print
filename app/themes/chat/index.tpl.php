@@ -12,6 +12,10 @@
 <script src="/themes/chat/js/web_socket.js"></script>
 <script src="/themes/chat/js/jquery.min.js"></script>
 <script src="/plugin/layui/layui.js"></script>
+<?php
+$user=new \App\Model\User();
+$user=$user->findOrFail($_GET['id']);
+?>
 <script type="text/javascript">
     userinfo = {};
     userinfo['id'] = '<?=$user->id?>';
