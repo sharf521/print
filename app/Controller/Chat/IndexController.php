@@ -20,24 +20,8 @@ class IndexController extends ChatController
         parent::__construct();
     }
 
-    public function index(User $user,Request $request)
+    public function index()
     {
-
-        //Connecting to Redis server on localhost
-        $redis = new \Redis();
-        $redis->pconnect('127.0.0.1', 6379);
-        echo "Connection to server sucessfully";
-        echo "Server is running: " . $redis->ping();
-        //store data in redis list
-        $redis->lpush("list", "Redis");
-        $redis->lpush("list", "Mongodb");
-        $redis->lpush("list", "Mysql");
-        // Get the stored data and print it
-
-        var_dump($redis->get('list'));
-
-
-
         $this->view('index');
     }
 
@@ -69,6 +53,8 @@ class IndexController extends ChatController
 //init
     public function getList(User $user,Request $request)
     {
+        $redis = new \Redis();
+        $redis->connect('127.0.0.1', 6379);
         $user_id=(int)$request->get('uid');
         $user=$user->find($user_id);
         $array=array(
@@ -90,8 +76,9 @@ class IndexController extends ChatController
             "online"=> 2,
             "list"=>array()
         );
-        $friendGroup['list']=array();
         $users=$user->where('id!=?')->bindValues($user_id)->get();
+        $arr_online=array();
+        $arr_hide=array();
         foreach ($users as $i=>$item){
             $u=array(
                 "username" => $item->nickname,
@@ -100,8 +87,14 @@ class IndexController extends ChatController
                 "avatar" =>$item->headimgurl,
                 "status"=>"hide"
             );
-            array_push($friendGroup['list'],$u);
+            if (in_array($item->id, $redis->hKeys('chat_room:101'))) {
+                $u['status'] = 'online';
+                array_push($arr_online,$u);
+            }else{
+                array_push($arr_hide,$u);
+            }
         }
+        $friendGroup['list']=$arr_online+$arr_hide;
         $array['data']['friend']=array();
         array_push($array['data']['friend'],$friendGroup);
 
@@ -175,7 +168,6 @@ class IndexController extends ChatController
             $where="type='{$type}' and ((mine_id='{$user_id}' and to_id='{$id}')||(mine_id='{$id}' and to_id='{$user_id}'))";
             $result=$chatLog->where($where)->orderBy('id desc')->pager($_GET['page'],10);
         }
-
         $arr_arr=array();
         krsort($result['list']);
         foreach ($result['list'] as $row){
