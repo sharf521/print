@@ -25,7 +25,7 @@ class IndexController extends ChatController
 
         //Connecting to Redis server on localhost
         $redis = new \Redis();
-        $redis->pconnect('121.41.30.46', 6379);
+        $redis->pconnect('127.0.0.1', 6379);
         echo "Connection to server sucessfully";
         echo "Server is running: " . $redis->ping();
         //store data in redis list
