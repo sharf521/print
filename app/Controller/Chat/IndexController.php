@@ -23,6 +23,21 @@ class IndexController extends ChatController
     public function index(User $user,Request $request)
     {
 
+        //Connecting to Redis server on localhost
+        $redis = new \Redis();
+        $redis->pconnect('121.41.30.46', 6379);
+        echo "Connection to server sucessfully";
+        echo "Server is running: " . $redis->ping();
+        //store data in redis list
+        $redis->lpush("list", "Redis");
+        $redis->lpush("list", "Mongodb");
+        $redis->lpush("list", "Mysql");
+        // Get the stored data and print it
+
+        var_dump($redis->get('list'));
+
+
+
         $this->view('index');
     }
 
@@ -82,7 +97,8 @@ class IndexController extends ChatController
                 "username" => $item->nickname,
                 "id" => $item->id,
                 "sign" => $item->sign,
-                "avatar" =>$item->headimgurl
+                "avatar" =>$item->headimgurl,
+                "status"=>"hide"
             );
             array_push($friendGroup['list'],$u);
         }
