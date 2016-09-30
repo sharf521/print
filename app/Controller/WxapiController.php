@@ -61,6 +61,10 @@ class WxapiController extends Controller
 
                 $message=new Text(['content' => "您成功的为 {$arr['invite_nickname']} 投了一票，感谢您的支持！"]);
                 $staff->message($message)->to($arr['openid'])->send();
+
+                //发送给邀请人
+                $message=new Text(['content' => "您成功邀请了：{$arr['nickname']}，一共邀请：{$arr['invite_invite_count']}人。"]);
+                $staff->message($message)->to($arr['invite_openid'])->send();
             }
 
         }elseif($message->Event=='unsubscribe'){
@@ -197,13 +201,11 @@ class WxapiController extends Controller
                 $invite->invite_count=$invite->invite_count+1;
                 $invite->save();
 
-                //发送给邀请人
-                $staff = $this->app->staff; // 客服管理
-                $message=new Text(['content' => "您成功邀请了：{$user->nickname}，一共邀请：{$invite->invite_count}人。"]);
-                $staff->message($message)->to($invite->openid)->send();
-
+                $return_arr['nickname']=$user->nickname;
                 $return_arr['openid']=$user->openid;
                 $return_arr['invite_nickname']=$invite->nickname;
+                $return_arr['invite_openid']=$invite->openid;
+                $return_arr['invite_invite_count']=$invite->invite_count;
             }
         }
         if(intval($user->type_id)==0){
