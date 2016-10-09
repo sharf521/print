@@ -18,6 +18,8 @@ set_time_limit($set_time = 3600);
 define('ROOT', __DIR__);
 
 require 'vendor/autoload.php';
+require 'function.php';
+
 \System\Lib\DB::instance(\App\Config::$db1);
 
 $pager = app('\System\Lib\Page');
