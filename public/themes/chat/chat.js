@@ -104,7 +104,7 @@ function initim(history_message) {
             }
             //聊天记录地址
             , chatLog: '/chat/history/'+userinfo['id']+'/'
-            , find:false
+            , find:'http://www.baidu.com/'
             , copyright: true //是否授权
             , title: 'LayChat'
         });
