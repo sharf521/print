@@ -45,7 +45,6 @@ class UploadController extends Controller
         $_path = ROOT . '/public' . $path;
         if (!file_exists($_path)) {
             if (!mkdir($_path, 0777, true)) {
-                echo $_path;
                 return $this->_error('Can not create directory');
             }
         }
@@ -76,8 +75,8 @@ class UploadController extends Controller
                     'code' => '0',
                     'msg'=>'',
                     'data'=>array(
-                        'src' => $filename,
-                        'name' => $path . $filename
+                        'name' => $filename,
+                        'src' => $path . $filename
                     )
                 );
             }else{
