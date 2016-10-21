@@ -96,7 +96,7 @@ function initim(history_message) {
             }
             // 上传图片
             , uploadImage: {
-                url: '/upload/save/'
+                url: '/upload/save/?type=chat'
             }
             // 上传文件
             , uploadFile: {
