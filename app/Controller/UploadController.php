@@ -25,7 +25,7 @@ class UploadController extends Controller
         $name = time() . rand(1000, 9000);
         $path = '/data/upload/' . date('Ym') . '/';
         if($type=='chat'){
-            $path = 'upload/chat/' . date('Ym');
+            $path = '/data/upload/chat/' . date('Ym');
         }else{
             $user_id = $this->user_id;
             if (empty($user_id)) {
@@ -45,6 +45,7 @@ class UploadController extends Controller
         $_path = ROOT . '/public' . $path;
         if (!file_exists($_path)) {
             if (!mkdir($_path, 0777, true)) {
+                echo $_path;
                 return $this->_error('Can not create directory');
             }
         }
