@@ -73,7 +73,6 @@ class UploadController extends Controller
             if($type=='chat'){
                 $data = array(
                     'code' => '0',
-                    'msg'=>'',
                     'data'=>array(
                         'name' => $filename,
                         'src' => $path . $filename
