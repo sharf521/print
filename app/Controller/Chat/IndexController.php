@@ -186,4 +186,49 @@ class IndexController extends ChatController
         $data['page']=$result['page'];
         $this->view('history',$data);
     }
+
+    public function upload()
+    {
+        if($_FILES['file']['size']<=0){
+            return;
+        }
+        $type = $_GET['type'];
+        $name = time() . rand(1000, 9000);
+        $path = '/data/chat/' . date('Ym') . '/';
+        //创建文件夹
+        $_path = ROOT . '/public' . $path;
+        if (!file_exists($_path)) {
+            if (!mkdir($_path, 0777, true)) {
+                return $this->_error('Can not create directory');
+            }
+        }
+        if (empty($_FILES['files']['tmp_name'])) {
+            return $this->_error('文件大小超过最大限额');
+        }
+        if ($_FILES['files']['size'] > 1048576 * 5) {
+            return $this->_error('文件超过限额，最大5M');
+        }
+        if ($_FILES['files']['name'] != '') {
+            if (function_exists('exif_imagetype')) {
+                if (exif_imagetype($_FILES['files']['tmp_name']) < 1) {
+                    return $this->_error('not a imagetype');
+                }
+            } else {
+                $ext = $this->getext($_FILES['files']['name']);
+                if (!in_array($ext, array(".gif", ".png", ".jpg", ".jpeg", ".bmp"))) {
+                    return $this->_error('type error');
+                }
+            }
+        }
+        $filename = $name . $ext;
+        if (!move_uploaded_file($_FILES['files']['tmp_name'], $_path . $filename)) {
+            $this->_error('can not move to tempath');
+        } else {
+            $data = array(
+                'code' => '0',
+                'url' => $path . $filename
+            );
+            echo json_encode($data);
+        }
+    }
 }
