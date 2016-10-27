@@ -54,13 +54,13 @@ class UploadController extends Controller
         if ($_FILES['file']['size'] > 1048576 * 5) {
             return $this->_error('文件超过限额，最大5M');
         }
+        $ext = $this->getext($_FILES['file']['name']);
         if ($_FILES['file']['name'] != '') {
             if (function_exists('exif_imagetype')) {
                 if (exif_imagetype($_FILES['file']['tmp_name']) < 1) {
                     return $this->_error('not a imagetype');
                 }
             } else {
-                $ext = $this->getext($_FILES['file']['name']);
                 if (!in_array($ext, array(".gif", ".png", ".jpg", ".jpeg", ".bmp"))) {
                     return $this->_error('type error');
                 }
