@@ -56,16 +56,17 @@ class WxapiController extends Controller
             }else{
                 //发送消息
                 $staff = $this->app->staff; // 客服管理
-                $message=new Text(['content' => "您好，终于等到你了！"]);
+                $message=new Text(['content' => "您好，终于等到你了！{$txt}"]);
                 $staff->message($message)->to($user->openid)->send();
 
+                /*
                 //您成功的为  投了一票，感谢您的支持！
                 $message=new Text(['content' => "{$user->nickname}，您己经成功关注商家印联，推荐人是：{$user->invite_nickname}"]);
                 $staff->message($message)->to($user->openid)->send();
 
                 //发送给邀请人
                 $message=new Text(['content' => "您成功邀请了：{$user->nickname}，一共邀请：{$user->invite_invite_count}人。"]);
-                $staff->message($message)->to($user->invite_openid)->send();
+                $staff->message($message)->to($user->invite_openid)->send();*/
             }
         }elseif($message->Event=='unsubscribe'){
             $arr=array(
