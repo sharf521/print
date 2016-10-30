@@ -52,7 +52,7 @@ class WxapiController extends Controller
         if($message->Event=='subscribe'){
             $user=(new User())->addWeChatUser($message->FromUserName,intval($txt));
             if(! isset($user->invite_openid)){
-                return new Text(['content' =>'您好，终于等到你了！']);
+                return new Text(['content' =>'您好，终于等到你了.']);
             }else{
                 //发送消息
                 $staff = $this->app->staff; // 客服管理
