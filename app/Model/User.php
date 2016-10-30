@@ -109,7 +109,7 @@ class User extends Model
         $user_wx=(new UserWx())->where("openid=?")->bindValues($userInfo->openid)->first();
         $user_wx->subscribe = $userInfo->subscribe;
         $user_wx->openid = $userInfo->openid;
-        $user_wx->nickname = $userInfo->nickname;
+        $user_wx->nickname = addslashes($userInfo->nickname);
         $user_wx->sex = $userInfo->sex;
         $user_wx->city = $userInfo->city;
         $user_wx->country = $userInfo->country;
