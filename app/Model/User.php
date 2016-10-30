@@ -128,7 +128,7 @@ class User extends Model
         $user->headimgurl=$userInfo->headimgurl;
         $user->nickname=addslashes($userInfo->nickname);
         if($invite_userid!=0 && intval($user->id)==0){
-            $invite=$this->find($invite_userid);
+            $invite=(new User())->find($invite_userid);
             if(!empty($invite)){
                 $user->invite_userid=$invite->id;
                 $user->invite_path=$invite->invite_path.$invite_userid.',';
