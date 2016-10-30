@@ -3,7 +3,7 @@ require 'header.php';
 if($this->func=='index'){?>
     <div class="main_title">
         <span>用户管理</span>列表
-        <?= $this->anchor('user/add/', '添加'); ?>
+        <?= $this->anchor('user/add/', '添加'); ?> &nbsp;
         <a href="<?=url('user/syncUser')?>">同步用户</a>
     </div>
     <form method="get">
