@@ -50,22 +50,22 @@ class WxapiController extends Controller
         }
 
         if($message->Event=='subscribe'){
-            $arr=$this->addUser($message->FromUserName,intval($txt));
-            if(empty($arr['openid'])){
+            $user=(new User())->addWeChatUser($message->FromUserName,intval($txt));
+            if(! isset($user->invite_openid)){
                 return new Text(['content' =>'您好，终于等到你了！']);
             }else{
                 //发送消息
                 $staff = $this->app->staff; // 客服管理
                 $message=new Text(['content' => "您好，终于等到你了！"]);
-                $staff->message($message)->to($arr['openid'])->send();
+                $staff->message($message)->to($user->openid)->send();
 
-                //$message=new Text(['content' => "您成功的为 {$arr['invite_nickname']} 投了一票，感谢您的支持！"]);
-                $message=new Text(['content' => "{$arr['nickname']}，您己经成功关注商家印联，推荐人是：{$arr['invite_nickname']}"]);
-                $staff->message($message)->to($arr['openid'])->send();
+                //您成功的为  投了一票，感谢您的支持！
+                $message=new Text(['content' => "{$user->nickname}，您己经成功关注商家印联，推荐人是：{$user->invite_nickname}"]);
+                $staff->message($message)->to($user->openid)->send();
 
                 //发送给邀请人
-                $message=new Text(['content' => "您成功邀请了：{$arr['nickname']}，一共邀请：{$arr['invite_invite_count']}人。"]);
-                $staff->message($message)->to($arr['invite_openid'])->send();
+                $message=new Text(['content' => "您成功邀请了：{$user->nickname}，一共邀请：{$user->invite_invite_count}人。"]);
+                $staff->message($message)->to($user->invite_openid)->send();
             }
         }elseif($message->Event=='unsubscribe'){
             $arr=array(
@@ -164,57 +164,6 @@ class WxapiController extends Controller
         }
     }
 
-    private function addUser($openid,$invite_userid=0)
-    {
-        $return_arr=array();
-        $userServer=$this->app->user;
-        $userInfo=$userServer->get($openid);
-        $user_wx=$this->UserWx->where("openid=?")->bindValues($userInfo->openid)->first();
-        $user_wx->subscribe = $userInfo->subscribe;
-        $user_wx->openid = $userInfo->openid;
-        $user_wx->nickname = $userInfo->nickname;
-        $user_wx->sex = $userInfo->sex;
-        $user_wx->city = $userInfo->city;
-        $user_wx->country = $userInfo->country;
-        $user_wx->province = $userInfo->province;
-        $user_wx->language = $userInfo->language;
-        $user_wx->headimgurl = $userInfo->headimgurl;
-        $user_wx->subscribe_time = $userInfo->subscribe_time;
-        $user_wx->unionid = $userInfo->unionid;
-        $user_wx->remark = $userInfo->remark;
-        $user_wx->groupid = $userInfo->groupid;
-        $user_wx->tagid_list =json_encode($userInfo->tagid_list);
-        $user_wx->save();
-
-        $user=new User();
-        $user=$user->where("openid=?")->bindValues($userInfo->openid)->first();
-        $user->openid=$userInfo->openid;
-        $user->headimgurl=$userInfo->headimgurl;
-        $user->nickname=$userInfo->nickname;
-        if($invite_userid!=0 && intval($user->id)==0){
-            $invite=new User();
-            $invite=$invite->find($invite_userid);
-            if(!empty($invite)){
-                $user->invite_userid=$invite->id;
-                $user->invite_path=$invite->invite_path.$invite_userid.',';
-                //更新邀请人的邀请数量
-                $invite->invite_count=$invite->invite_count+1;
-                $invite->save();
-
-                $return_arr['nickname']=$user->nickname;
-                $return_arr['openid']=$user->openid;
-                $return_arr['invite_nickname']=$invite->nickname;
-                $return_arr['invite_openid']=$invite->openid;
-                $return_arr['invite_invite_count']=$invite->invite_count;
-            }
-        }
-        if(intval($user->type_id)==0){
-            $user->type_id=1;
-        }
-        $user->save();
-        return $return_arr;
-    }
-
     public function oauth(Request $request)
     {
         $url=$request->get('url');
@@ -239,7 +188,7 @@ class WxapiController extends Controller
         );
         $result=$user->login($arr);
         if($result===true){
-            $this->addUser($oUser['id']);
+            $user->addWeChatUser($oUser['id']);
             $target_url=session('target_url');
             redirect($target_url); // 跳转
         }else{

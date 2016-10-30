@@ -1,6 +1,7 @@
 <?php
 namespace App\Model;
 
+use App\WeChat;
 use System\Lib\DB;
 
 class User extends Model
@@ -96,6 +97,60 @@ class User extends Model
         } else {
             return $id;
         }
+    }
+
+    public function addWeChatUser($openid,$invite_userid=0)
+    {
+        $return_arr=array();
+        $weChat=new WeChat();
+        $app=$weChat->app;
+        $userServer=$app->user;
+        $userInfo=$userServer->get($openid);
+        $user_wx=(new UserWx())->where("openid=?")->bindValues($userInfo->openid)->first();
+        $user_wx->subscribe = $userInfo->subscribe;
+        $user_wx->openid = $userInfo->openid;
+        $user_wx->nickname = $userInfo->nickname;
+        $user_wx->sex = $userInfo->sex;
+        $user_wx->city = $userInfo->city;
+        $user_wx->country = $userInfo->country;
+        $user_wx->province = $userInfo->province;
+        $user_wx->language = $userInfo->language;
+        $user_wx->headimgurl = $userInfo->headimgurl;
+        $user_wx->subscribe_time = $userInfo->subscribe_time;
+        $user_wx->unionid = $userInfo->unionid;
+        $user_wx->remark = $userInfo->remark;
+        $user_wx->groupid = $userInfo->groupid;
+        $user_wx->tagid_list =json_encode($userInfo->tagid_list);
+        $user_wx->save();
+
+        $user=$this->where("openid=?")->bindValues($userInfo->openid)->first();
+        $user->openid=$userInfo->openid;
+        $user->headimgurl=$userInfo->headimgurl;
+        $user->nickname=$userInfo->nickname;
+        if($invite_userid!=0 && intval($user->id)==0){
+            $invite=$this->find($invite_userid);
+            if(!empty($invite)){
+                $user->invite_userid=$invite->id;
+                $user->invite_path=$invite->invite_path.$invite_userid.',';
+                //更新邀请人的邀请数量
+                $invite->invite_count=$invite->invite_count+1;
+                $invite->save();
+
+//                $return_arr['nickname']=$user->nickname;
+//                $return_arr['openid']=$user->openid;
+                $return_arr['invite_nickname']=$invite->nickname;
+                $return_arr['invite_openid']=$invite->openid;
+                $return_arr['invite_invite_count']=$invite->invite_count;
+            }
+        }
+        if(intval($user->type_id)==0){
+            $user->type_id=1;
+        }
+        $user->save();
+        $user->invite_nickname=$return_arr['invite_nickname'];
+        $user->invite_openid=$return_arr['invite_openid'];
+        $user->invite_invite_count=$return_arr['invite_invite_count'];
+        return $user;
     }
 
     //修改密码

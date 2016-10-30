@@ -41,7 +41,28 @@ class UserController extends AdminController
 
         $data =$user->where($where)->orderBy('id desc')->pager($_GET['page'],10);
         $data['usertype'] = $userType->getList();
+
+
+
         $this->view('user', $data);
+    }
+
+    //同步微信用户
+    public function syncUser()
+    {
+        $weChat=new WeChat();
+        $userService=$weChat->app->user;
+        $users = $userService->lists();
+        $openids=$users['data']['openid'];
+        $user=new User();
+        foreach ($openids as $openid){
+            $user=$user->where("openid=?")->bindValues($openid)->first();
+            if(! $user->is_exist){
+                echo '新添加：'.$openid.'<br>';
+                $user->addWeChatUser($openid);
+            }
+        }
+        echo '完成';
     }
 
     function add()

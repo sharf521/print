@@ -2,7 +2,9 @@
 require 'header.php';
 if($this->func=='index'){?>
     <div class="main_title">
-        <span>用户管理</span>列表 <?= $this->anchor('user/add/', '添加'); ?>
+        <span>用户管理</span>列表
+        <?= $this->anchor('user/add/', '添加'); ?>
+        <a href="<?=url('user/syncUser')?>">同步用户</a>
     </div>
     <form method="get">
         <div class="search">
