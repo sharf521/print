@@ -136,7 +136,6 @@ class WeixinController extends Controller
     
     public function invite(WeChat $weChat,User $user)
     {
-        echo $this->user_id;
         $user=$user->find($this->user_id);
         if($user->type_id==5){
             //客服生成永久二维码
