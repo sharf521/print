@@ -126,7 +126,7 @@ class User extends Model
         $user=$this->where("openid=?")->bindValues($userInfo->openid)->first();
         $user->openid=$userInfo->openid;
         $user->headimgurl=$userInfo->headimgurl;
-        $user->nickname=$userInfo->nickname;
+        $user->nickname=addslashes($userInfo->nickname);
         if($invite_userid!=0 && intval($user->id)==0){
             $invite=$this->find($invite_userid);
             if(!empty($invite)){
