@@ -1,4 +1,39 @@
-// JavaScript Document
+layui.use(['layer', 'util', 'laydate'], function(){
+    var layer = layui.layer
+        ,util = layui.util
+        ,laydate = layui.laydate;
+    util.fixbar();
+
+
+    //上传文件
+    if ($('.layui-upload-file').length>0){
+        layui.use(['upload'], function(){
+            var index;
+            $('.layui-upload-file').each(function(index,obj){
+                var id=obj.getAttribute('upload_id');
+                var type=obj.getAttribute('upload_type');
+                layui.upload({
+                    url: '/index.php/upload/save?type='+type
+                    ,elem:obj
+                    ,before: function(input){
+                        index=layer.msg('上传中', {icon: 16,time:1000000});
+                    }
+                    ,success: function(res){
+                        layer.close(index);
+                        if(res.code=='0'){
+                            var path=res.url+'?'+Math.random();
+                            $('#'+id).val(path);
+                            var _str="<a href='"+path+"' target='_blank'><img src='"+path+"' height='50'/></a>";
+                            $('#upload_span_'+id).html(_str);
+                        }else{
+                            alert(res.msg);
+                        }
+                    }
+                });
+            });
+        });
+    }
+});
 
 //防止重复提交
 function setdisabled() {

@@ -127,8 +127,9 @@ class Uploader
         //移动文件
         if (!(move_uploaded_file($file["tmp_name"], $this->filePath) && file_exists($this->filePath))) { //移动失败	
             $this->stateInfo = $this->getStateInfo("ERROR_FILE_MOVE");
-        } else { //移动成功			
-			include '../../../system/upload.class.php';
+        } else { //移动成功
+            $this->stateInfo = $this->stateMap[0];
+			/*include '../../../system/upload.class.php';
 			$data=array(
 				'file'=>$this->filePath,
 				'path'=>dirname($this->fullName)
@@ -143,7 +144,7 @@ class Uploader
 			else
 			{
 				$this->stateInfo = $this->getStateInfo("ERROR_FILE_MOVE");	
-			}			
+			}			*/
         }
     }
 
@@ -308,10 +309,8 @@ class Uploader
         if (preg_match("/\{rand\:([\d]*)\}/i", $format, $matches)) {
             $format = preg_replace("/\{rand\:[\d]*\}/i", substr($randNum, 0, $matches[1]), $format);
         }*/
-        include_once __DIR__.'/../../../../system/Lib/Session.php';
-        $session=new \System\Lib\Session();
-        $user_id=$session->get('user_id');
-		$format="/data/upload/".intval($user_id/2000)."/".$user_id."/".date('Ym').'/'.rand(1, 10000000000) . rand(1, 10000000000);
+        global $user_id;
+		$format="/data/upload/".ceil($user_id/2000)."/".$user_id."/".date('Ym').'/'.rand(1, 10000000000) . rand(1, 10000000000);
         $ext = $this->getFileExt();
         return $format . $ext;
     }

@@ -100,17 +100,13 @@
                     <td>显示图片：</td>
                     <td>
                         <input type="hidden" name="picture" id="article" value="<?= $row->picture ?>"/>
-                <span id="upload_span_article">
-                    <? if ($row->picture != '') { ?>
-                        <a href="<?= $row->picture; ?>" target="_blank"><img src="<?= $row->picture ?>"
-                                                                             align="absmiddle" width="100"/></a>
-                    <? } ?>
-                </span>
-                        <div class="upload-upimg">
-                            <span class="_upload_f">上传图片</span>
-                            <input type="file" id="upload_article" name="files"
-                                   onchange="upload_image('article','article')"/>
-                        </div>
+						<span id="upload_span_article">
+							<? if ($row->picture != '') { ?>
+                                <a href="<?= $row->picture ?>" target="_blank"><img
+                                        src="<?= $row->picture ?>" align="absmiddle" width="100"/></a>
+                            <? } ?>
+                        </span>
+                        <input type="file" name="file" class="layui-upload-file" upload_id="article" upload_type="article">
                     </td>
                 </tr>
 

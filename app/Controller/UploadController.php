@@ -23,18 +23,14 @@ class UploadController extends Controller
         }
         $type = $_GET['type'];
         $name = time() . rand(1000, 9000);
-        $path = '/data/upload/' . date('Ym') . '/';
-        if($type=='chat'){
-            $path = '/data/upload/chat/' . date('Ym');
-        }else{
-            $user_id = $this->user_id;
-            if (empty($user_id)) {
-                return $this->_error('超时，请重新登陆');
-            }
+        $user_id = $this->user_id;
+        if (empty($user_id)) {
+            return $this->_error('超时，请重新登陆');
         }
+        $path="/data/upload/".ceil($user_id/2000)."/".$user_id."/".date('Ym').'/';
         if ($type == 'article') {
-            $path = 'upload/article/' . date('Ym');
-        }elseif ($type == 'headimgurl') {
+            $path="/data/upload/".ceil($user_id/2000)."/".$user_id."/article/".date('Ym').'/';
+        } elseif ($type == 'headimgurl') {
             $name = 'face';
             $path = '/data/upload/' . ceil($user_id / 2000) . '/' . $user_id . '/';
         } elseif ($type == 'card1' || $type == 'card2') {

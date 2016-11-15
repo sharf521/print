@@ -8,7 +8,9 @@ header("Content-Type: text/html; charset=utf-8");
 
 session_start();
 
-include_once __DIR__.'/../../../../system/Lib/Session.php';
+
+require __DIR__.'/../../../../vendor/autoload.php';
+
 $session=new \System\Lib\Session();
 $user_id=$session->get('user_id');
 
