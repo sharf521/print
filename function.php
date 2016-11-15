@@ -474,3 +474,31 @@ function show_msg($msg = array())
 	</ul>
 	</body></html>';
 }
+
+
+function ueditor($data=array())
+{
+    $name=isset($data['name'])?$data['name']:'content';
+    $value=isset($data['value'])?$data['value']:'';
+    ?>
+
+    <!-- 加载编辑器的容器 -->
+    <script id="container" name="<?=$name?>" type="text/plain" style="width:900px;">
+        <?=$value?>
+    </script>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="/plugin/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="/plugin/ueditor/ueditor.all.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('container', {
+            /*toolbars: [
+             ['fullscreen', 'source', 'undo', 'redo', 'bold']
+             ],*/
+            autoHeightEnabled: true,
+            autoFloatEnabled: true
+        });
+    </script>
+    <?
+}
