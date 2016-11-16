@@ -12,15 +12,6 @@ class System extends Model
         $this->result=DB::table('system')->orderBy("`showorder`,id")->lists('value','code');
     }
 
-    function lists()
-    {
-//        $_system = $this->getlist();
-//        foreach ($_system as $key => $value){
-//            $system[$value['code']] = $value['value'];
-//        }
-//        return $system;
-    }
-
     public function getCode($code)
     {
         return $this->result[$code];
