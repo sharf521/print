@@ -1,17 +1,25 @@
 <?php require 'header.php';?>
 <?php if($this->func=='index') : ?>
     <div class="weui-cells__title">分类管理</div>
-    <ul>
+    <ul class="cateList">
         <? foreach($cates as $cate) : ?>
         <li>
-            <?=$cate['name']?>  <a href="<?=url("category/add/?pid={$cate['id']}")?>">添加子分类</a>
-            <a href="<?=url("category/edit/?id={$cate['id']}")?>">编辑</a>
-            <a href="javascript:cateDel(<?=$cate['id']?>)">删</a>
+            <?=$cate['name']?>
+            <div class="operat">
+                <a href="<?=url("category/add/?pid={$cate['id']}")?>">添加子分类</a>
+                <a href="<?=url("category/edit/?id={$cate['id']}")?>">编辑</a>
+                <a href="javascript:cateDel(<?=$cate['id']?>)">删</a>
+            </div>
             <? if(isset($cate['son']) && is_array($cate['son'])) :
                 echo '<ul>';
                 foreach($cate['son'] as $son) : ?>
-                    <li><?=$son['name']?>            <a href="<?=url("category/edit/?id={$son['id']}")?>">编辑</a>
-            <a href="javascript:cateDel(<?=$son['id']?>)">删</a></li>
+                    <li>
+                        <?=$son['name']?>
+                        <div class="operat">
+                            <a href="<?=url("category/edit/?id={$son['id']}")?>">编辑</a>
+                            <a href="javascript:cateDel(<?=$son['id']?>)">删</a>
+                        </div>
+                    </li>
              <?
                 endforeach;
                 echo '</ul>';

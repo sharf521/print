@@ -162,3 +162,13 @@ ul,li{list-style: none}
     position: absolute;
     bottom: 0.5rem;
 }
+
+/* 分类 */
+.cateList{ margin: 10px; font-size: 14px;}
+.cateList li{ line-height: 30px; border-top: 1px dotted #ddd}
+.cateList li .operat{float: right}
+.cateList li ul li{ padding:0px 40px;border-top: 0px}
+
+/* goods */
+.goods_add_uploaderLi{position: relative; border: 1px solid #d9d9d9}
+.goods_add_uploaderLi i{position: absolute; right: 0px; background-color: #fff;border-radius: 50%;}

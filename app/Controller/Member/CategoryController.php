@@ -41,6 +41,7 @@ class CategoryController extends MemberController
             $shopCategory->pid=$pid;
             $shopCategory->path=$path;
             $shopCategory->name=$name;
+            $shopCategory->showorder=10;
             $id=$shopCategory->save(true);
             $cate=$shopCategory->find($id);
             $cate->path=$cate->path.$id.',';
