@@ -13,3 +13,4 @@
     <title><?php if(!empty($title_herder)){echo $title_herder.'-';}?><?=app('\App\Model\System')->getCode('webname');?></title>
     <link href="/themes/default_wap/css.css" type="text/css" rel="stylesheet"/>
 </head>
+<body>
