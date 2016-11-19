@@ -1,6 +1,11 @@
 <?php require 'header.php';?>
 <?php if($this->func=='index') : ?>
-    <div class="weui-cells__title">分类管理</div>
+    <div class="m_header">
+        <a class="m_header_l" href="<?=url('')?>"><i class="m_icogohisr"></i></a>
+        <a class="m_header_r" href="<?=url('category/add')?>">添加</a>
+        <h1>分类管理</h1>
+    </div>
+    <div class="weui-cells__title margin_header">分类管理</div>
     <ul class="cateList">
         <? foreach($cates as $cate) : ?>
         <li>
@@ -45,7 +50,12 @@
         }
     </script>
 <?php elseif($this->func=='add' || $this->func=='edit') : ?>
-    <div class="weui-cells__title"><? if ($this->func == 'add') { ?>新增<? } else { ?>编辑<? } ?>分类</div>
+    <div class="m_header">
+        <a class="m_header_l" href="<?=url('category')?>"><i class="m_icogohisr"></i></a>
+        <a class="m_header_r" href="m_seach.html"></a>
+        <h1>分类管理</h1>
+    </div>
+    <div class="weui-cells__title margin_header"><? if ($this->func == 'add') { ?>新增<? } else { ?>编辑<? } ?>分类</div>
     <form method="post">
         <input type="hidden" name="pid" value="<?=(int)$_GET['pid']?>"/>
         <div class="weui-cells weui-cells_form">

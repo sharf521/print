@@ -1,5 +1,10 @@
 <?php require 'header.php';?>
-    <div class="my-navbar">
+    <div class="m_header">
+        <a class="m_header_l" href="<?=url('')?>"><i class="m_icogohisr"></i></a>
+        <a class="m_header_r" href="<?=url('goods/add')?>">添加</a>
+        <h1>商品管理</h1>
+    </div>
+    <div class="my-navbar margin_header">
         <div class="my-navbar__item my-navbar__item_on">
             选项一
         </div>
@@ -51,6 +56,7 @@
     </ul>
 
 
+<a href="<?=url('goods/add')?>" class="weui-btn weui-btn_primary">添加商品</a>
 
     <div class="weui-tabbar">
         <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on">

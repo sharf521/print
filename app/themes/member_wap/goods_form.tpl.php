@@ -1,7 +1,11 @@
 <?php require 'header.php';?>
-<div class="weui-cells__title">表单</div>
+    <div class="m_header">
+        <a class="m_header_l" href="<?=url('goods')?>"><i class="m_icogohisr"></i></a>
+        <a class="m_header_r"></a>
+        <h1>添加商品</h1>
+    </div>
 <form method="post">
-    <div class="weui-cells weui-cells_form">
+    <div class="weui-cells weui-cells_form margin_header">
         <div class="page__bd">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
@@ -14,6 +18,7 @@
                             <ul class="weui-uploader__files" id="uploaderFiles">
 
                             </ul>
+                            <input type="hidden" name="imgids" id="imgids" value="">
                             <div class="weui-uploader__input-box">
                                 <input id="uploaderInput" name="file" class="weui-uploader__input" type="file" accept="image/*" onchange="uploadGoodsImg()"/>
                             </div>
@@ -25,7 +30,7 @@
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">名称</label></div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="text"  placeholder="请输入商品名称"/>
+                <input class="weui-input" type="text" name="name"  placeholder="请输入商品名称"/>
             </div>
         </div>
         <div class="weui-cell" id="nospec_price">
@@ -47,7 +52,7 @@
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">运费</label></div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="number" onkeyup="value=value.replace(/[^0-9.]/g,'')" value="0.00"/>
+                <input class="weui-input" type="number" name="shipping_fee" onkeyup="value=value.replace(/[^0-9.]/g,'')" value="0.00"/>
             </div>
         </div>
     </div>
@@ -55,11 +60,11 @@
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell">
             <div class="weui-cell__bd">
-                <textarea class="weui-textarea" placeholder="请输入详细介绍" rows="3"></textarea>
+                <textarea class="weui-textarea" name="content" placeholder="请输入详细介绍" rows="3"></textarea>
             </div>
         </div>
         <div class="weui-btn-area">
-            <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确定</a>
+            <input class="weui-btn weui-btn_primary" type="submit" value="保存">
         </div>
     </div>
 </form>

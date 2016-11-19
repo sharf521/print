@@ -1,14 +1,19 @@
 //goods js
 function uploadGoodsImg() {
+    var lay=layer.open({
+        type: 2
+        ,content: '上传中'
+    });
     $.ajaxFileUpload({
         url:'/index.php/upload/save?type=goods',
         fileElementId :'uploaderInput',
         dataType:'json',
         success: function (res,status){
+            layer.close(lay);
             if(res.code == '0'){
                 var imgId=res.id;
                 var path=res.url+'?'+Math.random();
-                //$('#'+id).val(path);
+                $('#imgids').val($('#imgids').val()+imgId+',');
                 var _str='<li class="weui-uploader__file goods_add_uploaderLi" style="background-image:url('+path+')">' +
                     "<i class='weui-icon-cancel' onclick=delGoodsImg(this,'"+imgId+"')></i></li>";
                 $("#uploaderFiles").append(_str);
@@ -17,6 +22,7 @@ function uploadGoodsImg() {
             }
         },
         error: function (result, status, e){
+            layer.close(lay);
             alert(e);
         }
     });

@@ -6,8 +6,8 @@ if(session('msg'))
     <script>
         layer.open({
             content: '<?=session('msg')?>',
-            style: '',
-            time:10000
+            skin: 'msg',
+            time:3
         });
     </script>
     <?
@@ -18,7 +18,8 @@ if(session('error'))
     <script>
         layer.open({
             content: '<?=session('error')?>',
-            style: ''
+            skin: 'msg',
+            time:5
         });
     </script>
     <?
