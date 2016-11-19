@@ -15,9 +15,9 @@ ul,li{list-style: none}
 .hide{display: none}
 
 
-.m_header{ height:28px; padding:8px 0;background: #eaeaea;color:#333;text-align: center; width:100%; display:block; position:fixed; top:0; left:0; z-index:999;}
+.m_header{ line-height:28px;height:28px; padding:8px 0;background: #eaeaea;color:#333;text-align: center; width:100%; display:block; position:fixed; top:0; left:0; z-index:999;}
 .m_header a{color: #333;}
-.m_header h1{line-height:28px; height:28px; padding:0 60px; width:100%; box-sizing:border-box; font-size:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; font-weight:normal;}
+.m_header h1{ height:28px; padding:0 60px; width:100%; box-sizing:border-box; font-size:1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; font-weight:normal;}
 .m_header .m_header_r{ position:absolute;height: 28px; display:block;right:0; top:0; padding:8px 10px;}
 .m_header .m_header_l{ position:absolute;width: 28px;height: 28px; display:block;left:0; top:0;padding:8px 10px;}
 .m_header .m_header_l i{margin:0px; position:absolute; top:15px; left:18px;
