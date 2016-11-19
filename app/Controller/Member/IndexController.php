@@ -1,7 +1,6 @@
 <?php
 namespace App\Controller\Member;
 
-use App\Model\App;
 use App\Model\AppUser;
 use App\Model\User;
 use System\Lib\DB;

@@ -15,7 +15,7 @@
 
                             </ul>
                             <div class="weui-uploader__input-box">
-                                <input id="uploaderInput" name="file" class="weui-uploader__input" type="file" accept="image/*" onchange="upload()"/>
+                                <input id="uploaderInput" name="file" class="weui-uploader__input" type="file" accept="image/*" onchange="uploadGoodsImg()"/>
                             </div>
                         </div>
                     </div>
@@ -64,47 +64,9 @@
     </div>
 </form>
     <script src="/plugin/js/ajaxfileupload.js?111"></script>
-<script type="text/javascript">
-    function upload() {
-        $.ajaxFileUpload({
-            url:'/index.php/upload/save?type=goods',
-            fileElementId :'uploaderInput',
-            dataType:'json',
-            success: function (res,status){
-                if(res.code == '0'){
-                    var path=res.url+'?'+Math.random();
-                    //$('#'+id).val(path);
-                    var _str='<li class="weui-uploader__file goods_add_uploaderLi" style="background-image:url('+path+')">' +
-                        '<i class="weui-icon-cancel" onclick="del_img(this)"></i></li>';
-                    $("#uploaderFiles").append(_str);
-                }else{
-                    alert(res.msg);
-                }
-            },
-            error: function (result, status, e){
-                alert(e);
-            }
-        });
-    }
-    function del_img(o) {
-        $(o).parent().remove();
-    }
-    $(function(){
-        $('#addSpecBtn').on("click",function(e){
-            $('#nospec_price').hide();
-            $('#nospec_stock_count').hide();
-            var tem=$('#spec_item_hide .spec_item').clone(true);
-            $('#specBox').append(tem);
-        });
-        $('.spec_item .spec_del').on("click",function(e){
-            $(this).parent().parent('.spec_item').remove();
-            if($('#specBox').html()==''){
-                $('#nospec_price').show();
-                $('#nospec_stock_count').show();
-            }
-        });
-    });
-</script>
+    <script type="text/javascript">
+        goodsAdd_js();
+    </script>
 <div id="spec_item_hide" class="hide">
     <div class="spec_item">
         <div class="weui-cell">
