@@ -52,7 +52,7 @@
 <?php elseif($this->func=='add' || $this->func=='edit') : ?>
     <div class="m_header">
         <a class="m_header_l" href="<?=url('category')?>"><i class="m_icogohisr"></i></a>
-        <a class="m_header_r" href="m_seach.html"></a>
+        <a class="m_header_r"></a>
         <h1>分类管理</h1>
     </div>
     <div class="weui-cells__title margin_header"><? if ($this->func == 'add') { ?>新增<? } else { ?>编辑<? } ?>分类</div>
