@@ -1,44 +1,56 @@
 <?php require 'header.php';?>
     <div class="m_header">
-        <a class="m_header_l" href="javascript:history.go(-1);"><i class="m_icogohisr"></i></a>
-        <a class="m_header_r" href="m_seach.html"><i class="m_ico m_icosearch"></i></a>
-        <h1></h1>
+        <a class="m_header_l" href="<?=url('')?>"><i class="iconfont">&#xe604;</i></a>
+        <a class="m_header_r"></a>
+        <h1>用户中心</h1>
     </div>
-<br><br><br>
+    <br><br>
 
+    <div class="weui-flex margin_header">
+        <div class="weui-flex__item">
+            <a href="<?=url('category')?>" style="text-align: center; width: 100%; height: 100%; display: block">
+                <i class="iconfont" style="font-size: 22px; color: #999999">&#xf0048;</i>
+                <p class="weui-grid__label">分类管理</p>
+            </a>
+        </div>
+        <div class="weui-flex__item">
+            <a href="<?=url('goods')?>" style="text-align: center; width: 100%; height: 100%; display: block">
+                <i class="iconfont" style="font-size: 22px; color: #999999">&#xe643;</i>
+                <p class="weui-grid__label">商品管理</p>
+            </a>
+        </div>
+    </div>
 
-    <div class="weui-cells__title">带说明、跳转的列表项</div>
-    <div class="weui-cells">
-        <a class="weui-cell weui-cell_access" href="<?=url('category')?>">
-            <div class="weui-cell__bd">
-                <p>分类管理</p>
+    <div class="weui-grids margin_header">
+        <a href="<?=url('category')?>" class="weui-grid">
+            <div class="weui-grid__icon">
+                <i class="iconfont" style="font-size: 22px; color: #999999">&#xf0048;</i>
             </div>
-            <div class="weui-cell__ft">编辑、添加</div>
+            <p class="weui-grid__label">分类管理</p>
         </a>
-        <a class="weui-cell weui-cell_access" href="<?=url('goods')?>">
-            <div class="weui-cell__bd">
-                <p>商品管理</p>
+        <a href="<?=url('goods')?>" class="weui-grid">
+            <div class="weui-grid__icon">
+                <i class="iconfont" style="font-size: 22px; color: #999999">&#xe643;</i>
             </div>
-            <div class="weui-cell__ft">编辑、添加</div>
+            <p class="weui-grid__label">商品管理</p>
         </a>
-
     </div>
 
     <div class="weui-tabbar">
         <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on">
-            <img src="./images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
-            <p class="weui-tabbar__label">微信</p>
+            <i class="iconfont weui-tabbar__icon">&#xe64f;</i>
+            <p class="weui-tabbar__label">首页</p>
         </a>
         <a href="javascript:;" class="weui-tabbar__item">
-            <img src="./images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
-            <p class="weui-tabbar__label">通讯录</p>
+            <i class="iconfont weui-tabbar__icon">&#xe698;</i>
+            <p class="weui-tabbar__label">购物车</p>
         </a>
         <a href="javascript:;" class="weui-tabbar__item">
-            <img src="./images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
+            <i class="iconfont weui-tabbar__icon">&#xe64f;</i>
             <p class="weui-tabbar__label">发现</p>
         </a>
         <a href="javascript:;" class="weui-tabbar__item">
-            <img src="./images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
+            <i class="iconfont weui-tabbar__icon">&#xe6fc;</i>
             <p class="weui-tabbar__label">我</p>
         </a>
     </div>

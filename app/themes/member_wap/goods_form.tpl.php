@@ -1,6 +1,6 @@
 <?php require 'header.php';?>
     <div class="m_header">
-        <a class="m_header_l" href="<?=url('goods')?>"><i class="m_icogohisr"></i></a>
+        <a class="m_header_l" href="<?=url('goods')?>"><i class="iconfont">&#xe604;</i></a>
         <a class="m_header_r"></a>
         <h1>添加商品</h1>
     </div>
@@ -63,9 +63,23 @@
                 <textarea class="weui-textarea" name="content" placeholder="请输入详细介绍" rows="3"></textarea>
             </div>
         </div>
-        <div class="weui-btn-area">
-            <input class="weui-btn weui-btn_primary" type="submit" value="保存">
+    </div>
+
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd"><label class="weui-label">分类</label></div>
+            <div class="weui-cell__bd">
+                <select name="shop_category" class="weui-select">
+                    <option value="0">默认</option>
+                    <? foreach ($cates as $cate) :?>
+                    <option value="<?=$cate->id?>"><?=$cate->name?></option>
+                    <? endforeach;?>
+                </select>
+            </div>
         </div>
+    </div>
+    <div class="weui-btn-area">
+        <input class="weui-btn weui-btn_primary" type="submit" value="保存">
     </div>
 </form>
     <script src="/plugin/js/ajaxfileupload.js?111"></script>

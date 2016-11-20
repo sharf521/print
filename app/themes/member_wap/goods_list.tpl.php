@@ -1,62 +1,56 @@
 <?php require 'header.php';?>
     <div class="m_header">
-        <a class="m_header_l" href="<?=url('')?>"><i class="m_icogohisr"></i></a>
+        <a class="m_header_l" href="<?=url('')?>"><i class="iconfont">&#xe604;</i></a>
         <a class="m_header_r" href="<?=url('goods/add')?>">添加</a>
         <h1>商品管理</h1>
     </div>
     <div class="my-navbar margin_header">
-        <div class="my-navbar__item my-navbar__item_on">
-            选项一
+        <div class="my-navbar__item <? if($this->func=='index'){echo 'my-navbar__item_on';}?>">
+            <a href="<?=url('goods')?>">出售中</a>
         </div>
-        <div class="my-navbar__item">
-            选项二
+        <div class="my-navbar__item <? if($this->func=='list_stock0'){echo 'my-navbar__item_on';}?>">
+            <a href="<?=url('goods/list_stock0')?>">售罄的</a>
         </div>
-        <div class="my-navbar__item">
-            选项二
-        </div>
-        <div class="my-navbar__item">
-            选项二
+        <div class="my-navbar__item <? if($this->func=='list_status2'){echo 'my-navbar__item_on';}?>">
+            <a href="<?=url('goods/list_status2')?>">仓库中</a>
         </div>
     </div>
 
     <ul class="commoditylist_content">
+        <? foreach ($result['list'] as $goods) : ?>
         <li>
-            <a href="/view/product/details.html?goodid=8ff32637-6c7f-445d-86bc-f0b8d21d5e3e">
+            <a href="<?=url("goods/edit/?id={$goods->id}")?>">
               <span class="imgspan">
-                    <img class="" src="http://tong.img.tongtongmall.com/3f1fe28a6a7642a1929503641551fc32?imageView2/4/quality/30">
+                    <img class="" src="<?=$goods->image_url?>">
                 </span>
-                <div>
-                    <p class="cd_title">法国ALPHANOVA艾罗若华护臀膏100ml法国100ml </p>
+                <div class="info">
+                    <p class="cd_title"><?=$goods->name?></p>
                     <p class="cd_money">
                         <span>￥</span>
-                        <var>79.</var>
-                        <span>00</span>
+                        <var><?=$goods->price?></var>
                     </p>
-                    <p class="cd_sales">0购买 100.00%好评</p>
+                    <p class="cd_sales">库存：<?=$goods->stock_count?></p>
                 </div>
             </a>
+            <div class="operat"><i class="iconfont" onclick="showMenu(<?=$goods->id?>)">&#xe73a;</i></div>
         </li>
-        <li>
-            <a href="/view/product/details.html?goodid=74d0fa25-d879-48f8-8646-dc7f4b6f5a74">
-              <span class="search_list_q">
-
-                    <img class="" src="http://tong.img.tongtongmall.com/177f6c828be1485a9e685ebe2ce1fef9?imageView2/4/quality/30">
-                </span>
-                <div>
-                    <p class="cd_title">法国艾罗若华100%有机纯天然公主泡泡浴200ml </p>
-                    <p class="cd_money">
-                        <span>￥</span>
-                        <var>86.</var>
-                        <span>00</span>
-                    </p>
-                    <p class="cd_sales">0购买 100.00%好评</p>
-                </div>
-            </a>
-        </li>
+        <? endforeach;?>
     </ul>
+    <? if($result['total']==0) : ?>
+    <div class="weui-msg">
+        <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg-primary"></i></div>
+        <div class="weui-msg__text-area">
+            <h2 class="weui-msg__title">没有任何商品。。</h2>
+            <p class="weui-msg__desc"></p>
+        </div>
+    </div>
 
+    <? endif;?>
 
-<a href="<?=url('goods/add')?>" class="weui-btn weui-btn_primary">添加商品</a>
+    <div class="weui-btn-area">
+        <a href="<?=url('goods/add')?>" class="weui-btn weui-btn_primary">添加商品</a>
+    </div>
+
 
     <div class="weui-tabbar">
         <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on">
@@ -76,4 +70,41 @@
             <p class="weui-tabbar__label">我</p>
         </a>
     </div>
+
+    <div class="weui-skin_android" id="androidActionsheet" style="display: none">
+        <div class="weui-mask"></div>
+        <div class="weui-actionsheet">
+            <div class="weui-actionsheet__menu">
+                <div class="weui-actionsheet__cell change">下架</div>
+                <div class="weui-actionsheet__cell edit">编辑</div>
+                <div class="weui-actionsheet__cell del">删除</div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function showMenu(id) {
+            var $androidActionSheet = $('#androidActionsheet');
+            $androidActionSheet.fadeIn(200);
+            $androidActionSheet.find('.weui-mask').on('click',function () {
+                $androidActionSheet.fadeOut(200);
+            });
+            $androidActionSheet.find('.change').on('click',function () {
+                location.href='<?=url("goods/change/?id=")?>'+id;
+            });
+            $androidActionSheet.find('.edit').on('click',function () {
+                location.href='<?=url("goods/edit/?id=")?>'+id;
+            });
+            $androidActionSheet.find('.del').on('click',function () {
+                layer.open({
+                    content: '您确定要删除吗？'
+                    ,btn: ['删除', '取消']
+                    ,yes: function(index){
+                        location.href='<?=url("goods/del/?id=")?>'+id;
+                        layer.close(index);
+                    }
+                });
+                $androidActionSheet.fadeOut(200);
+            });
+        }
+    </script>
 <?php require 'footer.php';?>
