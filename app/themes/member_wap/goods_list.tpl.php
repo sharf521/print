@@ -21,7 +21,7 @@
         <li>
             <a href="<?=url("goods/edit/?id={$goods->id}")?>">
               <span class="imgspan">
-                    <img class="" src="<?=$goods->image_url?>">
+                    <img src="/themes/images/blank.gif" data-echo="<?=$goods->image_url?>">
                 </span>
                 <div class="info">
                     <p class="cd_title"><?=$goods->name?></p>
@@ -75,7 +75,12 @@
         <div class="weui-mask"></div>
         <div class="weui-actionsheet">
             <div class="weui-actionsheet__menu">
-                <div class="weui-actionsheet__cell change">下架</div>
+                <? if($this->func=='index') : ?>
+                    <div class="weui-actionsheet__cell change">下架</div>
+                <? endif;?>
+                <? if($this->func=='list_status2') :?>
+                    <div class="weui-actionsheet__cell change">上架</div>
+                <? endif;?>
                 <div class="weui-actionsheet__cell edit">编辑</div>
                 <div class="weui-actionsheet__cell del">删除</div>
             </div>

@@ -108,7 +108,7 @@ class GoodsController extends MemberController
                 $goods->save();
 
                 DB::commit();
-                redirect('goods')->with('msg', '添加成功！');
+                redirect('goods/list_status2')->with('msg', '添加成功！');
             }catch(\Exception $e){
                 DB::rollBack();
                 $error = "Failed: " . $e->getMessage();
@@ -128,11 +128,12 @@ class GoodsController extends MemberController
             if($goods->status==1){
                 $goods->status=2;
                 $goods->save();
+                redirect('goods/list_status2')->with('msg', '己下架！');
             }elseif($goods->status==2){
                 $goods->status=1;
                 $goods->save();
+                redirect('goods')->with('msg','己上架！');
             }
-            redirect('goods')->with('msg','操作成功！');
         }else{
             redirect('goods')->with('error','操作失败！');
         }
