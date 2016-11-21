@@ -30,7 +30,9 @@ function uploadGoodsImg() {
 }
 function delGoodsImg(o,id) {
     $.get("/index.php/upload/del?type=goods&id=" + id, {}, function (str) { });
-    $(o).parent().remove();
+    var ids = $('#imgids').val();
+    $('#imgids').val(ids.replace(','+id+',',','));
+    $(o).parents('li').remove();
 }
 function goodsAdd_js()
 {
@@ -43,7 +45,7 @@ function goodsAdd_js()
         });
         $('.spec_item .spec_del').on("click",function(e){
             $(this).parent().parent('.spec_item').remove();
-            if($('#specBox').html()==''){
+            if($('#specBox input').length==0){
                 $('#is_have_spec').val('0');
                 $('#specBox_no').show();
             }
@@ -64,16 +66,20 @@ function goodsAdd_js()
                     return false;
                 }
             }else{
+                var _tag=true;
                 $('#specBox input').each(function(i){
                     if($(this).val()==''){
+                        $(this).next('.weui-cell__ft').remove();
                         $(this).after('<div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>');
                         $(this).focus();
-                        return false;
+                        _tag=false;
                     }else{
                         $(this).next('.weui-cell__ft').remove();
                     }
                 });
-                return false;
+                if(_tag==false){
+                    return false;
+                }
             }
             if($('#content').val()==''){
                 $('#content').parents('.weui-cell').addClass('weui-cell_warn');

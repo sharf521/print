@@ -53,7 +53,7 @@
         <a class="m_header_r"></a>
         <h1>分类管理</h1>
     </div>
-    <div class="weui-cells__title margin_header"><? if ($this->func == 'add') { ?>新增<? } else { ?>编辑<? } ?>分类</div>
+    <div class="weui-cells__title margin_header"><?=$this->func == 'add'?'新增':'编辑'; ?>分类</div>
     <form method="post">
         <input type="hidden" name="pid" value="<?=(int)$_GET['pid']?>"/>
         <ul class="my_cells">
