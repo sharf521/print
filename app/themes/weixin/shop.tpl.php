@@ -51,7 +51,7 @@
                         </span>
                         <div class="upload-upimg">
                             <span class="_upload_f">上传文件</span>
-                            <input type="file" id="upload_picture" name="files"
+                            <input type="file" id="upload_picture" name="files" accept="image/*"
                                    onchange="upload_image('picture','shop')"/>
                         </div>
                     </td></tr>
