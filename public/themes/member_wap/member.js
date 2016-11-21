@@ -67,6 +67,7 @@ function goodsAdd_js()
                 $('#specBox input').each(function(i){
                     if($(this).val()==''){
                         $(this).after('<div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>');
+                        $(this).focus();
                         return false;
                     }else{
                         $(this).next('.weui-cell__ft').remove();
@@ -76,6 +77,7 @@ function goodsAdd_js()
             }
             if($('#content').val()==''){
                 $('#content').parents('.weui-cell').addClass('weui-cell_warn');
+                $('#content').focus();
                 return false;
             }else{
                 $('#content').parents('.weui-cell').removeClass('weui-cell_warn');
@@ -87,6 +89,7 @@ function goodsAdd_js()
             if(oName=='name' || oName=='price' || oName=='stock_count'){
                 if(o.val()==''){
                     o.parents('.weui-cell').addClass('weui-cell_warn');
+                    o.focus();
                     return false;
                 }else{
                     o.parents('.weui-cell').removeClass('weui-cell_warn');
