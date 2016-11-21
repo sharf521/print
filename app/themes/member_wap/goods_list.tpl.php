@@ -89,9 +89,9 @@
     <script type="text/javascript">
         function showMenu(id) {
             var $androidActionSheet = $('#androidActionsheet');
-            $androidActionSheet.fadeIn(200);
+            $androidActionSheet.show();
             $androidActionSheet.find('.weui-mask').on('click',function () {
-                $androidActionSheet.fadeOut(200);
+                $androidActionSheet.hide();
             });
             $androidActionSheet.find('.change').on('click',function () {
                 location.href='<?=url("goods/change/?id=")?>'+id;
