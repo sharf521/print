@@ -3,14 +3,14 @@
 <script>
     <?php  if(session('msg')) : ?>
     layer.open({
-        content: '<?=session('msg')?>',
+        content: '<?=addslashes(session('msg'))?>',
         skin: 'msg',
         time:3
     });
     <? endif;
     if(session('error')) : ?>
     layer.open({
-        content: '<?=session('error')?>',
+        content: '<?=addslashes(session('error'))?>',
         skin: 'msg',
         time:5
     });

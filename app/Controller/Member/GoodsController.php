@@ -52,6 +52,7 @@ class GoodsController extends MemberController
             $shipping_fee=(float)$request->post('shipping_fee');
             $content=$request->post('content');
             $shop_cateid=(int)$request->post('shop_category');
+            $is_have_spec=(int)$request->post('is_have_spec');
             if($shop_cateid!=0){
                 $shop_catepath=(new ShopCategory())->find($shop_cateid)->path;
             }
@@ -74,6 +75,7 @@ class GoodsController extends MemberController
                 $goods->name=$name;
                 $goods->price=(float)$price;
                 $goods->stock_count=(int)$stock_count;
+                $goods->is_have_spec=$is_have_spec;
                 $goods->shipping_fee=(float)$shipping_fee;
                 $goods->sale_count=0;
                 $goods->status=2;
@@ -92,10 +94,10 @@ class GoodsController extends MemberController
                     foreach($spec_name as $i=>$v){
                         $spec=new GoodsSpec();
                         $spec->goods_id=$goods_id;
-                        $spec->name=$spec_name[$i];
+                        $spec->spec_1=$spec_name[$i];
                         $spec->price=(float)$price[$i];
                         $spec->stock_count=(int)$stock_count[$i];
-                        if($spec->name!='' && $spec->stock_count!=0){
+                        if($spec->spec_1!='' && $spec->stock_count!=0){
                             $spec->save();
                             if($stock_total==0){
                                 $goods->price=$spec->price;

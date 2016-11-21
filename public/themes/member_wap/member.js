@@ -26,6 +26,7 @@ function uploadGoodsImg() {
             alert(e);
         }
     });
+    $('.weui-uploader__input-box').css('border','1px solid #d9d9d9');
 }
 function delGoodsImg(o,id) {
     $.get("/index.php/upload/del?type=goods&id=" + id, {}, function (str) { });
@@ -35,18 +36,69 @@ function goodsAdd_js()
 {
     $(function(){
         $('#addSpecBtn').on("click",function(e){
-            $('#nospec_price').hide();
-            $('#nospec_stock_count').hide();
+            $('#is_have_spec').val('1');
+            $('#specBox_no').hide();
             var tem=$('#spec_item_hide .spec_item').clone(true);
             $('#specBox').append(tem);
         });
         $('.spec_item .spec_del').on("click",function(e){
             $(this).parent().parent('.spec_item').remove();
             if($('#specBox').html()==''){
-                $('#nospec_price').show();
-                $('#nospec_stock_count').show();
+                $('#is_have_spec').val('0');
+                $('#specBox_no').show();
             }
         });
+
+        $("#goods_form").on('submit',function(){
+            if(form_validate(this,'name')==false){
+                return false;
+            }
+            if(form_validate(this,'imgids')==false){
+                return false;
+            }
+            if($('#is_have_spec').val()=='0'){
+                if(form_validate(this,'price')==false){
+                    return false;
+                }
+                if(form_validate(this,'stock_count')==false){
+                    return false;
+                }
+            }else{
+                $('#specBox input').each(function(i){
+                    if($(this).val()==''){
+                        $(this).after('<div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>');
+                        return false;
+                    }else{
+                        $(this).next('.weui-cell__ft').remove();
+                    }
+                });
+                return false;
+            }
+            if($('#content').val()==''){
+                $('#content').parents('.weui-cell').addClass('weui-cell_warn');
+                return false;
+            }else{
+                $('#content').parents('.weui-cell').removeClass('weui-cell_warn');
+            }
+            return true;
+        });
+        function form_validate(form,oName){
+            var o=$(form).find("input[name="+oName+"]");
+            if(oName=='name' || oName=='price' || oName=='stock_count'){
+                if(o.val()==''){
+                    o.parents('.weui-cell').addClass('weui-cell_warn');
+                    return false;
+                }else{
+                    o.parents('.weui-cell').removeClass('weui-cell_warn');
+                }
+            }
+            if(oName=='imgids'){
+                if(o.val()==''){
+                    o.next('.weui-uploader__input-box').css('border','1px solid #f00');
+                    return false;
+                }
+            }
+        }
     });
 }
 ///goods js end
