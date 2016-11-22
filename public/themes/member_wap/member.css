@@ -39,10 +39,13 @@ body{background:#f8f8f8;}
 .m_header .m_header_l i{ font-size: 20px; color: #333;}
 .margin_header{margin-top: 50px;}
 
+/* goods */
+.goods_add_uploaderLi{position: relative; border: 1px solid #d9d9d9}
+.goods_add_uploaderLi i{position: absolute; top:-8px; right: -8px; border: 1px solid #ff2222; color: #f00; background-color: #fff;border-radius: 50%; font-size: 6px; width: 18px; height: 18px; line-height: 20px; text-align: center;z-index: 99}
 
 #addSpecBtn{ padding-left: 1em; margin-top: .5em;font-size: 17px; font-weight: bold; color: #1AAD19}
-.spec_item{border: 1px solid #d9d9d9; width: 90%; margin: 10px 0; background-color: #ffffff}
-.spec_del{position: absolute; width: 30px; right: -15px; background-color: #fff; border-radius: 50%;}
+.spec_item{border: 1px solid #d9d9d9; width: 95%; margin: 10px 0; background-color: #ffffff}
+.spec_del{position: absolute; font-size: 6px; width: 18px; height: 18px; line-height: 20px; text-align: center; background-color: #fff; border-radius: 50%;border: 1px solid #ff2222; color: #f00; right: -9px;}
 
 .weui-tabbar{left: 0;}
 .my-navbar {
@@ -201,6 +204,3 @@ body{background:#f8f8f8;}
 .cateList li .operat{float: right}
 .cateList li ul li{ padding:0px 40px;border-top: 0px}
 
-/* goods */
-.goods_add_uploaderLi{position: relative; border: 1px solid #d9d9d9}
-.goods_add_uploaderLi i{position: absolute; right: 0px; background-color: #fff;border-radius: 50%;}

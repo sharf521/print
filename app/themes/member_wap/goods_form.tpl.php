@@ -19,26 +19,26 @@
             <div class="weui-cell">
                 <div class="weui-cell__bd">
                     <div class="weui-uploader">
-                        <div class="weui-uploader__bd">
+
                             <ul class="weui-uploader__files" id="uploaderFiles">
                                 <?
                                 $imgids=',';
                                 foreach ($images as $img) :
                                     $imgids.=$img->id.',';
                                     ?>
-                                    <li class="weui-uploader__file goods_add_uploaderLi" style="background-image:url(<?=$img->image_url?>)"><i class='weui-icon-cancel' onclick=delGoodsImg(this,'<?=$img->id?>')></i></li>
+                                    <li class="weui-uploader__file goods_add_uploaderLi" style="background-image:url(<?=$img->image_url?>)"><i class='iconfont' onclick=delGoodsImg(this,'<?=$img->id?>')>&#xe642;</i></li>
                                 <? endforeach;?>
                             </ul>
                             <input type="hidden" name="imgids" id="imgids" value="<?=$imgids?>">
                             <div class="weui-uploader__input-box">
                                 <input id="uploaderInput" name="file" class="weui-uploader__input" type="file" accept="image/*" onchange="uploadGoodsImg()"/>
                             </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
-    <input type="hidden" name="is_have_spec" id="is_have_spec" value="<?=$goods->is_have_spec?>">
+    <input type="hidden" name="is_have_spec" id="is_have_spec" value="<?=(int)$goods->is_have_spec?>">
     <div class="weui-cells weui-cells_form" id="specBox_no">
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">价格</label></div>
@@ -76,7 +76,7 @@
                     <div class="weui-cell" style="position: relative">
                         <label class="weui-label">价格</label>
                         <input class="weui-input" type="number" name="price[]" value="<?=$spec->price?>" onkeyup="value=value.replace(/[^0-9.]/g,'')" placeholder="请输入价格"/>
-                        <i class="spec_del weui-icon-cancel"></i>
+                        <i class="spec_del iconfont">&#xe642;</i>
                     </div>
                     <div class="weui-cell">
                         <label class="weui-label">库存</label>
@@ -140,7 +140,7 @@
         <div class="weui-cell" style="position: relative">
             <label class="weui-label">价格</label>
             <input class="weui-input" type="number" name="price[]" value="0.00" onkeyup="value=value.replace(/[^0-9.]/g,'')" placeholder="请输入价格"/>
-            <i class="spec_del weui-icon-cancel"></i>
+            <i class="spec_del iconfont">&#xe642;</i>
         </div>
         <div class="weui-cell">
             <label class="weui-label">库存</label>

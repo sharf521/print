@@ -15,7 +15,7 @@ function uploadGoodsImg() {
                 var path=res.url+'?'+Math.random();
                 $('#imgids').val($('#imgids').val()+imgId+',');
                 var _str='<li class="weui-uploader__file goods_add_uploaderLi" style="background-image:url('+path+')">' +
-                    "<i class='weui-icon-cancel' onclick=delGoodsImg(this,'"+imgId+"')></i></li>";
+                    "<i class='iconfont' onclick=delGoodsImg(this,'"+imgId+"')>&#xe642;</i></li>";
                 $("#uploaderFiles").append(_str);
             }else{
                 alert(res.msg);
@@ -44,7 +44,7 @@ function goodsAdd_js()
             $('#specBox').append(tem);
         });
         $('.spec_item .spec_del').on("click",function(e){
-            $(this).parent().parent('.spec_item').remove();
+            $(this).parents('.spec_item').remove();
             if($('#specBox input').length==0){
                 $('#is_have_spec').val('0');
                 $('#specBox_no').show();
@@ -102,7 +102,7 @@ function goodsAdd_js()
                 }
             }
             if(oName=='imgids'){
-                if(o.val()==''){
+                if(o.val().length<2){
                     o.next('.weui-uploader__input-box').css('border','1px solid #f00');
                     return false;
                 }

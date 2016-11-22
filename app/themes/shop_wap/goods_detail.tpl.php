@@ -2,7 +2,9 @@
     <div class="swiper-container">
         <div class="swiper-wrapper" style="height: 300px;">
             <? foreach($images as $img) : ?>
-                <div class="swiper-slide" style="text-align: center"><a href="#"><img src="<?=$img->image_url?>" style="max-width: 100%; max-height: 100%"></a></div>
+                <div class="swiper-slide" style="text-align: center">
+                    <img src="<?=$img->image_url?>" style="max-width: 100%; height: 100%">
+                </div>
             <? endforeach;?>
         </div>
         <div class="swiper-pagination"></div>
