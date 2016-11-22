@@ -223,7 +223,7 @@ body{background:#f8f8f8;}
 
 .bottom_opts{position: fixed;  border-top: 1px solid #efefef; bottom: -1px; height: 50px;    width: 100%;   background-color: #F7F7FA;    left:0;}
 .bottom_opts i{font-size: 20px; margin: 0px;}
-.bottom_opts p{    color: #999999;    font-size: 12px; line-height: 20px; margin: 0; padding: 0;}
+.bottom_opts p{    color: #999999;    font-size: 12px; line-height: 20px; margin-top:-5px; padding: 0;}
 .bottom_opts a{padding-top: 0px;    text-align: center;    color: #999999;    font-size: 12px;}
 .bottom_opts .opt1{float: left; width: 20%;}
 .bottom_opts .opt2{float: left; width: 40%;background-color: #f85;; color: #fff; display: block;line-height: 50px; font-size: 16px;}
