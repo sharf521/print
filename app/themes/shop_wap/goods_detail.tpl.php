@@ -18,7 +18,7 @@
             运费: ¥<?=$goods->shipping_fee?> &nbsp;　&nbsp;剩余:<?=$goods->stock_count?>
         </div>
     </div>
-    <div class="weui-panel">
+    <div class="weui-panel" style="margin-bottom: 60px;">
         <div class="weui-panel__hd">详细说明</div>
         <div class="weui-panel__bd">
             <div class="weui-media-box weui-media-box_text">
