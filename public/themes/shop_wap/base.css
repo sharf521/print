@@ -253,5 +253,5 @@ body{background:#f8f8f8;}
 .bottom_buy_box .wrap-input{float: right; padding-top: 5px;}
 .bottom_buy_box .wrap-input span{width: 30px; text-align: center; height: 30px;line-height: 30px; background: #f1f1f1;
     color: #666; border: 1px solid #ccc;float: left;display: block}
-.bottom_buy_box .wrap-input input{width: 35px; text-align: center; height: 25px;line-height: 25px; background: #f1f1f1;
+.bottom_buy_box .wrap-input input{width: 35px; text-align: center; height: 30px;line-height: 30px; background: #f1f1f1;
     color: #666; border: 0px; border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;float: left;display: block}
