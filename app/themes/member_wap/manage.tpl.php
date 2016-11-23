@@ -9,7 +9,7 @@
     <div class="weui-flex margin_header">
         <div class="weui-flex__item">
             <a href="<?=url('category')?>" style="text-align: center; width: 100%; height: 100%; display: block">
-                <i class="iconfont" style="font-size: 22px; color: #999999">&#xf0048;</i>
+                <i class="iconfont" style="font-size: 22px; color: #999999">&#xe600;</i>
                 <p class="weui-grid__label">分类管理</p>
             </a>
         </div>
@@ -21,7 +21,7 @@
         </div>
         <div class="weui-flex__item">
             <a href="<?=url('order')?>" style="text-align: center; width: 100%; height: 100%; display: block">
-                <i class="iconfont" style="font-size: 22px; color: #999999">&#xe643;</i>
+                <i class="iconfont" style="font-size: 22px; color: #999999">&#xe89d;</i>
                 <p class="weui-grid__label">我的订单</p>
             </a>
         </div>
@@ -30,7 +30,7 @@
     <div class="weui-grids margin_header">
         <a href="<?=url('category')?>" class="weui-grid">
             <div class="weui-grid__icon">
-                <i class="iconfont" style="font-size: 22px; color: #999999">&#xf0048;</i>
+                <i class="iconfont" style="font-size: 22px; color: #999999">&#xe600;</i>
             </div>
             <p class="weui-grid__label">分类管理</p>
         </a>
@@ -52,8 +52,8 @@
             <p class="weui-tabbar__label">购物车</p>
         </a>
         <a href="javascript:;" class="weui-tabbar__item">
-            <i class="iconfont weui-tabbar__icon">&#xe64f;</i>
-            <p class="weui-tabbar__label">发现</p>
+            <i class="iconfont weui-tabbar__icon">&#xe89d;</i>
+            <p class="weui-tabbar__label">我的订单</p>
         </a>
         <a href="javascript:;" class="weui-tabbar__item">
             <i class="iconfont weui-tabbar__icon">&#xe6fc;</i>

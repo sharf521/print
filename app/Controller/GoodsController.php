@@ -54,7 +54,7 @@ class GoodsController extends Controller
             $orderGoods->quantity=$quantity;
             $orderGoods->goods_image=$goods->image_url;
             $orderGoods->save();
-            redirect()->back()->with('msg','己ok！');
+            redirect('/member/order')->with('msg','己ok！');
         }else{
             $data['goods']=$goods;
             $data['images']=$goods->GoodsImage();
