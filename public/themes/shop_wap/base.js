@@ -17,7 +17,7 @@ function goods_detail_js()
             hideBuyBox();
         });
 
-        $('#bottom_buy_box .buy_box_title').find('i').on('click',function(){
+        $('#bottom_buy_box dt').find('i').on('click',function(){
             hideBuyBox();
         });
 

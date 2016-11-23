@@ -19,6 +19,12 @@
                 <p class="weui-grid__label">商品管理</p>
             </a>
         </div>
+        <div class="weui-flex__item">
+            <a href="<?=url('order')?>" style="text-align: center; width: 100%; height: 100%; display: block">
+                <i class="iconfont" style="font-size: 22px; color: #999999">&#xe643;</i>
+                <p class="weui-grid__label">我的订单</p>
+            </a>
+        </div>
     </div>
 
     <div class="weui-grids margin_header">
