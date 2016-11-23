@@ -32,47 +32,18 @@
             <p>购物车</p>
         </a>
         <a href="javascript:;" class="opt2">加入购物车</a>
-        <a href="javascript:;showBuy()" class="opt3">立即购买</a>
+        <a href="javascript:;showBottomBuyBox()" class="opt3">立即购买</a>
     </div>
     <script>
-        $(function(){
-            var mySwiper = new Swiper('.swiper-container',{
-                loop : true,
-                autoplay:4800,
-                autoplayDisableOnInteraction : false,
-                pagination : '.swiper-pagination',
-                paginationClickable :true,
-            });
-        });
-        var index;
-        function showBuy() {
-            index=layer.open({
-                type: 1
-                ,content:$('#div_showBuy').html()
-                ,anim: 'up'
-                ,style: 'position:fixed; bottom:0; left:0; width: 100%; border:none;'
-            });
-        }
-        function buy_reduce(o) {
-            var input=$(o).parent().find('input');
-            var num=Number(input.val());
-            if(num>1){
-                input.val(num-1);
-            }
-        }
-        function buy_add(o) {
-            var input=$(o).parent().find('input');
-            var num=Number(input.val());
-            input.val(num+1);
-        }
+        goods_detail_js();
     </script>
-<div id="div_showBuy" class="hide">
-    <div class="buy_box">
+    <div class="weui-mask hide"></div>
+    <div class="bottom_buy_box" id="bottom_buy_box">
         <dl>
             <dt class="buy_box_title">
             <h4>q水库附近思考思考速度的反对</h4>
             <span>￥30.00</span>
-            <i class="iconfont" onclick="layer.close(index);">&#xe725;</i>
+            <i class="iconfont">&#xe725;</i>
             </dt>
             <dd></dd>
             <dd class="clearFix choose">
@@ -80,9 +51,9 @@
                     <span>购买数量：</span><br>
                     剩余<span>10</span>件</div>
                 <div class="wrap-input">
-                    <span class="btn-reduce" onclick="buy_reduce(this);">-</span>
+                    <span class="btn-reduce">-</span>
                     <input class="text" value="1"  maxlength="5" type="text" name="mun" onkeyup="value=value.replace(/[^0-9]/g,'')">
-                    <span class="btn-add" onclick="buy_add(this);">+</span>
+                    <span class="btn-add">+</span>
                 </div>
             </dd>
         </dl>
@@ -91,5 +62,4 @@
             <a href="javascript:;" class="opt2">立即购买</a>
         </div>
     </div>
-</div>
 <?php require 'footer.php';?>

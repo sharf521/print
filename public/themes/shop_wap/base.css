@@ -238,20 +238,20 @@ body{background:#f8f8f8;}
 .bottom_opts .opt2{float: left; width: 40%;background-color: #f85;color: #fff; display: block;line-height: 50px; font-size: 16px;}
 .bottom_opts .opt3{float: left; width: 40%;background-color: #f44;color: #fff; display: block;line-height: 50px; font-size: 16px;}
 
-.buy_box{z-index: 99; background-color: #fff;font-size: 14px; position: relative}
-.buy_box .buy_box_title{border: 1px solid #f3f3f3; padding: 10px;}
-.buy_box .buy_box_title i{position: absolute; right: 15px; top: 15px; color: #393D49; font-size: 20px;}
-.buy_box .buy_box_title h4{line-height: 28px; font-weight: 400; font-size: 16px;}
-.buy_box .buy_box_title span{color: #f60;font-size: 18px;}
-.buy_box .buy_box_opts{line-height: 48px; height: 48px;}
-.buy_box .buy_box_opts a{float: left; width: 50%; text-align: center;color: #fff; display: block; font-size: 16px;}
-.buy_box .buy_box_opts .opt1{background-color: #f85;}
-.buy_box .buy_box_opts .opt2{background-color: #f44;}
+.bottom_buy_box{z-index: 9999; background-color: #fff;font-size: 14px; position:fixed; bottom:0; left:0; width: 100%; display: none}
+.bottom_buy_box .buy_box_title{border: 1px solid #f3f3f3; padding: 10px;position: relative;}
+.bottom_buy_box .buy_box_title i{position: absolute; right: 15px; top: 15px; color: #393D49; font-size: 20px;}
+.bottom_buy_box .buy_box_title h4{line-height: 28px; font-weight: 400; font-size: 16px;}
+.bottom_buy_box .buy_box_title span{color: #f60;font-size: 18px;}
+.bottom_buy_box .buy_box_opts{line-height: 48px; height: 48px;}
+.bottom_buy_box .buy_box_opts a{float: left; width: 50%; text-align: center;color: #fff; display: block; font-size: 16px;}
+.bottom_buy_box .buy_box_opts .opt1{background-color: #f85;}
+.bottom_buy_box .buy_box_opts .opt2{background-color: #f44;}
 
-.buy_box .choose{padding: 10px 20px; line-height: 30px;}
-.buy_box .stock_count{float: left; line-height: 22px; color: #1a1a1a}
-.buy_box .wrap-input{float: right; padding-top: 5px;}
-.buy_box .wrap-input span{width: 25px; text-align: center; height: 25px;line-height: 25px; background: #f1f1f1;
+.bottom_buy_box .choose{padding: 10px 20px; line-height: 30px;}
+.bottom_buy_box .stock_count{float: left; line-height: 22px; color: #1a1a1a}
+.bottom_buy_box .wrap-input{float: right; padding-top: 5px;}
+.bottom_buy_box .wrap-input span{width: 25px; text-align: center; height: 25px;line-height: 25px; background: #f1f1f1;
     color: #666; border: 1px solid #ccc;float: left;display: block}
-.buy_box .wrap-input input{width: 35px; text-align: center; height: 25px;line-height: 25px; background: #f1f1f1;
+.bottom_buy_box .wrap-input input{width: 35px; text-align: center; height: 25px;line-height: 25px; background: #f1f1f1;
     color: #666; border: 0px; border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;float: left;display: block}
