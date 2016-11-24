@@ -43,14 +43,33 @@
             <dl>
                 <dt class="buy_box_title">
                 <h4><?=$goods->name?></h4>
-                <span>￥<?=$goods->price?></span>
+                <span>¥<em id="goods_price"><?=$goods->price?></em></span>
                 <i class="iconfont">&#xe725;</i>
                 </dt>
-                <dd></dd>
+                <? if($goods->is_have_spec) : ?>
+                <dd class="clearFix">
+                    <? $specs=$goods->GoodsSpec();?>
+                    <script>
+                        $(function(){
+                            var specs = new Array();
+                            <? foreach($specs as $spec) :?>
+                            specs.push(new spec(<?=$spec->id?>, '<?=$spec->spec_1?>', '<?=$spec->spec_2?>', <?=$spec->price?>, <?=$spec->stock_count?>));
+                            <? endforeach;?>
+                            goodsSpec=new GoodsSpec(specs);
+                            if(goodsSpec.specQty==1){
+                                goodsSpec.setFormValue();
+                            }
+                        });
+                    </script>
+                    <input type="hidden" name="spec_id" id="spec_id">
+                    <div id="specBox_1" class="spec_choose clearFix"></div>
+                    <div id="specBox_2" class="spec_choose clearFix"></div>
+                </dd>
+                <? endif;?>
                 <dd class="clearFix choose">
                     <div class="stock_count">
                         <span>购买数量：</span><br>
-                        剩余<span><?=$goods->stock_count?></span>件</div>
+                        剩余<span id="goods_stock_count"><?=$goods->stock_count?></span>件</div>
                     <div class="wrap-input">
                         <span class="btn-reduce">-</span>
                         <input class="text" value="1"  maxlength="5" type="text" name="quantity" onkeyup="value=value.replace(/[^0-9]/g,'')">

@@ -21,26 +21,26 @@ class OrderController extends MemberController
 
     public function index(Order $order,Request $request)
     {
-        $data['orders']=$order->where('buyer_id=?')->bindValues($this->user_id)->pager($request->get('page'));
+        $data['orders']=$order->where('buyer_id=?')->bindValues($this->user_id)->orderBy('id desc')->pager($request->get('page'));
         $this->view('order',$data);
     }
 
     //待付款
     public function status1(Order $order,Request $request)
     {
-        $data['orders']=$order->where('buyer_id=? and status=1')->bindValues($this->user_id)->pager($request->get('page'));
+        $data['orders']=$order->where('buyer_id=? and status=1')->bindValues($this->user_id)->orderBy('id desc')->pager($request->get('page'));
         $this->view('order',$data);
     }
 
     public function status3(Order $order,Request $request)
     {
-        $data['orders']=$order->where('buyer_id=? and status=3')->bindValues($this->user_id)->pager($request->get('page'));
+        $data['orders']=$order->where('buyer_id=? and status=3')->bindValues($this->user_id)->orderBy("id desc")->pager($request->get('page'));
         $this->view('order',$data);
     }
 
     public function status4(Order $order,Request $request)
     {
-        $data['orders']=$order->where('buyer_id=? and status=4')->bindValues($this->user_id)->pager($request->get('page'));
+        $data['orders']=$order->where('buyer_id=? and status=4')->bindValues($this->user_id)->orderBy('id desc')->pager($request->get('page'));
         $this->view('order',$data);
     }
 }
