@@ -96,6 +96,14 @@
                     });
                     tag=false;
                 }
+                if(Number($('#goods_stock_count').html()) < Number(quantity.value)){
+                    layer.open({
+                        content: '库存不足',
+                        skin: 'msg',
+                        time:1
+                    });
+                    tag=false;
+                }
                 if(tag){
                     form.submit();
                 }

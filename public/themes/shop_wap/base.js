@@ -36,7 +36,9 @@ function goods_detail_js()
         $('#bottom_buy_box .btn-add').on('click', function () {
             var input=$(this).parent().find('input');
             var num=Number(input.val());
-            input.val(num+1);
+            if(num < Number($('#goods_stock_count').html())){
+                input.val(num+1);
+            }
         });
     });
 }

@@ -239,7 +239,7 @@ body{background:#f8f8f8;}
 .bottom_opts .opt3{float: left; width: 40%;background-color: #f44;color: #fff; display: block;line-height: 50px; font-size: 16px;}
 
 /*购买层*/
-.bottom_buy_box{z-index: 9999; background-color: #fff;font-size: 14px; position:fixed; bottom:0; left:0; width: 100%;}
+.bottom_buy_box{z-index: 9999; background-color: #fff;font-size: 14px; position:fixed; bottom:0; left:0; width: 100%;display: none}
 .bottom_buy_box dt{border: 1px solid #f3f3f3; padding: 10px;position: relative;}
 .bottom_buy_box dt i{position: absolute; right: 8px; top: 8px; color: #ccc; font-size: 20px;}
 .bottom_buy_box dt h4{line-height: 28px; font-weight: 400; font-size: 16px;}
