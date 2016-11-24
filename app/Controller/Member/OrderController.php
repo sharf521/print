@@ -43,4 +43,11 @@ class OrderController extends MemberController
         $data['orders']=$order->where('buyer_id=? and status=4')->bindValues($this->user_id)->orderBy('id desc')->pager($request->get('page'));
         $this->view('order',$data);
     }
+
+    //确认订单
+    public function confirm(Request $request)
+    {
+        $card_id=$request->get('cart_id');//array
+        print_r($card_id);
+    }
 }

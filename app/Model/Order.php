@@ -3,6 +3,8 @@
 namespace App\Model;
 
 
+use System\Lib\Request;
+
 class Order extends Model
 {
     protected $table='order';
