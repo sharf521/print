@@ -44,10 +44,5 @@ class OrderController extends MemberController
         $this->view('order',$data);
     }
 
-    //确认订单
-    public function confirm(Request $request)
-    {
-        $card_id=$request->get('cart_id');//array
-        print_r($card_id);
-    }
+
 }

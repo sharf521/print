@@ -277,3 +277,54 @@ body{background:#f8f8f8;}
 .bottom_buy_box .spec_choose span.active {
     background-color: #e4393c;
     color: #fff;}
+
+/*确认订单*/
+.order_address{padding: 10px 10px 10px 3em; position: relative; border-bottom: 2px dashed #c3c3c3;}
+.order_address:after {
+    content: '\20';
+    display: block;
+    right: 15px;
+    position: absolute;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    border-top: 1px solid #7d7d7d;
+    border-left: 1px solid #7d7d7d;
+    background: none;
+    margin-top: -6px;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+.order_address h4{position: absolute;    top: 12px;    left: 10px;    width: 2em;    font-weight: 400;    font-size: 14px;    color: #999;}
+.order_address p{ line-height: 22px; padding-right: 40px; font-size: 14px;}
+.order_address p strong{font-weight: 400; margin-right: 10px;}
+
+/*order*/
+.order_box{position:relative;margin-top:10px;padding:0 10px 10px;border-top:1px solid #ddd;border-bottom:1px solid #ddd;background:#fff}
+.order_head{position:relative;min-height:60px;}
+.order_head .oh_content{position:relative;display:block;padding:10px 0}
+.order_head p{color:#999;font-size:9pt;line-height:1.7em}
+.order_head span{color:#666}
+.order_head span i{display:inline-block;width:24px}
+.co_blue,.co_blue a{color:#3985ff}
+.co_red{color:#e4393c}
+.order_head .oh_btn{position:absolute;top:14px;right:0;z-index:1;display:block;width:5pc;height:30px;border-radius:2px;background:#e4393c;color:#fff;text-align:center;line-height:30px}
+.order_shopBar{display:block;height:40px;border-bottom:1px solid #eee;border-top:1px solid #eee;font-size:14px;line-height:40px;color: #333; position: relative}
+.order_shopBar i{font-size: 16px; color: #e4393c; margin-right: 4px;}
+.order_shopBar em:after {
+    content: '\20';
+    display: block;
+    right: 15px;
+    position: absolute;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    border-top: 1px solid #7d7d7d;
+    border-left: 1px solid #7d7d7d;
+    background: none;
+    margin-top: -6px;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+.order_item{margin-top:10px; font-size: 14px;color: #333;}
+.order_item .image{float:left;margin-right:10px;height:50px; width: 50px;}

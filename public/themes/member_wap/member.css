@@ -234,4 +234,6 @@ body{background:#f8f8f8;}
     -webkit-transform: rotate(135deg);
 }
 .order_item{margin-top:10px; font-size: 14px;color: #333;}
-.order_item .image{float:left;margin-right:10px;height:50px}
+.order_item .image{float:left;margin-right:10px;height:50px;}
+
+

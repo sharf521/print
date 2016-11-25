@@ -56,7 +56,7 @@ class GoodsController extends Controller
                 $cart->session_id=session_id();
             }
             $cart_id=$cart->save(true);
-            redirect('/member/order/confirm/?cart_id[]='.$cart_id);
+            redirect('order/confirm/?cart_id[]='.$cart_id);
 /*            try{
                 DB::beginTransaction();
 
@@ -78,4 +78,6 @@ class GoodsController extends Controller
         }
 
     }
+
+
 }
