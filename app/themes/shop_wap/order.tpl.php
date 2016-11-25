@@ -10,7 +10,7 @@
     <p><strong>乔少工</strong>13937127756</p>
 </div>
 
-
+<form method="post">
 <?  foreach ($carts as $i=>$cart){
         if($cart->spec_id!=0){
             $spec=$cart->GoodsSpec();
@@ -35,14 +35,15 @@
         <?
         if($carts[$i]->seller_id!=$carts[$i+1]->seller_id){
             ?>
-            <div class="">留言：<textarea placeholder="选填，可填写您与卖家达成一致的要求" name="remark"><?=$goods_count?></textarea></div>
-            </div>
+             <textarea class="weui-textarea" style="background-color: #efefef; margin-top: 8px;font-size: 14px;" placeholder="请输入文本" rows="2">订单备注,选填.</textarea>
+             </div>
             <?
         }
     }?>
     <div class="weui-btn-area">
         <input class="weui-btn weui-btn_primary" type="submit" value="提交订单">
     </div>
+</form>
     <script type="text/javascript">
         function showMenu(id) {
             var $androidActionSheet = $('#androidActionsheet');
