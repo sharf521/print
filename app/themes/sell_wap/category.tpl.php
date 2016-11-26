@@ -1,7 +1,7 @@
 <?php require 'header.php';?>
 <?php if($this->func=='index') : ?>
     <div class="m_header">
-        <a class="m_header_l" href="<?=url('')?>"><i class="iconfont">&#xe604;</i></a>
+        <a class="m_header_l" href="<?=url('/member')?>"><i class="iconfont">&#xe604;</i></a>
         <a class="m_header_r" href="<?=url('category/add')?>">添加</a>
         <h1>分类管理</h1>
     </div>

@@ -6,7 +6,7 @@
  * Time: 15:31
  */
 
-namespace App\Controller\Member;
+namespace App\Controller\SellManage;
 
 use App\Model\Goods;
 use App\Model\GoodsData;
@@ -16,7 +16,7 @@ use App\Model\ShopCategory;
 use System\Lib\DB;
 use System\Lib\Request;
 
-class GoodsController extends MemberController
+class GoodsController extends SellController
 {
     public function __construct()
     {

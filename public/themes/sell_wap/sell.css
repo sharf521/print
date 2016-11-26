@@ -34,9 +34,6 @@ em, i {
 
 body{background:#f8f8f8;}
 
-form input.error {border: red 1px dotted;}
-form label.error {   color: red;    margin-left: 5px;    position:absolute; bottom:-1rem; left:0;    font-size:2rem;}
-
 .m_header{ line-height:28px;height:28px; padding:8px 0;background: #eaeaea;color:#333;text-align: center; width:100%; display:block; position:fixed; top:0; left:0; z-index:999;}
 .m_header a{color: #333;}
 .m_header h1{ height:28px; padding:0 60px; width:100%; box-sizing:border-box; font-size:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; font-weight:normal;}
@@ -238,32 +235,5 @@ form label.error {   color: red;    margin-left: 5px;    position:absolute; bott
 }
 .order_item{margin-top:10px; font-size: 14px;color: #333;}
 .order_item .image{float:left;margin-right:10px;height:50px;}
-
-
-/* address */
-.address_list{ background:#fff;}
-.address_list .noadres{ width:100%; text-align:center; padding:30px 0; font-size:16px; color:#999;border-bottom:1px solid #eee;}
-.address_list li{ padding:14px 10px; font-size:13px; position:relative; border-bottom:1px solid #eee;}
-.address_list li p{line-height:20px; padding:4px 0;}
-.address_list li span,.address_list li a{position:absolute; top:16px; font-size:12px; border:1px solid #008aff; color:#008aff; padding:3px 8px; text-align:center; border-radius:4px;}
-.address_list li .madres{ right:60px;}
-.address_list li .madrati{border:1px solid #f60; color:#f60}
-.address_list li .maddel{ right:10px;}
-
-.address_form{ background:#fff; margin-top:8px; padding:10px;}
-.address_form .mad_fmtab{ font-size:14px; border-collapse:collapse; box-sizing:border-box;}
-.address_form .mad_fmtab th{ text-align:left; border-bottom:1px solid #eee; padding:6px 0 14px 0; font-size:16px; font-weight:normal;}
-.address_form .mad_fmtab td{ padding:10px 0; border-bottom:1px solid #eee; position:relative;}
-.address_form .mad_fmtab td label.error{ position:absolute; font-size:12px;bottom: -8px; left: 0px;}
-.address_form .mad_fmtab select{ width:100%; border:0; height:30px; line-height:30px;background: none;font-size:14px;}
-.address_form .mad_fmtab input{ width:100%; border:0; height:30px; line-height:30px;background: none;font-size:14px; padding:0 10px; box-sizing:border-box}
-.address_form .mad_fmtab textarea{ width:100%; border:0; padding:10px; box-sizing:border-box;font-size:14px;}
-.address_form .mad_fmtab .adctbuton{
-    display: block;
-    width:100%;height:36px; line-height:36px;font-size:18px;
-    text-align: center;
-    color: #ffffff;
-    background-color: #db3652;
-    border-radius: 3px;}
 
 

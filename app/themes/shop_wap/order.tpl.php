@@ -6,68 +6,42 @@
     </div>
 <div class="order_address margin_header">
     <h4>收货地址</h4>
-    <p>河南郑州市郑东新区东风南路与七里河交叉口绿地之窗云峰座A座804</p>
-    <p><strong>乔少工</strong>13937127756</p>
+    <a href="<?=url('/member/address/?redirect_url='.$this->self_url)?>">
+        <? if($address->is_exist) : ?>
+        <p><?=$address->region_name?> <?=$address->address?></p>
+        <p><strong><?=$address->name?></strong><?=$address->phone?></p>
+        <? else : ?>
+            <div class="noadres"><p>暂无收货地址！</p></div>
+        <? endif;?>
+    </a>
 </div>
 
 <form method="post">
-<?  foreach ($carts as $i=>$cart){
-        if($cart->spec_id!=0){
-            $spec=$cart->GoodsSpec();
-            $spec_string=$spec->spec_1.'&nbsp;&nbsp;'.$spec->spec_2;
-            $goods_count=$spec->stock_count;
-        }else{
-            $goods=$cart->Goods();
-            $goods_count=$goods->stock_count;
-        }
-    ?>
-        <? if($carts[$i]->seller_id!=$carts[$i-1]->seller_id){?>
-            <div class="order_box">
+    <?  foreach ($result_carts as $i=>$carts) : ?>
+        <div class="order_box">
             <a class="order_shopBar"><i class="iconfont">&#xe854;</i><em>我的小店<?=$cart->seller_id?></em></a>
-        <? }?>
-        <div class="order_item clearFix">
-            <img class="image" src="<?=$cart->goods_image?>">
-            <div class="oi_content">
-                <a><?=$cart->goods_name?></a>
-                <p><?=$spec_string?><span class="count">数量：<?=$cart->quantity?></span></p>
-            </div>
+            <? foreach($carts as $cart): ?>
+                <div class="order_item clearFix">
+                    <img class="image" src="<?=$cart->goods_image?>">
+                    <div class="oi_content">
+                        <a><?=$cart->goods_name?></a>
+                        <p><?
+                            if($cart->spec_1!=''){
+                                echo "<span class='spec'>{$cart->spec_1}</span>";
+                            }
+                            if($cart->spec_2!=''){
+                                echo "<span class='spec'>{$cart->spec_2}</span>";
+                            }
+                            ?>
+                            <span class="count">数量：<?=$cart->quantity?></span></p>
+                    </div>
+                </div>
+            <? endforeach;?>
+            <textarea name="buyer_remark" class="weui-textarea" style="background-color: #efefef; margin-top: 8px;font-size: 14px;" placeholder="请输入文本" rows="2">订单备注,选填.</textarea>
         </div>
-        <?
-        if($carts[$i]->seller_id!=$carts[$i+1]->seller_id){
-            ?>
-             <textarea class="weui-textarea" style="background-color: #efefef; margin-top: 8px;font-size: 14px;" placeholder="请输入文本" rows="2">订单备注,选填.</textarea>
-             </div>
-            <?
-        }
-    }?>
+    <? endforeach;?>
     <div class="weui-btn-area">
         <input class="weui-btn weui-btn_primary" type="submit" value="提交订单">
     </div>
 </form>
-    <script type="text/javascript">
-        function showMenu(id) {
-            var $androidActionSheet = $('#androidActionsheet');
-            $androidActionSheet.show();
-            $androidActionSheet.find('.weui-mask').on('click',function () {
-                $androidActionSheet.hide();
-            });
-            $androidActionSheet.find('.change').on('click',function () {
-                location.href='<?=url("goods/change/?id=")?>'+id;
-            });
-            $androidActionSheet.find('.edit').on('click',function () {
-                location.href='<?=url("goods/edit/?id=")?>'+id;
-            });
-            $androidActionSheet.find('.del').on('click',function () {
-                layer.open({
-                    content: '您确定要删除吗？'
-                    ,btn: ['删除', '取消']
-                    ,yes: function(index){
-                        location.href='<?=url("goods/del/?id=")?>'+id;
-                        layer.close(index);
-                    }
-                });
-                $androidActionSheet.fadeOut(200);
-            });
-        }
-    </script>
 <?php require 'footer.php';?>

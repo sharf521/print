@@ -6,40 +6,45 @@
     </div>
     <br><br>
 
-    <div class="weui-flex margin_header">
-        <div class="weui-flex__item">
-            <a href="<?=url('category')?>" style="text-align: center; width: 100%; height: 100%; display: block">
-                <i class="iconfont" style="font-size: 22px; color: #999999">&#xe600;</i>
-                <p class="weui-grid__label">分类管理</p>
-            </a>
-        </div>
-        <div class="weui-flex__item">
-            <a href="<?=url('goods')?>" style="text-align: center; width: 100%; height: 100%; display: block">
-                <i class="iconfont" style="font-size: 22px; color: #999999">&#xe643;</i>
-                <p class="weui-grid__label">商品管理</p>
-            </a>
-        </div>
-        <div class="weui-flex__item">
-            <a href="<?=url('order')?>" style="text-align: center; width: 100%; height: 100%; display: block">
-                <i class="iconfont" style="font-size: 22px; color: #999999">&#xe89d;</i>
-                <p class="weui-grid__label">我的订单</p>
-            </a>
-        </div>
-    </div>
 
+
+    <div class="weui-cells__title">会员中心</div>
     <div class="weui-grids margin_header">
-        <a href="<?=url('category')?>" class="weui-grid">
+        <a href="<?=url('address')?>" class="weui-grid">
             <div class="weui-grid__icon">
                 <i class="iconfont" style="font-size: 22px; color: #999999">&#xe600;</i>
             </div>
-            <p class="weui-grid__label">分类管理</p>
+            <p class="weui-grid__label">地址管理</p>
         </a>
         <a href="<?=url('goods')?>" class="weui-grid">
             <div class="weui-grid__icon">
                 <i class="iconfont" style="font-size: 22px; color: #999999">&#xe643;</i>
             </div>
-            <p class="weui-grid__label">商品管理</p>
+            <p class="weui-grid__label">我的订单</p>
         </a>
+    </div>
+
+<br><br>
+    <div class="weui-cells__title">卖家管理</div>
+    <div class="weui-flex margin_header">
+        <div class="weui-flex__item">
+            <a href="<?=url('/sellManage/category')?>" style="text-align: center; width: 100%; height: 100%; display: block">
+                <i class="iconfont" style="font-size: 22px; color: #999999">&#xe600;</i>
+                <p class="weui-grid__label">分类管理</p>
+            </a>
+        </div>
+        <div class="weui-flex__item">
+            <a href="<?=url('/sellManage/goods')?>" style="text-align: center; width: 100%; height: 100%; display: block">
+                <i class="iconfont" style="font-size: 22px; color: #999999">&#xe643;</i>
+                <p class="weui-grid__label">商品管理</p>
+            </a>
+        </div>
+        <div class="weui-flex__item">
+            <a href="<?=url('/sellManage/order')?>" style="text-align: center; width: 100%; height: 100%; display: block">
+                <i class="iconfont" style="font-size: 22px; color: #999999">&#xe89d;</i>
+                <p class="weui-grid__label">我的订单</p>
+            </a>
+        </div>
     </div>
 
     <div class="weui-tabbar">

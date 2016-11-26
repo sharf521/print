@@ -6,13 +6,13 @@
  * Time: 15:31
  */
 
-namespace App\Controller\Member;
+namespace App\Controller\SellManage;
 
 
 use App\Model\ShopCategory;
 use System\Lib\Request;
 
-class CategoryController extends MemberController
+class CategoryController extends SellController
 {
     public function __construct()
     {

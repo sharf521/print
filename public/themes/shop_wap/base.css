@@ -298,6 +298,7 @@ body{background:#f8f8f8;}
 .order_address h4{position: absolute;    top: 12px;    left: 10px;    width: 2em;    font-weight: 400;    font-size: 14px;    color: #999;}
 .order_address p{ line-height: 22px; padding-right: 40px; font-size: 14px;}
 .order_address p strong{font-weight: 400; margin-right: 10px;}
+.order_address .noadres{ width:100%; text-align:center; padding:15px 0; font-size:16px; color:#999;}
 
 /*order*/
 .order_box{position:relative;margin-top:10px;padding:0 10px 10px;border-top:1px solid #ddd;border-bottom:1px solid #ddd;background:#fff}
@@ -328,3 +329,4 @@ body{background:#f8f8f8;}
 }
 .order_item{margin-top:10px; font-size: 14px;color: #333;}
 .order_item .image{float:left;margin-right:10px;height:50px; width: 50px;}
+.order_item .spec{padding: 3px 10px; margin-right: 10px; background-color: #ddd}
