@@ -19,8 +19,6 @@ class AddressController extends MemberController
         parent::__construct();
         if(isset($_GET['redirect_url']) && $_GET['redirect_url']!=''){
             $this->redirect_url=$_GET['redirect_url'];
-        }else{
-            $this->redirect_url='address';
         }
     }
     public function index(UserAddress $address,Request $request)
@@ -48,6 +46,9 @@ class AddressController extends MemberController
                 $address->is_default=0;
             }
             $address->save();
+            if($this->redirect_url==''){
+                $this->redirect_url='address';
+            }
             redirect($this->redirect_url)->with('msg','添加成功！');
         }else{
             $this->view('address');
