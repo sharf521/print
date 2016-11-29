@@ -6,6 +6,11 @@ use System\Lib\Request;
 
 class ArticleController extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public  function  index()
     {
 

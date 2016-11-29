@@ -28,6 +28,9 @@ class Order extends Model
         $goods_price=$goods->price;
         if($spec_id!=0){
             $Spec=(new GoodsSpec())->findOrFail($spec_id);
+            if($Spec->goods_id!=$goods->id){
+                throw  new \Exception("规格异常！");
+            }
             $goods_price=$Spec->price;
             $stock_count=$Spec->stock_count;
         }

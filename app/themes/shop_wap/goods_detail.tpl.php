@@ -27,16 +27,15 @@
     </div>
 
     <div class="bottom_opts">
-        <a href="javascript:;" class="opt1">
+        <a href="<?=url('cart')?>" class="opt_cart">
             <i class="iconfont">&#xe698;</i>
             <p>购物车</p>
         </a>
-        <a href="javascript:;" class="opt2">加入购物车</a>
-        <a href="javascript:;showBottomBuyBox()" class="opt3">立即购买</a>
+        <a href="javascript:;" class="opt_add">加入购物车</a>
+        <a href="javascript:;" class="opt_buy">立即购买</a>
     </div>
-    <script>
-        goods_detail_js();
-    </script>
+
+
     <div class="weui-mask hide"></div>
     <div class="bottom_buy_box" id="bottom_buy_box">
         <form method="post" name="form_order">
@@ -69,7 +68,7 @@
                 <dd class="clearFix choose">
                     <div class="stock_count">
                         <span>购买数量：</span><br>
-                        剩余<span id="goods_stock_count"><?=$goods->stock_count?></span>件</div>
+                        剩余<span id="goods_stock_count" class="goods_stock_count"><?=$goods->stock_count?></span>件</div>
                     <div class="wrap-input">
                         <span class="btn-reduce">-</span>
                         <input class="text" value="1"  maxlength="5" type="text" name="quantity" onkeyup="value=value.replace(/[^0-9]/g,'')">
@@ -82,32 +81,9 @@
                 <a href="javascript:;" class="opt2">立即购买</a>
             </div>
         </form>
-        <script>
-            $('#bottom_buy_box .opt2').on('click',function(){
-                var form=document.forms['form_order'];
-                var quantity=form.quantity;
-                var tag=true;
-                if(Number(quantity.value)==0){
-                    $(quantity).focus();
-                    layer.open({
-                        content: '请正确选择数量',
-                        skin: 'msg',
-                        time:1
-                    });
-                    tag=false;
-                }
-                if(Number($('#goods_stock_count').html()) < Number(quantity.value)){
-                    layer.open({
-                        content: '库存不足',
-                        skin: 'msg',
-                        time:1
-                    });
-                    tag=false;
-                }
-                if(tag){
-                    form.submit();
-                }
-            })
-        </script>
     </div>
+    <script>
+        var goods_id='<?=(int)$_GET['id']?>';
+        goods_detail_js();
+    </script>
 <?php require 'footer.php';?>

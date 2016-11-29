@@ -10,5 +10,18 @@ class Model extends BaseModel
         parent::__construct();
     }
 
+    protected function returnSuccess($data = array())
+    {
+        $data['code'] = '0';
+        return $data;
+    }
 
+    protected function returnError($msg)
+    {
+        $data = array(
+            'code' => 'fail',
+            'msg' => $msg
+        );
+        return $data;
+    }
 }

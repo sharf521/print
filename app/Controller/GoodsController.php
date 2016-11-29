@@ -27,36 +27,22 @@ class GoodsController extends Controller
 
     public function detail(Goods $goods,Request $request)
     {
-        $user_id=$this->user_id;
         $goods=$goods->findOrFail($request->get('id'));
         if($_POST){
-            $spec_id=(int)$request->post('spec_id');
-            $quantity=(int)$request->post('quantity');
-            $stock_count=$goods->stock_count;
-            if($spec_id!=0){
-                $Spec=(new GoodsSpec())->findOrFail($spec_id);
-                $stock_count=$Spec->stock_count;
+            $data=array(
+                'buyer_id'=>$this->user_id,
+                'goods_id'=>$goods->id,
+                'spec_id'=>$request->post('spec_id'),
+                'quantity'=>$request->post('quantity')
+            );
+            $return=(new Cart())->add($data);
+            if($return['code']!='0'){
+                redirect()->back()->with('error',$return['msg']);
+                return;
+            }else{
+                redirect('order/confirm/?cart_id[]='.$return['cart_id']);
             }
-            if($goods->is_have_spec==1 && $spec_id==0){
-                redirect()->back()->with('error',"请选择规格！");
-            }
-            if($stock_count<$quantity){
-                redirect()->back()->with('error',"库存不足，仅剩{$stock_count}件！");
-            }
-            $cart=new Cart();
-            $cart->buyer_id=$user_id;
-            $cart->seller_id=$goods->user_id;
-            $cart->goods_id=$goods->id;
-            $cart->goods_name=$goods->name;
-            $cart->goods_image=$goods->image_url;
-            $cart->spec_id=$spec_id;
-            $cart->quantity=$quantity;
-            $cart->session_id='';
-            if(empty($user_id)){
-                $cart->session_id=session_id();
-            }
-            $cart_id=$cart->save(true);
-            redirect('order/confirm/?cart_id[]='.$cart_id);
+
 /*            try{
                 DB::beginTransaction();
 
@@ -77,6 +63,21 @@ class GoodsController extends Controller
             $this->view('goods_detail',$data);
         }
 
+    }
+
+    public function getQuantity(Goods $goods,Request $request)
+    {
+        $goods=$goods->findOrFail($request->get('id'));
+        if($goods->is_have_spec){
+            $Spec=(new GoodsSpec())->find($request->get('spec_id'));
+            if($Spec->goods_id=$goods->id){
+                echo $Spec->stock_count;
+            }else{
+                echo 0;
+            }
+        }else{
+            echo $goods->stock_count;
+        }
     }
 
 
