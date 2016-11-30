@@ -52,7 +52,7 @@
             <i class="iconfont weui-tabbar__icon">&#xe64f;</i>
             <p class="weui-tabbar__label">首页</p>
         </a>
-        <a href="javascript:;" class="weui-tabbar__item">
+        <a href="<?=url('/cart')?>" class="weui-tabbar__item">
             <i class="iconfont weui-tabbar__icon">&#xe698;</i>
             <p class="weui-tabbar__label">购物车</p>
         </a>
