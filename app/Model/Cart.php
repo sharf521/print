@@ -94,6 +94,7 @@ class Cart extends Model
                     $result_carts[$seller_id][$i]->stock_count = $spec->stock_count;
                 } else {
                     $goods = $cart->Goods();
+                    $result_carts[$seller_id][$i]->price = $goods->price;
                     $result_carts[$seller_id][$i]->stock_count = $goods->stock_count;
                 }
             }
