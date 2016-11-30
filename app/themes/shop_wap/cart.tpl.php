@@ -5,7 +5,7 @@
         <h1>我的购物车</h1>
     </div>
 
-    <div class="margin_header">
+    <div class="margin_header" style="margin-bottom: 60px">
         <?  foreach ($result_carts as $i=>$carts) : ?>
             <div class="cart_box">
                 <a class="shopBar"><i class="iconfont">&#xe854;</i><em>我的小店<?=$cart->seller_id?></em></a>

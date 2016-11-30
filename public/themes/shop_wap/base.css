@@ -243,16 +243,16 @@ body{background:#f8f8f8;}
 .bottom_opts .opt_buy{float: left; width: 40%;background-color: #f44;color: #fff; display: block;line-height: 50px; font-size: 16px;}
 
 .wrap-input{float: right; padding-top: 5px;}
-.wrap-input span{width: 30px; text-align: center; height: 30px;line-height: 30px; background: #f1f1f1;
+.wrap-input span{width: 25px; text-align: center; height: 25px;line-height: 25px; background: #f1f1f1;
     color: #666; border: 1px solid #ccc;float: left;display: block}
-.wrap-input input{width: 35px; text-align: center; height: 30px; line-height: 30px; background: #f1f1f1;
+.wrap-input input{width: 35px; text-align: center; height: 25px; line-height: 25px; background: #f1f1f1;
     color: #666; border: 0px; border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;float: left;display: block}
 
 
 /*cart*/
 .cart_box{position:relative;margin-top:10px;padding:0 10px;border-top:1px solid #ddd;border-bottom:1px solid #ddd;background:#fff}
 .cart_box .checkbox{ float: left; margin: 15px 5px; width: 20px; height: 20px;}
-.cart_box .shopBar{display:block;height:40px;border-bottom:1px solid #eee;border-top:1px solid #eee;font-size:14px;line-height:40px;color: #333; position: relative}
+.cart_box .shopBar{display:block;height:40px;border-bottom:1px solid #eee;font-size:14px;line-height:40px;color: #333; position: relative}
 .cart_box .shopBar i{font-size: 16px; color: #e4393c; margin-right: 4px;}
 .cart_box .shopBar em:after {
     content: '\20';
@@ -270,20 +270,20 @@ body{background:#f8f8f8;}
     -webkit-transform: rotate(135deg);
 }
 .cart_box .goods_item{margin-top:10px; font-size: 14px;color: #333;}
-.cart_box .goods_item .image{float:left;margin-right:10px;height:50px; width: 50px;}
+.cart_box .goods_item .image{float:left;margin-right:10px;height:80px; width: 80px;}
 .cart_box .goods_item .spec{padding: 3px 10px; margin-right: 10px; background-color: #ddd}
-.cart_box .cart_foot{text-align: right; padding-right: 10px; line-height: 40px; margin-top: 5px; border-top: 1px solid #ddd}
+.cart_box .cart_foot{text-align: right; padding-right: 10px; line-height: 40px;border-top: 1px solid #ddd; margin-top: 5px;}
 .cart_box .cart_foot em{font-weight: 700; color: #e4393c;}
 
 
-.cart_bottom{position: fixed;  border-top: 1px solid #ddd; bottom: -1px; height: 50px;    width: 100%;   background-color: #F7F7FA;    left:0;}
+.cart_bottom{position: fixed;  border-top: 1px solid #ddd; bottom: -1px; height: 49px;    width: 100%;   background-color: #F7F7FA;    left:0;}
 .cart_bottom label{width: 50px; text-align: center;display: block; float: left; font-size: 14px; position: relative}
 .cart_bottom label input{width: 16px; height: 16px; position: absolute; top:6px; left: 16px;}
 .cart_bottom .total{position: absolute;    top: 0;    right: 0;}
 .cart_bottom .total p {    padding-top: 10px;    font-weight: 700;    line-height: 1em;    height: 50px;    text-align: right;    float: left;    font-size: 16px;}
 .cart_bottom .total strong {    color: #e4393c;}
 .cart_bottom .total small {    padding-top: 2px;    display: block;    font-size: 10px;    color: #666;    font-weight: 400;}
-.cart_bottom .total>a {  float: right;display: block;width: 100px; height: 50px; margin-left: 10px; line-height: 50px; font-size: 16px; text-align: center; font-weight: 700;background: #e4393c; color: #fff;}
+.cart_bottom .total>a {  float: right;display: block;width: 100px; height: 100%; margin-left: 10px; line-height: 50px; font-size: 16px; text-align: center; font-weight: 700;background: #e4393c; color: #fff;}
 .cart_bottom .total>a em {    font-weight: 400;    font-size: 12px;    font-family: none;}
 
 /*购买层*/
@@ -357,7 +357,7 @@ body{background:#f8f8f8;}
 .co_blue,.co_blue a{color:#3985ff}
 .co_red{color:#e4393c}
 .order_head .oh_btn{position:absolute;top:14px;right:0;z-index:1;display:block;width:5pc;height:30px;border-radius:2px;background:#e4393c;color:#fff;text-align:center;line-height:30px}
-.order_shopBar{display:block;height:40px;border-bottom:1px solid #eee;border-top:1px solid #eee;font-size:14px;line-height:40px;color: #333; position: relative}
+.order_shopBar{display:block;height:40px;border-bottom:1px solid #eee;font-size:14px;line-height:40px;color: #333; position: relative}
 .order_shopBar i{font-size: 16px; color: #e4393c; margin-right: 4px;}
 .order_shopBar em:after {
     content: '\20';
