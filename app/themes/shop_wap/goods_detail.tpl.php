@@ -71,7 +71,7 @@
                         剩余<span id="goods_stock_count" class="goods_stock_count"><?=$goods->stock_count?></span>件</div>
                     <div class="wrap-input">
                         <span class="btn-reduce">-</span>
-                        <input class="text" value="1"  maxlength="5" type="text" name="quantity" onkeyup="value=value.replace(/[^0-9]/g,'')">
+                        <input class="text" value="1"  maxlength="5" type="text" id="buy_quantity" name="quantity" onkeyup="value=value.replace(/[^0-9]/g,'')">
                         <span class="btn-add">+</span>
                     </div>
                 </dd>

@@ -10,6 +10,7 @@ namespace App\Controller;
 
 
 use App\Model\Cart;
+use App\Model\Goods;
 use System\Lib\Request;
 
 class CartController extends Controller
@@ -41,6 +42,23 @@ class CartController extends Controller
         $return=$cart->add($data);
         echo json_encode($return);
     }
+    
+    public function changeQuantity(Request $request,Cart $cart,Goods $goods)
+    {
+        $num=(int)$request->get('num');
+        $cart=$cart->findOrFail($request->get('id'));
+        $goods=$goods->findOrFail($cart->goods_id);
+        $goods=$goods->addSpec($cart->spec_id);
+        $stock_count=$goods->stock_count;
+        if($stock_count>=$num){
+            echo json_encode(array('code'=>'0'));
+        }else{
+            $num=$stock_count;
+            echo json_encode(array('code'=>'fail','stock_count'=>$stock_count,'msg'=>"库存不足，剩余：{$stock_count}件"));
+        }
+        $cart->quantity=$num;
+        $cart->save();
+    }
 
     public function getSelectedMoney(Request $request,Cart $cart)
     {
@@ -58,7 +76,7 @@ class CartController extends Controller
             foreach ($carts_result as $seller_id=>$carts){
                 $result[$seller_id]=0;
                 foreach ($carts as $cart){
-                    $_t=math($cart->price,$cart->stock_count,'*',2);
+                    $_t=math($cart->price,$cart->quantity,'*',2);
                     $result[$seller_id]=math($result[$seller_id],$_t,'+',2);
                     $result['nums']++;
                 }

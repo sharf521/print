@@ -5,18 +5,21 @@ html {
     font-family: Helvetica,"STHeiti STXihei","Microsoft YaHei",Tohoma,Arial;
 }
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
-::-webkit-scrollbar
-{
+::-webkit-scrollbar {
     width: 0;
     height: 0;
     background-color: #fff;
     display: none;
 }
-@media only screen and (min-width:800px){
-    body{ width:760px; margin:0 auto; }
+
+@media only screen and (min-width: 800px) {
+    body {
+        width: 760px;
+        margin: 0 auto;
+    }
 }
 ul,li{list-style: none}
-em, i {    font-style: normal;}
+em, i { font-style: normal;}
 .hide{display: none}
 .clearFix:after{
     clear:both;
@@ -247,10 +250,35 @@ body{background:#f8f8f8;}
 
 
 /*cart*/
+.cart_box{position:relative;margin-top:10px;padding:0 10px;border-top:1px solid #ddd;border-bottom:1px solid #ddd;background:#fff}
+.cart_box .checkbox{ float: left; margin: 15px 5px; width: 20px; height: 20px;}
+.cart_box .shopBar{display:block;height:40px;border-bottom:1px solid #eee;border-top:1px solid #eee;font-size:14px;line-height:40px;color: #333; position: relative}
+.cart_box .shopBar i{font-size: 16px; color: #e4393c; margin-right: 4px;}
+.cart_box .shopBar em:after {
+    content: '\20';
+    display: block;
+    right: 15px;
+    position: absolute;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    border-top: 1px solid #7d7d7d;
+    border-left: 1px solid #7d7d7d;
+    background: none;
+    margin-top: -6px;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+.cart_box .goods_item{margin-top:10px; font-size: 14px;color: #333;}
+.cart_box .goods_item .image{float:left;margin-right:10px;height:50px; width: 50px;}
+.cart_box .goods_item .spec{padding: 3px 10px; margin-right: 10px; background-color: #ddd}
+.cart_box .cart_foot{text-align: right; padding-right: 10px; line-height: 40px; margin-top: 5px; border-top: 1px solid #ddd}
+.cart_box .cart_foot em{font-weight: 700; color: #e4393c;}
 
-.order_box .checkbox{ float: left; margin: 15px 5px; width: 20px; height: 20px;}
 
-.cart_bottom{position: fixed;  border-top: 1px solid #efefef; bottom: -1px; height: 50px;    width: 100%;   background-color: #F7F7FA;    left:0;}
+.cart_bottom{position: fixed;  border-top: 1px solid #ddd; bottom: -1px; height: 50px;    width: 100%;   background-color: #F7F7FA;    left:0;}
+.cart_bottom label{width: 50px; text-align: center;display: block; float: left; font-size: 14px; position: relative}
+.cart_bottom label input{width: 16px; height: 16px; position: absolute; top:6px; left: 16px;}
 .cart_bottom .total{position: absolute;    top: 0;    right: 0;}
 .cart_bottom .total p {    padding-top: 10px;    font-weight: 700;    line-height: 1em;    height: 50px;    text-align: right;    float: left;    font-size: 16px;}
 .cart_bottom .total strong {    color: #e4393c;}
@@ -320,8 +348,15 @@ body{background:#f8f8f8;}
 .order_address p strong{font-weight: 400; margin-right: 10px;}
 .order_address .noadres{ width:100%; text-align:center; padding:15px 0; font-size:16px; color:#999;}
 
-/*order*/
 .order_box{position:relative;margin-top:10px;padding:0 10px 10px;border-top:1px solid #ddd;border-bottom:1px solid #ddd;background:#fff}
+.order_head{position:relative;min-height:60px;}
+.order_head .oh_content{position:relative;display:block;padding:10px 0}
+.order_head p{color:#999;font-size:9pt;line-height:1.7em}
+.order_head span{color:#666}
+.order_head span i{display:inline-block;width:24px}
+.co_blue,.co_blue a{color:#3985ff}
+.co_red{color:#e4393c}
+.order_head .oh_btn{position:absolute;top:14px;right:0;z-index:1;display:block;width:5pc;height:30px;border-radius:2px;background:#e4393c;color:#fff;text-align:center;line-height:30px}
 .order_shopBar{display:block;height:40px;border-bottom:1px solid #eee;border-top:1px solid #eee;font-size:14px;line-height:40px;color: #333; position: relative}
 .order_shopBar i{font-size: 16px; color: #e4393c; margin-right: 4px;}
 .order_shopBar em:after {
@@ -340,5 +375,4 @@ body{background:#f8f8f8;}
     -webkit-transform: rotate(135deg);
 }
 .order_item{margin-top:10px; font-size: 14px;color: #333;}
-.order_item .image{float:left;margin-right:10px;height:50px; width: 50px;}
-.order_item .spec{padding: 3px 10px; margin-right: 10px; background-color: #ddd}
+.order_item .image{float:left;margin-right:10px;height:80px;}

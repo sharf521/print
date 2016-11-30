@@ -1,3 +1,116 @@
+/* 购物车 start*/
+function getCartedMoney() {
+    var cart_id = "";
+    var allChecked = true;
+    $("input:checkbox[name='cart_id[]']").each(function (i) {
+        if ($(this).attr('checked')) {
+            if (cart_id == "") {
+                cart_id = $(this).val();
+            } else {
+                cart_id += ("," + $(this).val());
+            }
+        } else {
+            if (allChecked == true) {
+                allChecked = false;
+            }
+        }
+    });
+    $(".checkall").attr("checked", allChecked);
+    $.get("/index.php/cart/getSelectedMoney?cart_ids=" + cart_id, function (data) {
+        if (data != "") {
+            var data = eval('(' + data + ")");
+            $("#totalPrice span").html(data.total);
+            $("#totalNum span").html(data.nums);
+            $('.cart_foot .shop_total').each(function(){
+                var shop_id=$(this).attr('shop_id');
+                if(data[shop_id]){
+                    $(this).html(data[shop_id]);
+                }else{
+                    $(this).html(0);
+                }
+            });
+        } else {
+            $("#totalPrice span").html(0);
+            $("#totalNum span").html(0);
+        }
+    });
+}
+
+function cart_js() {
+    $('.cart_bottom .btn_pay').on('click',function () {
+        var cart_id='';
+        $("input:checkbox[name='cart_id[]']").each(function (i) {
+            if ($(this).attr('checked')) {
+                if (cart_id == "") {
+                    cart_id ="?cart_id[]="+$(this).val();
+                } else {
+                    cart_id += "&cart_id[]="+$(this).val();
+                }
+            }
+        });
+        if(cart_id==''){
+            layer.open({
+                content: '请选择商品',
+                skin: 'msg',
+                time:1
+            });
+        }else{
+            window.location='/order/confirm/'+cart_id;
+        }
+    });
+
+    getCartedMoney();
+    $("input[name='cart_id[]']").on('click',function () {
+        getCartedMoney();
+    });
+    $('.checkall').on('click',function () {
+        $("input[name='cart_id[]']").attr('checked',this.checked);
+        getCartedMoney();
+    });
+    $('.wrap-input .btn-reduce').on('click',function(){
+        var input=$(this).parent().find('input');
+        var num=Number(input.val());
+        if(num>1){
+            num--;
+            var chkbox=$(this).parents('.goods_item').find('input:checkbox');
+            $.get("/index.php/cart/changeQuantity?num="+num+"&id="+chkbox.val(), function (data) {
+                var data=eval("("+data+")");
+                if(data.code=='0'){
+                    input.val(num);
+                }else{
+                    input.val(data.stock_count);
+                    layer.open({
+                        content: data.msg,
+                        skin: 'msg',
+                        time:1
+                    });
+                }
+            });
+        }
+        getCartedMoney();
+    });
+    $('.wrap-input .btn-add').on('click', function () {
+        var input=$(this).parent().find('input');
+        var num=Number(input.val())+1;
+        var chkbox=$(this).parents('.goods_item').find('input:checkbox');
+        $.get("/index.php/cart/changeQuantity?num="+num+"&id="+chkbox.val(), function (data) {
+            var data=eval("("+data+")");
+            if(data.code=='0'){
+                input.val(num);
+            }else{
+                input.val(data.stock_count);
+                layer.open({
+                    content: data.msg,
+                    skin: 'msg',
+                    time:1
+                });
+            }
+        });
+        getCartedMoney();
+    });
+}
+/* 购物车 end*/
+
 function showBuyBox() {
     $('.weui-mask').show();
     $('#bottom_buy_box').slideDown(150);
@@ -7,12 +120,6 @@ function hideBuyBox(){
     $('.weui-mask').hide();
     $('#bottom_buy_box').slideUp(150);
 }
-
-$(function () {
-
-});
-
-
 function goods_detail_js()
 {
     $(function(){
@@ -49,7 +156,7 @@ function goods_detail_js()
         $('.wrap-input .btn-add').on('click', function () {
             var input=$(this).parent().find('input');
             var num=Number(input.val());
-            var max=Number($(this).parent().prev('.goods_stock_count').html());
+            var max=Number($('#goods_stock_count').html());
             if(num < max){
                 input.val(num+1);
             }
@@ -183,4 +290,5 @@ function selectSpec(type,obj){
         goodsSpec.spec2_name=obj.html();
     }
     goodsSpec.setFormValue();
+    $('#buy_quantity').val(1);
 }
