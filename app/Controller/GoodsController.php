@@ -30,6 +30,7 @@ class GoodsController extends Controller
         $goods=$goods->findOrFail($request->get('id'));
         if($_POST){
             $data=array(
+                'is_direct_buy'=>1,
                 'buyer_id'=>$this->user_id,
                 'goods_id'=>$goods->id,
                 'spec_id'=>$request->post('spec_id'),

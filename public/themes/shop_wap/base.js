@@ -108,6 +108,17 @@ function cart_js() {
         });
         getCartedMoney();
     });
+    $(".goods_item .del").on('click',function () {
+        var id=Number($(this).attr('data-id'));
+        layer.open({
+            content: '您确定要删除吗？'
+            ,btn: ['删除', '取消']
+            ,yes: function(index){
+                location.href='/index.php/cart/del/?id='+id;
+                layer.close(index);
+            }
+        });
+    });
 }
 /* 购物车 end*/
 

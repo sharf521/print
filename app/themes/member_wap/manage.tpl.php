@@ -16,7 +16,7 @@
             </div>
             <p class="weui-grid__label">地址管理</p>
         </a>
-        <a href="<?=url('goods')?>" class="weui-grid">
+        <a href="<?=url('order')?>" class="weui-grid">
             <div class="weui-grid__icon">
                 <i class="iconfont" style="font-size: 22px; color: #999999">&#xe643;</i>
             </div>

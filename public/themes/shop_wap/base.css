@@ -250,6 +250,8 @@ body{background:#f8f8f8;}
 
 
 /*cart*/
+.cart_empty{text-align: center; padding-top: 30px; font-size: 16px; font-weight: 700; line-height: 40px;}
+.cart_empty a{font-size: 16px;font-weight: normal}
 .cart_box{position:relative;margin-top:10px;padding:0 10px;border-top:1px solid #ddd;border-bottom:1px solid #ddd;background:#fff}
 .cart_box .checkbox{ float: left; margin: 15px 5px; width: 20px; height: 20px;}
 .cart_box .shopBar{display:block;height:40px;border-bottom:1px solid #eee;font-size:14px;line-height:40px;color: #333; position: relative}
@@ -269,9 +271,10 @@ body{background:#f8f8f8;}
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
 }
-.cart_box .goods_item{margin-top:10px; font-size: 14px;color: #333;}
+.cart_box .goods_item{margin-top:10px; font-size: 14px;color: #333; position: relative}
 .cart_box .goods_item .image{float:left;margin-right:10px;height:80px; width: 80px;}
 .cart_box .goods_item .spec{padding: 3px 10px; margin-right: 10px; background-color: #ddd}
+.cart_box .del{ position: absolute; right: 10px; bottom: 5px; color: #999999;}
 .cart_box .cart_foot{text-align: right; padding-right: 10px; line-height: 40px;border-top: 1px solid #ddd; margin-top: 5px;}
 .cart_box .cart_foot em{font-weight: 700; color: #e4393c;}
 

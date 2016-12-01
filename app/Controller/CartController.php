@@ -42,6 +42,31 @@ class CartController extends Controller
         $return=$cart->add($data);
         echo json_encode($return);
     }
+
+    public function del(Cart $cart,Request $request)
+    {
+        $user_id=$this->user_id;
+        $cart=$cart->findOrFail($request->get('id'));
+        $tag=false;
+        if($cart->is_exist){
+            if(! empty($user_id)){
+                if($cart->buyer_id==$user_id){
+                    $cart->delete();
+                    $tag=true;
+                }
+            }else{
+                if($cart->session_id==session_id() && $cart->buyer_id==0){
+                    $cart->delete();
+                    $tag=true;
+                }
+            }
+        }
+        if($tag){
+            redirect()->back()->with('msg','删除成功！');
+        }else{
+            redirect()->back()->with('error','失败');
+        }
+    }
     
     public function changeQuantity(Request $request,Cart $cart,Goods $goods)
     {

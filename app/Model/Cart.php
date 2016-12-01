@@ -39,7 +39,11 @@ class Cart extends Model
             $cart=$this->where("buyer_id={$buyer_id} and goods_id={$goods_id} and spec_id={$spec_id}")->first();
         }
         if($cart->is_exist){
-            $cart->quantity=$cart->quantity + $quantity;
+            if((int)$data['is_direct_buy']==1){
+                $cart->quantity=$quantity;
+            }else{
+                $cart->quantity=$cart->quantity + $quantity;
+            }
             $cart->save();
             return $this->returnSuccess(array('cart_id'=>$cart->id));
         }else{
