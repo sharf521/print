@@ -15,6 +15,15 @@ class WxController extends Controller
     {
         parent::__construct();
     }
+
+    public function index()
+    {
+        $AppID='wx0453db85b190df07';
+        $AppSecret='a0845f7bca562a55aa47a07f1b043dcd';
+        $redirect_uri='http://print.yuantuwang.com/index/error';
+        $url="https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid={$AppID}&pre_auth_code={$AppSecret}&redirect_uri={$redirect_uri}";
+        echo "<a href='{$url}'>授权</a>";
+    }
     public function error()
     {
         $msg=json_encode($_REQUEST);
