@@ -23,14 +23,11 @@ class Cart extends Model
         $spec_id=(int)$data['spec_id'];
         $quantity=(int)$data['quantity'];
         $goods=(new Goods())->findOrFail($goods_id);
-        $stock_count=$goods->stock_count;
         if($goods->is_have_spec==1 && $spec_id==0){
             return $this->returnError('请选择规格！');
         }
-        if($spec_id!=0){
-            $Spec=(new GoodsSpec())->findOrFail($spec_id);
-            $stock_count=$Spec->stock_count;
-        }
+        $goods=$goods->addSpec($spec_id);
+        $stock_count=$goods->stock_count;
         if($stock_count<$quantity){
             return $this->returnError("库存不足，仅剩{$stock_count}件！");
         }

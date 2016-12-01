@@ -41,9 +41,9 @@
         <form method="post" name="form_order">
             <dl>
                 <dt class="buy_box_title">
-                <h4><?=$goods->name?></h4>
-                <span>¥<em id="goods_price"><?=$goods->price?></em></span>
-                <i class="iconfont">&#xe725;</i>
+                    <h4><?=$goods->name?></h4>
+                    <span>¥<em id="goods_price"><?=$goods->price?></em></span>
+                    <i class="iconfont">&#xe725;</i>
                 </dt>
                 <? if($goods->is_have_spec) : ?>
                 <dd class="clearFix">
