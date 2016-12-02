@@ -49,6 +49,7 @@ class WxOpenController extends Controller
         $WeChatOpen=new WeChatOpen();
         $server=$WeChatOpen->app->server;
         $msg=$server->getMessage();
+        $chatTicket=$chatTicket->first();
         $chatTicket->timestamp=$request->timestamp;
         $chatTicket->nonce=$request->nonce;
         $chatTicket->encrypt_type=$request->encrypt_type;
