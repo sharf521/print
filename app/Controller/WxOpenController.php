@@ -19,22 +19,16 @@ class WxOpenController extends Controller
     public function __construct()
     {
         parent::__construct();
+        $this->WeChatOpen=new WeChatOpen();
+        $this->component_appid=$this->WeChatOpen->options['app_id'];
+        $this->component_appsecret=$this->WeChatOpen->options['secret'];
     }
 
     public function index(WeChatTicket $chatTicket)
     {
-        $WeChatOpen=new WeChatOpen();
-        $server=$WeChatOpen->app->server;
-
-        $chatTicket=$chatTicket->first();
-        var_dump($chatTicket->ComponentVerifyTicket);
-
-
-        $AppID='wx0453db85b190df07';
-        $AppSecret='a0845f7bca562a55aa47a07f1b043dcd';
         $redirect_uri='http://print.yuantuwang.com/index/error';
         $code=$this->getPreAuthCode();
-        $url="https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid={$AppID}&pre_auth_code={$code}&redirect_uri={$redirect_uri}";
+        $url="https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid={$this->component_appid}&pre_auth_code={$code}&redirect_uri={$redirect_uri}";
         echo $url;
         echo "<a href='{$url}'>授权</a>";
 
@@ -59,8 +53,7 @@ class WxOpenController extends Controller
 
     public function ticket(WeChatTicket $chatTicket,Request $request)
     {
-        $WeChatOpen=new WeChatOpen();
-        $server=$WeChatOpen->app->server;
+        $server=$this->WeChatOpen->app->server;
         $msg=$server->getMessage();
         $chatTicket=$chatTicket->first();
         $chatTicket->timestamp=$request->timestamp;
@@ -74,8 +67,8 @@ class WxOpenController extends Controller
 
         if($chatTicket->token_expires_in<time()){
             $arr=array(
-                'component_appid'=>$WeChatOpen->options['app_id'],
-                'component_appsecret'=>$WeChatOpen->options['secret'],
+                'component_appid'=>$this->component_appid,
+                'component_appsecret'=>$this->component_appsecret,
                 'component_verify_ticket'=>$chatTicket->ComponentVerifyTicket
             );
             $html=$this->curl_url('https://api.weixin.qq.com/cgi-bin/component/api_component_token',json_encode($arr));
@@ -102,10 +95,9 @@ class WxOpenController extends Controller
 
     public function getPreAuthCode()
     {
-        $WeChatOpen=new WeChatOpen();
         $chatTicket=(new WeChatTicket())->first();
         $url="https://api.weixin.qq.com/cgi-bin/component/api_create_preauthcode?component_access_token={$chatTicket->component_access_token}";
-        $arr=array("component_appid"=>$WeChatOpen->options['app_id']);
+        $arr=array("component_appid"=>$this->component_appid);
         $html=$this->curl_url($url,json_encode($arr));
         $html=json_decode($html);
         return $html->pre_auth_code;
