@@ -48,7 +48,7 @@ class WxOpenController extends Controller
     {
         $WeChatOpen=new WeChatOpen();
         $server=$WeChatOpen->app->server;
-        $msg=json_encode($server->getMessage());
+        $msg=$server->getMessage();
         $chatTicket->timestamp=$request->timestamp;
         $chatTicket->nonce=$request->nonce;
         $chatTicket->encrypt_type=$request->encrypt_type;
@@ -57,12 +57,8 @@ class WxOpenController extends Controller
         $chatTicket->InfoType=$msg['InfoType'];
         $chatTicket->component_verify_ticket=$msg['component_verify_ticket'];
         $chatTicket->save();
-        $xml = $GLOBALS["HTTP_RAW_POST_DATA"];
-        if(empty($xml))
-        {
-            $xml = file_get_contents("php://input");
-        }
-        $msg=$xml;
+
+        $msg=json_encode($msg);
         $file_path = ROOT . "/public/data/wx/";
         if (!is_dir($file_path)) {
             mkdir($file_path, 0777, true);
