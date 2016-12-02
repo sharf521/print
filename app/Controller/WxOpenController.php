@@ -12,6 +12,8 @@ use App\Model\WeChatTicket;
 use App\WeChatOpen;
 use System\Lib\Request;
 
+include ROOT."/public/extended/wx/wxBizMsgCrypt.php";
+
 class WxOpenController extends Controller
 {
     public function __construct()
@@ -33,7 +35,7 @@ class WxOpenController extends Controller
             'component_appsecret'=>$AppSecret,
             'component_verify_ticket'=>$chatTicket->ComponentVerifyTicket
         );
-        $html=curl_url('https://api.weixin.qq.com/cgi-bin/component/api_component_token',$arr);
+        $html=curl_url('https://api.weixin.qq.com/cgi-bin/component/api_component_token',json_encode($arr));
         echo $html;
 
         $AppID='wx0453db85b190df07';
