@@ -19,8 +19,23 @@ class WxOpenController extends Controller
         parent::__construct();
     }
 
-    public function index()
+    public function index(WeChatTicket $chatTicket)
     {
+        $WeChatOpen=new WeChatOpen();
+        $server=$WeChatOpen->app->server;
+
+        $chatTicket=$chatTicket->first();
+        var_dump($chatTicket->ComponentVerifyTicket);
+        $AppID='wx0453db85b190df07';
+        $AppSecret='a0845f7bca562a55aa47a07f1b043dcd';
+        $arr=array(
+            'component_appid'=>$AppID,
+            'component_appsecret'=>$AppSecret,
+            'component_verify_ticket'=>$chatTicket->ComponentVerifyTicket
+        );
+        $html=curl_url('https://api.weixin.qq.com/cgi-bin/component/api_component_token',$arr);
+        echo $html;
+
         $AppID='wx0453db85b190df07';
         $AppSecret='a0845f7bca562a55aa47a07f1b043dcd';
         $redirect_uri='http://print.yuantuwang.com/index/error';
