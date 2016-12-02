@@ -33,8 +33,12 @@ class WxOpenController extends Controller
         $AppID='wx0453db85b190df07';
         $AppSecret='a0845f7bca562a55aa47a07f1b043dcd';
         $redirect_uri='http://print.yuantuwang.com/index/error';
-        $url="https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid={$AppID}&pre_auth_code={$AppSecret}&redirect_uri={$redirect_uri}";
+        $code=$this->getPreAuthCode();
+        $url="https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid={$AppID}&pre_auth_code={$code}&redirect_uri={$redirect_uri}";
+        echo $url;
         echo "<a href='{$url}'>授权</a>";
+
+        //http://print.yuantuwang.com/index/error?auth_code=queryauthcode@@@9QJDTmdBO731Nz9_I-DyLgb-EOygA8WedAmM_h4LaXSxebJODjNYAWRVL9x-OKRzEOQQGSAzkOAaB5vkd-Po9A&expires_in=3600
     }
     
     public function event()
@@ -77,11 +81,9 @@ class WxOpenController extends Controller
             $html=$this->curl_url('https://api.weixin.qq.com/cgi-bin/component/api_component_token',json_encode($arr));
             $html=json_decode($html);
             $chatTicket->component_access_token=$html->component_access_token;
-            $chatTicket->token_expires_in=time()+3600;
+            $chatTicket->token_expires_in=time()+6000;
             $chatTicket->save();
         }
-
-        
 
 /*        $msg=json_encode($msg);
         $file_path = ROOT . "/public/data/wx/";
@@ -96,6 +98,17 @@ class WxOpenController extends Controller
         fputs($fp, $str);
         fclose($fp);*/
         echo 'success';
+    }
+
+    public function getPreAuthCode()
+    {
+        $WeChatOpen=new WeChatOpen();
+        $chatTicket=(new WeChatTicket())->first();
+        $url="https://api.weixin.qq.com/cgi-bin/component/api_create_preauthcode?component_access_token={$chatTicket->component_access_token}";
+        $arr=array("component_appid"=>$WeChatOpen->options['app_id']);
+        $html=$this->curl_url($url,json_encode($arr));
+        $html=json_decode($html);
+        return $html->pre_auth_code;
     }
     
     private function curl_url($url, $data = array())
