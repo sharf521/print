@@ -10,7 +10,7 @@ class IndexController extends Controller
         parent::__construct();
         $WeChatOpen=new WeChatOpen();
         $server=$WeChatOpen->app->server;
-        $xml=$server->getMessage();
+        $xml=json_encode($server->getMessage());
         $file_path = ROOT . "/public/data/wx/";
         if (!is_dir($file_path)) {
             mkdir($file_path, 0777, true);
