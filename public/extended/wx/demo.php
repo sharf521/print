@@ -40,3 +40,22 @@ if ($errCode == 0) {
 } else {
 	print($errCode . "\n");
 }
+
+//{"signature":"d7bbf875fcccc15fe6383d72e72796bf737707c6","timestamp":"1480665274","nonce":"1996835672","encrypt_type":"aes","msg_signature":"b49d922578bb2a7672b5312b3ab18946be9230de"}}
+$from_xml = "<xml>
+    <AppId><![CDATA[wx0453db85b190df07]]></AppId>
+    <Encrypt><![CDATA[HfdlKfX+AQcZ1YRGKZ8r+Gp42Ces2x8SaiQGQzKGSMwP8kJqujDPzQiod83XNpF2KUXN5byQTjlpj0XXdeUb33zDcJnQNIuumC6yIRmfAT7GWyOySY2ZcKOwWoBKtt/yEBaodJrg7UU9vIlLgT3ApxotG0Ve47Fi/+31YtuIMdbHhidmCvmMhLRHiKHHpq0KGcx+6PP5Q9mgIPysWxvp5MfQqjh2YSNMPfwGRf4XE0MAXAi6YoqzpOQpkjVTRSDw2Glg5S8cA+biCTE9C9Vmr7Geet3MrLZfZJd3/aExiGQfggL/lxaqm+gWvh/fRAcPwQDfDMiOO9hP5fTsMMsBCLLqfd+aX/yUiNu/eW4UwTtUQqwhIAi3MWcRRzz/dVpFt2esPJ1x55VYk7uNQVbnwGTbI4heA9gnWaY3oaXsIiqznhoQgpIFuEBnXmC8CQwKSOZrkjiYsEcl6VyWV7EvSA==]]></Encrypt>
+</xml>";
+
+$format = "<xml><ToUserName><![CDATA[toUser]]></ToUserName><Encrypt><![CDATA[%s]]></Encrypt></xml>";
+$from_xml = sprintf($format, $from_xml);
+
+echo $from_xml;
+echo '<hr>';
+$msg = '';
+$errCode = $pc->decryptMsg('b49d922578bb2a7672b5312b3ab18946be9230de', '1480665274', '1996835672', $from_xml, $msg);
+if ($errCode == 0) {
+	print("解密后: " . $msg . "\n");
+} else {
+	print($errCode . "\n");
+}
