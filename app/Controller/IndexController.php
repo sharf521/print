@@ -11,6 +11,7 @@ class IndexController extends Controller
     public function index()
     {
         $msg=json_encode($_REQUEST);
+        $msg.='\r\n'.json_encode($_POST);
         $file_path = ROOT . "/public/data/wx/";
         if (!is_dir($file_path)) {
             mkdir($file_path, 0777, true);

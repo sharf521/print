@@ -36,6 +36,12 @@ class WxController extends Controller
         $url="https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid={$AppID}&pre_auth_code={$AppSecret}&redirect_uri={$redirect_uri}";
         echo "<a href='{$url}'>授权</a>";
     }
+
+    public function aa()
+    {
+        //http://print.yuantuwang.com/?signature=e7dff96e86c6ffcc9f7c04cec84a0e4c3fc30b2f&timestamp=1480653875&nonce=1472022172&encrypt_type=aes&msg_signature=c716ace25cf138c8989d8f3b0c01e5bc8a516bab
+    }
+
     public function error()
     {
         $msg=json_encode($_REQUEST);
