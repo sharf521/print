@@ -12,7 +12,7 @@ use EasyWeChat\Foundation\Application;
 class WeChatOpen
 {
     public $app;
-    private $options;
+    public $options;
     public function __construct()
     {
         $this->options = [
