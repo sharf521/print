@@ -45,7 +45,7 @@ class IndexController extends Controller
         }
         if(!empty($xml))
         {
-            $xml = new SimpleXMLElement($xml);
+            $xml = new \SimpleXMLElement($xml);
             if(is_array($xml)){
                 foreach ($xml as $key => $value) {
                     $data[$key] = strval($value);
