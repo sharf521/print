@@ -10,8 +10,23 @@ class IndexController extends Controller
 
     public function index()
     {
-        $msg=json_encode($_REQUEST);
-        $msg.='\r\n'.json_encode($_POST);
+        $xml = $GLOBALS["HTTP_RAW_POST_DATA"];
+        if(empty($xml))
+        {
+            $xml = file_get_contents("php://input");
+        }
+        if(!empty($xml))
+        {
+            $xml = new SimpleXMLElement($xml);
+            if(is_array($xml)){
+                foreach ($xml as $key => $value) {
+                    $data[$key] = strval($value);
+                }
+            }
+        }
+
+        $msg=json_encode($data);
+        $msg.='\r\n'.json_encode($_REQUEST);
         $file_path = ROOT . "/public/data/wx/";
         if (!is_dir($file_path)) {
             mkdir($file_path, 0777, true);
