@@ -15,7 +15,7 @@ class IndexController extends Controller
         {
             $xml = file_get_contents("php://input");
         }
-        if(!empty($xml))
+/*        if(!empty($xml))
         {
             $xml = new \SimpleXMLElement($xml);
             if(is_array($xml)){
@@ -23,9 +23,9 @@ class IndexController extends Controller
                     $data[$key] = strval($value);
                 }
             }
-        }
+        }*/
 
-        $msg=json_encode($data);
+        $msg=$xml;
         $msg.='\r\n'.json_encode($_REQUEST);
         $file_path = ROOT . "/public/data/wx/";
         if (!is_dir($file_path)) {
