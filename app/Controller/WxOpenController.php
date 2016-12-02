@@ -68,15 +68,19 @@ class WxOpenController extends Controller
         $chatTicket->ComponentVerifyTicket=$msg['ComponentVerifyTicket'];
         $chatTicket->save();
 
-        $arr=array(
-            'component_appid'=>$WeChatOpen->options['app_id'],
-            'component_appsecret'=>$WeChatOpen->options['secret'],
-            'component_verify_ticket'=>$chatTicket->ComponentVerifyTicket
-        );
-        $html=$this->curl_url('https://api.weixin.qq.com/cgi-bin/component/api_component_token',json_encode($arr));
-        $html=json_decode($html);
-        $chatTicket->component_access_token=$html->component_access_token;
-        $chatTicket->save();
+        if($chatTicket->token_expires_in<time()){
+            $arr=array(
+                'component_appid'=>$WeChatOpen->options['app_id'],
+                'component_appsecret'=>$WeChatOpen->options['secret'],
+                'component_verify_ticket'=>$chatTicket->ComponentVerifyTicket
+            );
+            $html=$this->curl_url('https://api.weixin.qq.com/cgi-bin/component/api_component_token',json_encode($arr));
+            $html=json_decode($html);
+            $chatTicket->component_access_token=$html->component_access_token;
+            $chatTicket->token_expires_in=time()+3600;
+            $chatTicket->save();
+        }
+
         
 
 /*        $msg=json_encode($msg);
