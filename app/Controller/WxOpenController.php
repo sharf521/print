@@ -35,7 +35,7 @@ class WxOpenController extends Controller
         if (!is_dir($file_path)) {
             mkdir($file_path, 0777, true);
         }
-        $filename = $file_path . date("Ym") . ".log";
+        $filename = $file_path . date("Ym") . "event.log";
         $fp = fopen($filename, "a+");
         $time = date('Y-m-d H:i:s');
         $file = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
@@ -55,7 +55,7 @@ class WxOpenController extends Controller
         $chatTicket->msg_signature=$request->msg_signature;
         $chatTicket->CreateTime=$msg['CreateTime'];
         $chatTicket->InfoType=$msg['InfoType'];
-        $chatTicket->component_verify_ticket=$msg['component_verify_ticket'];
+        $chatTicket->ComponentVerifyTicket=$msg['ComponentVerifyTicket'];
         $chatTicket->save();
 
         $msg=json_encode($msg);
