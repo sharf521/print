@@ -37,10 +37,12 @@ class WxOpenController extends Controller
     //授权返回
     public function auth_code(Request $request)
     {
+        $server=$this->WeChatOpen->app->server;
+        $msg=$server->getMessage();
+        $msg=json_encode($msg);
+        echo $msg;
         //?auth_code=queryauthcode@@@9QJDTmdBO731Nz9_I-DyLgb-EOygA8WedAmM_h4LaXSxebJODjNYAWRVL9x-OKRzEOQQGSAzkOAaB5vkd-Po9A&expires_in=3600
         $auth_code=$request->get('auth_code');
-
-
         $ticket=(new WeChatTicket())->first();
         $url="https://api.weixin.qq.com/cgi-bin/component/api_query_auth?component_access_token={$ticket->component_access_token}";
         $arr=array(
