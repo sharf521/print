@@ -69,7 +69,10 @@ class WxOpenController extends Controller
     
     public function event()
     {
-        $msg=json_encode($_REQUEST);
+        $server=$this->WeChatOpen->app->server;
+        $msg=$server->getMessage();
+        $msg=json_encode($msg);
+        $msg.=json_encode($_REQUEST);
         $file_path = ROOT . "/public/data/wx/";
         if (!is_dir($file_path)) {
             mkdir($file_path, 0777, true);
