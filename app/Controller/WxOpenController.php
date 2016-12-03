@@ -72,7 +72,7 @@ class WxOpenController extends Controller
     public function event(Request $request,WeChatAuth $auth)
     {
         $app_id=$request->get(2);
-        $auth=$auth->findOrFail($app_id);
+        //$auth=$auth->findOrFail($app_id);
 
         $server=$this->WeChatOpen->app->server;
         $server->setMessageHandler(function ($message) {
