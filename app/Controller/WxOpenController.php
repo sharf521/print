@@ -123,8 +123,7 @@ class WxOpenController extends Controller
             $str=substr($message->Content,16)."_from_api";
             //发送消息
             $staff = $this->app->staff; // 客服管理
-            $message=new Text(['content' =>$message->FromUserName]);
-            return $message;
+            $message=new Text(['content' =>$str]);
             $staff->message($message)->to($message->FromUserName)->send();
         }
     }
