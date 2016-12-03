@@ -29,6 +29,11 @@ class WxOpenController extends Controller
 
     public function index()
     {
+
+
+
+
+
         $redirect_uri='http://'.$_SERVER['HTTP_HOST'].url('wxOpen/auth_code');
         $code=$this->getPreAuthCode();
         $url="https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid={$this->component_appid}&pre_auth_code={$code}&redirect_uri={$redirect_uri}";
@@ -113,6 +118,13 @@ class WxOpenController extends Controller
     {
         if($message->Content=='TESTCOMPONENT_MSG_TYPE_TEXT'){
             return new Text(['content' => 'TESTCOMPONENT_MSG_TYPE_TEXT_callback']);
+        }
+        if(substr($message->Content,0,16)=='QUERY_AUTH_CODE:'){
+            $str=substr($message->Content,16)."_from_api";
+            //发送消息
+            $staff = $this->app->staff; // 客服管理
+            $message=new Text(['content' =>$str]);
+            $staff->message($message)->to($message->FromUserName)->send();
         }
     }
 
