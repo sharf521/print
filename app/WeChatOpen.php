@@ -16,7 +16,7 @@ class WeChatOpen
     public function __construct()
     {
         $this->options = [
-            'debug' => false,
+            'debug' => true,
             'app_id' => 'wx0453db85b190df07',
             'secret' => 'a0845f7bca562a55aa47a07f1b043dcd',
             'token' => 'jaskdfjqweir234934jkzxc8asdfdf',
