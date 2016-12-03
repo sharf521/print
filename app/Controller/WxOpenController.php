@@ -11,6 +11,7 @@ namespace App\Controller;
 use App\Model\WeChatAuth;
 use App\Model\WeChatTicket;
 use App\WeChatOpen;
+use EasyWeChat\Message\Text;
 use System\Lib\Request;
 
 include ROOT."/public/extended/wx/wxBizMsgCrypt.php";
