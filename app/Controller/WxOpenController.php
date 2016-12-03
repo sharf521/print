@@ -78,8 +78,8 @@ class WxOpenController extends Controller
     public function event(Request $request,WeChatAuth $auth)
     {
         $app_id=$request->get(2);
-        $auth=$auth->findOrFail($app_id);
-        $this->app['access_token']->setToken($auth->authorizer_access_token);
+        //$auth=$auth->findOrFail($app_id);
+        //$this->app['access_token']->setToken($auth->authorizer_access_token);
 
         $server=$this->WeChatOpen->app->server;
         $server->setMessageHandler(function ($message) {
@@ -117,6 +117,20 @@ class WxOpenController extends Controller
     private function text($message)
     {
         if($message->Content=='TESTCOMPONENT_MSG_TYPE_TEXT'){
+/*            include ROOT."/public/extended/wx/wxBizMsgCrypt.php";
+            $pc = new WXBizMsgCrypt($this->WeChatOpen->options['token'], $this->WeChatOpen->options['aes_key'], $this->component_appid);
+            $ticket=(new WeChatTicket())->first();
+            // file:http://print.yuantuwang.com/wxOpen/event/wx02560f146a566747?signature=604d456e091a0d8b610994d8fc6ea2f0ac24ba35&timestamp=1480759705&nonce=536707496&openid=on0aqs51hEudNQsGESP3GWEMYe78&encrypt_type=aes&msg_signature=9506d80a0a74ead57cd0d8641681170003e41ce1
+
+            $text="<xml>
+<ToUserName><![CDATA[{$message->FromUserName}]]></ToUserName>
+<FromUserName><![CDATA[{$message->ToUserName}]]></FromUserName>
+<CreateTime>".time()."</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[TESTCOMPONENT_MSG_TYPE_TEXT_callback]]></Content>
+</xml>";
+            $errCode = $pc->encryptMsg($text, $_GET['timestamp'], $_GET['nonce'], 'aes');*/
+
             return new Text(['content' => 'TESTCOMPONENT_MSG_TYPE_TEXT_callback']);
         }
         if(substr($message->Content,0,16)=='QUERY_AUTH_CODE:'){
