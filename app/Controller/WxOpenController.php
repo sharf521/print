@@ -108,10 +108,8 @@ class WxOpenController extends Controller
 
     private function text($message)
     {
-        if($message->Content=='邀请'){
-            $url="http://{$_SERVER['HTTP_HOST']}/index.php/weixin/invite";
-            $url=$this->WeChatOpen->shorten($url);
-            return new Text(['content' => $url]);
+        if($message->Content=='123456'){
+            return new Text(['content' => '1234']);
         }
     }
 
