@@ -82,7 +82,7 @@ class WxOpenController extends Controller
 
         $server=$this->WeChatOpen->app->server;
         $server->setMessageHandler(function ($message) {
-
+            $this->app['access_token']->setToken('-k-jEFwzYF70RlbWemeNw00-X4sRCaA0keG_GCbmpbNmYRnx1BeMvTPmxU61Grf71YRU2nqpFtCQoGZujkB_l9ZmlXuXpvyKFjShTWc5SifuCUdG57jMoZTG6Ar8Bv2yNWKaADDZIW');
             switch ($message->MsgType) {
                 case 'event':
                     return new Text(['content' => $message->MsgType.'from_callback']);
@@ -117,7 +117,6 @@ class WxOpenController extends Controller
     private function text($message)
     {
         if($message->Content=='TESTCOMPONENT_MSG_TYPE_TEXT'){
-            $this->app['access_token']->setToken('-k-jEFwzYF70RlbWemeNw00-X4sRCaA0keG_GCbmpbNmYRnx1BeMvTPmxU61Grf71YRU2nqpFtCQoGZujkB_l9ZmlXuXpvyKFjShTWc5SifuCUdG57jMoZTG6Ar8Bv2yNWKaADDZIW');
             return new Text(['content' => 'TESTCOMPONENT_MSG_TYPE_TEXT_callback']);
         }
         if(substr($message->Content,0,16)=='QUERY_AUTH_CODE:'){
