@@ -77,7 +77,8 @@ class WxOpenController extends Controller
 
         $server=$this->WeChatOpen->app->server;
         $server->setMessageHandler(function ($message) {
-            switch ($message->MsgType) {
+            return new Text(['content' => $message->MsgType.'from_callback']);
+            /*switch ($message->MsgType) {
                 case 'event':
                     //return $this->event($message);
                     break;
@@ -87,7 +88,7 @@ class WxOpenController extends Controller
                 default:
                     # code...
                     break;
-            }
+            }*/
         });
         $server->serve()->send();
 
