@@ -37,9 +37,7 @@ class WxOpenController extends Controller
     //授权返回
     public function auth_code(Request $request)
     {
-        $server=$this->WeChatOpen->app->server;
-        $msg=$server->getMessage();
-        $msg=json_encode($msg);
+        $msg=json_encode($_REQUEST);
         echo $msg;
         //?auth_code=queryauthcode@@@9QJDTmdBO731Nz9_I-DyLgb-EOygA8WedAmM_h4LaXSxebJODjNYAWRVL9x-OKRzEOQQGSAzkOAaB5vkd-Po9A&expires_in=3600
         $auth_code=$request->get('auth_code');
