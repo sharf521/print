@@ -78,11 +78,11 @@ class WxOpenController extends Controller
     public function event(Request $request,WeChatAuth $auth)
     {
         $app_id=$request->get(2);
-        //$auth=$auth->findOrFail($app_id);
+        $auth=$auth->findOrFail($app_id);
+        $this->app['access_token']->setToken($auth->authorizer_access_token);
 
         $server=$this->WeChatOpen->app->server;
         $server->setMessageHandler(function ($message) {
-            $this->app['access_token']->setToken('-k-jEFwzYF70RlbWemeNw00-X4sRCaA0keG_GCbmpbNmYRnx1BeMvTPmxU61Grf71YRU2nqpFtCQoGZujkB_l9ZmlXuXpvyKFjShTWc5SifuCUdG57jMoZTG6Ar8Bv2yNWKaADDZIW');
             switch ($message->MsgType) {
                 case 'event':
                     return new Text(['content' => $message->MsgType.'from_callback']);
