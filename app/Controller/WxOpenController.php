@@ -86,32 +86,35 @@ class WxOpenController extends Controller
         fclose($fp);
     }
 
-    //10分钟推送一次
+    //平台接收消息
     public function ticket(WeChatTicket $chatTicket,Request $request)
     {
         $server=$this->WeChatOpen->app->server;
         $msg=$server->getMessage();
-        $chatTicket=$chatTicket->first();
-        $chatTicket->timestamp=$request->timestamp;
-        $chatTicket->nonce=$request->nonce;
-        $chatTicket->encrypt_type=$request->encrypt_type;
-        $chatTicket->msg_signature=$request->msg_signature;
-        $chatTicket->CreateTime=$msg['CreateTime'];
-        $chatTicket->InfoType=$msg['InfoType'];
-        $chatTicket->ComponentVerifyTicket=$msg['ComponentVerifyTicket'];
-        $chatTicket->save();
-
-        if($chatTicket->token_expires_in<time()){
-            $arr=array(
-                'component_appid'=>$this->component_appid,
-                'component_appsecret'=>$this->component_appsecret,
-                'component_verify_ticket'=>$chatTicket->ComponentVerifyTicket
-            );
-            $html=$this->curl_url('https://api.weixin.qq.com/cgi-bin/component/api_component_token',json_encode($arr));
-            $html=json_decode($html);
-            $chatTicket->component_access_token=$html->component_access_token;
-            $chatTicket->token_expires_in=time()+6000;
+        //10分钟推送一次
+        if($msg['InfoType']=='component_verify_ticket'){
+            $chatTicket=$chatTicket->first();
+            $chatTicket->timestamp=$request->timestamp;
+            $chatTicket->nonce=$request->nonce;
+            $chatTicket->encrypt_type=$request->encrypt_type;
+            $chatTicket->msg_signature=$request->msg_signature;
+            $chatTicket->CreateTime=$msg['CreateTime'];
+            $chatTicket->InfoType=$msg['InfoType'];
+            $chatTicket->ComponentVerifyTicket=$msg['ComponentVerifyTicket'];
             $chatTicket->save();
+            //token
+            if($chatTicket->token_expires_in<time()){
+                $arr=array(
+                    'component_appid'=>$this->component_appid,
+                    'component_appsecret'=>$this->component_appsecret,
+                    'component_verify_ticket'=>$chatTicket->ComponentVerifyTicket
+                );
+                $html=$this->curl_url('https://api.weixin.qq.com/cgi-bin/component/api_component_token',json_encode($arr));
+                $html=json_decode($html);
+                $chatTicket->component_access_token=$html->component_access_token;
+                $chatTicket->token_expires_in=time()+6000;
+                $chatTicket->save();
+            }
         }
 
         $msg=json_encode($msg);
