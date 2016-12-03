@@ -21,11 +21,12 @@ class WxOpenController extends Controller
     {
         parent::__construct();
         $this->WeChatOpen=new WeChatOpen();
+        $this->app=$this->WeChatOpen->app;
         $this->component_appid=$this->WeChatOpen->options['app_id'];
         $this->component_appsecret=$this->WeChatOpen->options['secret'];
     }
 
-    public function index(WeChatTicket $chatTicket)
+    public function index()
     {
         $redirect_uri='http://'.$_SERVER['HTTP_HOST'].url('wxOpen/auth_code');
         $code=$this->getPreAuthCode();
@@ -66,10 +67,29 @@ class WxOpenController extends Controller
             exit;
         }
     }
-    
-    public function event()
+
+    //wxOpen/event/wx02560f146a566747
+    public function event(Request $request,WeChatAuth $auth)
     {
+        $app_id=$request->get(2);
+        $auth=$auth->findOrFail($app_id);
+
         $server=$this->WeChatOpen->app->server;
+        $server->setMessageHandler(function ($message) {
+            switch ($message->MsgType) {
+                case 'event':
+                    //return $this->event($message);
+                    break;
+                case 'text':
+                    return $this->text($message);
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+        });
+        $server->serve()->send();
+
         $msg=$server->getMessage();
         $msg=json_encode($msg);
         $msg.=json_encode($_REQUEST);
@@ -84,6 +104,15 @@ class WxOpenController extends Controller
         $str = "time:{$time} \t{error:" . $msg . "}\t file:{$file}\t\r\n";
         fputs($fp, $str);
         fclose($fp);
+    }
+
+    private function text($message)
+    {
+        if($message->Content=='邀请'){
+            $url="http://{$_SERVER['HTTP_HOST']}/index.php/weixin/invite";
+            $url=$this->WeChatOpen->shorten($url);
+            return new Text(['content' => $url]);
+        }
     }
 
     //平台接收消息
