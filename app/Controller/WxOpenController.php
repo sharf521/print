@@ -178,16 +178,18 @@ class WxOpenController extends Controller
         }elseif($msg['InfoType']=='authorized'){
             $AuthorizationCode=$request->AuthorizationCode;
             $redirect_uri='http://'.$_SERVER['HTTP_HOST'].url("wxOpen/auth_code/?auth_code={$AuthorizationCode}");
-            $this->curl_url($redirect_uri);
+            $this->log($redirect_uri);
+            $html=$this->curl_url($redirect_uri);
+            $this->log($html);
             $txt="{$AuthorizationCode}_from_api";
             //发送消息
             $staff = $this->app->staff; // 客服管理
             $message=new Text(['content' =>$txt]);
             $staff->message($message)->to($message->FromUserName)->send();
         }
-/*
+
         $msg=json_encode($msg);
-        */
+        $this->log($msg);
         echo 'success';
     }
 
