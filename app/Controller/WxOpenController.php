@@ -131,7 +131,7 @@ class WxOpenController extends Controller
 </xml>";
             $errCode = $pc->encryptMsg($text, $_GET['timestamp'], $_GET['nonce'], 'aes');*/
 
-            $xml="<xml>
+/*            $xml="<xml>
 <ToUserName><![CDATA[{$message->FromUserName}]]></ToUserName>
 <FromUserName><![CDATA[{$message->ToUserName}]]></FromUserName>
 <CreateTime>".time()."</CreateTime>
@@ -152,8 +152,8 @@ class WxOpenController extends Controller
             $str = "time:{$time} \t{error:" . $msg . "}\t file:{$file}\t\r\n";
             fputs($fp, $str);
             fclose($fp);
-            return new Raw($xml);
-            //return new Text(['content' => 'TESTCOMPONENT_MSG_TYPE_TEXT_callback']);
+            return new Raw($xml);*/
+            return new Text(['content' => 'TESTCOMPONENT_MSG_TYPE_TEXT_callback']);
         }
         if(substr($message->Content,0,16)=='QUERY_AUTH_CODE:'){
             $str=substr($message->Content,16)."_from_api";
