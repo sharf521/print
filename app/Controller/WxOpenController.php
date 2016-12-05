@@ -132,8 +132,8 @@ class WxOpenController extends Controller
             $errCode = $pc->encryptMsg($text, $_GET['timestamp'], $_GET['nonce'], 'aes');*/
 
             return new Raw("<xml>
-<ToUserName><![CDATA[{$message->FromUserName}]]></ToUserName>
-<FromUserName><![CDATA[{$message->ToUserName}]]></FromUserName>
+<ToUserName><![CDATA[{$message->ToUserName}]]></ToUserName>
+<FromUserName><![CDATA[{$message->FromUserName}]]></FromUserName>
 <CreateTime>".time()."</CreateTime>
 <MsgType><![CDATA[text]]></MsgType>
 <Content><![CDATA[TESTCOMPONENT_MSG_TYPE_TEXT_callback]]></Content>
