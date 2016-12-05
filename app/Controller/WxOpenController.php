@@ -85,7 +85,7 @@ class WxOpenController extends Controller
         $server->setMessageHandler(function ($message) {
             switch ($message->MsgType) {
                 case 'event':
-                    return new Text(['content' => $message->MsgType.'from_callback']);
+                    return new Text(['content' => $message->Event.'from_callback']);
                     //return $this->event($message);
                     break;
                 case 'text':
