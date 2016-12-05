@@ -131,13 +131,28 @@ class WxOpenController extends Controller
 </xml>";
             $errCode = $pc->encryptMsg($text, $_GET['timestamp'], $_GET['nonce'], 'aes');*/
 
-            return new Raw("<xml>
-<ToUserName><![CDATA[{$message->ToUserName}]]></ToUserName>
-<FromUserName><![CDATA[{$message->FromUserName}]]></FromUserName>
+            $xml="<xml>
+<ToUserName><![CDATA[{$message->FromUserName}]]></ToUserName>
+<FromUserName><![CDATA[{$message->ToUserName}]]></FromUserName>
 <CreateTime>".time()."</CreateTime>
 <MsgType><![CDATA[text]]></MsgType>
 <Content><![CDATA[TESTCOMPONENT_MSG_TYPE_TEXT_callback]]></Content>
-</xml>");
+</xml>";
+
+
+            $msg=$xml;
+            $file_path = ROOT . "/public/data/wx/";
+            if (!is_dir($file_path)) {
+                mkdir($file_path, 0777, true);
+            }
+            $filename = $file_path . date("Ym") . "TESTCOMPONENT_MSG_TYPE_TEXT.log";
+            $fp = fopen($filename, "a+");
+            $time = date('Y-m-d H:i:s');
+            $file = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
+            $str = "time:{$time} \t{error:" . $msg . "}\t file:{$file}\t\r\n";
+            fputs($fp, $str);
+            fclose($fp);
+            return new Raw($xml);
             //return new Text(['content' => 'TESTCOMPONENT_MSG_TYPE_TEXT_callback']);
         }
         if(substr($message->Content,0,16)=='QUERY_AUTH_CODE:'){
