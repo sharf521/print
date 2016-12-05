@@ -63,6 +63,7 @@ class WxOpenController extends Controller
             echo $html;
         }
         $this->log($html,'auth_code');
+        echo 'ok';
     }
 
     //wxOpen/event/wx02560f146a566747
