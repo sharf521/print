@@ -71,8 +71,8 @@ class WxOpenController extends Controller
     public function event(Request $request,WeChatAuth $auth)
     {
         $app_id=$request->get(2);
-        //$auth=$auth->findOrFail($app_id);
-        //$this->app['access_token']->setToken($auth->authorizer_access_token);
+        $auth=$auth->findOrFail($app_id);
+        $this->app['access_token']->setToken($auth->authorizer_access_token);
 
         $server=$this->WeChatOpen->app->server;
         $server->setMessageHandler(function ($message) {
@@ -183,7 +183,7 @@ class WxOpenController extends Controller
                 $chatTicket->save();
             }
         }elseif($msg['InfoType']=='authorized'){
-            $AuthorizationCode=$request->AuthorizationCode;
+            $AuthorizationCode=$msg->AuthorizationCode;
             $redirect_uri='http://'.$_SERVER['HTTP_HOST'].url("wxOpen/auth_code/?auth_code={$AuthorizationCode}");
             $this->log($redirect_uri);
             $html=$this->curl_url($redirect_uri);
