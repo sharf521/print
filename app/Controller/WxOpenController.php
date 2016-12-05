@@ -131,7 +131,14 @@ class WxOpenController extends Controller
 </xml>";
             $errCode = $pc->encryptMsg($text, $_GET['timestamp'], $_GET['nonce'], 'aes');*/
 
-            return new Text(['content' => 'TESTCOMPONENT_MSG_TYPE_TEXT_callback']);
+            return new Raw("<xml>
+<ToUserName><![CDATA[{$message->FromUserName}]]></ToUserName>
+<FromUserName><![CDATA[{$message->ToUserName}]]></FromUserName>
+<CreateTime>".time()."</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[TESTCOMPONENT_MSG_TYPE_TEXT_callback]]></Content>
+</xml>");
+            //return new Text(['content' => 'TESTCOMPONENT_MSG_TYPE_TEXT_callback']);
         }
         if(substr($message->Content,0,16)=='QUERY_AUTH_CODE:'){
             $str=substr($message->Content,16)."_from_api";
