@@ -187,12 +187,7 @@ class WxOpenController extends Controller
             $redirect_uri='http://'.$_SERVER['HTTP_HOST'].url("wxOpen/auth_code/?auth_code={$AuthorizationCode}");
             $this->log($redirect_uri);
             $html=$this->curl_url($redirect_uri);
-            $this->log($html);
-            $txt="{$AuthorizationCode}_from_api";
-            //发送消息
-            $staff = $this->app->staff; // 客服管理
-            $message=new Text(['content' =>$txt]);
-            $staff->message($message)->to($message->FromUserName)->send();
+            $this->log("BBB".$html);
         }
         echo 'success';
     }
