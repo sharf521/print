@@ -147,8 +147,8 @@ class WxOpenController extends Controller
             $str=$query_auth_code."_from_api";
             //发送消息
             $staff = $this->app->staff; // 客服管理
-            $message=new Text(['content' =>$str]);
-            $staff->message($message)->to($message->FromUserName)->send();
+            $_message=new Text(['content' =>$str]);
+            $staff->message($_message)->to($message->FromUserName)->send();
         }
     }
 
