@@ -99,42 +99,6 @@ class WxOpenController extends Controller
     private function text($message)
     {
         if($message->Content=='TESTCOMPONENT_MSG_TYPE_TEXT'){
-/*            include ROOT."/public/extended/wx/wxBizMsgCrypt.php";
-            $pc = new WXBizMsgCrypt($this->WeChatOpen->options['token'], $this->WeChatOpen->options['aes_key'], $this->component_appid);
-            $ticket=(new WeChatTicket())->first();
-            // file:http://print.yuantuwang.com/wxOpen/event/wx02560f146a566747?signature=604d456e091a0d8b610994d8fc6ea2f0ac24ba35&timestamp=1480759705&nonce=536707496&openid=on0aqs51hEudNQsGESP3GWEMYe78&encrypt_type=aes&msg_signature=9506d80a0a74ead57cd0d8641681170003e41ce1
-
-            $text="<xml>
-<ToUserName><![CDATA[{$message->FromUserName}]]></ToUserName>
-<FromUserName><![CDATA[{$message->ToUserName}]]></FromUserName>
-<CreateTime>".time()."</CreateTime>
-<MsgType><![CDATA[text]]></MsgType>
-<Content><![CDATA[TESTCOMPONENT_MSG_TYPE_TEXT_callback]]></Content>
-</xml>";
-            $errCode = $pc->encryptMsg($text, $_GET['timestamp'], $_GET['nonce'], 'aes');*/
-
-/*            $xml="<xml>
-<ToUserName><![CDATA[{$message->FromUserName}]]></ToUserName>
-<FromUserName><![CDATA[{$message->ToUserName}]]></FromUserName>
-<CreateTime>".time()."</CreateTime>
-<MsgType><![CDATA[text]]></MsgType>
-<Content><![CDATA[TESTCOMPONENT_MSG_TYPE_TEXT_callback]]></Content>
-</xml>";
-
-
-            $msg=$xml;
-            $file_path = ROOT . "/public/data/wx/";
-            if (!is_dir($file_path)) {
-                mkdir($file_path, 0777, true);
-            }
-            $filename = $file_path . date("Ym") . "TESTCOMPONENT_MSG_TYPE_TEXT.log";
-            $fp = fopen($filename, "a+");
-            $time = date('Y-m-d H:i:s');
-            $file = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
-            $str = "time:{$time} \t{error:" . $msg . "}\t file:{$file}\t\r\n";
-            fputs($fp, $str);
-            fclose($fp);
-            return new Raw($xml);*/
             return new Text(['content' => 'TESTCOMPONENT_MSG_TYPE_TEXT_callback']);
         }
         if(substr($message->Content,0,16)=='QUERY_AUTH_CODE:'){
@@ -183,7 +147,7 @@ class WxOpenController extends Controller
                 $chatTicket->save();
             }
         }elseif($msg['InfoType']=='authorized'){
-            $AuthorizationCode=$msg->AuthorizationCode;
+            $AuthorizationCode=$msg['AuthorizationCode'];
             $redirect_uri='http://'.$_SERVER['HTTP_HOST'].url("wxOpen/auth_code/?auth_code={$AuthorizationCode}");
             $this->log($redirect_uri);
             $html=$this->curl_url($redirect_uri);
