@@ -23,7 +23,7 @@ class WeChatOpen
             'aes_key' => '12345678jddsdjaskdfjqweir234934jkzxc8asdfdf', // 可选
             'log' => [
                 'level' => 'debug',
-                'file' => ROOT.'/public/easywechatopen.log', // XXX: 绝对路径！！！！
+                'file' => ROOT.'/public/data/easywechatopen.log', // XXX: 绝对路径！！！！
             ],
             'oauth' => [
                 'scopes'   => ['snsapi_userinfo'],

@@ -23,7 +23,7 @@ class WeChat
             // 'aes_key' => null, // 可选
             'log' => [
                 'level' => 'debug',
-                'file' => ROOT.'/public/easywechat.log', // XXX: 绝对路径！！！！
+                'file' => ROOT.'/public/data/easywechat.log', // XXX: 绝对路径！！！！
             ],
             'oauth' => [
                 'scopes'   => ['snsapi_userinfo'],

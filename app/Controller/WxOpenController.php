@@ -194,7 +194,7 @@ class WxOpenController extends Controller
 
     public function log($msg)
     {
-        $file_path = ROOT . "/public/data/wx/";
+        $file_path = ROOT . "/public/data/";
         if (!is_dir($file_path)) {
             mkdir($file_path, 0777, true);
         }
