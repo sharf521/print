@@ -29,11 +29,6 @@ class WxOpenController extends Controller
 
     public function index()
     {
-
-
-
-
-
         $redirect_uri='http://'.$_SERVER['HTTP_HOST'].url('wxOpen/auth_code');
         $code=$this->getPreAuthCode();
         $url="https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid={$this->component_appid}&pre_auth_code={$code}&redirect_uri={$redirect_uri}";
@@ -44,8 +39,6 @@ class WxOpenController extends Controller
     //授权返回
     public function auth_code(Request $request)
     {
-        $msg=json_encode($_REQUEST);
-        echo $msg;
         //?auth_code=queryauthcode@@@9QJDTmdBO731Nz9_I-DyLgb-EOygA8WedAmM_h4LaXSxebJODjNYAWRVL9x-OKRzEOQQGSAzkOAaB5vkd-Po9A&expires_in=3600
         $auth_code=$request->get('auth_code');
         $ticket=(new WeChatTicket())->first();
@@ -70,8 +63,8 @@ class WxOpenController extends Controller
             $auth->save();
         }else{
             echo $html;
-            exit;
         }
+        $this->log($html);
     }
 
     //wxOpen/event/wx02560f146a566747
@@ -98,20 +91,9 @@ class WxOpenController extends Controller
         });
         $server->serve()->send();
 
-        $msg=$server->getMessage();
+/*        $msg=$server->getMessage();
         $msg=json_encode($msg);
-        $msg.=json_encode($_REQUEST);
-        $file_path = ROOT . "/public/data/wx/";
-        if (!is_dir($file_path)) {
-            mkdir($file_path, 0777, true);
-        }
-        $filename = $file_path . date("Ym") . "event.log";
-        $fp = fopen($filename, "a+");
-        $time = date('Y-m-d H:i:s');
-        $file = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
-        $str = "time:{$time} \t{error:" . $msg . "}\t file:{$file}\t\r\n";
-        fputs($fp, $str);
-        fclose($fp);
+        $this->log($msg);*/
     }
 
     private function text($message)
@@ -193,21 +175,35 @@ class WxOpenController extends Controller
                 $chatTicket->token_expires_in=time()+6000;
                 $chatTicket->save();
             }
+        }elseif($msg['InfoType']=='authorized'){
+            $AuthorizationCode=$request->AuthorizationCode;
+            $redirect_uri='http://'.$_SERVER['HTTP_HOST'].url("wxOpen/auth_code/?auth_code={$AuthorizationCode}");
+            $this->curl_url($redirect_uri);
+            $txt="{$AuthorizationCode}_from_api";
+            //发送消息
+            $staff = $this->app->staff; // 客服管理
+            $message=new Text(['content' =>$txt]);
+            $staff->message($message)->to($message->FromUserName)->send();
         }
-
+/*
         $msg=json_encode($msg);
+        */
+        echo 'success';
+    }
+
+    public function log($msg)
+    {
         $file_path = ROOT . "/public/data/wx/";
         if (!is_dir($file_path)) {
             mkdir($file_path, 0777, true);
         }
-        $filename = $file_path . date("Ym") . "ticket.log";
+        $filename = $file_path . date("Ym") . "wxopen.log";
         $fp = fopen($filename, "a+");
         $time = date('Y-m-d H:i:s');
         $file = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
-        $str = "time:{$time} \t{error:" . $msg . "}\t file:{$file}\t\r\n\r\n";
+        $str = "time:{$time} \r\n{$file}\r\n{ $msg}\r\n\r\n";
         fputs($fp, $str);
         fclose($fp);
-        echo 'success';
     }
 
     public function getPreAuthCode()
