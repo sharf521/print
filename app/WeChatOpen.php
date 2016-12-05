@@ -49,6 +49,35 @@ class WeChatOpen
         $this->app=new Application($this->options);
     }
 
+    public function curl_url($url, $data = array())
+    {
+        $ssl = substr($url, 0, 8) == "https://" ? TRUE : FALSE;
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        if ($data) {
+            if (is_array($data)) {
+                curl_setopt($ch, CURLOPT_POST, 1);
+            } else {
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                        'Content-Type: application/json',
+                        'Content-Length: ' . strlen($data))
+                );
+            }
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        }
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        if ($ssl) {
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        }
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return $data;
+    }
+
     public function getPayParams($prepay_id)
     {
         $pay=array();
