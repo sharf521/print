@@ -138,7 +138,13 @@ class WxOpenController extends Controller
             return new Text(['content' => 'TESTCOMPONENT_MSG_TYPE_TEXT_callback']);
         }
         if(substr($message->Content,0,16)=='QUERY_AUTH_CODE:'){
-            $str=substr($message->Content,16)."_from_api";
+            $query_auth_code=substr($message->Content,16);
+            $redirect_uri='http://'.$_SERVER['HTTP_HOST'].url("wxOpen/auth_code/?auth_code={$query_auth_code}");
+            $this->log("\r\n AAA".$redirect_uri);
+            $html=$this->curl_url($redirect_uri);
+            $this->log($html);
+
+            $str=$query_auth_code."_from_api";
             //发送消息
             $staff = $this->app->staff; // 客服管理
             $message=new Text(['content' =>$str]);
