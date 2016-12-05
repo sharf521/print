@@ -157,6 +157,7 @@ class WxOpenController extends Controller
     {
         $server=$this->WeChatOpen->app->server;
         $msg=$server->getMessage();
+        $this->log(json_encode($msg));
         //10分钟推送一次
         if($msg['InfoType']=='component_verify_ticket'){
             $chatTicket=$chatTicket->first();
@@ -193,9 +194,6 @@ class WxOpenController extends Controller
             $message=new Text(['content' =>$txt]);
             $staff->message($message)->to($message->FromUserName)->send();
         }
-
-        $msg=json_encode($msg);
-        $this->log($msg);
         echo 'success';
     }
 
