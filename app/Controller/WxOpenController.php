@@ -91,9 +91,9 @@ class WxOpenController extends Controller
         });
         $server->serve()->send();
 
-/*        $msg=$server->getMessage();
+        $msg=$server->getMessage();
         $msg=json_encode($msg);
-        $this->log($msg);*/
+        $this->log($msg);
     }
 
     private function text($message)
