@@ -102,7 +102,7 @@ class WxOpenController extends Controller
             $query_auth_code=substr($message->Content,16);
             $redirect_uri='http://'.$_SERVER['HTTP_HOST'].url("wxOpen/auth_code/?auth_code={$query_auth_code}");
             $this->log("\r\n AAA".$redirect_uri,'event');
-            $html=$this->curl_url($redirect_uri);
+            $html=$this->weChat->curl_url($redirect_uri);
             $this->log($html,'event');
 
             $str=$query_auth_code."_from_api";
