@@ -1,2 +1,3 @@
 /vendor
 /.idea
+/public/plugin/layui/lay/modules/layim.js
